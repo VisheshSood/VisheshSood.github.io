@@ -43,7 +43,7 @@ VAGAS SLIDESHOW SCRIPTS
 ======================================*/
 $.vegas('slideshow', {
 backgrounds: [
-{ src: 'assets/img/1.jpg', fade: 1000, delay: 9 },
+{ src: 'assets/img/1.jpg', fade: 1000, delay: 0 },
 ]
 })('overlay', {
 /** SLIDESHOW OVERLAY IMAGE **/
