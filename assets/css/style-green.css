@@ -117,18 +117,22 @@ margin: 50px 20px;
 
 #carousel-slider {
 padding: 50px 20px 5px 50px;
+background-color: rgba(0,0,0,0.5);
 }
 
 #carousel-slider h3 {
 line-height: 50px;
+font-weight: 600;
+font-style: bold;
 font-size: 50px;
 font-family: 'Oswald', sans-serif;
 }
 
 #carousel-slider p {
 color: rgb(57, 171, 111);
-font-size: 22px;
-line-height: 25px;
+font-size: 30px;
+font-style: italic;
+line-height: 35px;
 margin: 25px 20px;
 }
 
