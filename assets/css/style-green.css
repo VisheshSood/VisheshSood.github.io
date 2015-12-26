@@ -1,31 +1,7 @@
-﻿/*=============================================================
-    Authour URL: www.designbootstrap.com
-    
-    http://www.designbootstrap.com/
-
-    License: MIT
-
-    http://opensource.org/licenses/MIT
-
-    100% Free To use For Personal And Commercial Use.
-
-    IN EXCHANGE JUST TELL PEOPLE ABOUT THIS WEBSITE
-   
-========================================================  */
-
-
-/* =============================================================
-GOOGLE FONT
-============================================================ */
-
-@import url(http://fonts.googleapis.com/css?family=Ubuntu); /* FREE GOOGLE FONT */
+﻿@import url(http://fonts.googleapis.com/css?family=Ubuntu); /* FREE GOOGLE FONT */
 @import url(http://fonts.googleapis.com/css?family=Oswald); /* FREE GOOGLE FONT */
 
 
-
-/* =============================================================
-GENERAL STYLES
-============================================================ */
 body {
 font-family: 'Ubuntu', sans-serif;
 color: #fff;
@@ -33,7 +9,7 @@ color: #fff;
 
 section {
 padding-top: 80px;
-padding-bottom: 40px;
+padding-bottom: 20px;
 }
 
 h6 {
@@ -45,7 +21,7 @@ padding-bottom: 60px;
 
 .header {
 font-family: 'Oswald', sans-serif;
-padding-bottom: 40px;
+padding-bottom: 0px;
 text-transform: uppercase;
 }
 
@@ -54,10 +30,6 @@ width: 50px;
 border-top: 2px solid rgb(57, 171, 111);
 }
 
-
-/* =============================================================
-CUSTOM BUTTON STYLES
-============================================================ */
 .button-custom {
 border-radius: 0px;
 -webkit-border-radius: 0px;
@@ -95,10 +67,6 @@ color: #fff;
 background-color: transparent;
 }
 
-
-/* =============================================================
-MENU SECTION STYLES
-============================================================ */
 .navbar-inverse {
 background-color: rgba(0, 0, 0, 0.4);
 border-color: transparent;
@@ -134,11 +102,6 @@ background-color: rgb(57, 171, 111);
 border-color: rgb(57, 171, 111);
 }
 
-
-/* =============================================================
-HOME SECTION STYLES
-============================================================ */
-
 #home {
 text-align: center;
 padding-top: 120px;
@@ -168,11 +131,6 @@ font-size: 22px;
 line-height: 25px;
 margin: 25px 20px;
 }
-
-
-/* =============================================================
-SERVICES SECTION STYLES
-============================================================ */
 
 #services .services-wrapper {
 padding: 20px;
@@ -209,11 +167,6 @@ margin: 3px;
 color: white;
 font-size: 18px;
 }
-
-
-/*============================
-PRICING SECTION STYLES
-==============================*/
 
 .light-pricing {
 margin-bottom: 30px;
@@ -301,11 +254,6 @@ margin-top: 10px;
 padding-top: 80px;
 }
 
-
-/*============================
-WORK SECTION STYLES
-==============================*/
-
 #work .caegories a.active {
 background-color: transparent;
 color: #fff;
@@ -369,10 +317,26 @@ padding-top: 10px;
 
 }
 
-/*============================
-TEAM SECTION STYLES
-==============================*/
+ul
+{
+	list-style-type: none;
+	padding-left: 0;
+}
 
+.gridSection {
+	padding: 20px;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+margin-bottom: 40px;
+background-color: rgba(0,0,0, 0.2);
+cursor: pointer;
+height: 100%;
+-webkit-transition: all 0.5s ease-in-out;
+-moz-transition: all 0.5s ease-in-out;
+-o-transition: all 0.5s ease-in-out;
+transition: all 0.5s ease-in-out;
+}
 
 .team-wrapper {
 overflow-x: hidden;
@@ -437,11 +401,6 @@ border-left: 1px solid #fff;
 color: rgb(57, 171, 111);
 }
 
-
-
-/*============================
-CONTACT SECTION STYLES
-==============================*/
 
 #contact .contact-wrapper {
 background-color:rgba(255, 255, 255, 0.1);
