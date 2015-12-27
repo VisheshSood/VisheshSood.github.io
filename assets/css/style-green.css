@@ -82,13 +82,14 @@ font-size: 12px;
 font-weight: 800;
 padding: 5px 0px;
 letter-spacing: 2px;
-margin: 10px 20px 10px 20px;
+margin: 10px 10px 10px 10px;
 color: #FFF;
 }
 
 .navbar-inverse .navbar-brand, .navbar-inverse .navbar-brand:hover {
 color: #fff;
 font-weight: 900;
+font-size: 2em;
 font-family: 'Oswald', sans-serif;
 }
 
