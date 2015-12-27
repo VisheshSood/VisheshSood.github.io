@@ -93,6 +93,20 @@ font-size: 2em;
 font-family: 'Oswald', sans-serif;
 }
 
+label {
+	padding-right: 50px;
+}
+
+input {
+	color: green;
+}
+
+.mywidth {
+    width: 350px; 
+    margin-bottom: 5px;  
+}
+
+
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
 border-color: transparent;
 }
@@ -131,7 +145,7 @@ font-family: 'Oswald', sans-serif;
 
 #carousel-slider p {
 color: rgb(57, 171, 111);
-font-size: 30px;
+font-size: 25px;
 font-style: italic;
 line-height: 35px;
 margin: 25px 20px;
@@ -276,7 +290,7 @@ border-radius: 5px;
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
 margin-bottom: 40px;
-background-color: rgba(255, 255, 255, 0.4);
+background-color: rgba(255, 255, 255, 0.25);
 cursor: pointer;
 -webkit-transition: all 0.5s ease-in-out;
 -moz-transition: all 0.5s ease-in-out;
@@ -352,13 +366,6 @@ position: relative;
 -o-transition: all 0.2s ease;
 transition: all 0.2s ease;
 margin-bottom:30px;
-}
-.team-wrapper:hover {
--webkit-transform: scale(1.1);
--moz-transform: scale(1.1);
--ms-transform: scale(1.1);
--o-transform: scale(1.1);
-transform: scale(1.1);
 }
 .team-wrapper .team-inner {
 background-size: cover;
