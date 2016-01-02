@@ -170,6 +170,45 @@ transition: all 0.5s ease-in-out;
 background-color: rgba(0, 0, 0, 0.80);
 }
 
+
+#services .services-wrapper-2 {
+padding: 20px;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+margin-bottom: 40px;
+background-color: rgba(255,165,0, 0.2);
+cursor: pointer;
+height: 100%;
+-webkit-transition: all 0.5s ease-in-out;
+-moz-transition: all 0.5s ease-in-out;
+-o-transition: all 0.5s ease-in-out;
+transition: all 0.5s ease-in-out;
+}
+
+#services .services-wrapper-2:hover {
+background-color: rgba(255,165,0, 0.8);
+}
+
+#services .services-wrapper-3 {
+padding: 20px;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+margin-bottom: 40px;
+background-color: rgba(0,0,0, 0.2);
+cursor: pointer;
+height: 100%;
+-webkit-transition: all 0.5s ease-in-out;
+-moz-transition: all 0.5s ease-in-out;
+-o-transition: all 0.5s ease-in-out;
+transition: all 0.5s ease-in-out;
+}
+
+#services .services-wrapper-3:hover {
+background-color: rgba(0, 0, 0, 0.8);
+}
+
 #services h3 {
 font-family: 'Oswald', sans-serif;
 color: white;
