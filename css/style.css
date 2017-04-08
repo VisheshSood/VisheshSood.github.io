@@ -1411,6 +1411,21 @@ h3.agile {
     font-weight: 600;
     margin-bottom: 50px;
 }
+h4.agile {
+    font-size: 30px;
+    color:#FFC107;
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+p.agile {
+    font-size: 30px;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 50px;
+}
 /*-- //team --*/
 /*-- mail --*/
 .agileinfo-contact,.agileinfo-gal {
