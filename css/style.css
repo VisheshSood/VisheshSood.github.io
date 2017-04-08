@@ -1809,7 +1809,7 @@ h3.agileits-icons-title {
 	-ms-transition:0.5s all;
 }
 .con-left:hover .spa-ico{
-	background:#FFC107;
+	background:green;
 	transition:0.5s all;
 	-webkit-transition:0.5s all;
 	-moz-transition:0.5s all;
@@ -1817,12 +1817,56 @@ h3.agileits-icons-title {
 	-ms-transition:0.5s all;
 }
 .spa-ico {
-    background: #000000;
-    width: 62px;
-    height: 62px;
+    background: white;
+    width: 100px;
+    height: 100px;
     transform: rotate(45deg);
     margin: -32px auto 0;
 }
+
+.your-icon {
+    position: relative;
+    top: 15px;
+    left: 15px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    float: left;
+    display: block; /* This is required */
+}
+
+.your-icon.icon-hand {
+    background: url(../images/hand.png);
+    background-size: 70px 70px;
+
+}
+
+.your-icon.icon-second {
+    background: url(../images/second.png);
+    background-size: 70px 70px;
+
+}
+
+.your-icon.icon-third {
+    background: url(../images/third.png);
+    background-size: 70px 70px;
+
+}
+
+.your-icon.icon-fourth {
+    background: url(../images/fourth.png);
+    background-size: 70px 70px;
+
+}
+
+
+.your-icon.normal {
+    width: 70px;
+    height: 70px;
+}
+
+
 .con-left span {
     font-size: 2em;
     color: #fff;
