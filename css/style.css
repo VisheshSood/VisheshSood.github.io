@@ -764,6 +764,25 @@ ul.aglieits-nav li a:hover{
     line-height: 1.8em;
     margin: 0;
 }
+
+custom{
+  color:black;
+  font-weight: bold;
+}
+
+.questions {
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
+.historey-lines ul {
+list-style: none;
+margin: 0;
+text-align: left;
+padding-left: 0px;
+}
+.custom-key-words 
+
 .w3-agile-services-right p span{
 	display:block;
 	margin:1em 0 0 0;
@@ -1087,6 +1106,11 @@ i.fa.fa-quote-right {
 
 #work .work-wrapper h4 {
 padding-top: 10px;
+}
+
+.work-wrapper h3 {
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 #work .sizes h2{
