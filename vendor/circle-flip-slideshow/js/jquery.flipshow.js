@@ -148,7 +148,7 @@
 	// the options
 	$.Flipshow.defaults = {
 		// default transition speed (ms)
-		speed : 700,
+		speed : 1000,
 		// default transition easing
 		easing : 'ease-out'
 	};

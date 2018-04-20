@@ -2179,7 +2179,10 @@ aside ul.nav-list > li > a {
 }
 
 .slider-container .tp-opacity-overlay {
-	background: rgba(0, 0, 0, 0.75);
+	background-image: url("../img/innovative-img/Front.jpg");
+	 background-repeat: no-repeat;
+    background-size: 1600px 780px;
+	
 }
 
 .slider-container.transparent {
@@ -2372,7 +2375,7 @@ section.section-custom-map-2 section.section {
 	background-color: #171717;
 	margin-bottom: 60px;
 	overflow: hidden;
-	padding: 20px 0 10px 0;
+	/*padding: 20px 0 10px 0;*/
 	position: relative;
 	text-align: left;
 }
