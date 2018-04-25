@@ -2174,8 +2174,9 @@ aside ul.nav-list > li > a {
 }
 
 .slider-container .tp-caption-overlay-opacity {
-	background: rgba(0, 0, 0, 0.4);
-	padding: 10px;
+	background-image: url("../img/innovative-img/Front.jpg");
+	 background-repeat: no-repeat;
+    background-size: 1600px 780px;
 }
 
 .slider-container .tp-opacity-overlay {
