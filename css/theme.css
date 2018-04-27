@@ -2174,16 +2174,16 @@ aside ul.nav-list > li > a {
 }
 
 .slider-container .tp-caption-overlay-opacity {
-	background-image: url("../img/innovative-img/Front.jpg");
+	background-image: url("../img/banner.jpg");
 	 background-repeat: no-repeat;
-    background-size: 1600px 780px;
+	 back1
+background-size:100%;
 }
 
 .slider-container .tp-opacity-overlay {
-	background-image: url("../img/innovative-img/Front.jpg");
+	background-image: url("../img/banner.jpg");
 	 background-repeat: no-repeat;
-    background-size: 1600px 780px;
-	
+background-size:100%;
 }
 
 .slider-container.transparent {
