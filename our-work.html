@@ -50,7 +50,12 @@
 
 		<!-- Head Libs -->
 		<script src="vendor/modernizr/modernizr.min.js"></script>
-
+		<style>
+			.our-work-container{visibility: hidden;}
+		</style>
+		
+		
+		
 	</head>
 	<body>
 
@@ -184,9 +189,9 @@
 
 					<hr>
 
-					<div class="row">
+					<div class="row" id="out-work-container">
 
-						<div class="sort-destination-loader sort-destination-loader-showing">
+						<div class="sort-destination-loader sort-destination-loader-showing our-work-container">
 							<ul class="portfolio-list  sort-destination" data-sort-id="portfolio">
 								<li class="col-md-12 isotope-item mt-xl brands">
 									<div class="row">
@@ -675,6 +680,14 @@
 
 		<!-- Theme Initialization Files -->
 		<script src="js/theme.init.js"></script>
+		
+		<script>
+		
+				setTimeout(function(){
+					jQuery(".our-work-container").css("visibility", "visible");;
+				},500);
+		
+		</script>
 
 		<!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
 		<script>
