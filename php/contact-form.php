@@ -13,10 +13,10 @@ header('Content-type: application/json');
 require_once('php-mailer/PHPMailerAutoload.php');
 
 // Step 1 - Enter your email address below.
-$email = 'you@domain.com';
+$email = 'ankit@innovativeglove.com';
 
 // If the e-mail is not working, change the debug option to 2 | $debug = 2;
-$debug = 0;
+$debug = 2;
 
 $subject = $_POST['subject'];
 
