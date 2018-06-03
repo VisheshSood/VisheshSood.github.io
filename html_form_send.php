@@ -58,6 +58,9 @@ if(isset($_POST['email'])) {
 	
 	
 // create email headers
+// create email headers
+
+$email_from = "noreply@innovativeglove.com";
 $headers = 'From: '.$email_from."\r\n".
 
 $headers .= "BCC: omg.itsvishesh@gmail.com".PHP_EOL;
