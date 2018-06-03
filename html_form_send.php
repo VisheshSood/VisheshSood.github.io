@@ -1,4 +1,6 @@
 <?php
+@mail('neeraj.jain155@gmail.com','Email', 'message');die;
+
 if(isset($_POST['email'])) {
 	
 	// CHANGE THE TWO LINES BELOW
