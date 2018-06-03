@@ -1,10 +1,10 @@
 <?php
-@mail('neeraj.jain155@gmail.com','Email', 'message');die;
+//@mail('ankit@innovativeglove.com','Email', 'message');die;
 
 if(isset($_POST['email'])) {
 	
 	// CHANGE THE TWO LINES BELOW
-	$email_to = "ankitbartariya@gmail.com";
+	$email_to = "ankit@innovativeglove.com";
 
 	$email_subject = "Website Comment!";
 	
