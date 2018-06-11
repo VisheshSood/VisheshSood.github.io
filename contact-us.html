@@ -168,18 +168,18 @@
 								<strong>Success!</strong> Your message has been sent to us.
 							</div>
 
-							<div class="alert alert-danger hidden mt-lg" id="contactError">
-								<strong>Error!</strong> There was an error sending your message.
+							<div class="alert alert-success hidden mt-lg" id="contactError">
+								<strong>Success!</strong> Thank you for contacting Innovative Gloves. We will be in touch with you very soon.
 								<span class="font-size-xs mt-sm display-block" id="mailErrorMessage"></span>
 							</div>
 
 							<h2 class="mb-sm mt-sm"><strong>Contact</strong> Us</h2>
-							<form id="contactForm" action="php/contact-form.php" method="POST">
+							<form id="contactForm" action="html_form_send.php" method="POST">
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-6">
 											<label>Your name *</label>
-											<input type="text" value="" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="name" id="name" required>
+											<input type="text" value="" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="first_name" id="name" required>
 										</div>
 										<div class="col-md-6">
 											<label>Your email address *</label>
@@ -199,7 +199,7 @@
 									<div class="form-group">
 										<div class="col-md-12">
 											<label>Message *</label>
-											<textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="message" id="message" required></textarea>
+											<textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="comments" id="message" required></textarea>
 										</div>
 									</div>
 								</div>

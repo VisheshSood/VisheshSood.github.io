@@ -18,16 +18,16 @@ if(isset($_POST['email'])) {
 	}
 	
 	// validation expected data exists
-	if(!isset($_POST['first_name']) ||
+	if(!isset($_POST['name']) ||
 		!isset($_POST['email']) ||
-		!isset($_POST['comments'])) {
+		!isset($_POST['message'])) {
 		die('We are sorry, but there appears to be a problem with the form you submitted.');		
 	}
 	
-	$first_name = $_POST['first_name']; // required
+	$first_name = $_POST['name']; // required
 	$email_from = $_POST['email']; // required
 	$telephone = $_POST['telephone']; // not required
-	$comments = $_POST['comments']; // required
+	$comments = $_POST['message']; // required
 	
 	$error_message = "";
 	$email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/';
@@ -69,8 +69,9 @@ $headers .= "BCC: omg.itsvishesh@gmail.com".PHP_EOL;
 /*echo $email_to;echo '|';
 echo $email_subject;echo '|';
 echo $email_message;echo '|';
-echo $email_headers;echo '|';*/
+echo $email_headers;echo '|';die;*/
 @mail($email_to, $email_subject, $email_message, $headers);  
+//@mail($email_to, $email_subject, $email_message);  
 ?>
 
 

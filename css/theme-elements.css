@@ -3925,6 +3925,7 @@ hr.pattern.pattern-2:after, .divider.pattern.pattern-2:after {
     /* font-weight: */
 }
 .product-tab.sort-source > li > a {
+	font-size: 11px;
 	background-color: #999;
     color: #ffffff;
     margin-right: 5px;
