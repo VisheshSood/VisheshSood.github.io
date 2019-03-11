@@ -34,7 +34,6 @@ window.theme.fn = {
 
 };
 
-
 // Animate
 (function(theme, $) {
 

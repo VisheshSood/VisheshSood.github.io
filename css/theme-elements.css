@@ -1152,7 +1152,6 @@ label.error#captcha-error {
 .img-thumbnail {
 	border-radius: 4px;
 	position: relative;
-	margin-top:3.5em;
 }
 
 .img-thumbnail img {
