@@ -1,4 +1,0 @@
-[01-Aug-2018 11:45:04 UTC] PHP Parse error:  syntax error, unexpected ''/Catalog.pdf'' (T_CONSTANT_ENCAPSED_STRING), expecting variable (T_VARIABLE) or '{' or '$' in /home/i5glove/public_html/Temp/handler.php on line 25
-[01-Aug-2018 11:45:56 UTC] PHP Parse error:  syntax error, unexpected ''/Catalog.pdf'' (T_CONSTANT_ENCAPSED_STRING), expecting variable (T_VARIABLE) or '{' or '$' in /home/i5glove/public_html/Temp/handler.php on line 25
-[01-Aug-2018 11:46:52 UTC] PHP Parse error:  syntax error, unexpected ''/Catalog.pdf'' (T_CONSTANT_ENCAPSED_STRING), expecting variable (T_VARIABLE) or '{' or '$' in /home/i5glove/public_html/Temp/handler.php on line 25
-[01-Aug-2018 11:47:35 UTC] PHP Parse error:  syntax error, unexpected ''/Catalog.pdf'' (T_CONSTANT_ENCAPSED_STRING), expecting variable (T_VARIABLE) or '{' or '$' in /home/i5glove/public_html/Temp/handler.php on line 25
