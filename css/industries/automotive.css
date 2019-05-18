@@ -7,3 +7,20 @@ h1 {
 .smallhead {
 	font-style: italic;
 }
+
+.productimage {
+	height: 180px !important;
+}
+
+.featureicon {
+	height: 100px;
+	width: 100px !important;
+	 display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.featurelabel {
+	text-align: center;
+	font-size: 13px;
+}
