@@ -53,6 +53,7 @@
           url: "http://166.62.56.207:8888/api/v1/glovelists",
           type: 'GET',
           success: function(result){
+            console.log(result);
             var len = result.data.length;
                       $("#sel_thickness").empty();
                       $("#sel_texture").empty();
