@@ -49,89 +49,199 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script>
     $(document).ready(function(){
+        document.getElementsByClassName('filters')[0].style.visibility = 'hidden';
+        var fullList = {};
+        var currentList = [];
         $.ajax({
           url: "http://166.62.56.207:8888/api/v1/glovelists",
           type: 'GET',
           success: function(result){
-            console.log(result);
-            var len = result.data.length;
-                      $("#sel_thickness").empty();
-                      $("#sel_texture").empty();
-                      $("#sel_cuff_len").empty();
-                      for( var i = 0; i<len; i++){
-                          var g_id = result.data[i]['g_id'];
-                          var g_thickness = result.data[i]['g_thickness'];
-                          var g_texture = result.data[i]['g_pattern'];
-                          var g_cuff = result.data[i]['g_cuff'];
-                          $("#sel_thickness").append("<option value='"+g_thickness+"'>"+g_thickness+" Mil </option>");
-                          $("#sel_texture").append("<option value='"+g_texture+"'>"+g_texture+" </option>");
-                          $("#sel_cuff_len").append("<option value='"+g_cuff+"'>"+g_cuff+"mm </option>");
-                          }
+            fullList = result.data;
+            document.getElementsByClassName('base')[0].style.visibility = 'visible';
         }});
 
-        var baseVal = "";
-        var thickness = "";
-        var Texture = "";
-        var cuff = "";
-        $("#baseSelect").change(function(){
-          baseVal = $(this).children("option:selected").val();
-          $.ajax({
-            url: "http://166.62.56.207:8888/api/v1/seachgloves",
-            type: 'POST',
-            crossDomain: true,
-            dataType: "jsonp",
-            data: { base: baseVal},
-            success: function(result){
-            var len = result.data.length;
-                      $("#sel_thickness").empty();
-                      $("#sel_texture").empty();
-                      $("#sel_cuff_len").empty();
-                      for( var i = 0; i<len; i++){
-                          var g_id = result.data[i]['g_id'];
-                          var g_thickness = result.data[i]['g_thickness'];
-                          var g_texture = result.data[i]['g_pattern'];
-                          var g_cuff = result.data[i]['g_cuff'];
-                          $("#sel_thickness").append("<option value='"+g_thickness+"'>"+g_thickness+" Mil </option>");
-                          $("#sel_texture").append("<option value='"+g_texture+"'>"+g_texture+" </option>");
-                          $("#sel_cuff_len").append("<option value='"+g_cuff+"'>"+g_cuff+"mm </option>");
-                          }
-                },
-            error: function (xhr, status) {
-                alert("error");
+        $('#base').on('change', function () {
+            $("#thickness").empty();
+            document.getElementsByClassName('thickness')[0].style.visibility = 'visible';
+            currentList = [];
+            var thicknesses = [];
+            var base = $( "#base" ).val();
+            $.each(fullList, function(id,object){
+                if(object.g_base == base) {
+                    currentList.push(object);
+                    thicknesses.push(object.g_thickness);
+                }
+
+            });
+            console.log(currentList);
+            var unique = [];
+            $.each(thicknesses, function(i, el){
+                if($.inArray(el, unique) === -1) unique.push(el);
+            });
+            $('#thickness').append('<option value="' + " " + '">' + " " + '</option>');
+            unique.sort(function(a, b){return a - b});
+            $(unique).each(function (i,j) {
+                $('#thickness').append('<option value="' + j + '">' + j + '</option>');
+            });
+
+            updateTexture(fullList);
+            updateCuff(fullList);
+        });
+
+        $('#thickness').on('change', function () {
+            $("#texture").empty();
+            document.getElementsByClassName('texture')[0].style.visibility = 'visible';
+
+            currentList = [];
+            var textures = [];
+            var base = $( "#base" ).val();
+            var thickness = $( "#thickness" ).val();
+
+            $.each(fullList, function(id,object){
+                if(object.g_base == base && object.g_thickness == thickness) {
+                    currentList.push(object);
+                    textures.push(object.g_pattern);
+                }
+            });
+            var unique = [];
+            $.each(textures, function(i, el){
+                if($.inArray(el, unique) === -1) unique.push(el);
+            });
+            $('#texture').append('<option value="' + " " + '">' + " " + '</option>');
+
+            unique.sort(function(a, b){return a - b});
+            $(unique).each(function (i,j) {
+                $('#texture').append('<option value="' + j + '">' + j + '</option>');
+            });
+
+            if (unique.length == 1) {
+                document.getElementsByClassName('cuff')[0].style.visibility = 'visible';
             }
-        })
+            updateCuff(fullList);
+        });
 
-      });
 
-      $("#sel_thickness").change(function(){
-        var thickness = $(this).children("option:selected").val();
+
+       $('#texture').on('change', function () {
+            $("#cuff").empty();
+            document.getElementsByClassName('cuff')[0].style.visibility = 'visible';
+
+            currentList = [];
+            var cuffs = [];
+            var base = $( "#base" ).val();
+            var thickness = $( "#thickness" ).val();
+            var texture = $( "#texture" ).val();
+
+
+            $.each(fullList, function(id,object){
+                if(object.g_base == base && object.g_thickness == thickness && object.g_pattern == texture) {
+                    currentList.push(object);
+                    cuffs.push(object.g_cuff);
+                }
+            });
+            var unique = [];
+            $.each(cuffs, function(i, el){
+                if($.inArray(el, unique) === -1) unique.push(el);
+            });
+
+            unique.sort(function(a, b){return a - b});
+            $(unique).each(function (i,j) {
+                $('#cuff').append('<option value="' + j + '">' + j + '</option>');
+            });
+            selectionComplete();
+        });
+
+       $('#cuff').on('change', function () {
+            selectionComplete();
+        });
+
+       function updateTexture(list) {
+        $("#texture").empty();
+        currentList = [];
+        var textures = [];
+        var base = $( "#base" ).val();
+        var thickness = $( "#thickness" ).val();
+
+        $.each(list, function(id,object){
+            if(object.g_base == base && object.g_thickness == thickness) {
+                currentList.push(object);
+                textures.push(object.g_pattern);
+            }
+        });
+        var unique = [];
+        $.each(textures, function(i, el){
+            if($.inArray(el, unique) === -1) unique.push(el);
+        });
+        unique.sort(function(a, b){return a - b});
+        $(unique).each(function (i,j) {
+            $('#texture').append('<option value="' + j + '">' + j + '</option>');
+        });
+        selectionComplete();
+       }
+
+
+       function updateCuff(list) {
+        $("#cuff").empty();
+        currentList = [];
+        var cuffs = [];
+        var base = $( "#base" ).val();
+        var thickness = $( "#thickness" ).val();
+        var texture = $( "#texture" ).val();
+
+        $.each(list, function(id,object){
+            if(object.g_base == base && object.g_thickness == thickness && object.g_pattern == texture) {
+                currentList.push(object);
+                cuffs.push(object.g_cuff);
+            }
+        });
+        var unique = [];
+        $.each(cuffs, function(i, el){
+            if($.inArray(el, unique) === -1) unique.push(el);
+        });
+
+        unique.sort(function(a, b){return a - b});
+        $(unique).each(function (i,j) {
+            $('#cuff').append('<option value="' + j + '">' + j + '</option>');
+        });
+        selectionComplete();
+       }
+
+
+       function selectionComplete() {
+        var base = $( "#base" ).val();
+        var thickness = $( "#thickness" ).val();
+        var texture = $( "#texture" ).val();
+        var cuff = $( "#cuff" ).val();
+        console.log(base);
         console.log(thickness);
-        $.ajax({
-          url: "http://166.62.56.207:8888/api/v1/seachgloves",
-          type: 'POST',
-          data: { base: baseVal,thickness:thickness},
-          crossDomain: true,
-            dataType: "jsonp",
-            
-          success: function(result){
-            console.log(result);
-            var len = result.data.length;
-                    $("#sel_texture").empty();
-                    $("#sel_cuff_len").empty();
-                    for( var i = 0; i<len; i++){
-                        var g_id = result.data[i]['g_id'];
-                        var g_texture = result.data[i]['g_pattern'];
-                        var g_cuff = result.data[i]['g_cuff'];
-                        $("#sel_texture").append("<option value='"+g_id+"'>"+g_texture+" </option>");
-                        $("#sel_cuff_len").append("<option value='"+g_id+"'>"+g_cuff+"mm </option>");
-                        }
-              },
-              error: function (xhr, status) {
-                alert("error");
-            }
-      })
+        console.log(texture);
+        console.log(cuff);
 
-    });
+        if (base != "" && thickness != "" && texture != "" && cuff != ""
+            && 
+            base != null && thickness != null && texture != null && cuff != null) {
+            console.log("possible gloves;");
+            console.log(currentList);
+            updateImages(currentList);
+        }
+       }
+
+       function updateImages(list) {
+        document.getElementsByClassName('listselect')[0].style.visibility = 'visible';
+        document.getElementsByClassName('listselect')[1].style.visibility = 'visible';
+        
+
+
+        /*
+        <div class="col-sm-offset-4">
+            <img src="img/Micro Diamond 6 Mil ORANGE.png">
+        </div>
+        <div class="col-sm-offset-4">
+            <label>6 Mil Orange Micro Diamond </label>
+        </div>
+        */
+
+       }
 
     });
     </script>
@@ -370,79 +480,60 @@
             </div>
             <div class="container">
                 <div class="row filters">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 base">
                         <div class="unselected-field" style="display: inline-block;" id="selectBase">
                             <label>Base:</label>
-                            <select id="baseSelect" name="baseSelect">
-                                <option>Latex</option>
-                                <option>Nitrile</option>
+                            <select id="base" name="baseSelect">
+                                <option disabled selected value> </option>
+                                <option value="Latex">Latex</option>
+                                <option value="Nitrile">Nitrile</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2 thickness">
                         <div class="unselected-field" style="display: inline-block;" id="selectBase">
                             <label>Thickness:</label>
-                            <select id="baseSelect" name="baseSelect">
-                                <option>3.8 Mil</option>
-                                <option>4.0 Mil</option>
-                                <option>5.0 Mil</option>
-                                <option>6.0 Mil</option>
-                                <option>7.0 Mil</option>
-                                <option>8.0 Mil</option>
-                                <option>9.0 Mil</option>
+                            <select id="thickness" name="thicknessSelect">
                             </select>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4 texture">
                         <div class="unselected-field" style="display: inline-block;" id="selectBase">
                             <label>Texture:</label>
-                            <select id="baseSelect" name="baseSelect">
-                                <option>Finger Texture</option>
-                                <option>Fully Textured</option>
-                                <option>Diamond Textured</option>
-                                <option>Tyre Tread Textured</option>
-                                <option>Micro Diamond Textured</option>
+                            <select id="texture" name="textureSelect">
                             </select>
                         </div>​
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 cuff">
                         <div class="unselected-field" style="display: inline-block;" id="selectBase">
                             <label>Cuff Length:</label>
-                            <select id="baseSelect" name="baseSelect">
-                                <option>240mm</option>
-                                <option>300mm</option>
+                            <select id="cuff" name="cuffSelect">
                             </select>
                         </div>​
                     </div>
                 </div>
-                <div class="slideshow-container">
-                    <div class="mySlides container">
-                        <div class="col-sm-offset-4">
+                <div class="slideshow-container" id="carosel" style="margin:100px;">
+                    <div class="mySlides container objects">
+                        <div class="col-sm-offset-4 itemimage">
                             <img src="img/Micro Diamond 6 Mil ORANGE.png">
                         </div>
-                        <div class="col-sm-offset-4">
+                        <div class="col-sm-offset-4 itemlabel">
                             <label>6 Mil Orange Micro Diamond </label>
                         </div>
                     </div>
-
-                    <div class="mySlides container">
-                        <div class="col-sm-offset-4">
-                            <img src="img/Gripper orange.png">
+                    <div class="mySlides container objects">
+                        <div class="col-sm-offset-4 itemimage">
+                            <img src="img/Micro Diamond 6 Mil ORANGE.png">
                         </div>
-                        <div class="col-sm-offset-4">
-                            <label>6 Mil Orange Tyre Tread </label>
+                        <div class="col-sm-offset-4 itemlabel">
+                            <label>6 Mil Blue Micro Diamond </label>
                         </div>
                     </div>
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
+                    <a class="prev listselect" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next listselect" onclick="plusSlides(1)">&#10095;</a>
                 </div>
                 <br>
 
-<!--                 <div style="text-align:center">
-                    <span class="dot" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                </div> -->
                 <div class="row details">
                     <div class="col-sm-9" style="border-style: double; margin-bottom: 20px; padding: 10px;">
                         <h5>Details</h5>
