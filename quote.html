@@ -144,6 +144,9 @@
                 if($.inArray(el, unique) === -1) unique.push(el);
             });
 
+            $('#cuff').append('<option value="' + " " + '">' + " " + '</option>');
+
+
             unique.sort(function(a, b){return a - b});
             $(unique).each(function (i,j) {
                 $('#cuff').append('<option value="' + j + '">' + j + '</option>');
@@ -172,6 +175,8 @@
         $.each(textures, function(i, el){
             if($.inArray(el, unique) === -1) unique.push(el);
         });
+        $('#texture').append('<option value="' + " " + '">' + " " + '</option>');
+
         unique.sort(function(a, b){return a - b});
         $(unique).each(function (i,j) {
             $('#texture').append('<option value="' + j + '">' + j + '</option>');
@@ -198,6 +203,7 @@
         $.each(cuffs, function(i, el){
             if($.inArray(el, unique) === -1) unique.push(el);
         });
+        $('#cuff').append('<option value="' + " " + '">' + " " + '</option>');
 
         unique.sort(function(a, b){return a - b});
         $(unique).each(function (i,j) {
@@ -229,7 +235,7 @@
        function updateImages(list) {
         document.getElementsByClassName('listselect')[0].style.visibility = 'visible';
         document.getElementsByClassName('listselect')[1].style.visibility = 'visible';
-        
+
 
 
         /*
