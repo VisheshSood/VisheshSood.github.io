@@ -66,7 +66,15 @@
 
         $('#base').on('change', function () {
             $("#thickness").empty();
+            $("#texture").empty();
+            $("#color").empty();
+            $("#cuff").empty();
+            i=0;
             document.getElementsByClassName('thickness')[0].style.visibility = 'visible';
+            document.getElementsByClassName('texture')[0].style.visibility = 'visible';
+            document.getElementsByClassName('color')[0].style.visibility = 'visible';
+            document.getElementsByClassName('cuff')[0].style.visibility = 'visible';
+
             currentList = [];
             var thicknesses = [];
             var base = $( "#base" ).val();
@@ -75,27 +83,26 @@
                     currentList.push(object);
                     thicknesses.push(object.g_thickness);
                 }
-
             });
-            console.log(currentList);
             var unique = [];
             $.each(thicknesses, function(i, el){
                 if($.inArray(el, unique) === -1) unique.push(el);
             });
-            $('#thickness').append('<option value="' + " " + '">' + " " + '</option>');
             unique.sort(function(a, b){return a - b});
             $(unique).each(function (i,j) {
                 $('#thickness').append('<option value="' + j + '">' + j + '</option>');
             });
 
-            updateTexture(fullList);
-            updateCuff(fullList);
+            updateTexture(currentList);
+            updateColor(currentList);
+            updateCuff(currentList);
         });
 
         $('#thickness').on('change', function () {
             $("#texture").empty();
-            document.getElementsByClassName('texture')[0].style.visibility = 'visible';
-
+            $("#color").empty();
+            $("#cuff").empty();
+            i=0;
             currentList = [];
             var textures = [];
             var base = $( "#base" ).val();
@@ -111,7 +118,6 @@
             $.each(textures, function(i, el){
                 if($.inArray(el, unique) === -1) unique.push(el);
             });
-            $('#texture').append('<option value="' + " " + '">' + " " + '</option>');
 
             unique.sort(function(a, b){return a - b});
             $(unique).each(function (i,j) {
@@ -121,17 +127,16 @@
             if (unique.length == 1) {
                 document.getElementsByClassName('cuff')[0].style.visibility = 'visible';
             }
-            updateCuff(fullList);
+            updateTexture(currentList);
         });
 
-
-
        $('#texture').on('change', function () {
+            $("#color").empty();
             $("#cuff").empty();
-            document.getElementsByClassName('cuff')[0].style.visibility = 'visible';
+            i=0;
 
             currentList = [];
-            var cuffs = [];
+            var colors = [];
             var base = $( "#base" ).val();
             var thickness = $( "#thickness" ).val();
             var texture = $( "#texture" ).val();
@@ -140,32 +145,87 @@
             $.each(fullList, function(id,object){
                 if(object.g_base == base && object.g_thickness == thickness && object.g_pattern == texture) {
                     currentList.push(object);
+                    colors.push(object.g_color);
+                }
+            });
+            var unique = [];
+            $.each(colors, function(i, el){
+                if($.inArray(el, unique) === -1) unique.push(el);
+            });
+            unique.sort(function(a, b){return a - b});
+            $('#color').append('<option value="' + '' + '">' + 'All' + '</option>');
+            $(unique).each(function (i,j) {
+                $('#color').append('<option value="' + j + '">' + j + '</option>');
+            });
+        });
+
+        $('#color').on('change', function () {
+            $("#cuff").empty();
+            i=0
+            document.getElementsByClassName('cuff')[0].style.visibility = 'visible';
+
+            currentList = [];
+            var cuffs = [];
+            var base = $( "#base" ).val();
+            var thickness = $( "#thickness" ).val();
+            var texture = $( "#texture" ).val();
+            var color = $( "#color" ).val();
+
+            $.each(fullList, function(id,object) {
+                console.log(color);
+                if (color == "") {
+                    if(object.g_base == base && object.g_thickness == thickness && object.g_pattern == texture) {
+                    currentList.push(object);
                     cuffs.push(object.g_cuff);
+                    } 
+                } else {
+                    if(object.g_base == base && object.g_thickness == thickness && object.g_pattern == texture && object.g_color == color) {
+                        currentList.push(object);
+                        cuffs.push(object.g_cuff);
+                    }
                 }
             });
             var unique = [];
             $.each(cuffs, function(i, el){
                 if($.inArray(el, unique) === -1) unique.push(el);
             });
-
             unique.sort(function(a, b){return a - b});
             $(unique).each(function (i,j) {
                 $('#cuff').append('<option value="' + j + '">' + j + '</option>');
             });
-            selectionComplete();
+            updateCuff(currentList);
         });
 
+
+
        $('#cuff').on('change', function () {
+            i=0;
+            document.getElementsByClassName('cuff')[0].style.visibility = 'visible';
+            currentList = [];
+            var cuffs = [];
+            var base = $( "#base" ).val();
+            var thickness = $( "#thickness" ).val();
+            var texture = $( "#texture" ).val();
+            var color = $( "#color" ).val();
+            var cuff = $( "#cuff" ).val();
+
+
+            $.each(fullList, function(id,object){
+                if(object.g_base == base && object.g_thickness == thickness && object.g_pattern == texture && object.g_color == texture && object.g_cuff == cuff) {
+                    currentList.push(object);
+                    cuffs.push(object.g_cuff);
+                }
+            });
             selectionComplete();
         });
 
        function updateTexture(list) {
         $("#texture").empty();
+        i=0;
         currentList = [];
         var textures = [];
         var base = $( "#base" ).val();
         var thickness = $( "#thickness" ).val();
-
         $.each(list, function(id,object){
             if(object.g_base == base && object.g_thickness == thickness) {
                 currentList.push(object);
@@ -180,12 +240,40 @@
         $(unique).each(function (i,j) {
             $('#texture').append('<option value="' + j + '">' + j + '</option>');
         });
-        selectionComplete();
        }
 
 
+       function updateColor(list) {
+        $("#color").empty();
+        i=0;
+        currentList = [];
+        var colors = [];
+        var base = $( "#base" ).val();
+        var thickness = $( "#thickness" ).val();
+        var texture = $( "#texture" ).val();
+
+        $.each(list, function(id,object){
+            if(object.g_base == base && object.g_thickness == thickness && object.g_pattern == texture) {
+                currentList.push(object);
+                colors.push(object.g_color);
+            }
+        });
+        var unique = [];
+        $.each(colors, function(i, el){
+            if($.inArray(el, unique) === -1) unique.push(el);
+        });
+
+        unique.sort(function(a, b){return a - b});
+                    $('#color').append('<option value="' + '' + '">' + 'All' + '</option>');
+
+        $(unique).each(function (i,j) {
+            $('#color').append('<option value="' + j + '">' + j + '</option>');
+        });
+       }
+
        function updateCuff(list) {
         $("#cuff").empty();
+        i=0;
         currentList = [];
         var cuffs = [];
         var base = $( "#base" ).val();
@@ -216,20 +304,17 @@
         var thickness = $( "#thickness" ).val();
         var texture = $( "#texture" ).val();
         var cuff = $( "#cuff" ).val();
-        console.log(base);
-        console.log(thickness);
-        console.log(texture);
-        console.log(cuff);
+        var color = $( "#color" ).val();
+        console.log("cuff: " + cuff);
+        console.log(currentList);
         j = currentList.length;
         finalList = currentList;
-        if (base != "" && thickness != "" && texture != "" && cuff != ""
-            &&
-            base != null && thickness != null && texture != null && cuff != null) {
-            updateImages(currentList,i);
-        }
+        // if (base != "" && thickness != "" && texture != "" && cuff != "" && color != "" &&
+        //     base != null && thickness != null && texture != null && cuff != null) {
+                updateImages(currentList,i);
+            
+        // }
        }
-
-
 
     });
 
@@ -243,8 +328,17 @@
              }else{
                document.getElementsByClassName('listselect')[0].style.visibility = 'visible';
              }
-             document.getElementById('imagesrc').src = list[k].g_url;
-             document.getElementById('itemlabelval').innerHTML = list[k].g_thickness +" Mil "+list[k].g_color+" "+list[k].g_name
+             //console.log(list);
+             if (list[k].g_url != null && list[k].g_url != undefined && list[k].g_url != "") {
+                //console.log("URL:" + list[k].g_url);
+                document.getElementById('imagesrc').src = "img/gloves/"+list[k].g_url;
+            } else {
+                document.getElementById('imagesrc').src = "";
+            }
+             document.getElementById('glovedetails').innerHTML = list[k].g_description;
+             document.getElementById('glovespecs').innerHTML = list[k].g_certification;
+
+             document.getElementById('itemlabelval').innerHTML = list[k].g_thickness +" Mil "+list[k].g_color+" "+list[k].g_name+" " + list[k].g_cuff + "mm";
              document.getElementsByClassName('listselect')[1].style.visibility = 'visible';
              if(k ==j-1 && l>=0){
                document.getElementsByClassName('listselect')[1].style.visibility = 'hidden';
@@ -506,7 +600,7 @@
             </div>
             <div class="container">
                 <div class="row filters">
-                    <div class="col-sm-3 base">
+                    <div class="col-sm-2 base">
                         <div class="unselected-field" style="display: inline-block;" id="selectBase">
                             <label>Base:</label>
                             <select id="base" name="baseSelect">
@@ -530,34 +624,44 @@
                             </select>
                         </div>​
                     </div>
-                    <div class="col-sm-3 cuff">
+                    <div class="col-sm-2 color">
+                        <div class="unselected-field" style="display: inline-block;" id="selectBase">
+                            <label>Color:</label>
+                            <select id="color" name="colorSelect">
+                            </select>
+                        </div>​
+                    </div>
+                    <div class="col-sm-2 cuff">
                         <div class="unselected-field" style="display: inline-block;" id="selectBase">
                             <label>Cuff Length:</label>
                             <select id="cuff" name="cuffSelect">
                             </select>
                         </div>​
                     </div>
+                    
                 </div>
-                <div class="slideshow-container" id="carosel" style="margin:100px;">
-                    <div class="mySlides container objects">
-                        <div class="col-sm-offset-4 itemimage">
+                <div class="slideshow-container row" id="carosel" style="margin:100px;">
+                    <div class ="col-sm-2 photo">
+                    <a class="prev listselect" onclick ="showSlides(0)">&#10094;</a>
+                    </div>
+                    <div class="mySlides container objects col-sm-8 photo">
                             <img src="" id="imagesrc">
-                        </div>
-                        <div class="col-sm-offset-4 itemlabel">
-                            <label id = "itemlabelval" ></label>
+                        <div>
+                            <label id = "itemlabelval"></label>
                         </div>
                     </div>
-                    <a class="prev listselect" onclick ="showSlides(0)">&#10094;</a>
+                    <div class ="col-sm-2 photo">
                     <a class="next listselect" onclick ="showSlides(1)">&#10095;</a>
+                    </div>
                 </div>
                 <br>
 
                 <div class="row details">
                     <div class="col-sm-9" style="border-style: double; margin-bottom: 20px; padding: 10px;">
                         <h5>Details</h5>
-                        <p>something something....</p>
+                        <p id="glovedetails"></p>
                         <h5>Specs</h5>
-                        <p>Some more details</p>
+                        <p id="glovespecs"></p>
 
                     </div>
                     <div class="col-sm-3">

@@ -15,9 +15,18 @@ body {font-family: Verdana, sans-serif; margin:0}
 .listselect {
   visibility: hidden;
 }
+.photo {
+  height: 100px;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
 .slideshow-container img {
   vertical-align: middle;
-  height: 300px;
+  height: 250%;
+  padding-left: 0px;
+  padding-right: 0px;
+
 }
 
 /* Slideshow container */
