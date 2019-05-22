@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Quote | Innovative Gloves Co., Ltd. | Latex and Nitrile Gloves Manufacturers | Thin Nitrile Gloves | Diamond Textured</title>
-    <meta name="keywords" content="Innovative Gloves Latex Nitrile Disposable Micro Diamond Tyre Textured Manufacturer Premium Quality Best Grip Grippy Texture Chlorinated Thick Thailand Malaysia Unique Special Factory Falcon Gripper 
+    <meta name="keywords" content="Innovative Gloves Latex Nitrile Disposable Micro Diamond Tyre Textured Manufacturer Premium Quality Best Grip Grippy Texture Chlorinated Thick Thailand Malaysia Unique Special Factory Falcon Gripper
     Ultimate Food Buddy Barrier Nitri Skin Hand Avi Silverline Silver Line High Risk" />
     <meta name="description" content="Innovative Gloves Premium Textured and Smooth Nitrile And Latex Glove Manufacturers Thailand">
     <meta name="author" content="www.innovativegloves.net">
@@ -48,7 +48,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script>
+    var i=0,j=0,l=0,finalList = [];
+
     $(document).ready(function(){
+
+       document.getElementById('imagesrc').src = '';
         document.getElementsByClassName('filters')[0].style.visibility = 'hidden';
         var fullList = {};
         var currentList = [];
@@ -144,9 +148,6 @@
                 if($.inArray(el, unique) === -1) unique.push(el);
             });
 
-            $('#cuff').append('<option value="' + " " + '">' + " " + '</option>');
-
-
             unique.sort(function(a, b){return a - b});
             $(unique).each(function (i,j) {
                 $('#cuff').append('<option value="' + j + '">' + j + '</option>');
@@ -175,8 +176,6 @@
         $.each(textures, function(i, el){
             if($.inArray(el, unique) === -1) unique.push(el);
         });
-        $('#texture').append('<option value="' + " " + '">' + " " + '</option>');
-
         unique.sort(function(a, b){return a - b});
         $(unique).each(function (i,j) {
             $('#texture').append('<option value="' + j + '">' + j + '</option>');
@@ -203,7 +202,6 @@
         $.each(cuffs, function(i, el){
             if($.inArray(el, unique) === -1) unique.push(el);
         });
-        $('#cuff').append('<option value="' + " " + '">' + " " + '</option>');
 
         unique.sort(function(a, b){return a - b});
         $(unique).each(function (i,j) {
@@ -222,34 +220,59 @@
         console.log(thickness);
         console.log(texture);
         console.log(cuff);
-
+        j = currentList.length;
+        finalList = currentList;
         if (base != "" && thickness != "" && texture != "" && cuff != ""
-            && 
+            &&
             base != null && thickness != null && texture != null && cuff != null) {
-            console.log("possible gloves;");
-            console.log(currentList);
-            updateImages(currentList);
+            updateImages(currentList,i);
         }
        }
 
-       function updateImages(list) {
-        document.getElementsByClassName('listselect')[0].style.visibility = 'visible';
-        document.getElementsByClassName('listselect')[1].style.visibility = 'visible';
 
-
-
-        /*
-        <div class="col-sm-offset-4">
-            <img src="img/Micro Diamond 6 Mil ORANGE.png">
-        </div>
-        <div class="col-sm-offset-4">
-            <label>6 Mil Orange Micro Diamond </label>
-        </div>
-        */
-
-       }
 
     });
+
+    function updateImages(list,k) {
+             console.log(list);
+             console.log(k);
+             console.log(l);
+             if(l==-1){
+               k = k-1;
+               i = i-1;
+             }
+             if(k==0){
+               document.getElementsByClassName('listselect')[0].style.visibility = 'hidden';
+             }else{
+               document.getElementsByClassName('listselect')[0].style.visibility = 'visible';
+             }
+             document.getElementById('imagesrc').src = list[k].g_url;
+             document.getElementById('itemlabelval').innerHTML = list[k].g_thickness +" Mil "+list[k].g_color+" "+list[k].g_name
+             document.getElementsByClassName('listselect')[1].style.visibility = 'visible';
+             if(k ==j-1 && l>=0){
+               document.getElementsByClassName('listselect')[1].style.visibility = 'hidden';
+             }
+             i = k+1;
+           }
+
+
+    function showSlides(h){
+        if(h==0){
+        if(i>= -1){
+          l = -1;
+        updateImages(finalList,i-1);
+        }
+      }
+
+      if(h==1){
+        if(i<j){
+          l=0;
+        updateImages(finalList,i);
+        }
+      }
+
+    }
+
     </script>
     <script>
         $(function() {
@@ -308,13 +331,13 @@
         .thumb-info-action {
             display: none
         }
-        
+
         .fc-slideshow img {
             border-radius: 0%;
             margin-top: 21px;
             width: : 150px !important;
         }
-        
+
         .big-circle {
             display: none;
         }
@@ -441,7 +464,7 @@
                                                         <a href="construction.html">Construction</a>
                                                         <a href="food.html">Food Processing</a>
                                                         <a href="household.html">House Hold</a>
-                                                        <a href="janitorial.html">Janitorial</a>          
+                                                        <a href="janitorial.html">Janitorial</a>
                                                 </ul>
                                             </li>
                                                 <li class="active">
@@ -521,22 +544,14 @@
                 <div class="slideshow-container" id="carosel" style="margin:100px;">
                     <div class="mySlides container objects">
                         <div class="col-sm-offset-4 itemimage">
-                            <img src="img/Micro Diamond 6 Mil ORANGE.png">
+                            <img src="" id="imagesrc">
                         </div>
                         <div class="col-sm-offset-4 itemlabel">
-                            <label>6 Mil Orange Micro Diamond </label>
+                            <label id = "itemlabelval" ></label>
                         </div>
                     </div>
-                    <div class="mySlides container objects">
-                        <div class="col-sm-offset-4 itemimage">
-                            <img src="img/Micro Diamond 6 Mil ORANGE.png">
-                        </div>
-                        <div class="col-sm-offset-4 itemlabel">
-                            <label>6 Mil Blue Micro Diamond </label>
-                        </div>
-                    </div>
-                    <a class="prev listselect" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next listselect" onclick="plusSlides(1)">&#10095;</a>
+                    <a class="prev listselect" onclick ="showSlides(0)">&#10094;</a>
+                    <a class="next listselect" onclick ="showSlides(1)">&#10095;</a>
                 </div>
                 <br>
 
@@ -618,7 +633,7 @@
     <script src="js/custom.js"></script>
     <!-- Theme Initialization Files -->
     <script src="js/theme.init.js"></script>
-    <script>
+    <!-- <script>
         var slideIndex = 1;
         showSlides(slideIndex);
 
@@ -649,7 +664,7 @@
             slides[slideIndex - 1].style.display = "block";
             // dots[slideIndex - 1].className += " active";
         }
-    </script>
+    </script> -->
     <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
