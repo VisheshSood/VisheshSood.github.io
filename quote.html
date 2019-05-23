@@ -100,8 +100,10 @@
             });
             console.log("global:"+globalColor);
             console.log("Updated List:" + currentList);
-            updateImages(currentList);
-        }
+            i=0;
+            finalList = currentList;
+            updateImages(currentList,i);
+          }
 
         function updateDropdowns(updated) {
             if (updated == "base") {
@@ -200,12 +202,10 @@
                 if (globalColor == "") {
                     if(object.g_base == globalBase && object.g_thickness == globalThickness && object.g_pattern == globalTexture) {
                         cuffs.push(object.g_cuff);
-                        console.log("pushing " + object.g_cuff);
                     }
                 } else {
                     if(object.g_base == globalBase && object.g_thickness == globalThickness && object.g_pattern == globalTexture && object.g_color == globalColor) {
                         cuffs.push(object.g_cuff);
-                        console.log("pushing " + object.g_cuff);
                     }
                 }
             });
@@ -265,6 +265,7 @@
     });
 
     function updateImages(list,k) {
+            j = list.length;
              if(l==-1){
                k = k-1;
                i = i-1;
@@ -309,6 +310,46 @@
       }
 
     }
+
+    function deleteDiv(){
+      console.log("here");
+      $(this).closest('tr').fadeOut(3000);
+      //$(this).closest('tr').remove();
+    }
+    //
+    $("#productTable").on('click', '#btnDelete', function () {
+        $(this).closest('tr').remove();
+
+        //.fadeOut(3000)
+    });
+
+    function productsAdd() {
+      let Tbase = ($( "#base" ).val());
+      let Tthickness = ($( "#thickness" ).val());
+      let Ttexture = ($( "#texture" ).val());
+      let Tcuff = ($( "#cuff" ).val());
+      let Tcolor = ($( "#color" ).val());
+
+        $("#productTable tbody").append(
+          '<tr>'+
+          '<td ></td>'+
+          '<td >'+Tbase+'</td>'+
+          '<td >'+Tthickness+'</td>'+
+          '<td >'+Ttexture+'</td>'+
+          '<td >'+Tcuff+'</td>'+
+          '<td >'+Tcolor+'</td>'+
+          '</tr>'
+        );
+      }
+
+      // "<td >"+$( "#base" ).val();+"</td>"+
+      // "<td >"+$( "#thickness" ).val();+"</td>"+
+      // "<td >"+$( "#texture" ).val();+"</td>"+
+      // "<td >"+$( "#color" ).val();+"</td>"+
+      // "<td >"+$("#cuff").val()+"</td>"+
+
+
+
 
     </script>
     <script>
@@ -584,7 +625,7 @@
                             </select>
                         </div>​
                     </div>
-                    
+
                 </div>
                 <div class="slideshow-container row" id="carosel" style="margin:100px;">
                     <div class ="col-sm-2 photo">
@@ -611,13 +652,13 @@
 
                     </div>
                     <div class="col-sm-3">
-                        <button class="col-sm-12">Add To Quote</button>
+                        <button class="col-sm-12" onclick="productsAdd();">Add To Quote</button>
                     </div>
                 </div>
-                <div class="row summary">
+                <!-- <div class="row summary">
                     <h2>Current Quote List</h2>
                     <div class="col-md-12" style="padding: 0;">
-                        <table class="tg" style="width: 100%;">
+                        <table class="tg" style="width: 100%;" id = "gloveRequest">
                           <tr>
                             <th class="tg-s268">Item Number</th>
                             <th class="tg-0lax">Base</th>
@@ -626,25 +667,26 @@
                             <th class="tg-0lax">Cuff</th>
                             <th class="tg-0lax">Color</th>
                           </tr>
-                          <tr>
-                            <td class="tg-s268"></td>
-                            <td class="tg-0lax"></td>
-                            <td class="tg-s268"></td>
-                            <td class="tg-s268"></td>
-                            <td class="tg-0lax"></td>
-                            <td class="tg-0lax"></td>
-                          </tr>
-                          <tr>
-                            <td class="tg-s268"></td>
-                            <td class="tg-0lax"></td>
-                            <td class="tg-s268"></td>
-                            <td class="tg-s268"></td>
-                            <td class="tg-0lax"></td>
-                            <td class="tg-0lax"></td>
-                          </tr>
+                          <tbody>
+                          </tbody>
                         </table>
                     </div>
-                </div>
+                </div> -->
+
+                <table id="productTable" class="table table-bordered table-condensed table-striped">
+                    <thead>
+                      <tr>
+                        <th >Item Number</th>
+                        <th >Base</th>
+                        <th >Thickness</th>
+                        <th >Pattern</th>
+                        <th >Cuff</th>
+                        <th >Color</th>
+                      </tr>
+                      <tbody>
+                      </tbody>
+                    </thead>
+                </table>
                 <div class="row">
                     <div class="col-sm-12" style="margin-top: 20px;">
                         <button class="col-sm-12">Submit!</button>
