@@ -85,8 +85,6 @@
             updateDropdowns("base");
         }
 
-
-
         function updateList() {
             currentList = [];
             $.each(fullList, function(id,object){
@@ -102,6 +100,7 @@
             });
             console.log("global:"+globalColor);
             console.log("Updated List:" + currentList);
+            updateImages(currentList);
         }
 
         function updateDropdowns(updated) {
@@ -184,7 +183,9 @@
                 if($.inArray(el, unique) === -1) unique.push(el);
             });
             unique.sort(function(a, b){return a - b});
-            $('#color').append('<option value="' + '' + '">' + 'All' + '</option>');
+            if (unique.length > 1) {
+                $('#color').append('<option value="' + '' + '">' + 'All' + '</option>');
+            }
             $(unique).each(function (i,j) {
                 $('#color').append('<option value="' + j + '">' + j + '</option>');
             });
@@ -262,25 +263,6 @@
 
 
     });
-
-    //    function selectionComplete() {
-    //     var base = $( "#base" ).val();
-    //     var thickness = $( "#thickness" ).val();
-    //     var texture = $( "#texture" ).val();
-    //     var cuff = $( "#cuff" ).val();
-    //     var color = $( "#color" ).val();
-    //     console.log("cuff: " + cuff);
-    //     console.log(currentList);
-    //     j = currentList.length;
-    //     finalList = currentList;
-    //     // if (base != "" && thickness != "" && texture != "" && cuff != "" && color != "" &&
-    //     //     base != null && thickness != null && texture != null && cuff != null) {
-    //             updateImages(currentList,i);
-            
-    //     // }
-    //    }
-
-    // });
 
     function updateImages(list,k) {
              if(l==-1){
