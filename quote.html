@@ -87,7 +87,19 @@
 
         function updateList() {
             currentList = [];
-            $.each(fullList, function(id,object){
+            temp = fullList;
+            console.log("Current Globals: " + globalBase + ' ' + globalColor + ' ' + globalThickness + ' ' + globalCuff + ' ' + globalTexture);
+
+
+            $.each(temp, function(id,object) {
+                if (globalBase != "") {
+                    if(object.g_base != globalBase) {
+                        temp.pop(object);
+                    }
+                }
+
+
+
                 if (globalColor == "") {
                     if(object.g_base == globalBase && object.g_thickness == globalThickness && object.g_pattern == globalTexture && object.g_cuff == globalCuff) {
                         currentList.push(object);
@@ -98,37 +110,35 @@
                     }
                 }
             });
-            console.log("global:"+globalColor);
-            console.log("Updated List:" + currentList);
             i=0;
             finalList = currentList;
-            updateImages(currentList,i);
+            // updateImages(currentList,i);
           }
 
         function updateDropdowns(updated) {
             if (updated == "base") {
                 console.log("updating dropdowns with new " + updated);
-                updateThicknesses();
-                updateTexture();
-                updateColor();
-                updateCuff();
-            } else if (updated == "thickness") {
+                updateThicknesses(updated);
+                updateTexture(updated);
+                updateColor(updated);
+                updateCuff(updated);
+            } else if (updated == "thickness" && globalThickness != '') {
                 console.log("updating dropdowns with new " + updated);
                 updateTexture();
                 updateColor();
                 updateCuff();
-            } else if (updated == "texture") {
+            } else if (updated == "texture" && globalTexture != '') {
                 console.log("updating dropdowns with new " + updated);
                 updateColor();
                 updateCuff();
-            } else if (updated == "color") {
+            } else if (updated == "color" && globalColor != '') {
                 console.log("updating dropdowns with new " + updated);
                 updateCuff();
             }
             updateList();
         }
 
-        function updateThicknesses() {
+        function updateThicknesses(updated) {
             $("#thickness").empty();
             var thicknesses = [];
             $.each(currentList, function(id,object){
@@ -142,15 +152,21 @@
                 if($.inArray(el, unique) === -1) unique.push(el);
             });
             unique.sort(function(a, b){return a - b});
+            if (unique.length > 1) {
+                $('#thickness').append('<option value="' + '' + '">' + 'All' + '</option>');
+            }
             $(unique).each(function (i,j) {
                 $('#thickness').append('<option value="' + j + '">' + j + '</option>');
             });
+            if (updated == "base" && unique.length > 1) { 
+                $("#thickness").val($("#thickness option:eq(1)").val());
+            }
             globalThickness = $( "#thickness" ).val();
             console.log("current thickness: " + globalThickness);
         }
 
 
-        function updateTexture() {
+        function updateTexture(updated) {
             $("#texture").empty();
             var textures = [];
             $.each(fullList, function(id,object){
@@ -164,14 +180,21 @@
                 if($.inArray(el, unique) === -1) unique.push(el);
             });
             unique.sort(function(a, b){return a - b});
+            if (unique.length > 1) {
+                $('#texture').append('<option value="' + '' + '">' + 'All' + '</option>');
+            }
             $(unique).each(function (i,j) {
                 $('#texture').append('<option value="' + j + '">' + j + '</option>');
             });
+            if (updated == "base" && unique.length > 1) { 
+                $("#texture").val($("#texture option:eq(1)").val());
+
+            }
             globalTexture = $( "#texture" ).val();
 
         }
 
-        function updateColor() {
+        function updateColor(updated) {
             $("#color").empty();
             var colors = [];
             $.each(fullList, function(id,object){
@@ -191,11 +214,15 @@
             $(unique).each(function (i,j) {
                 $('#color').append('<option value="' + j + '">' + j + '</option>');
             });
+            if (updated == "base" && unique.length > 1) { 
+                $("#color").val($("#color option:eq(1)").val());
+
+            }
             globalColor = $( "#color" ).val();
         }
 
 
-        function updateCuff() {
+        function updateCuff(updated) {
             $("#cuff").empty();
             var cuffs = [];
             $.each(fullList, function(id,object){
@@ -214,9 +241,16 @@
                 if($.inArray(el, unique) === -1) unique.push(el);
             });
             unique.sort(function(a, b){return a - b});
+            if (unique.length > 1) {
+                $('#cuff').append('<option value="' + '' + '">' + 'All' + '</option>');
+            }
             $(unique).each(function (i,j) {
                 $('#cuff').append('<option value="' + j + '">' + j + '</option>');
             });
+            if (updated == "base" && unique.length > 1) { 
+                $("#cuff").val($("#cuff option:eq(1)").val());
+
+            }
             globalCuff = $( "#cuff" ).val();
 
         }
