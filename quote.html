@@ -88,28 +88,94 @@
         function updateList() {
             currentList = [];
             temp = fullList;
+            console.log(temp);
             console.log("Current Globals: " + globalBase + ' ' + globalColor + ' ' + globalThickness + ' ' + globalCuff + ' ' + globalTexture);
 
-
-            $.each(temp, function(id,object) {
-                if (globalBase != "") {
-                    if(object.g_base != globalBase) {
-                        temp.pop(object);
+            if (globalBase != "" || globalBase=="" || globalThickness==globalThickness) {
+              if(globalBase=="" || globalThickness==null){
+                currentList = temp;
+              }else{
+                $.each(temp, function(id,object) {
+                    if(object.g_base==globalBase){
+                      currentList.push(object);
                     }
-                }
+                  })
+              }
 
+                  temp = currentList;
+                  currentList = [];
+              }
 
-
-                if (globalColor == "") {
-                    if(object.g_base == globalBase && object.g_thickness == globalThickness && object.g_pattern == globalTexture && object.g_cuff == globalCuff) {
-                        currentList.push(object);
+          if (globalThickness != "" || globalThickness=="" || globalThickness==null) {
+              if(globalThickness=="" || globalThickness==null){
+                currentList = temp;
+              }else{
+                $.each(temp, function(id,object) {
+                    if(object.g_thickness==globalThickness){
+                      currentList.push(object);
                     }
-                } else {
-                    if(object.g_base == globalBase && object.g_thickness == globalThickness && object.g_pattern == globalTexture && object.g_color == globalColor && object.g_cuff == globalCuff) {
+                  })
+              }
+                temp = currentList;
+                console.log(temp);
+                currentList = [];
+            }
+
+          if (globalTexture != "" || globalTexture=="" || globalTexture==null) {
+            if(globalTexture=="" || globalTexture==null){
+              currentList = temp;
+            }else{
+              $.each(temp, function(id,object) {
+                  if(object.g_pattern==globalTexture){
                     currentList.push(object);
+                  }
+                })
+              }
+                temp = currentList;
+                currentList = [];
+            }
+
+            if (globalColor != "" || globalColor=="" || globalColor==null) {
+              if(globalColor=="" || globalColor==null){
+                currentList = temp;
+              }else{
+                $.each(temp, function(id,object) {
+                    if(object.g_color==globalColor){
+                      currentList.push(object);
                     }
+                  })
                 }
-            });
+                  temp = currentList;
+                  currentList = [];
+              }
+
+            if (globalCuff != "" || globalCuff=="" || globalCuff==null) {
+              if(globalCuff=="" || globalCuff==null){
+                currentList = temp;
+              }else{
+                $.each(temp, function(id,object) {
+                    if(object.g_cuff==globalCuff){
+                      currentList.push(object);
+                    }
+                  })
+                }
+                  temp = currentList;
+                  currentList = [];
+              }
+
+              console.log(temp);
+
+                //
+                // if (globalColor == "") {
+                //     if(object.g_base == globalBase && object.g_thickness == globalThickness && object.g_pattern == globalTexture && object.g_cuff == globalCuff) {
+                //         currentList.push(object);
+                //     }
+                // } else {
+                //     if(object.g_base == globalBase && object.g_thickness == globalThickness && object.g_pattern == globalTexture && object.g_color == globalColor && object.g_cuff == globalCuff) {
+                //     currentList.push(object);
+                //     }
+                // }
+            // });
             i=0;
             finalList = currentList;
             // updateImages(currentList,i);
@@ -158,7 +224,7 @@
             $(unique).each(function (i,j) {
                 $('#thickness').append('<option value="' + j + '">' + j + '</option>');
             });
-            if (updated == "base" && unique.length > 1) { 
+            if (updated == "base" && unique.length > 1) {
                 $("#thickness").val($("#thickness option:eq(1)").val());
             }
             globalThickness = $( "#thickness" ).val();
@@ -186,7 +252,7 @@
             $(unique).each(function (i,j) {
                 $('#texture').append('<option value="' + j + '">' + j + '</option>');
             });
-            if (updated == "base" && unique.length > 1) { 
+            if (updated == "base" && unique.length > 1) {
                 $("#texture").val($("#texture option:eq(1)").val());
 
             }
@@ -214,7 +280,7 @@
             $(unique).each(function (i,j) {
                 $('#color').append('<option value="' + j + '">' + j + '</option>');
             });
-            if (updated == "base" && unique.length > 1) { 
+            if (updated == "base" && unique.length > 1) {
                 $("#color").val($("#color option:eq(1)").val());
 
             }
@@ -247,7 +313,7 @@
             $(unique).each(function (i,j) {
                 $('#cuff').append('<option value="' + j + '">' + j + '</option>');
             });
-            if (updated == "base" && unique.length > 1) { 
+            if (updated == "base" && unique.length > 1) {
                 $("#cuff").val($("#cuff option:eq(1)").val());
 
             }
@@ -345,35 +411,50 @@
 
     }
 
-    function deleteDiv(){
-      console.log("here");
-      $(this).closest('tr').fadeOut(3000);
-      //$(this).closest('tr').remove();
+    function deleteRow(id){
+      $('#'+id).css('background-color', 'red');
+      $('#'+id).fadeOut(3000);
     }
-    //
-    $("#productTable").on('click', '#btnDelete', function () {
-        $(this).closest('tr').remove();
 
-        //.fadeOut(3000)
-    });
-
+    var row=1;
+    var id = "";
     function productsAdd() {
+
       let Tbase = ($( "#base" ).val());
       let Tthickness = ($( "#thickness" ).val());
       let Ttexture = ($( "#texture" ).val());
       let Tcuff = ($( "#cuff" ).val());
       let Tcolor = ($( "#color" ).val());
 
+        if(Tthickness==""){
+	  Tthickness = "All";
+	 }
+
+	if(Ttexture==""){
+		 Ttexture = "All";
+		}
+	if(Tcolor==""){
+		 Tcolor = "All";
+		}
+	if(Tcuff==""){
+		 Tcuff = "All";
+		}
+
+	id = row+"_base";
         $("#productTable tbody").append(
-          '<tr>'+
+          '<tr id = '+id+'>'+
           '<td ></td>'+
           '<td >'+Tbase+'</td>'+
           '<td >'+Tthickness+'</td>'+
           '<td >'+Ttexture+'</td>'+
           '<td >'+Tcuff+'</td>'+
           '<td >'+Tcolor+'</td>'+
+          '<td >'+
+		"<button class='btn btn-danger	' onclick=deleteRow('"+id+"')>Delete</button>"+
+	  '</td>'+
           '</tr>'
         );
+	row++;
       }
 
       // "<td >"+$( "#base" ).val();+"</td>"+
@@ -716,6 +797,7 @@
                         <th >Pattern</th>
                         <th >Cuff</th>
                         <th >Color</th>
+			<th >Action</th>
                       </tr>
                       <tbody>
                       </tbody>
