@@ -48,6 +48,16 @@ body {font-family: Verdana, sans-serif; margin:0}
   display: inline-block;
 
 }
+
+.slick-slide img {
+    display: inline-block !important;
+}
+
+
+.slick-slide:hover {
+    /*border:2px solid green;*/
+    cursor: pointer; 
+}
 .listselect {
   visibility: hidden;
 }

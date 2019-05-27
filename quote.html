@@ -194,32 +194,40 @@
                 i = 0;
                 finalList = temp;
                 updateIcons(temp);
-
             }
 
 
             function updateIcons(updated){
+                if (updated.length  == 0 ) {
+                    document.getElementById('itemlabelval').innerHTML = "This glove is not part of our catalog... yet. <br> <br>If you are interested in this glove, please add it to your list and we will get back to you!";
+                    document.getElementsByClassName('listselect')[0].style.visibility = 'hidden';
+                    document.getElementsByClassName('listselect')[1].style.visibility = 'hidden';
+                    quoteItemBase = $("#base").val();
+                    quoteItemThickness = $("#thickness").val();
+                    quoteItemTexture = $("#texture").val();
+                    quoteItemColor = $("#color").val();
+                    quoteItemCuff = $("#cuff").val();
+                    quoteItemName = "Custom Product";
+                    return 0;
+                }
                 document.getElementsByClassName('slick-dots')[0].style.visibility = 'visible';
-
                 var imgList="";
                 console.log(updated);
                 $('.gloveicons').slick('removeSlide', null, null, true);
                 $.each(updated, function (id, object) {
-                      //"<button class='btn btn-danger  ' onclick=deleteRow('" + id + "')>Delete</button>" +
-                      //currentImage('" + id + "')
-                      //"<div onclick=dataCurrent('"+object.g_id+"');>"+
                     imgList += "<div onclick=dataCurrent('"+object.g_id+"');>"+
                     '<img src=img/gloves/'
                             + object.g_url
                             + '>'
                             +'<p>'
-                            + object.g_thickness + ' Mil ' + object.g_name + ' '
+                            + object.g_thickness + ' Mil ' + object.g_name + ' <br>'
                             + object.g_cuff + 'mm </p>'
                             +'</div>';
                   });
                 $('.gloveicons').append(imgList);
                 $('.gloveicons')[0].slick.refresh();
                 document.getElementsByClassName('slick-dots')[0].style.visibility = 'visible';
+                updateImages(updated, 0);
             }
 
             function updateDropdowns(updated) {
@@ -387,25 +395,35 @@
 
         });
 
-
-
-                   function dataCurrent(id){
-                              updateImages(temp,id);
-                              }
-
+        function dataCurrent(id){
+            updateImages(temp,id);
+        }
 
         function updateImages(list, k) {
+            console.log(k);
             console.log(list);
-            j = list.length;
-            if (l == -1) {
-                k = k - 1;
-                i = i - 1;
+
+            for(i=0;i<list.length;i++){
+              if(list[i].g_id == k) {
+                if (list[i].g_url != null && list[i].g_url != undefined && list[i].g_url != "") {
+                    ////console.log("URL:" + list[k].g_url);
+                    document.getElementById('imagesrc').src = "img/gloves/" + list[i].g_url;
+                    document.getElementById('glovedetails').innerHTML = list[i].g_description;
+                    document.getElementById('glovespecs').innerHTML = list[i].g_certification;
+
+                    document.getElementById('itemlabelval').innerHTML = list[i].g_thickness + " Mil " + list[i].g_color + " " + list[i].g_name + " " + list[i].g_cuff + "mm";
+                    quoteItemName = list[i].g_name;
+                    quoteItemBase = list[i].g_base;
+                    quoteItemThickness = list[i].g_thickness;
+                    quoteItemTexture = list[i].g_pattern;
+                    quoteItemColor = list[i].g_color;
+                    quoteItemCuff = list[i].g_cuff;
+                } else {
+                    document.getElementById('imagesrc').src = "";
+                }
+              }
             }
-            if (k == 0) {
-                document.getElementsByClassName('listselect')[0].style.visibility = 'hidden';
-            } else {
-                document.getElementsByClassName('listselect')[0].style.visibility = 'visible';
-            }
+
             //console.log(list);
             if (list.length  == 0 ) {
                 document.getElementById('itemlabelval').innerHTML = "This glove is not part of our catalog... yet. <br> <br>If you are interested in this glove, please add it to your list and we will get back to you!";
@@ -419,28 +437,6 @@
                 quoteItemName = "Custom Product";
                 return 0;
             }
-            if (list[k].g_url != null && list[k].g_url != undefined && list[k].g_url != "") {
-                ////console.log("URL:" + list[k].g_url);
-                document.getElementById('imagesrc').src = "img/gloves/" + list[k].g_url;
-            } else {
-                document.getElementById('imagesrc').src = ""
-                ;
-            }
-            document.getElementById('glovedetails').innerHTML = list[k].g_description;
-            document.getElementById('glovespecs').innerHTML = list[k].g_certification;
-
-            document.getElementById('itemlabelval').innerHTML = list[k].g_thickness + " Mil " + list[k].g_color + " " + list[k].g_name + " " + list[k].g_cuff + "mm";
-            quoteItemName = list[k].g_name;
-            quoteItemBase = list[k].g_base;
-            quoteItemThickness = list[k].g_thickness;
-            quoteItemTexture = list[k].g_pattern;
-            quoteItemColor = list[k].g_color;
-            quoteItemCuff = list[k].g_cuff;
-            document.getElementsByClassName('listselect')[1].style.visibility = 'visible';
-            if (k == j - 1 && l >= 0) {
-                document.getElementsByClassName('listselect')[1].style.visibility = 'hidden';
-            }
-            i = k + 1;
         }
 
         // function showSlides(h) {
