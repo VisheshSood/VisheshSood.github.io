@@ -9,6 +9,13 @@ option {
 */
 }
 
+#productTable {
+  visibility: hidden;
+}
+
+.submit {
+  visibility: hidden;
+}
 select {
   width: 100%;
 }
@@ -19,6 +26,10 @@ select {
 
 .filters {
   visibility: hidden;
+}
+.filters label {
+  font-size: 15px !important;
+  color: black !important;
 }
 
 {box-sizing: border-box}
@@ -46,6 +57,7 @@ body {font-family: Verdana, sans-serif; margin:0}
   text-align: center;
   vertical-align: center;
   display: inline-block;
+  margin-top: 5px;
 
 }
 

@@ -90,6 +90,7 @@
                 success: function(result) {
                     fullList = result.data;
                     document.getElementsByClassName('base')[0].style.visibility = 'visible';
+                    document.getElementById('baseheading').style.visibility = 'visible';
                 }
             });
 
@@ -210,7 +211,7 @@
 
                 $.each(updated, function(id, object) {
                     imgList += "<div onclick=dataCurrent('" + object.g_id + "');>" +
-                        '<img src=img/gloves/' + object.g_url + '>' + '<p>' + object.g_thickness + ' Mil ' + object.g_name + ' <br>' + object.g_cuff + 'mm </p>' + '</div>';
+                        '<img src=img/gloves/' + object.g_url + '>' + '<p> <b>' + object.g_thickness + ' Mil <br></b>' + object.g_name + ' <br>' + object.g_cuff + 'mm </p>' + '</div>';
                 });
                 $('.gloveicons').append(imgList);
                 $('.gloveicons')[0].slick.refresh();
@@ -409,6 +410,8 @@
         var id = "";
 
         function productsAdd() {
+            document.getElementById('productTable').style.visibility = 'visible';
+            document.getElementsByClassName('submit')[0].style.visibility = 'visible';
             console.log(quoteItemThickness + " " + quoteItemTexture + " " + quoteItemColor + " " + quoteItemCuff);
             if (quoteItemThickness == "") {
                 quoteItemThickness = "All";
@@ -678,7 +681,8 @@
                 <hr class="tall">
             </div>
             <div class="container">
-                <div class="row filters">
+                <div class="row filters">                            
+                    <h4 id='baseheading' style="font-style: italic;">Please Select A Base To Proceed</h4>
                     <div class="col-sm-2 base">
                         <div class="unselected-field" id="selectBase">
                             <label>Base:</label>
@@ -712,7 +716,7 @@
                     </div>
                     <div class="col-sm-2 cuff">
                         <div class="unselected-field" id="selectBase">
-                            <label>Cuff Length:</label>
+                            <label>Cuff Length (MM):</label>
                             <select id="cuff" name="cuffSelect">
                             </select>
                         </div>​
@@ -725,51 +729,33 @@
                     </div>
                 </div>
 
-                <div class="slideshow-container row" id="carosel" style="margin-top:100px;">
-                    <div class="col-sm-2 photo">
+                <div class="slideshow-container row" id="carosel" style="margin-bottom:100px;">
+                    <!-- <div class="col-sm-2 photo">
                         <a class="prev listselect" onclick="showSlides(0)">&#10094;</a>
-                    </div>
-                    <div class="mySlides container objects col-sm-8 photo">
+                    </div> -->
+
+
+                    <div class="mySlides container objects col-sm-6 photo">
                         <img src="" id="imagesrc">
                         <div>
                             <label id="itemlabelval"></label>
                         </div>
                     </div>
-                    <div class="col-sm-2 photo">
-                        <a class="next listselect" onclick="showSlides(1)">&#10095;</a>
-                    </div>
-                </div>
-                <br>
 
-                <div class="row details">
-                    <div class="col-sm-9" style="border-style: double; margin-bottom: 20px; padding: 10px;">
+                    <div class="col-sm-6" style="border-style: double; margin-bottom: 20px; margin-top:20px;padding: 10px;">
                         <h5>Details</h5>
                         <p id="glovedetails"></p>
                         <h5>Specs</h5>
                         <p id="glovespecs"></p>
-
-                    </div>
-                    <div class="col-sm-3">
                         <button class="col-sm-12" onclick="productsAdd();">Add To Quote</button>
                     </div>
+
+
+                    <!-- <div class="col-sm-2 photo">
+                        <a class="next listselect" onclick="showSlides(1)">&#10095;</a>
+                    </div> -->
                 </div>
-                <!-- <div class="row summary">
-                    <h2>Current Quote List</h2>
-                    <div class="col-md-12" style="padding: 0;">
-                        <table class="tg" style="width: 100%;" id = "gloveRequest">
-                          <tr>
-                            <th class="tg-s268">Item Number</th>
-                            <th class="tg-0lax">Base</th>
-                            <th class="tg-s268">Thickness</th>
-                            <th class="tg-s268">Pattern</th>
-                            <th class="tg-0lax">Cuff</th>
-                            <th class="tg-0lax">Color</th>
-                          </tr>
-                          <tbody>
-                          </tbody>
-                        </table>
-                    </div>
-                </div> -->
+                <br>
 
                 <table id="productTable" class="table table-bordered table-condensed table-striped">
                     <thead>
@@ -786,7 +772,7 @@
                         </tbody>
                     </thead>
                 </table>
-                <div class="row">
+                <div class="row submit">
                     <div class="col-sm-12" style="margin-top: 20px;">
                         <button class="col-sm-12">Submit!</button>
                     </div>
