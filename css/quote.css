@@ -12,12 +12,42 @@ option {
 select {
   width: 100%;
 }
+.gloveicons img {
+  width: 140px !important;
+  height: 140px !important;
+}
+
+.filters {
+  visibility: hidden;
+}
 
 {box-sizing: border-box}
 body {font-family: Verdana, sans-serif; margin:0}
 /* .mySlides {
   display: none
 } */
+
+.slick-dots {
+  visibility: hidden;
+}
+
+.slick-prev:before {
+  color: black !important;
+  font-size: 20px !important;
+}
+.slick-next:before {
+  color: black !important;
+  height: 20px;
+  width: 20px;
+}
+
+.slick-slide {
+  font-size: 12px !important;
+  text-align: center;
+  vertical-align: center;
+  display: inline-block;
+
+}
 .listselect {
   visibility: hidden;
 }
@@ -99,6 +129,7 @@ body {font-family: Verdana, sans-serif; margin:0}
   display: inline-block;
   transition: background-color 0.6s ease;
 }
+
 
 
 

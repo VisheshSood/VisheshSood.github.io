@@ -42,6 +42,8 @@
     <link rel="stylesheet" href="css/skins/skin-corporate-5.css">
     <!-- Theme Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" type="text/css" href="css/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="css/slick/slick-theme.css"/>
 
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.min.js"></script>
@@ -56,8 +58,16 @@
 
         $(document).ready(function() {
 
+          $('.gloveicons').slick({
+            slidesToShow: 6,
+            slidesToScroll:6,
+            dots: true,
+            //infinite: true,
+            arrows: true
+          });
+        
+
             document.getElementById('imagesrc').src = '';
-            document.getElementsByClassName('filters')[0].style.visibility = 'hidden';
 
             var fullList = {};
             var currentList = [];
@@ -89,6 +99,8 @@
                 document.getElementsByClassName('texture')[0].style.visibility = 'visible';
                 document.getElementsByClassName('color')[0].style.visibility = 'visible';
                 document.getElementsByClassName('cuff')[0].style.visibility = 'visible';
+                document.getElementsByClassName('slick-dots')[0].style.visibility = 'visible';
+
                 currentList = [];
                 $.each(fullList, function(id, object) {
                     if (object.g_base == globalBase) {
@@ -180,7 +192,30 @@
                 //console.log(temp);
                 i = 0;
                 finalList = temp;
+                updateIcons(temp);
                 updateImages(temp,i);
+            }
+
+            function updateIcons(updated){
+                document.getElementsByClassName('slick-dots')[0].style.visibility = 'visible';
+
+                var imgList="";
+                console.log(updated);
+                $('.gloveicons').slick('removeSlide', null, null, true);
+                $.each(updated, function (id, object) {
+                    imgList += '<div><img src=img/gloves/' 
+                            + object.g_url 
+                            + '>'
+                            +'<p>' 
+                            + object.g_thickness + ' Mil ' + object.g_name + ' ' 
+                            + object.g_cuff + 'mm </p>'
+                            +'</div>';
+                  });
+                $('.gloveicons').append(imgList);
+                $('.gloveicons')[0].slick.refresh();
+                document.getElementsByClassName('slick-dots')[0].style.visibility = 'visible';
+
+
             }
 
             function updateDropdowns(updated) {
@@ -377,7 +412,8 @@
                 ////console.log("URL:" + list[k].g_url);
                 document.getElementById('imagesrc').src = "img/gloves/" + list[k].g_url;
             } else {
-                document.getElementById('imagesrc').src = "";
+                document.getElementById('imagesrc').src = ""
+                ;
             }
             document.getElementById('glovedetails').innerHTML = list[k].g_description;
             document.getElementById('glovespecs').innerHTML = list[k].g_certification;
@@ -736,39 +772,8 @@
 
                 </div>
                 <div class="row">
-                        <div class="col-md-12">
-                            <div class="owl-carousel owl-theme stage-margin overalldiv" data-plugin-options="{'items': 6, 'margin': 10, 'loop': false, 'nav': true, 'dots': false, 'stagePadding': 40}">
-                                <div id="icondiv">
-                                    <img alt="" class="img-responsive img-rounded iconimage" src="img/gloves/blackmdt.jpg">
-                                </div>
-                                <!-- <div>
-                                    <img alt="" class="img-responsive img-rounded" src="img/gloves/militarygreendt.jpg">
-                                </div>
-                                <div>
-                                    <img alt="" class="img-responsive img-rounded" src="img/gloves/reddt.jpg">
-                                </div>
-                                <div>
-                                    <img alt="" class="img-responsive img-rounded" src="img/gloves/reddt.jpg">
-                                </div>
-                                <div>
-                                    <img alt="" class="img-responsive img-rounded" src="img/gloves/reddt.jpg">
-                                </div>
-                                <div>
-                                    <img alt="" class="img-responsive img-rounded" src="img/gloves/reddt.jpg">
-                                </div>
-                                <div>
-                                    <img alt="" class="img-responsive img-rounded" src="img/gloves/reddt.jpg">
-                                </div>
-                                <div>
-                                    <img alt="" class="img-responsive img-rounded" src="img/gloves/reddt.jpg">
-                                </div>
-                                <div>
-                                    <img alt="" class="img-responsive img-rounded" src="img/gloves/reddt.jpg">
-                                </div>
-                                <div>
-                                    <img alt="" class="img-responsive img-rounded" src="img/gloves/reddt.jpg">
-                                </div> -->
-                            </div>
+                        <div class="col-md-12 gloveicons" id = "gloveicons">
+                            
                         </div>
                     </div>
 
@@ -862,7 +867,7 @@
     <script src="vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
     <script src="vendor/circle-flip-slideshow/js/jquery.flipshow.min.js"></script>
     <script src="js/views/view.home.js"></script>
-    <!-- Theme Base, Components and Settings -->
+    <script type="text/javascript" src="css/slick/slick.min.js"></script>    <!-- Theme Base, Components and Settings -->
     <script src="js/theme.js"></script>
     <!-- Theme Custom -->
     <script src="js/custom.js"></script>
