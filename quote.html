@@ -55,6 +55,7 @@
             j = 0,
             l = 0,
             finalList = [];
+            temp = [];
 
         $(document).ready(function() {
 
@@ -65,7 +66,7 @@
             //infinite: true,
             arrows: true
           });
-        
+
 
             document.getElementById('imagesrc').src = '';
 
@@ -193,8 +194,9 @@
                 i = 0;
                 finalList = temp;
                 updateIcons(temp);
-                updateImages(temp,i);
+
             }
+
 
             function updateIcons(updated){
                 document.getElementsByClassName('slick-dots')[0].style.visibility = 'visible';
@@ -203,19 +205,21 @@
                 console.log(updated);
                 $('.gloveicons').slick('removeSlide', null, null, true);
                 $.each(updated, function (id, object) {
-                    imgList += '<div><img src=img/gloves/' 
-                            + object.g_url 
+                      //"<button class='btn btn-danger  ' onclick=deleteRow('" + id + "')>Delete</button>" +
+                      //currentImage('" + id + "')
+                      //"<div onclick=dataCurrent('"+object.g_id+"');>"+
+                    imgList += "<div onclick=dataCurrent('"+object.g_id+"');>"+
+                    '<img src=img/gloves/'
+                            + object.g_url
                             + '>'
-                            +'<p>' 
-                            + object.g_thickness + ' Mil ' + object.g_name + ' ' 
+                            +'<p>'
+                            + object.g_thickness + ' Mil ' + object.g_name + ' '
                             + object.g_cuff + 'mm </p>'
                             +'</div>';
                   });
                 $('.gloveicons').append(imgList);
                 $('.gloveicons')[0].slick.refresh();
                 document.getElementsByClassName('slick-dots')[0].style.visibility = 'visible';
-
-
             }
 
             function updateDropdowns(updated) {
@@ -225,7 +229,7 @@
                     updateTexture(updated);
                     updateColor(updated);
                     updateCuff(updated);
-                } 
+                }
                 i=0;
                 updateList();
             }
@@ -383,6 +387,13 @@
 
         });
 
+
+
+                   function dataCurrent(id){
+                              updateImages(temp,id);
+                              }
+
+
         function updateImages(list, k) {
             console.log(list);
             j = list.length;
@@ -407,7 +418,7 @@
                 quoteItemCuff = $("#cuff").val();
                 quoteItemName = "Custom Product";
                 return 0;
-            } 
+            }
             if (list[k].g_url != null && list[k].g_url != undefined && list[k].g_url != "") {
                 ////console.log("URL:" + list[k].g_url);
                 document.getElementById('imagesrc').src = "img/gloves/" + list[k].g_url;
@@ -432,22 +443,22 @@
             i = k + 1;
         }
 
-        function showSlides(h) {
-            if (h == 0) {
-                if (i >= -1) {
-                    l = -1;
-                    updateImages(finalList, i - 1);
-                }
-            }
-
-            if (h == 1) {
-                if (i < j) {
-                    l = 0;
-                    updateImages(finalList, i);
-                }
-            }
-
-        }
+        // function showSlides(h) {
+        //     if (h == 0) {
+        //         if (i >= -1) {
+        //             l = -1;
+        //             updateImages(finalList, i - 1);
+        //         }
+        //     }
+        //
+        //     if (h == 1) {
+        //         if (i < j) {
+        //             l = 0;
+        //             updateImages(finalList, i);
+        //         }
+        //     }
+        //
+        // }
 
         function deleteRow(id) {
             $('#' + id).css('background-color', 'red');
@@ -548,13 +559,13 @@
         .thumb-info-action {
             display: none
         }
-        
+
         .fc-slideshow img {
             border-radius: 0%;
             margin-top: 21px;
             width: : 150px !important;
         }
-        
+
         .big-circle {
             display: none;
         }
@@ -692,7 +703,7 @@
                                                 <ul class="dropdown-menu">
                                                     <li class="dropdown">
                                                         <a href="products.html#all">Our Range</a>
-                                                        <a href="our-gloves.html">Our Brands</a>       
+                                                        <a href="our-gloves.html">Our Brands</a>
                                                 </ul>
                                             </li>
                                                     <li class="active">
@@ -772,8 +783,8 @@
 
                 </div>
                 <div class="row">
-                        <div class="col-md-12 gloveicons" id = "gloveicons">
-                            
+                        <div class="col-md-12 gloveicons" id = "gloveicons" >
+
                         </div>
                     </div>
 
