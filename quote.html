@@ -198,10 +198,14 @@
 
 
             function updateIcons(updated){
+                $('.gloveicons').slick('removeSlide', null, null, true);
                 if (updated.length  == 0 ) {
                     document.getElementById('itemlabelval').innerHTML = "This glove is not part of our catalog... yet. <br> <br>If you are interested in this glove, please add it to your list and we will get back to you!";
                     document.getElementsByClassName('listselect')[0].style.visibility = 'hidden';
                     document.getElementsByClassName('listselect')[1].style.visibility = 'hidden';
+                    document.getElementById('imagesrc').style.visibility = 'hidden';
+                    document.getElementById('imagesrc').style.display = 'none';
+
                     quoteItemBase = $("#base").val();
                     quoteItemThickness = $("#thickness").val();
                     quoteItemTexture = $("#texture").val();
@@ -213,7 +217,7 @@
                 document.getElementsByClassName('slick-dots')[0].style.visibility = 'visible';
                 var imgList="";
                 console.log(updated);
-                $('.gloveicons').slick('removeSlide', null, null, true);
+                
                 $.each(updated, function (id, object) {
                     imgList += "<div onclick=dataCurrent('"+object.g_id+"');>"+
                     '<img src=img/gloves/'
@@ -403,9 +407,12 @@
             console.log(k);
             console.log(list);
 
+
             for(i=0;i<list.length;i++){
               if(list[i].g_id == k) {
                 if (list[i].g_url != null && list[i].g_url != undefined && list[i].g_url != "") {
+                    document.getElementById('imagesrc').style.visibility = 'visible';
+                    document.getElementById('imagesrc').style.display = 'inline-block';
                     ////console.log("URL:" + list[k].g_url);
                     document.getElementById('imagesrc').src = "img/gloves/" + list[i].g_url;
                     document.getElementById('glovedetails').innerHTML = list[i].g_description;
@@ -429,6 +436,8 @@
                 document.getElementById('itemlabelval').innerHTML = "This glove is not part of our catalog... yet. <br> <br>If you are interested in this glove, please add it to your list and we will get back to you!";
                 document.getElementsByClassName('listselect')[0].style.visibility = 'hidden';
                 document.getElementsByClassName('listselect')[1].style.visibility = 'hidden';
+                document.getElementById('imagesrc').style.visibility = 'hidden';
+                document.getElementById('imagesrc').style.display = 'none';
                 quoteItemBase = $("#base").val();
                 quoteItemThickness = $("#thickness").val();
                 quoteItemTexture = $("#texture").val();
@@ -438,23 +447,6 @@
                 return 0;
             }
         }
-
-        // function showSlides(h) {
-        //     if (h == 0) {
-        //         if (i >= -1) {
-        //             l = -1;
-        //             updateImages(finalList, i - 1);
-        //         }
-        //     }
-        //
-        //     if (h == 1) {
-        //         if (i < j) {
-        //             l = 0;
-        //             updateImages(finalList, i);
-        //         }
-        //     }
-        //
-        // }
 
         function deleteRow(id) {
             $('#' + id).css('background-color', 'red');
