@@ -369,6 +369,7 @@
                     if (list[i].g_url != null && list[i].g_url != undefined && list[i].g_url != "") {
                         document.getElementById('imagesrc').style.visibility = 'visible';
                         document.getElementById('imagesrc').style.display = 'inline-block';
+                        document.getElementsByClassName('detailssection')[0].style.visibility = 'visible';
                         document.getElementById('imagesrc').src = "img/gloves/" + list[i].g_url;
                         document.getElementById('glovedetails').innerHTML = list[i].g_description;
                         document.getElementById('glovespecs').innerHTML = list[i].g_certification;
@@ -742,7 +743,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6" style="border-style: double; margin-bottom: 20px; margin-top:20px;padding: 10px;">
+                    <div class="col-sm-6 detailssection" style="border-style: double; margin-bottom: 20px; margin-top:20px;padding: 10px;">
                         <h5>Details</h5>
                         <p id="glovedetails"></p>
                         <h5>Specs</h5>

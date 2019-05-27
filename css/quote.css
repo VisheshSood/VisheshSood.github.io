@@ -16,6 +16,9 @@ option {
 .submit {
   visibility: hidden;
 }
+.detailssection {
+  visibility: hidden;
+}
 select {
   width: 100%;
 }
