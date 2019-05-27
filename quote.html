@@ -200,10 +200,12 @@
                 quoteItemName = "Custom Product";
                 if (updated.length == 0) {
                     document.getElementById('itemlabelval').innerHTML = "This glove is not part of our catalog... yet. <br> <br>If you are interested in this glove, please add it to your list and we will get back to you!";
-                    document.getElementsByClassName('listselect')[0].style.visibility = 'hidden';
-                    document.getElementsByClassName('listselect')[1].style.visibility = 'hidden';
+                    // document.getElementsByClassName('listselect')[0].style.visibility = 'hidden';
+                    // document.getElementsByClassName('listselect')[1].style.visibility = 'hidden';
                     document.getElementById('imagesrc').style.visibility = 'hidden';
                     document.getElementById('imagesrc').style.display = 'none';
+                    document.getElementsByClassName('detailssection')[0].style.visibility = 'hidden';
+
                     return 0;
                 }
                 document.getElementsByClassName('slick-dots')[0].style.visibility = 'visible';
