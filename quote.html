@@ -205,7 +205,7 @@
                     document.getElementById('imagesrc').style.visibility = 'hidden';
                     document.getElementById('imagesrc').style.display = 'none';
                     document.getElementsByClassName('detailssection')[0].style.visibility = 'hidden';
-
+                    document.getElementsByClassName('addbutton')[0].style.visibility = 'visible';
                     return 0;
                 }
                 document.getElementsByClassName('slick-dots')[0].style.visibility = 'visible';
@@ -372,6 +372,7 @@
                         document.getElementById('imagesrc').style.visibility = 'visible';
                         document.getElementById('imagesrc').style.display = 'inline-block';
                         document.getElementsByClassName('detailssection')[0].style.visibility = 'visible';
+                        document.getElementsByClassName('addbutton')[0].style.visibility = 'visible';
                         document.getElementById('imagesrc').src = "img/gloves/" + list[i].g_url;
                         document.getElementById('glovedetails').innerHTML = list[i].g_description;
                         document.getElementById('glovespecs').innerHTML = list[i].g_certification;
@@ -394,6 +395,8 @@
                 document.getElementsByClassName('listselect')[1].style.visibility = 'hidden';
                 document.getElementById('imagesrc').style.visibility = 'hidden';
                 document.getElementById('imagesrc').style.display = 'none';
+                document.getElementsByClassName('addbutton')[0].style.visibility = 'visible';
+
                 quoteItemBase = $("#base").val();
                 quoteItemThickness = $("#thickness").val();
                 quoteItemTexture = $("#texture").val();
@@ -750,7 +753,7 @@
                         <p id="glovedetails"></p>
                         <h5>Specs</h5>
                         <p id="glovespecs"></p>
-                        <button class="col-sm-12" onclick="productsAdd();">Add To Quote</button>
+                        <button class="col-sm-12 addbutton" onclick="productsAdd();">Add To Quote</button>
                     </div>
 
 
