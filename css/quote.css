@@ -157,7 +157,9 @@ body {font-family: Verdana, sans-serif; margin:0}
   transition: background-color 0.6s ease;
 }
 
-
+#glovedetails {
+  margin-bottom: 10px;
+}
 
 
 @-webkit-keyframes fade {
@@ -177,7 +179,7 @@ body {font-family: Verdana, sans-serif; margin:0}
 
 
 .tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-s268{text-align:left}
-.tg .tg-0lax{text-align:left;vertical-align:top}
+.tg td{font-family:Arial, sans-serif;font-size:12px;padding:5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;text-align:center;font-weight:normal;padding:5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-s268{text-align:center}
+.tg .tg-0lax{text-align:center;vertical-align:top}

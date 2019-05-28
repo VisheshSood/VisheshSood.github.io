@@ -374,8 +374,24 @@
                         document.getElementsByClassName('detailssection')[0].style.visibility = 'visible';
                         document.getElementsByClassName('addbutton')[0].style.visibility = 'visible';
                         document.getElementById('imagesrc').src = "img/gloves/" + list[i].g_url;
-                        document.getElementById('glovedetails').innerHTML = list[i].g_description;
-                        document.getElementById('glovespecs').innerHTML = list[i].g_certification;
+                        var string = list[i].g_description;
+                        var array = string.split(',');
+                        var rowCount = $('#glovedetails tr').length;
+                        if (rowCount > 1) {
+                            var table=document.getElementById('glovedetails');
+                            table.deleteRow(1);
+                        }
+                        var newRow=document.getElementById('glovedetails').insertRow();
+                        newRow.innerHTML = "<td>Weight (g)</td>" 
+                                        + "<td>" + array[0] + "</td>" 
+                                        + "<td>" + array[1] + "</td>" 
+                                        + "<td>" + array[2] + "</td>" 
+                                        + "<td>" + array[3] + "</td>" 
+                                        + "<td>" + array[4] + "</td>"
+                                        + "<td>" + array[5] + "</td>"
+                                        + "<td>" + array[6] + "</td>";
+                        document.getElementById('glovespecs').innerHTML = "<a href=\"img\\specification\\new\\"
+                                                                        + list[i].g_certification + "\" class=\"\" target=\"_blank\"> Download Specification Sheet</a>"
 
                         document.getElementById('itemlabelval').innerHTML = list[i].g_thickness + " Mil " + list[i].g_color + " " + list[i].g_name + " " + list[i].g_cuff + "mm";
                         quoteItemName = list[i].g_name;
@@ -749,9 +765,20 @@
                     </div>
 
                     <div class="col-sm-6 detailssection" style="border-style: double; margin-bottom: 20px; margin-top:20px;padding: 10px;">
-                        <h5>Details</h5>
-                        <p id="glovedetails"></p>
-                        <h5>Specs</h5>
+                        <h5>Weights</h5>
+                        <table class="tg" id="glovedetails">
+                          <tr>
+                            <th class="tg-xldj"></th>
+                            <th class="tg-0pky">XS</th>
+                            <th class="tg-xldj">S</th>
+                            <th class="tg-xldj">M</th>
+                            <th class="tg-0pky">L</th>
+                            <th class="tg-0pky">XL</th>
+                            <th class="tg-0lax">XXL</th>
+                            <th class="tg-0lax">XXXL</th>
+                          </tr>
+                        </table>
+                        <h5>Specification Sheet</h5>
                         <p id="glovespecs"></p>
                         <button class="col-sm-12 addbutton" onclick="productsAdd();">Add To Quote</button>
                     </div>
