@@ -218,7 +218,7 @@
                 $('.gloveicons').append(imgList);
                 $('.gloveicons')[0].slick.refresh();
                 document.getElementsByClassName('slick-dots')[0].style.visibility = 'visible';
-                updateImages(updated, 0);
+                updateImages(updated, updated[0].g_id);
             }
 
             function updateDropdowns(updated) {
@@ -766,7 +766,7 @@
 
                     <div class="col-sm-6 detailssection" style="border-style: double; margin-bottom: 20px; margin-top:20px;padding: 10px;">
                         <h5>Weights</h5>
-                        <table class="tg" id="glovedetails">
+                        <table class="tg" id="glovedetails" style="margin-left: auto;margin-right: auto;">
                           <tr>
                             <th class="tg-xldj"></th>
                             <th class="tg-0pky">XS</th>
