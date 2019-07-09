@@ -5239,9 +5239,9 @@ html.boxed .pricing-table .plan, html.boxed .pricing-table h3 {
 	width: 100%;
 }
 
-.thumb-info:hover .thumb-info-wrapper:after {
+/*.thumb-info:hover .thumb-info-wrapper:after {
 	opacity: 1;
-}
+}*/
 
 .thumb-info:hover .thumb-info-action-icon {
 	right: 0;
