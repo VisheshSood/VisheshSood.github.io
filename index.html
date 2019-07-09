@@ -8,6 +8,13 @@
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="-1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
+    <script type="text/javascript" src="https://downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: true"></script>
+
+    <script type="text/javascript">
+    window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"//mc.us3.list-manage.com","uuid":"875551bb8059dc51b9b036593","lid":"926af27177","uniqueMethods":true}) })
+    </script>
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140531009-1"></script>
     <script>
@@ -82,13 +89,6 @@
     </script>
     <!-- jQuery Script  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
-    <script type="text/javascript" src="https://downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: true"></script>
-
-    <script type="text/javascript">
-    window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"https://mc.us3.list-manage.com","uuid":"875551bb8059dc51b9b036593","lid":"926af27177","uniqueMethods":true}) })
-    </script>
     <script>
         $(function() {
             function after_form_submitted(data) {
