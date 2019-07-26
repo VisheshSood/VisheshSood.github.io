@@ -406,7 +406,7 @@ img.svg{
 	clear: both;
 	float: left;
 	margin-bottom: 40px;
-		/*background-color: rgba(0,0,0,.7);*/
+	background-color: rgba(0,0,0,.7);
 	padding: 10px;
 }
 .glax_tm_hero_header_wrap .swiper_content .texts_wrap h3{
@@ -1576,7 +1576,7 @@ img.svg{
 .glax_tm_introduce_wrap .experience_box .top p{
 	margin: 0px;
     padding: 0px;
-    font-size: 20px;
+    font-size: 25px;
     letter-spacing: 0px;
     font-weight: 300;
     margin-bottom: 10px;
@@ -1598,7 +1598,7 @@ img.svg{
 }
 .glax_tm_introduce_wrap .experience_box .bottom .definition{
 	font-family: "Montserrat";
-	font-size: 10px;
+	font-size: 14px;
 	color: #ad3110;
 	text-transform: uppercase;
 	padding-left: 4px;
@@ -2479,7 +2479,7 @@ img.svg{
 .glax_tm_home_project_wrapper_all .rightbox ul li .inner .title_holder h3{
 	font-family: "Rubik";
 	font-size: 24px;
-	color: #eee;
+	color: red;
 	line-height: 1;
 	margin-bottom: 10px;
 }
