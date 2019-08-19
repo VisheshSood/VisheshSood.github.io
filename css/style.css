@@ -2851,7 +2851,7 @@ img.svg{
 	clear: both;
 	float: left;
 }
-.glax_tm_list_wrap.footer{padding-top: 95px;}
+.glax_tm_list_wrap.footer{}
 .glax_tm_list_wrap ul.glax_list{
 	margin: 0px;
 	list-style-type: none;
@@ -5040,7 +5040,7 @@ img.svg{
 	background-repeat: no-repeat;
 	background-position: bottom right;
 }
-.glax_tm_about_counter_wrap .inner_counter .inner_rightbox{padding: 95px 100px 90px 100px;}
+.glax_tm_about_counter_wrap .inner_counter .inner_rightbox{padding: 50px 50px 0px 50px;}
 .glax_tm_about_counter_wrap .inner_counter .rightbox .top_title{
 	margin: 0px;
     padding: 0px;
@@ -5229,6 +5229,7 @@ img.svg{
     letter-spacing: 0px;
     font-weight: 400;
     color: #14141c;
+    text-align: center;
 }
 .glax_tm_about_team_wrap ul li .main_definitions span{
 	margin: 0px;
@@ -5479,8 +5480,8 @@ img.svg{
 	.glax_tm_subscribe_wrap .inner_wrap{display: block;}
 	.glax_tm_subscribe_wrap .left_wrap{width: 100%;margin-bottom: 30px;}
 	.glax_tm_subscribe_wrap .right_wrap{width: 100%;float: left;display: flex;}
-	.glax_tm_about_counter_wrap .inner_counter .inner_rightbox{padding: 67px 7% 60px 7%;}
-	.glax_tm_about_team_wrap ul li{width: 33.3333%;}
+	.glax_tm_about_counter_wrap .inner_counter .inner_rightbox{}
+	.glax_tm_about_team_wrap ul li{width: 25%;}
 	.glax_tm_main_contact_wrap .office_list ul li{width: 100%;padding-left: 0px;}
 	.glax_tm_main_contact_wrap .office_list ul{margin: 0px;}
 }
