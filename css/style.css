@@ -333,7 +333,7 @@ img.svg{
 	height: 70px;
 	text-decoration: none;
 	color: #edc0c6;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	
 	-webkit-transition: all .3s ease;
 	   -moz-transition: all .3s ease;
@@ -348,7 +348,7 @@ img.svg{
 	height: 0;
 	border-style: solid;
 	border-width: 10px 60px 0px 0px;
-	border-color: #ad3110 transparent transparent transparent;
+	border-color: #7DCBFF transparent transparent transparent;
 	left: 0px;
 	top: 100%;
 }
@@ -582,7 +582,7 @@ img.svg{
 	width: 220px;
 	top: -90px;
 	bottom: 0px;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	justify-content: center;
 	display: flex;
 	align-items: center;
@@ -596,7 +596,7 @@ img.svg{
     height: 0;
     border-style: solid;
     border-width: 40px 220px 0px 0px;
-    border-color: #ad3110 transparent transparent transparent;
+    border-color: #7DCBFF transparent transparent transparent;
     left: 0px;
     top: 100%;	
 }
@@ -605,7 +605,7 @@ img.svg{
     content: "";
     width: 200px;
 	height: 15px;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	bottom: -33px;
 	transform: rotate(-10deg);
 }
@@ -614,7 +614,7 @@ img.svg{
 	z-index: 11;
 	width: 20px;
 	height: 20px;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	left: 0px;
 	bottom: -51px;
 	border-radius: 100%;
@@ -624,7 +624,7 @@ img.svg{
 	z-index: 11;
 	width: 22px;
 	height: 20px;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	right: 0px;
 	bottom: -15px;
 	border-radius: 100%;
@@ -634,7 +634,7 @@ img.svg{
 	z-index: 11;
 	width: 22px;
 	height: 20px;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	right: 0px;
 	bottom: -12px;
 	border-radius: 100%;
@@ -644,7 +644,7 @@ img.svg{
 	z-index: 11;
 	width: 22px;
 	height: 20px;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	right: 3px;
 	bottom: -16px;
 	border-radius: 100%;
@@ -1236,7 +1236,7 @@ img.svg{
 	height: 70px;
 	text-decoration: none;
 	color: #edc0c6;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	
 	-webkit-transition: all .3s ease;
 	   -moz-transition: all .3s ease;
@@ -1251,7 +1251,7 @@ img.svg{
 	height: 0;
 	border-style: solid;
 	border-width: 10px 60px 0px 0px;
-	border-color: #ad3110 transparent transparent transparent;
+	border-color: #7DCBFF transparent transparent transparent;
 	left: 0px;
 	top: 100%;
 }
@@ -1382,7 +1382,7 @@ img.svg{
 .glax_tm_widget_wrap .widget_dropdown_wrap .button a{
 	height: 50px;
     padding: 0px 26px;
-    background-color: #ad3110;
+    background-color: #7DCBFF;
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 0.5px;
@@ -1567,7 +1567,7 @@ img.svg{
 .glax_tm_introduce_wrap .experience_box{
 	width: 240px;
 	height: 240px;
-	border: 10px solid #ad3110;
+	border: 10px solid #7DCBFF;
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
@@ -1599,7 +1599,7 @@ img.svg{
 .glax_tm_introduce_wrap .experience_box .bottom .definition{
 	font-family: "Montserrat";
 	font-size: 14px;
-	color: #ad3110;
+	color: #7DCBFF;
 	text-transform: uppercase;
 	padding-left: 4px;
 	font-weight: 500;
@@ -1609,7 +1609,7 @@ img.svg{
 	width: 70px;
 	height: 70px;
 	border-radius: 100%;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	bottom: -20px;
 	left: 80px;
 	z-index: 3;
@@ -2170,7 +2170,7 @@ img.svg{
 	width: 70px;
 	height: 80px;
 	line-height: 80px;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	border-radius: 1px;
 	text-align: center;
 }
@@ -2647,7 +2647,7 @@ img.svg{
 	left: 0px;
 	width: 80px;
 	height: auto;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	z-index: 2;
 	padding: 18px 19px 10px 19px;
 }
@@ -2656,7 +2656,7 @@ img.svg{
     content: '';
     left: 0px;
     bottom: -15px;
-    border-top: 15px solid #ad3110;
+    border-top: 15px solid #7DCBFF;
     border-right: 80px solid transparent;
     z-index: -1;
 }
@@ -3351,7 +3351,7 @@ img.svg{
 	        transition: all .3s ease;
 }
 .glax_tm_projects_wrap .glax_tm_portfolio_list .inner:hover .image_wrap .overlay_color{
-	background-color: rgba(15,15,22,.9);
+	background-color: rgba(15,15,22,0);
 }
 .glax_tm_projects_wrap .glax_tm_portfolio_list .inner .image_wrap .plus{
 	position: absolute;
@@ -3926,15 +3926,15 @@ img.svg{
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.glax_tm_shape_read_more_wrap .read_more_in:hover{background-color: #ad3110;}
-.glax_tm_shape_read_more_wrap .read_more_in:hover a:before{background-color: #ad3110;}
+.glax_tm_shape_read_more_wrap .read_more_in:hover{background-color: #7DCBFF;}
+.glax_tm_shape_read_more_wrap .read_more_in:hover a:before{background-color: #7DCBFF;}
 .glax_tm_categories{
 	width: 100%;
 	min-height: 200px;
 	height: auto;
 	clear: both;
 	float: left;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	position: relative;
 	overflow: hidden;
 	margin-bottom: 60px;
@@ -4264,7 +4264,7 @@ img.svg{
 	letter-spacing: 0px;
 }
 .glax_tm_service_single_wrap .leftbox .image_definition p .shape{
-	border: 3px solid #ad3110;
+	border: 3px solid #7DCBFF;
 	width: 80px;
 	height: 80px;
 	line-height: 80px;
@@ -4278,7 +4278,7 @@ img.svg{
 	border-radius: 10px;
 }
 .glax_tm_service_single_wrap .leftbox .image_definition p .shape span{
-	color: #ad3110;
+	color: #7DCBFF;
 	font-size: 50px;
 	display: inline-block;
 	font-family: "Montserrat";
@@ -4539,6 +4539,7 @@ img.svg{
 .glax_tm_other_services_wrap .services_list_wrap ul li .description p{
 	color: #777;
 	line-height: 1.6;
+	margin-top: 40px;
 }
 .glax_tm_other_services_wrap .services_list_wrap ul li .read_more_wrap{
 	position: absolute;
@@ -4588,8 +4589,8 @@ img.svg{
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.glax_tm_other_services_wrap .services_list_wrap ul li .read_more_in:hover{background-color: #ad3110;}
-.glax_tm_other_services_wrap .services_list_wrap ul li .read_more_in:hover a:before{background-color: #ad3110;}
+.glax_tm_other_services_wrap .services_list_wrap ul li .read_more_in:hover{background-color: #7DCBFF;}
+.glax_tm_other_services_wrap .services_list_wrap ul li .read_more_in:hover a:before{background-color: #7DCBFF;}
 
 /*------------------------------------------------------------------*/ 
 /*	19) GLAX BLOG
@@ -4629,7 +4630,7 @@ img.svg{
 	left: 0px;
 	width: 80px;
 	height: auto;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 	z-index: 2;
 	padding: 18px 19px 10px 19px;
 }
@@ -4638,7 +4639,7 @@ img.svg{
     content: '';
     left: 0px;
     bottom: -15px;
-    border-top: 15px solid #ad3110;
+    border-top: 15px solid #7DCBFF;
     border-right: 80px solid transparent;
     z-index: -1;
 }
@@ -4765,7 +4766,7 @@ img.svg{
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.glax_tm_blog_wrap .definitions_wrap .continue a:hover{background-color: #ad3110;}
+.glax_tm_blog_wrap .definitions_wrap .continue a:hover{background-color: #7DCBFF;}
 
 /*------------------------------------------------------------------*/ 
 /*	20) GLAX BLOG SINGLE
@@ -5320,7 +5321,7 @@ img.svg{
 	right: 0px;
 	bottom: 0px;
 	width: 60px;
-	background-color: #ad3110;
+	background-color: #7DCBFF;
 }
 .glax_tm_main_contact_wrap .office_list ul li .definitions_wrap .office .icon .svg{
 	position: absolute;
@@ -5460,7 +5461,7 @@ img.svg{
 	     -o-transition: all .3s ease;
 	        transition: all .3s ease;
 }
-.glax_tm_contact_wrap .inner_wrap .row a:hover{background-color: #ad3110;}
+.glax_tm_contact_wrap .inner_wrap .row a:hover{background-color: #7DCBFF;}
 .glax_tm_contact_wrap .empty_notice{
 	color: #FF0004;
 	margin-bottom: 7px;
