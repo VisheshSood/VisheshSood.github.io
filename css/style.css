@@ -4422,7 +4422,7 @@ img.svg{
 	height: auto;
 	clear: both;
 	float: left;
-	display: flex;
+	/*display: flex;*/
 	align-items: center;
 	justify-content: space-between;
 	background-color: #0f0f16;
@@ -4437,6 +4437,8 @@ img.svg{
     min-width: -webkit-max-content;
     margin-left: auto;
 	width: auto;
+	margin-top: 30px;
+	text-align: center;
 }
 .glax_tm_short_contact .glax_tm_button_wrap a{
 	text-decoration: none;
