@@ -4542,7 +4542,7 @@ img.svg{
 .glax_tm_other_services_wrap .services_list_wrap ul li .description p{
 	color: #777;
 	line-height: 1.6;
-	margin-top: 40px;
+	/*margin-top: 40px;*/
 }
 .glax_tm_other_services_wrap .services_list_wrap ul li .read_more_wrap{
 	position: absolute;
