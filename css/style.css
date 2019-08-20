@@ -3713,6 +3713,7 @@ img.svg{
 .glax_tm_justified_content .rightpart{
 	/*width: 370px;*/
 	/*min-width: 370px;*/
+	width: 100%;
 	position: relative;
 	/*margin-left: 50px;*/
 }
@@ -3740,7 +3741,7 @@ img.svg{
 }
 .glax_tm_justified_content .infobox ul li span{
 	font-size: 14px;
-	color: #777;
+	color: black;
 	line-height: 1.3;
 	display: block;
 }
@@ -4254,7 +4255,7 @@ img.svg{
 	float: left;
 	margin-bottom: 150px;
 }
-.glax_tm_service_single_wrap .leftbox .main_image_wrap{margin-bottom: 58px;}
+.glax_tm_service_single_wrap .leftbox .main_image_wrap{margin-bottom: 25px;}
 .glax_tm_service_single_wrap .leftbox .image_wrap{margin-bottom: 34px;}
 .glax_tm_service_single_wrap .leftbox .image_definition p{
 	font-size: 16px;
@@ -4483,7 +4484,7 @@ img.svg{
 	clear: both;
 	float: left;
 	background-color: #e9eff4;
-	margin-bottom: 65px;
+	margin-bottom: 35px;
 }
 .glax_tm_other_services_wrap{
 	width: 100%;
