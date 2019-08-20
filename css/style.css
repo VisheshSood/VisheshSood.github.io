@@ -48,7 +48,7 @@ body{
 	letter-spacing: 0.5px;
 }
 svg{
-	fill: currentcolor;
+	/*fill: currentcolor;*/
 	width: 15px;
 	height: 15px;
 }
