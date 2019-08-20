@@ -3139,10 +3139,10 @@ img.svg{
 	width: 100%;
     float: left;
     clear: both;
-    padding-bottom: 101px;
+    padding-bottom: 0px;
     position: relative;
 	margin-bottom: 10px;
-}
+}/*
 .builify_tm_breadcrumbs:before{
 	content: '';
     position: absolute;
@@ -3160,7 +3160,7 @@ img.svg{
     background-color: #eee;
     left: 0px;
     bottom: 73px;
-}
+}*/
 .builify_tm_breadcrumbs ul{
 	margin: 0px;
 	list-style-type: none;
@@ -3711,10 +3711,10 @@ img.svg{
 .glax_tm_share_wrap ul li a:hover{color: #45a2df;}
 .glax_tm_justified_content .glax_tm_project_video{float: left;}
 .glax_tm_justified_content .rightpart{
-	width: 370px;
-	min-width: 370px;
+	/*width: 370px;*/
+	/*min-width: 370px;*/
 	position: relative;
-	margin-left: 50px;
+	/*margin-left: 50px;*/
 }
 .glax_tm_justified_content .infobox{
 	width: 100%;
@@ -3746,8 +3746,8 @@ img.svg{
 }
 .glax_tm_justified_content .first_square{
 	position: absolute;
-	width: 100px;
-	height: 150px;
+	width: 75px;
+	height: 125px;
 	background-color: #f7f7f7;
 	bottom: 0px;
 	right: 0px;
@@ -4368,10 +4368,10 @@ img.svg{
 }
 .glax_tm_accordion .accordion_in .acc_head{
 	position: relative;
-	font-family: "Raleway";
+	font-family: "Open Sans";
 	color:#181a2f;
 	font-weight: 500;
-	font-size: 18px;
+	font-size: 17px;
 	display: block;
 	cursor: pointer;
 	padding-left: 34px;
