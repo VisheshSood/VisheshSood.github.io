@@ -11,8 +11,8 @@ jQuery(document).ready(function(){
 	
 	// here all ready functions
 	
-	glax_tm_lang_box();
-	glax_tm_lang_offset();
+	// glax_tm_lang_box();
+	// glax_tm_lang_offset();
 	glax_tm_imgtosvg();
 	glax_tm_data_images();
 	glax_tm_article();
@@ -48,7 +48,7 @@ jQuery(document).ready(function(){
 		glax_tm_isotope();
 		glax_tm_stickyy();
 		glax_tm_sidebar_shape();
-		glax_tm_lang_offset();
+		// glax_tm_lang_offset();
 		
 	});
 	
