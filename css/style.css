@@ -1,35 +1,5 @@
 @charset "utf-8";
-
-/*	Copyright (c) 2019 Marketify
-/*	Author: Marketify
-/*	This file is made for CURRENT TEMPLATE
-
-
-	01) GLAX BASE
-	02) GLAX HERO HEADER
-	03) GLAX MOBILE TOPBAR
-	04) GLAX MOBILE HEADER
-	05) GLAX WIDGET
-	06) GLAX HOME INTRODUCE
-	07) GLAX HOME SERVICE
-	08) GLAX WHY CHOOSE US
-	09) GLAX PRINCIPLES
-	10) GLAX RESPONSIBILITY
-	11) GLAX HOME PROJECTS
-	12) GLAX HOME BLOG
-	13) GLAX FOOTER
-	14) GLAX TO TOP
-	15) GLAX PROJECTS
-	16) GLAX PROJECT SINGLE
-	17) GLAX SERVICES
-	18) GLAX SERVICE SINGLE
-	19) GLAX BLOG
-	20) GLAX BLOG SINGLE
-	21) GLAX ABOUT
-	22) GLAX CONTACT
-	23) GLAX MEDIA QUERIES (FOR SMALL DEVICES)
 	
-
 /*------------------------------------------------------------------*/
 /*	01) GLAX BASE
 /*------------------------------------------------------------------*/
@@ -395,7 +365,7 @@ img.svg{
 }
 .glax_tm_hero_header_wrap .swiper_content{
 	position: relative;
-	max-width: 550px;
+	max-width: 500px;
 	height: auto;
 	z-index: 2;
 	float: left;
@@ -409,20 +379,35 @@ img.svg{
 	background-color: rgba(0,0,0,.7);
 	padding: 10px;
 }
-.glax_tm_hero_header_wrap .swiper_content .texts_wrap h3{
+.glax_tm_hero_header_wrap .swiper_content .texts_wrap h2{
 	font-family: "Rubik";
-	font-size: 60px;
-	text-transform: capitalize;
+	font-size: 45px;
+	text-transform: uppercase;
 	line-height: 1;
 	color: white;
 	letter-spacing: 0px;
 	font-weight: 400;
 	margin-bottom: 30px;
+	text-align: center;
 }
-.glax_tm_hero_header_wrap .swiper_content .texts_wrap p{
-	color: #ccc;
-	line-height: 1.7;
+
+.glax_tm_hero_header_wrap .swiper_content .texts_wrap h1{
+	font-family: "Rubik";
+	font-size: 25px;
+	text-transform: capitalize;
+	line-height: 1;
+	color: white;
 	letter-spacing: 0px;
+	font-weight: 200;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.glax_tm_hero_header_wrap .swiper_content .texts_wrap p{
+	color: white;
+	line-height: 1.7;
+	letter-spacing: 0.5px;
+	font-size: 15px;
 }
 .glax_tm_hero_header_wrap .swiper-slide .swiper_content{
 	opacity: 0;
