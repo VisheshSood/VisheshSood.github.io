@@ -767,6 +767,8 @@ img.svg{
 .glax_tm_mobile_bar_wrap .mobile_topbar_wrap .short_info_wrap ul li a .svg{
 	width: 20px;
 	height: 20px;
+	filter: invert(90%) sepia(100%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+
 }
 .glax_tm_mobile_bar_wrap .mobile_topbar_wrap .mobile_socials_wrap ul{
 	margin: 0px;
@@ -971,7 +973,7 @@ img.svg{
 	padding: 40px 0px;
 }
 .glax_tm_dropdown_wrap .adress_wrap .office_image{
-	max-width: 320px;
+	max-width: 200px;
 	margin-right: 30px;
 }
 .glax_tm_dropdown_wrap .definitions_wrap{width: auto;}
@@ -1087,9 +1089,9 @@ img.svg{
 }
 .glax_tm_dropdown_wrap .call_wrap .image{display: inline-block;}
 .glax_tm_dropdown_wrap .call_wrap .image img{
-	border-radius: 100%;
+	/*border-radius: 100%;*/
 	max-width: 120px;
-	background-color: #fff;
+	/*background-color: #fff;*/
 	margin-bottom: 26px;
 }
 .glax_tm_dropdown_wrap .call_wrap h3{
@@ -1394,9 +1396,9 @@ img.svg{
 }
 .glax_tm_widget_wrap .widget_dropdown_wrap .call_wrap .image{display: inline-block;}
 .glax_tm_widget_wrap .widget_dropdown_wrap .call_wrap .image img{
-	border-radius: 100%;
+	/*border-radius: 100%;*/
 	max-width: 120px;
-	background-color: #fff;
+	/*background-color: #fff;*/
 	margin-bottom: 26px;
 }
 .glax_tm_widget_wrap .widget_dropdown_wrap .call_wrap h3{
@@ -2266,7 +2268,7 @@ img.svg{
 	float: left;
 	margin-bottom: 150px;
 }
-.glax_tm_universal_parallax_wrap .main_bg .overlay_image.responsibility{background-image: url(..//img/slider/8.jpg);}
+/*.glax_tm_universal_parallax_wrap .main_bg .overlay_image.responsibility{background-image: url(..//img/slider/8.jpg);}*/
 .glax_tm_universal_parallax_wrap .main_bg .overlay_color.responsibility{background-color: rgba(17,17,25,0.9);}
 .glax_tm_universal_parallax_wrap .main_content.responsibility{padding: 150px 0px 143px 0px;}
 .glax_tm_main_responsibility_wrap .content_inner_wrap{
@@ -2759,7 +2761,7 @@ img.svg{
 	float: left;
 }
 
-.glax_tm_universal_parallax_wrap .overlay_image.footer{background-image: url(..//img/slider/5.jpg);}
+/*.glax_tm_universal_parallax_wrap .overlay_image.footer{background-image: url(..//img/slider/5.jpg);}*/
 .glax_tm_universal_parallax_wrap .overlay_color.footer{background-color: rgba(8,18,37,0.9);}
 .glax_tm_universal_parallax_wrap .main_content.footer{padding: 38px 0px 0px 0px;}
 .glax_tm_subscribe_wrap,
