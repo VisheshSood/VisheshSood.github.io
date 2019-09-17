@@ -70,6 +70,11 @@ img.svg{
 	   -moz-box-sizing: border-box; /* Firefox, other Gecko */
 			box-sizing: border-box; /* Opera/IE 8+ */
 }
+.glax_tm_wrapper_all .main_infos{
+	padding-left: 100px;
+	padding-top: 50px;
+}
+
 .glax_tm_border_wrap .border{position: absolute;}
 .glax_tm_border_wrap .border.top{
 	top: 0px;
@@ -3786,8 +3791,9 @@ img.svg{
 	width: 100%;
 	height: auto;
 	float: left;
-	margin-bottom: 95px;
+	margin-bottom: 50px;
 }
+
 .glax_tm_service_title_holder h3{
 	color: #041230;
 	font-size: 24px;
@@ -3819,7 +3825,10 @@ img.svg{
 	float: left;
 	position: relative;
 	box-shadow: 0px 0px 15px rgba(0,0,0,0.06);
-	padding: 35px 60px 73px 300px;
+	padding-top: 35px;
+    padding-right: 60px;
+    padding-bottom: 120px;
+    padding-left: 300px;
 }
 .glax_tm_service_list_wrap ul li .main_infos h3{
 	font-size: 24px;
@@ -3844,10 +3853,9 @@ img.svg{
 }
 .glax_tm_service_list_wrap ul li .list_image_wrap{
 	position: absolute;
-	width: 220px;
-	height: 220px;
+	width: 350px;
 	left: 40px;
-	top: -40px;
+	top: 70px;
 }
 .glax_tm_service_list_wrap ul li .list_image_wrap .image{
 	position: absolute;
@@ -3961,6 +3969,19 @@ img.svg{
 	list-style-type: none;
 	position: relative;
 	z-index: 3;
+}
+.brand_types ul {
+	list-style-type: none;  
+	margin: auto; 
+	width: 100%; 
+	padding: 0; 
+	margin-top: 20px;
+	overflow: hidden; 
+	font-style: normal; 
+	font-size: 18px;
+}
+.brand_types a {
+	color: black;
 }
 .glax_tm_categories ul li{margin: 0px 0px 8px 0px;}
 .glax_tm_categories ul li:last-child{margin-bottom: 0px;}
@@ -5183,7 +5204,7 @@ img.svg{
 .glax_tm_about_team_wrap ul li{
 	margin: 0px 0px 30px 0px;
 	float: left;
-	width: 33.3333%;
+	width: 25%;
 	padding-left: 30px;
 }
 .glax_tm_about_team_wrap ul li .inner,
@@ -5572,4 +5593,25 @@ img.svg{
 	.glax_tm_home_service_list ul li .inner_list{border-bottom: 1px solid #aaa;}
 	.glax_tm_home_service_list ul li:last-child .inner_list{border-bottom: none;}
 	.glax_tm_about_counter_wrap .glax_tm_counter_list li{width: 100%;text-align: center;}
+}
+
+li .row .col-md-12 {
+    border: 1px solid #000;
+    margin-bottom: 20px;
+    width: 98%;
+}
+
+.feature-box .feature-box-icon {
+    background: #CCC;
+    border-radius: 35px;
+    color: #FFF;
+    display: inline-block;
+    float: left;
+    height: 35px;
+    line-height: 35px;
+    margin-right: 10px;
+    position: relative;
+    text-align: center;
+    top: 5px;
+    width: 35px;
 }
