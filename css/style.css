@@ -976,7 +976,7 @@ img.svg{
 	max-width: 200px;
 	margin-right: 30px;
 }
-.glax_tm_dropdown_wrap .definitions_wrap{width: auto;}
+.glax_tm_dropdown_wrap .definitions_wrap{width: auto; text-align: center;}
 .glax_tm_dropdown_wrap .definitions_wrap h3{
 	margin: 0px;
     padding: 0px;
@@ -1001,6 +1001,7 @@ img.svg{
 	height: auto;
 	clear: both;
 	float: left;
+	text-align: center;
 	padding: 35px 0px 40px 0px;
 }
 .glax_tm_dropdown_wrap .short_contact .title{
@@ -1117,6 +1118,7 @@ img.svg{
 	height: auto;
 	clear: both;
 	float: left;
+	text-align: center;
 	padding: 40px 0px 40px 0px;
 }
 .glax_tm_dropdown_wrap .working_hours_wrap_short h3{
