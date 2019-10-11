@@ -5598,7 +5598,7 @@ img.svg{
 li .row .col-md-12 {
     border: 1px solid #000;
     margin-bottom: 20px;
-    width: 98%;
+    /*width: 98%;*/
 }
 
 .feature-box .feature-box-icon {
@@ -5614,4 +5614,32 @@ li .row .col-md-12 {
     text-align: center;
     top: 5px;
     width: 35px;
+}
+.box {
+        position: relative;
+        display: inline-block;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+        transition: all 0.3s ease-in-out;
+      }
+
+      /* Create the hidden pseudo-element */
+      /* include the shadow for the end state */
+      .box::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        transition: opacity 0.3s ease-in-out;
+      }
+.box:hover {
+  -webkit-transform: scale(1.15, 1.15);
+  transform: scale(1.15, 1.15);
+}
+
+.box:hover::after {
+    opacity: 1;
 }
