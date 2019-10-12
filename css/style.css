@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 /*------------------------------------------------------------------*/
-/*	01) GLAX BASE
+/*  01) GLAX BASE
 /*------------------------------------------------------------------*/
 
 html {
@@ -588,7 +588,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	02) GLAX HEADER
+/*  02) GLAX HEADER
 /*------------------------------------------------------------------*/
 
 .glax_tm_header_wrap {
@@ -850,7 +850,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	03) GLAX MOBILE TOPBAR
+/*  03) GLAX MOBILE TOPBAR
 /*------------------------------------------------------------------*/
 
 .glax_tm_mobile_bar_wrap {
@@ -962,7 +962,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	04) GLAX MOBILE HEADER
+/*  04) GLAX MOBILE HEADER
 /*------------------------------------------------------------------*/
 
 .glax_tm_mobile_bar_wrap .mobile_header_wrap {
@@ -1431,7 +1431,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	05) GLAX WIDGET
+/*  05) GLAX WIDGET
 /*------------------------------------------------------------------*/
 
 .glax_tm_widget_wrap {
@@ -1835,7 +1835,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	06) GLAX HOME INTRODUCE
+/*  06) GLAX HOME INTRODUCE
 /*------------------------------------------------------------------*/
 
 .glax_tm_introduce_wrap {
@@ -2031,7 +2031,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	07) GLAX HOME SERVICE
+/*  07) GLAX HOME SERVICE
 /*------------------------------------------------------------------*/
 
 .glax_tm_home_service_list {
@@ -2197,7 +2197,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	08) GLAX WHY CHOOSE US
+/*  08) GLAX WHY CHOOSE US
 /*------------------------------------------------------------------*/
 
 .glax_tm_rating_wrap {
@@ -2460,7 +2460,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	09) GLAX PRINCIPLES
+/*  09) GLAX PRINCIPLES
 /*------------------------------------------------------------------*/
 
 .glax_tm_principles_wrapper_all {
@@ -2673,7 +2673,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	10) GLAX RESPONSIBILITY
+/*  10) GLAX RESPONSIBILITY
 /*------------------------------------------------------------------*/
 
 .glax_tm_universal_parallax_wrap {
@@ -2846,7 +2846,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	11) GLAX HOME PROJECTS
+/*  11) GLAX HOME PROJECTS
 /*------------------------------------------------------------------*/
 
 .glax_tm_home_project_wrapper_all {
@@ -3065,7 +3065,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	12) GLAX HOME BLOG
+/*  12) GLAX HOME BLOG
 /*------------------------------------------------------------------*/
 
 .glax_tm_home_blog_wrap,
@@ -3326,7 +3326,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	13) GLAX FOOTER
+/*  13) GLAX FOOTER
 /*------------------------------------------------------------------*/
 
 .glax_tm_footer {
@@ -3788,7 +3788,7 @@ img.svg {
 }
 
 /*---------------------------------------------------*/
-/*	14) GLAX TO TOP
+/*  14) GLAX TO TOP
 /*---------------------------------------------------*/
 
 .glax_tm_wrapper_all[data-border="none"] .glax_tm_totop {
@@ -3862,7 +3862,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	15) GLAX PROJECTS
+/*  15) GLAX PROJECTS
 /*------------------------------------------------------------------*/
 
 .glax_tm_main_title_holder {
@@ -3904,7 +3904,7 @@ img.svg {
 
 /*
 .builify_tm_breadcrumbs:before{
-	content: '';
+    content: '';
     position: absolute;
     width: 70px;
     height: 6px;
@@ -3913,7 +3913,7 @@ img.svg {
     bottom: 60px;
 }
 .builify_tm_breadcrumbs:after{
-	content: '';
+    content: '';
     position: absolute;
     width: 150px;
     height: 6px;
@@ -4376,7 +4376,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	16) GLAX PROJECT SINGLE
+/*  16) GLAX PROJECT SINGLE
 /*------------------------------------------------------------------*/
 
 .glax_tm_justified_wrap {
@@ -4634,7 +4634,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	17) GLAX SERVICES
+/*  17) GLAX SERVICES
 /*------------------------------------------------------------------*/
 
 .glax_tm_twicebox_wrap {
@@ -4688,6 +4688,7 @@ img.svg {
     height: auto;
     clear: both;
     float: left;
+    padding-bottom: 30px;
 }
 
 .glax_tm_service_list_wrap ul {
@@ -5228,7 +5229,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	18) GLAX SERVICE SINGLE
+/*  18) GLAX SERVICE SINGLE
 /*------------------------------------------------------------------*/
 
 .glax_tm_service_single_wrap {
@@ -5657,7 +5658,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	19) GLAX BLOG
+/*  19) GLAX BLOG
 /*------------------------------------------------------------------*/
 
 .glax_tm_blog_wrap {
@@ -5873,7 +5874,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	20) GLAX BLOG SINGLE
+/*  20) GLAX BLOG SINGLE
 /*------------------------------------------------------------------*/
 
 .glax_tm_blog_single_wrap {
@@ -6056,7 +6057,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	21) GLAX ABOUT
+/*  21) GLAX ABOUT
 /*------------------------------------------------------------------*/
 
 .glax_tm_about_wrap {
@@ -6477,7 +6478,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	22) GLAX CONTACT
+/*  22) GLAX CONTACT
 /*------------------------------------------------------------------*/
 
 .glax_tm_main_contact_wrap {
@@ -6489,10 +6490,10 @@ img.svg {
 }
 
 .glax_tm_main_contact_wrap .office_list {
-    width: 100%;
+    width: 45%;
     height: auto;
     clear: both;
-    float: left;
+    float: right;
     margin-bottom: 40px;
 }
 
@@ -6632,7 +6633,7 @@ img.svg {
 }
 
 .glax_tm_main_contact_wrap .get_in_touch {
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
 }
 
 .glax_tm_main_contact_wrap .get_in_touch h3 {
@@ -6654,6 +6655,9 @@ img.svg {
 .glax_tm_contact_wrap {
     position: relative;
     margin-top: -7px;
+    width: 50%;
+    float: left;
+    clear: none;
 }
 
 .glax_tm_contact_wrap .inner_wrap .row {
@@ -6780,7 +6784,7 @@ img.svg {
 }
 
 /*------------------------------------------------------------------*/
-/*	23) GLAX MEDIA QUERIES (FOR SMALL DEVICES)
+/*  23) GLAX MEDIA QUERIES (FOR SMALL DEVICES)
 /*------------------------------------------------------------------*/
 
 @media (max-width: 1400px) {
@@ -7271,21 +7275,38 @@ ul#horizontal-list {
     min-width: 696px;
     list-style: none;
     padding-top: 0px;
+    font-style: italic;
 }
 
 ul#horizontal-list li {
     display: inline;
+    padding: 0px 20px 0px 20px
 }
 
 .brands_title_holder {
-	margin-bottom: 0px !important;
+    margin-bottom: 0px !important;
 }
 
-.cd-top--is-visible { // back-to-top button visible
-  visibility: visible;
-  opacity: 1;
+.cd-top--is-visible {
+    // back-to-top button visible
+    visibility: visible;
+    opacity: 1;
 }
 
-.cd-top--fade-out { // reduce button opacity if user keeps scrolling
-  opacity: .5;
+.cd-top--fade-out {
+    // reduce button opacity if user keeps scrolling
+    opacity: .5;
+}
+
+.glax_tm_service_list_wrap h5 {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    line-height: 0.1em;
+    margin: 40px 0 20px;
+}
+
+.glax_tm_service_list_wrap h5 span {
+    background: #fff;
+    padding: 0 10px;
 }

@@ -28,4 +28,17 @@
 		( windowTop > offsetOpacity ) && Util.addClass(backTop, 'cd-top--fade-out');
 		scrolling = false;
 	}
+
+	   $(window).scroll(function() {
+
+    if ($(this).scrollTop()>$(document).height()*0.88)
+     {
+        $('.cd-top-new').fadeOut();
+     }
+    else
+     {
+      $('.cd-top-new').fadeIn();
+     }
+ });
 })();
+
