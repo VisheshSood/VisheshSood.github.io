@@ -1655,7 +1655,7 @@ img.svg {
 .glax_tm_widget_wrap .widget_dropdown_wrap .input_list_wrap ul li input {
     width: 100%;
     height: 50px;
-    border: 1px solid rgba(229, 229, 229, .04);
+    border: 1px solid gold;
     background-color: rgba(255, 255, 255, .02);
     padding: 0px 20px !important;
     margin-bottom: 10px;
@@ -1669,7 +1669,7 @@ img.svg {
 .glax_tm_widget_wrap .widget_dropdown_wrap textarea {
     width: 100%;
     min-height: 150px;
-    border: 1px solid rgba(229, 229, 229, .04);
+    border: 1px solid gold;
     background-color: rgba(255, 255, 255, .02);
     padding: 10px 20px !important;
     margin-bottom: 20px;
@@ -7437,18 +7437,18 @@ ul#horizontal-list li {
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: red;
+  color: white;
   font-size: 10px;
 }
 ::-moz-placeholder { /* Firefox 19+ */
-  color: red;
+  color: white;
   font-size: 10px;
 }
 :-ms-input-placeholder { /* IE 10+ */
-  color: red;
+  color: white;
   font-size: 10px;
 }
 :-moz-placeholder { /* Firefox 18- */
-  color: red;
+  color: white;
   font-size: 10px;
 }
