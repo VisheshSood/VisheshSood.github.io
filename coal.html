@@ -200,23 +200,25 @@
                                 <h3 class="title">Looking for high quality gloves?</h3>
                                 <p class="subtitle">Get In Touch!</p>
                                 <div class="inputs_wrap">
-                                    <form action="/" method="post">
+                                    <form action="/" method="post" class="contact_form" id="contact_form">
+                                        <div class="returnmessage" data-success="Your message has been received. We will contact you soon!"></div>
+                                        <div class="empty_notice"><span> Fill Required Fields</span></div>
                                         <div class="input_list_wrap">
                                             <ul>
                                                 <li>
-                                                    <input type="text" placeholder="Your Name" />
+                                                    <input id="name" type="text" placeholder="Your Name" />
                                                 </li>
                                                 <li>
-                                                    <input type="text" placeholder="E-mail Address" />
+                                                    <input id="email" type="text" placeholder="E-mail" />
                                                 </li>
                                                 <li>
-                                                    <input type="text" placeholder="Main Subject" />
+                                                    <input id="subject" type="text" placeholder="Subject" />
                                                 </li>
                                             </ul>
                                         </div>
-                                        <textarea placeholder="Message"></textarea>
+                                        <textarea id="message" placeholder="Message"></textarea>
                                         <div class="button">
-                                            <a href="#">Send Message</a>
+                                            <a id="send_message" type="submit" value="Submit" href="#">Send Message</a>
                                         </div>
                                     </form>
                                 </div>
@@ -292,28 +294,31 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- THIS IS THE ONE FOR WEB -->
                         <div class="drop_list message">
                             <div class="short_contact">
                                 <h3 class="title">Looking for high quality gloves?</h3>
                                 <p class="subtitle">Get in touch!</p>
                                 <div class="inputs_wrap">
-                                    <form action="/" method="post">
+                                    <form action="/" method="post" class="contact_form" id="contact_form">
+                                        <div class="returnmessage" data-success="Your message has been received. We will contact you soon!"></div>
+                                        <div class="empty_notice"><span>Please Fill Required Fields</span></div>
                                         <div class="input_list_wrap">
                                             <ul>
                                                 <li>
-                                                    <input type="text" placeholder="Your Name" />
+                                                    <input id="name2" type="text" placeholder="Your Name" />
                                                 </li>
                                                 <li>
-                                                    <input type="text" placeholder="E-mail Address" />
+                                                    <input id="email2" type="text" placeholder="E-mail Address" />
                                                 </li>
                                                 <li>
-                                                    <input type="text" placeholder="Main Subject" />
+                                                    <input id="subject2" type="text" placeholder="Main Subject" />
                                                 </li>
                                             </ul>
                                         </div>
-                                        <textarea placeholder="Message"></textarea>
+                                        <textarea id="message2" placeholder="Message"></textarea>
                                         <div class="button">
-                                            <a href="#">Send Message</a>
+                                            <a id="send_message" type="submit" value="Submit" href="#">Send Message</a>
                                         </div>
                                     </form>
                                 </div>
