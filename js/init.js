@@ -720,9 +720,7 @@ jQuery(".glax_tm_accordion").friendslab_accordion({
 function glax_tm_contact_form(){
 	
 	"use strict";
-	
 	jQuery(".contact_form #send_message").on('click', function(){
-		
 		var name 		= jQuery(".contact_form #name").val();
 		var email 		= jQuery(".contact_form #email").val();
 		var message 	= jQuery(".contact_form #message").val();
@@ -730,6 +728,15 @@ function glax_tm_contact_form(){
 		var success     = jQuery(".contact_form .returnmessage").data('success');
 	
 		jQuery(".contact_form .returnmessage").empty(); //To empty previous error/success message.
+
+		if (name===''||email===''||message==='') {
+			name 		= jQuery(".contact_form #name2").val();
+			email 		= jQuery(".contact_form #email2").val();
+			message 	= jQuery(".contact_form #message2").val();
+			subject 	= jQuery(".contact_form #subject2").val();
+			success     = jQuery(".contact_form .returnmessage").data('success');
+		}
+		
 		//checking for blank fields	
 		if(name===''||email===''||message===''){
 			

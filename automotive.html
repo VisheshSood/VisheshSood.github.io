@@ -202,21 +202,23 @@
                                 <h3 class="title">Looking for high quality gloves?</h3>
                                 <p class="subtitle">Get In Touch!</p>
                                 <div class="inputs_wrap">
-                                    <form action="/" method="post">
+                                    <form action="/" method="post" class="contact_form" id="contact_form">
+                                        <div class="returnmessage" data-success="Your message has been received. We will contact you soon!"></div>
+                                        <div class="empty_notice"><span> Fill Required Fields</span></div>
                                         <div class="input_list_wrap">
                                             <ul>
                                                 <li>
-                                                    <input type="text" placeholder="Your Name" />
+                                                    <input id="name" type="text" placeholder="Your Name" />
                                                 </li>
                                                 <li>
-                                                    <input type="text" placeholder="E-mail Address" />
+                                                    <input id="email" type="text" placeholder="E-mail Address" />
                                                 </li>
                                                 <li>
-                                                    <input type="text" placeholder="Main Subject" />
+                                                    <input id="subject" type="text" placeholder="Main Subject" />
                                                 </li>
                                             </ul>
                                         </div>
-                                        <textarea placeholder="Message"></textarea>
+                                        <textarea id="message" placeholder="Message"></textarea>
                                         <div class="button">
                                             <a id="send_message" type="submit" value="Submit" href="#" >Send Message</a>
                                         </div>
@@ -294,28 +296,31 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- THIS IS THE ONE FOR WEB -->
                         <div class="drop_list message">
                             <div class="short_contact">
                                 <h3 class="title">Looking for high quality gloves?</h3>
                                 <p class="subtitle">Get in touch!</p>
                                 <div class="inputs_wrap">
-                                    <form action="/" method="post">
+                                    <form action="/" method="post" class="contact_form" id="contact_form">
+                                        <div class="returnmessage" data-success="Your message has been received. We will contact you soon!"></div>
+                                        <div class="empty_notice"><span>Please Fill Required Fields</span></div>
                                         <div class="input_list_wrap">
                                             <ul>
                                                 <li>
-                                                    <input type="text" placeholder="Your Name" />
+                                                    <input id="name2" type="text" placeholder="Your Name" />
                                                 </li>
                                                 <li>
-                                                    <input type="text" placeholder="E-mail Address" />
+                                                    <input id="email2" type="text" placeholder="E-mail Address" />
                                                 </li>
                                                 <li>
-                                                    <input type="text" placeholder="Main Subject" />
+                                                    <input id="subject2" type="text" placeholder="Main Subject" />
                                                 </li>
                                             </ul>
                                         </div>
-                                        <textarea placeholder="Message"></textarea>
+                                        <textarea id="message2" placeholder="Message"></textarea>
                                         <div class="button">
-                                            <a href="#">Send Message</a>
+                                            <a id="send_message" type="submit" value="Submit" href="#" >Send Message</a>
                                         </div>
                                     </form>
                                 </div>
@@ -384,9 +389,13 @@
                                     <img src="img/slider/5.jpg" alt="" />
                                 </div> -->
                                     <div class="image_definition">
-                                        <p><span class="shape"><span>T</span></span>he automotive market has been neglected of good gloves for decades. For several years, engineers and technicians were given the same gloves given to dentists and nurses, without considering the difference in the industries. However, ever since synthetic rubber (nitrile) was introduced, Innovative Gloves has led the manufacturing industry to produce unique and special products catering to the automotive industry through special formulations and patented designs to help all those in the automotive industry enjoy what they do on a daily basis.</p>
-                                        <p>Innovative was one of the first manufacturers to develop a nitrile formulation that guarantees unbelievable tensile strength and elongation, and with their unique patented designs, we also provide the best grip in the industry at a very affordable price.</p>
-                                        <p>We also believe that the quality of industrial gloves should match that of medical industries. The last thing a mechanic would want is a torn glove and oily fingers. Thus, our gloves go through 12 stages of quality control before they reach you, ensuring you will never don a torn glove.</p>
+                                        <p><span class="shape"><span>T</span></span>here is little argument that, for decades now, the automotive market has been deprived of quality disposable gloves. For many years, engineers and technicians have been supplied disposable gloves designed primarily for dentists and nurses, with very little consideration given to their unique industry-specific needs.</p>
+
+                                        <p>However, since the introduction of synthetic rubber (otherwise known as nitrile), Innovative Gloves has disrupted the disposable glove manufacturing industry by taking this previously untapped user need, and transforming it into chemical formulations and textures which enable tougher and more reliable disposable gloves that specially cater to the needs of end-users in the automotive industry.</p>
+
+                                        <p>Innovative Gloves was one of the first manufacturers to develop a patented nitrile formulation that promises all end-users in the automotive industry with disposable gloves that not only ensure top tensile strength and elongation, but also provide unrivaled grip in both wet and dry conditions.</p>
+
+                                        <p>We also believe that the quality of industrial disposable gloves should, in every way possible, match those sold to medical professionals. The last thing a mechanic needs is getting oil, grime and potential skin abrasion injuries due to being completely exposed — which is why every single one of our disposable gloves goes through 12 stages of quality control before they reach our end-users.</p>
                                     </div>
                                 </div>
                                 <div class="service_features">
@@ -493,6 +502,11 @@
                                                             <a href="img/services/7milgripper.pdf" target="_blank">Download Specifications</a>
                                                         </div>
                                                     </div>
+                                                    <div class="sample_more_wrap">
+                                                        <div class="sample_more_in">
+                                                            <a href="img/services/7milgripper.pdf" target="_blank">Request Samples</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </li>
                                             <li>
@@ -511,6 +525,11 @@
                                                             <a href="img/services/7mildiamond.pdf" target="_blank">Download Specifications</a>
                                                         </div>
                                                     </div>
+                                                    <div class="sample_more_wrap">
+                                                        <div class="sample_more_in">
+                                                            <a href="img/services/7milgripper.pdf" target="_blank">Request Samples</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </li>
                                             <li>
@@ -527,6 +546,11 @@
                                                             <a href="img/services/6milmdt.pdf" target="_blank">Download Specifications</a>
                                                         </div>
                                                     </div>
+                                                    <div class="sample_more_wrap">
+                                                        <div class="sample_more_in">
+                                                            <a href="img/services/7milgripper.pdf" target="_blank">Request Samples</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </li>
                                             <li>
@@ -541,6 +565,11 @@
                                                     <div class="read_more_wrap">
                                                         <div class="read_more_in">
                                                             <a href="img/services/6mil.pdf" target="_blank">Download Specifications</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sample_more_wrap">
+                                                        <div class="sample_more_in">
+                                                            <a href="img/services/7milgripper.pdf" target="_blank">Request Samples</a>
                                                         </div>
                                                     </div>
                                                 </div>
