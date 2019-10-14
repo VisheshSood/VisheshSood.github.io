@@ -6490,7 +6490,7 @@ img.svg {
 }
 
 .glax_tm_main_contact_wrap .office_list {
-    width: 45%;
+    width: 65%;
     height: auto;
     clear: both;
     float: right;
@@ -6595,7 +6595,7 @@ img.svg {
     height: auto;
     float: left;
     background-color: #0d0e13;
-    padding: 35px 30px 45px 38px;
+    padding: 60px 30px 60px 38px;
 }
 
 .glax_tm_main_contact_wrap .office_list ul li .short_info_wrap .row {
@@ -6655,7 +6655,7 @@ img.svg {
 .glax_tm_contact_wrap {
     position: relative;
     margin-top: -7px;
-    width: 50%;
+    width: 30%;
     float: left;
     clear: none;
 }
@@ -6716,7 +6716,7 @@ img.svg {
 }
 
 .glax_tm_contact_wrap .inner_wrap .row input {
-    width: 340px !important;
+    width: 100% !important;
     height: 40px !important;
     background-color: #f5f5f5;
     border: 1px solid #e5e5e5;
@@ -6731,7 +6731,7 @@ img.svg {
 
 .glax_tm_contact_wrap .inner_wrap .row textarea {
     max-width: 600px;
-    height: 220px !important;
+    height: 160px !important;
     background-color: #f5f5f5;
     border: 1px solid #e5e5e5;
     margin-top: 9px;
@@ -6810,8 +6810,9 @@ img.svg {
     }
 
     .glax_tm_main_contact_wrap .office_list ul li {
-        width: 100%;
+        width: 50%;
         padding-left: 0px;
+        padding-right: 20px;
     }
 
     .glax_tm_main_contact_wrap .office_list ul {
