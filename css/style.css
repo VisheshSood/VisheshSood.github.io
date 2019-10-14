@@ -6731,7 +6731,7 @@ img.svg {
 
 .glax_tm_contact_wrap .inner_wrap .row textarea {
     max-width: 600px;
-    height: 160px !important;
+    height: 75px !important;
     background-color: #f5f5f5;
     border: 1px solid #e5e5e5;
     margin-top: 9px;
@@ -7310,4 +7310,14 @@ ul#horizontal-list li {
 .glax_tm_service_list_wrap h5 span {
     background: #fff;
     padding: 0 10px;
+}
+
+.description img {
+    width: 50%;
+    float: left;
+    margin-right: 20px;
+}
+
+.description p {
+    margin-top: 10%;
 }
