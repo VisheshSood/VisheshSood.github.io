@@ -5663,6 +5663,7 @@ img.svg {
     bottom: 0px;
     right: 0px;
     max-width: calc(100% - 40px);
+    cursor: pointer;
 
 }
 

@@ -353,7 +353,9 @@ function sample_request_form(product){
 	product = product.replace(/_/g, ' ');
 
 	$("input#subject2").val("Samples for " + product + ".");
-	$("textarea#message2").val("I am interested in samples for " + product + ".");
+	$("textarea#message2").val("I am interested in samples for the " + product + " gloves.");
+
+	$(".short_contact h3").html("Let us send you some samples!");
 
 		
 }
@@ -377,6 +379,9 @@ function glax_tm_widget_opener(){
 		var element			= jQuery(this);
 		var allLi			= element.parent();
 		var attr			= allLi.attr("data-style");
+		if (attr == "message") {
+			$(".short_contact h3").html("Looking for high quality gloves?");
+		}
 		var extraClass		= jQuery('.widget_dropdown_wrap .drop_list.'+attr);
 		var widgetAttr		= jQuery('.glax_tm_widget_wrap .widget_icons_wrap ul li.'+attr);
 				console.log(list);
