@@ -1659,7 +1659,7 @@ img.svg {
     background-color: rgba(255, 255, 255, .02);
     padding: 0px 20px !important;
     margin-bottom: 10px;
-    color: #999;
+    color: white;
 }
 
 .glax_tm_widget_wrap .widget_dropdown_wrap .input_list_wrap ul li input:focus {
@@ -1673,7 +1673,7 @@ img.svg {
     background-color: rgba(255, 255, 255, .02);
     padding: 10px 20px !important;
     margin-bottom: 20px;
-    color: #999;
+    color: white;
     font-family: "Rubik";
 }
 

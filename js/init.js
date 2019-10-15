@@ -36,6 +36,7 @@ jQuery(document).ready(function(){
 	glax_tm_magnific_popup();
 	glax_tm_sidebar_shape();
 	glax_tm_contact_form();
+	// request_sample();
 	
 	
 	jQuery(window).on('resize',function(e){
@@ -59,9 +60,15 @@ jQuery(document).ready(function(){
 		glax_tm_stickyy();
 		
 	});
+
+
+    $('.sample_more_wrap').click(function(e) { 
+    	sample_request_form($(this).attr('id'));
+    	// glax_tm_widget_opener($(this).attr('id'));
+    });
 	
 });
-
+	
 
 // -----------------------------------------------------
 // --------------------  FUNCTIONS  --------------------
@@ -315,6 +322,43 @@ function glax_tm_mobile_info(){
 	});
 }
 
+
+// -----------------------------------------------------
+// ---------- VISHESH'S SAMPLE REQUEST  ----------------
+// -----------------------------------------------------
+
+function sample_request_form(product){
+	
+	"use strict";
+	var topbar				= jQuery('.glax_tm_topbar_wrap');
+	var list				= topbar.find('.right_part_wrap ul li');
+	var widget				= jQuery('.glax_tm_widget_wrap');
+	var overlay				= jQuery('.glax_tm_widget_window_overlay');
+
+	var attr			=  "message";
+	var extraClass		= jQuery('.widget_dropdown_wrap .drop_list.'+attr);
+	var widgetAttr		= jQuery('.glax_tm_widget_wrap .widget_icons_wrap ul li.'+attr);
+			console.log(list);
+
+	list.addClass('opened');
+	widget.addClass('opened');
+	overlay.addClass('opened');
+	
+	setTimeout(function(){widgetAttr.addClass('opened');},650);
+	setTimeout(function(){
+		extraClass.slideDown();
+	 },600);
+	glax_tm_widget_inside();
+
+	product = product.replace(/_/g, ' ');
+
+	$("input#subject2").val("Samples for " + product + ".");
+	$("textarea#message2").val("I am interested in samples for " + product + ".");
+
+		
+}
+
+
 // -----------------------------------------------------
 // ----------    GLAX WIDGET OPENER   ------------------
 // -----------------------------------------------------
@@ -335,7 +379,8 @@ function glax_tm_widget_opener(){
 		var attr			= allLi.attr("data-style");
 		var extraClass		= jQuery('.widget_dropdown_wrap .drop_list.'+attr);
 		var widgetAttr		= jQuery('.glax_tm_widget_wrap .widget_icons_wrap ul li.'+attr);
-			
+				console.log(list);
+
 		list.addClass('opened');
 		widget.addClass('opened');
 		overlay.addClass('opened');
