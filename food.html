@@ -24,475 +24,152 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900" rel="stylesheet">
     <!--[if lt IE 9]> <script type="text/javascript" src="js/modernizr.custom.js"></script> <![endif]-->
     <!-- /STYLES -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+    </script>
+    <script>
+    $(function() {
+        $("#header").load("header.html");
+        $("#subheader").load("subheader.html");
+        $("#footer").load("footer.html");
+    });
+    </script>
 </head>
 
 <body>
     <!-- WRAPPER ALL -->
     <div class="glax_tm_wrapper_all">
-        <!-- LANG BOX -->
-        <!-- <div class="lang_box">
-        <ul>
-            <li><span>Eng</span></li>
-            <li><a href="#">Spa</a></li>
-            <li><a href="#">Rus</a></li>
-        </ul>
-    </div> -->
-        <!-- /LANG BOX -->
-        <!-- BORDERS -->
-        <div class="glax_tm_border_wrap">
-            <div class="border top"></div>
-            <div class="border left"></div>
-            <div class="border right"></div>
+        <div id="header"></div>
+        <!-- SERVICE SINGLE -->
+        <div class="glax_tm_section">
+            <div class="glax_tm_main_title_holder">
+                <div class="container">
+                    <div class="title_holder">
+                        <h3>Food Processing Industry</h3>
+                    </div>
+                    <div class="builify_tm_breadcrumbs">
+                        <ul>
+                            <li><a href="index.html">Innovative Home</a></li>
+                            <li class="shape"><span></span></li>
+                            <li><a href="industries.html">Industries</a></li>
+                            <li class="shape"><span></span></li>
+                            <li><span>Food Processing Industry</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- /BORDERS -->
-        <!-- HOLDER -->
-        <div class="glax_tm_holder_wrap">
-            <div class="holder left"></div>
-            <div class="holder right"></div>
-        </div>
-        <!-- /HOLDER -->
-        <!-- TOP BAR -->
-        <div class="glax_tm_topbar_wrap">
+        <div class="glax_tm_section">
             <div class="container">
-                <div class="inner_wrap">
-                    <div class="left_part_wrap">
-                        <div class="share_wrap">
-                            <ul>
-                                <li><a href="#"><i class="xcon-facebook"></i></a></li>
-                                <li><a href="#"><i class="xcon-twitter"></i></a></li>
-                                <li><a href="#"><i class="xcon-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="right_part_wrap">
-                        <ul>
-                            <li data-style="home">
-                                <a href="#"><img class="svg" src="img/svg/home.svg" alt="" /></a>
-                            </li>
-                            <li data-style="message">
-                                <a href="#"><img class="svg" src="img/svg/message2.svg" alt="" /></a>
-                            </li>
-                            <li data-style="phone">
-                                <a href="#"><img class="svg" src="img/svg/old_phone.svg" alt="" /></a>
-                            </li>
-                            <li data-style="clock">
-                                <a href="#"><img class="svg" src="img/svg/clock.svg" alt="" /></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /TOP BAR -->
-        <div class="wrapper_all_inner_wrap">
-            <!-- HEADER -->
-            <div class="glax_tm_header_wrap" data-style="light" data-position="relative">
-                <div class="container">
-                    <div class="header_inner_wrap">
-                        <div class="menu_wrap">
-                            <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="industries.html">Industries</a></li>
-                                <li class="shape">
-                                    <a>Products</a>
-                                    <div class="submenu_wrap">
-                                        <ul>
-                                            <li><a href="quote.html">Get A Quote</a></li>
-                                            <li><a href="brands.html">Our Brands</a></li>
-                                            <li><a href="products.html">Product Line</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="blog.html">Blog</a>
-                                </li>
-                                <li><a href="recognition.html">Recognition</a></li>
-                            </ul>
-                        </div>
-                        <div class="purchase_button">
-                            <a href="contact.html">Contact Us</a>
-                        </div>
-                        <div class="logo_wrap">
-                            <img src="img/desktop-logo.png" alt="" />
-                            <span class="left"></span>
-                            <span class="right"></span>
-                            <span class="extra_first"></span>
-                            <span class="extra_second"></span>
-                            <a class="full_link" href="index.html"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /HEADER -->
-            <!-- MOBILE BAR -->
-            <div class="glax_tm_mobile_bar_wrap">
-                <div class="mobile_topbar_wrap">
-                    <div class="container">
-                        <div class="inner_wrap">
-                            <div class="short_info_wrap">
-                                <ul>
-                                    <li data-type="home"><a href="#"><img class="svg" src="img/svg/home.svg" alt="" /></a></li>
-                                    <li data-type="message"><a href="#"><img class="svg" src="img/svg/message2.svg" alt="" /></a></li>
-                                    <li data-type="phone"><a href="#"><img class="svg" src="img/svg/old-phone.svg" alt="" /></a></li>
-                                    <li data-type="clock"><a href="#"><img class="svg" src="img/svg/clock.svg" alt="" /></a></li>
-                                </ul>
-                            </div>
-                            <div class="mobile_socials_wrap">
-                                <ul>
-                                    <li><a href="#"><i class="xcon-facebook"></i></a></li>
-                                    <li><a href="#"><i class="xcon-linkedin"></i></a></li>
-                                    <li><a href="#"><i class="xcon-twitter"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mobile_header_wrap">
-                    <div class="container">
-                        <div class="inner_wrap">
-                            <div class="logo_wrap">
-                                <a href="#"><img src="img/mobile-logo.png" alt="" /></a>
-                            </div>
-                            <div class="trigger_wrap">
-                                <div class="hamburger hamburger--collapse-r">
-                                    <div class="hamburger-box">
-                                        <div class="hamburger-inner"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- MENU LIST -->
-                <!-- MENU LIST -->
-                <div class="menu_list_wrap">
-                    <ul class="nav">
-                        <li><a href="index.html">Homepage</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="industries.html">Industries</a></li>
-                        <li>
-                            <a>Products</a>
-                            <ul class="sub_menu">
-                                <li><a href="quote.html">Get A Quote</a></li>
-                                <li><a href="brands.html">Our Brands</a></li>
-                                <li><a href="products.html">Product Line</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="recognition.html">Recognition</a></li>
-                    </ul>
-                </div>
-                <!-- /MENU LIST -->
-                <!-- DROPDOWN -->
-                <div class="glax_tm_dropdown_wrap">
-                    <div class="container">
-                        <div class="drop_list home">
-                            <div class="adress_wrap">
-                                <div class="definitions_wrap">
-                                    <h3>Head Office in Bangkok</h3>
-                                    <p>75/23 Ocean Tower 2, 17th Floor, Sukhumvit 19, Bangkok, Thailand, 10110</p>
-                                    <p>Phone: +66 2 258 6352</p>
-                                    <p><span>Email:</span><a href="#">sales@innovativeglove.com</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="drop_list message">
-                            <div class="short_contact">
-                                <h3 class="title">Looking for high quality gloves?</h3>
-                                <p class="subtitle">Get In Touch!</p>
-                                <div class="inputs_wrap">
-                                    <form action="/" method="post" class="contact_form" id="contact_form">
-                                        <div class="returnmessage" data-success="Your message has been received. We will contact you soon!"></div>
-                                        <div class="empty_notice"><span> Fill Required Fields</span></div>
-                                        <div class="input_list_wrap">
-                                            <ul>
-                                                <li>
-                                                    <input id="name" type="text" placeholder="Your Name" />
-                                                </li>
-                                                <li>
-                                                    <input id="email" type="text" placeholder="E-mail" />
-                                                </li>
-                                                <li>
-                                                    <input id="subject" type="text" placeholder="Subject" />
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <textarea id="message" placeholder="Message"></textarea>
-                                        <div class="button">
-                                            <a id="send_message" type="submit" value="Submit" href="#">Send Message</a>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="drop_list phone">
-                            <div class="call_wrap">
-                                <h3>Call Us!</h3>
-                                <p>Head Office: +66 2 258 6352</p>
-                                <p>Factory: +66 7 450 2251</p>
-                            </div>
-                        </div>
-                        <div class="drop_list clock">
-                            <div class="working_hours_wrap_short">
-                                <h3>Working Hours</h3>
-                                <p class="subtitle">We are always available via email, however if you plan to visit us for a tour, please book ahead!</p>
-                                <div class="hour_list">
-                                    <ul>
-                                        <li>
-                                            <span class="left">Monday-Saturday:</span>
-                                            <span class="right">8:00am to 5:30pm</span>
-                                        </li>
-                                        <li>
-                                            <span class="left">Sunday:</span>
-                                            <span class="right">Closed</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /DROPDOWN -->
-            </div>
-            <!-- /MOBILE BAR -->
-            <!-- SIDEBAR WIDGET -->
-            <div class="glax_tm_widget_wrap">
-                <div class="widget_inner_wrap">
-                    <div class="widget_icons_wrap">
-                        <ul>
-                            <li class="home" data-style="home">
-                                <a href="#"><img class="svg" src="img/svg/home.svg" alt="" /></a>
-                            </li>
-                            <li class="message" data-style="message">
-                                <a href="#"><img class="svg" src="img/svg/message2.svg" alt="" /></a>
-                            </li>
-                            <li class="phone" data-style="phone">
-                                <a href="#"><img class="svg" src="img/svg/old_phone.svg" alt="" /></a>
-                            </li>
-                            <li class="clock" data-style="clock">
-                                <a href="#"><img class="svg" src="img/svg/clock.svg" alt="" /></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- WIDGET DROPDOWN -->
-                    <div class="widget_dropdown_wrap">
-                        <div class="drop_list home">
-                            <div class="adress_wrap">
-                                <div class="office_image">
-                                    <img src="img/about/factory.jpg" alt="" />
-                                </div>
-                                <div class="definitions_wrap">
-                                    <h3>Head Office in Bangkok</h3>
-                                    <p>75/23 Ocean Tower 2, 17th Floor, Sukhumvit 19, Bangkok, Thailand, 10110</p>
-                                    <p>Phone: +66 2 258 6352</p>
-                                </div>
-                                <br>
-                                <div class="definitions_wrap">
-                                    <h3>Factory in Hat Yai</h3>
-                                    <p>830 Moo 4 Sanambin-Banklang Road, Hatyai, Songkhla, Thailand 90110</p>
-                                    <p>Phone: +66 7 450 2251</p>
-                                    <p><span>Email:</span><a href="#">sales@innovativeglove.com</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- THIS IS THE ONE FOR WEB -->
-                        <div class="drop_list message">
-                            <div class="short_contact">
-                                <h3 class="title">Looking for high quality gloves?</h3>
-                                <p class="subtitle">Get in touch!</p>
-                                <div class="inputs_wrap">
-                                    <form action="/" method="post" class="contact_form" id="contact_form">
-                                        <div class="returnmessage" data-success="Your message has been received. We will contact you soon!"></div>
-                                        <div class="empty_notice"><span>Please Fill Required Fields</span></div>
-                                        <div class="input_list_wrap">
-                                            <ul>
-                                                <li>
-                                                    <input id="name2" type="text" placeholder="Your Name" />
-                                                </li>
-                                                <li>
-                                                    <input id="email2" type="text" placeholder="E-mail Address" />
-                                                </li>
-                                                <li>
-                                                    <input id="subject2" type="text" placeholder="Main Subject" />
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <textarea id="message2" placeholder="Message"></textarea>
-                                        <div class="button">
-                                            <a id="send_message" type="submit" value="Submit" href="#">Send Message</a>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="drop_list phone">
-                            <div class="call_wrap">
-                                <div class="image">
-                                    <img src="img/mobile-logo.png" alt="" />
-                                </div>
-                                <h3>Call Us!</h3>
-                                <p>Head Office: +66 2 258 6352</p>
-                                <p>Factory: +66 7 450 2251</p>
-                            </div>
-                        </div>
-                        <div class="drop_list clock">
-                            <div class="working_hours_wrap_short">
-                                <h3>Working Hours</h3>
-                                <p class="subtitle">We are always available via email, however if you plan to visit us for a tour, please book ahead!</p>
-                                <div class="hour_list">
-                                    <ul>
-                                        <li>
-                                            <span class="left">Monday-Saturday:</span>
-                                            <span class="right">8:00am to 5:30pm</span>
-                                        </li>
-                                        <li>
-                                            <span class="left">Sunday:</span>
-                                            <span class="right">Closed</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /WIDGET DROPDOWN -->
-                </div>
-            </div>
-            <div class="glax_tm_widget_window_overlay"></div>
-            <!-- /SIDEBAR WIDGET -->
-            <!-- SERVICE SINGLE -->
-            <div class="glax_tm_section">
-                <div class="glax_tm_main_title_holder">
-                    <div class="container">
-                        <div class="title_holder">
-                            <h3>Food Processing Industry</h3>
-                        </div>
-                        <div class="builify_tm_breadcrumbs">
-                            <ul>
-                                <li><a href="index.html">Innovative Home</a></li>
-                                <li class="shape"><span></span></li>
-                                <li><a href="industries.html">Industries</a></li>
-                                <li class="shape"><span></span></li>
-                                <li><span>Food Processing Industry</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="glax_tm_section">
-                <div class="container">
-                    <div class="glax_tm_service_single_wrap">
-                        <div class="glax_tm_twicebox_wrap">
-                            <div class="leftbox">
-                                <div class="main_image_wrap">
-                                    <!-- <div class="image_wrap">
+                <div class="glax_tm_service_single_wrap">
+                    <div class="glax_tm_twicebox_wrap">
+                        <div class="leftbox">
+                            <div class="main_image_wrap">
+                                <!-- <div class="image_wrap">
                                     <img src="img/slider/5.jpg" alt="" />
                                 </div> -->
-                                    <div class="image_definition">
-                                        <!-- The food processing industry has a huge range of needs for disposable gloves and safety measures. In general, there are two basic categories of safety needs in the food processing industry: low care and high care. Low care areas typically necessitate a lower level of hygiene and cleanliness while a high care area requires very stringent de-contamination methods in order to maintain cleanliness.
+                                <div class="image_definition">
+                                    <!-- The food processing industry has a huge range of needs for disposable gloves and safety measures. In general, there are two basic categories of safety needs in the food processing industry: low care and high care. Low care areas typically necessitate a lower level of hygiene and cleanliness while a high care area requires very stringent de-contamination methods in order to maintain cleanliness.
  
 When workers go between a low and high care area, they may have to change some of what they’re wearing in order to avoid cross contamination. This may include changing to a new pair of disposable gloves.
  
 Depending on what specific type of food processing application you are dealing with, you may need to use different types of disposable gloves for certain tasks, depending on the risk. In this day and age there are hundreds of different types of disposable gloves ranging in material, thickness, internal and external treatments, elasticity, coatings, and textures. You can be confident knowing that there will be a disposable glove on the market to meet your needs.
  -->
-
-
-                                        <p><span class="shape"><span>G</span></span>enerally speaking, the safety needs in the food processing industry can be categorized into two types: low care and high care. Beyond this, every user will have their own preference between latex and nitrile gloves based on their own desired level of comfort. Regardless of whichever food processing application you are dealing with, we’re confident that you’ll find a glove well-suited to your needs at Innovative Gloves.</p>
-                                        <p>Innovative Gloves is one of the only manufacturers in the world to carry out off-line chlorination, a process by which a glove’s strength and comfort is significantly enhanced. This is a highly labour-intensive, and not to mention time- and resource- consuming process. However, at Innovative Gloves we are committed to producing only the best quality disposable gloves and understand what goes into delivering that promise, which is why all our latex gloves undergo this treatment and have near-neglible extractable protein content, making them the perfect glove for food processing.</p>
-                                            <i style="text-align: center;">The diamond texture on our gloves is an added bonus for grip and safety.</i></p>
-                                    </div>
+                                    <p><span class="shape"><span>G</span></span>enerally speaking, the safety needs in the food processing industry can be categorized into two types: low care and high care. Beyond this, every user will have their own preference between latex and nitrile gloves based on their own desired level of comfort. Regardless of whichever food processing application you are dealing with, we’re confident that you’ll find a glove well-suited to your needs at Innovative Gloves.</p>
+                                    <p>Innovative Gloves is one of the only manufacturers in the world to carry out off-line chlorination, a process by which a glove’s strength and comfort is significantly enhanced. This is a highly labour-intensive, and not to mention time- and resource- consuming process. However, at Innovative Gloves we are committed to producing only the best quality disposable gloves and understand what goes into delivering that promise, which is why all our latex gloves undergo this treatment and have near-neglible extractable protein content, making them the perfect glove for food processing.</p>
+                                    <i style="text-align: center;">The diamond texture on our gloves is an added bonus for grip and safety.</i></p>
                                 </div>
-                                <div class="service_features">
-                                    <h3>Product Features</h3>
+                            </div>
+                            <div class="service_features">
+                                <h3>Product Features</h3>
+                                <ul>
+                                    <li>
+                                        <div class="inner">
+                                            <div class="definition">
+                                                <p>Worldwide food safety compliant</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img class="svg" src="img/svg/check.svg" alt="" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="inner">
+                                            <div class="definition">
+                                                <p>Developed specially for engineering markets</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img class="svg" src="img/svg/check.svg" alt="" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="inner">
+                                            <div class="definition">
+                                                <p>Guaranteed comfort over prolonged use</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img class="svg" src="img/svg/check.svg" alt="" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="inner">
+                                            <div class="definition">
+                                                <p>Multiple fits (snug and loose)</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img class="svg" src="img/svg/check.svg" alt="" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="inner">
+                                            <div class="definition">
+                                                <p>Maximum resistance to chemical splashes</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img class="svg" src="img/svg/check.svg" alt="" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="inner">
+                                            <div class="definition">
+                                                <p>Extra thick, maximum protection</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img class="svg" src="img/svg/check.svg" alt="" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="inner">
+                                            <div class="definition">
+                                                <p>Ambidexterous</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img class="svg" src="img/svg/check.svg" alt="" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="inner">
+                                            <div class="definition">
+                                                <p>Enhanced strength</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img class="svg" src="img/svg/check.svg" alt="" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="glax_tm_line"></div>
+                            <div class="glax_tm_other_services_wrap">
+                                <h3>Recommended Products</h3>
+                                <div class="services_list_wrap">
                                     <ul>
-                                        <li>
-                                            <div class="inner">
-                                                <div class="definition">
-                                                    <p>Worldwide food safety compliant</p>
-                                                </div>
-                                                <div class="icon">
-                                                    <img class="svg" src="img/svg/check.svg" alt="" />
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="inner">
-                                                <div class="definition">
-                                                    <p>Developed specially for engineering markets</p>
-                                                </div>
-                                                <div class="icon">
-                                                    <img class="svg" src="img/svg/check.svg" alt="" />
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="inner">
-                                                <div class="definition">
-                                                    <p>Guaranteed comfort over prolonged use</p>
-                                                </div>
-                                                <div class="icon">
-                                                    <img class="svg" src="img/svg/check.svg" alt="" />
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="inner">
-                                                <div class="definition">
-                                                    <p>Multiple fits (snug and loose)</p>
-                                                </div>
-                                                <div class="icon">
-                                                    <img class="svg" src="img/svg/check.svg" alt="" />
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="inner">
-                                                <div class="definition">
-                                                    <p>Maximum resistance to chemical splashes</p>
-                                                </div>
-                                                <div class="icon">
-                                                    <img class="svg" src="img/svg/check.svg" alt="" />
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="inner">
-                                                <div class="definition">
-                                                    <p>Extra thick, maximum protection</p>
-                                                </div>
-                                                <div class="icon">
-                                                    <img class="svg" src="img/svg/check.svg" alt="" />
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="inner">
-                                                <div class="definition">
-                                                    <p>Ambidexterous</p>
-                                                </div>
-                                                <div class="icon">
-                                                    <img class="svg" src="img/svg/check.svg" alt="" />
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="inner">
-                                                <div class="definition">
-                                                    <p>Enhanced strength</p>
-                                                </div>
-                                                <div class="icon">
-                                                    <img class="svg" src="img/svg/check.svg" alt="" />
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="glax_tm_line"></div>
-                                <div class="glax_tm_other_services_wrap">
-                                    <h3>Recommended Products</h3>
-                                    <div class="services_list_wrap">
-                                        <ul>
-                                            <!-- <li>
+                                        <!-- <li>
                                                 <div class="inner">
                                                     <div class="title_holder">
                                                         <h3>9 Mil Royal Blue Micro Diamond Textured Nitrile</h3>
@@ -508,235 +185,173 @@ Depending on what specific type of food processing application you are dealing w
                                                     </div>
                                                 </div>
                                             </li> -->
-                                            <li>
-                                                <div class="inner">
-                                                    <div class="title_holder">
-                                                        <h3>14 Mil Blue Diamond Textured Silverlined Latex</h3>
-                                                    </div>
-                                                    <div class="description">
-                                                        <img src="img/services/silverlinebox.png" alt="" />
-                                                        <p>The 14 mil thick silver lined latex gloves are the go-to choice for anyone looking for latex food processing gloves. These consist of our trademark diamond texture for superb grip and are a good alternative to replace all canners and household latex gloves. These perfect gloves can be used for all sorts of food processing. They can be used multiple times and are also suitable to be worn over a thin cotton sleeve in cold storage conditions. These gloves comply with all food handling certifications. </p>
-                                                    </div>
-                                                    <div class="read_more_wrap">
-                                                        <div class="read_more_in">
-                                                            <a href="img/services/silverlined.pdf" target="_blank">Download Specifications</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="sample_more_wrap"  id="14_Mil_Silverlined">
-                                                        <div class="sample_more_in">
-                                                            <a target="">Request Samples</a>
-                                                        </div>
+                                        <li>
+                                            <div class="inner">
+                                                <div class="title_holder">
+                                                    <h3>14 Mil Blue Diamond Textured Silverlined Latex</h3>
+                                                </div>
+                                                <div class="description">
+                                                    <img src="img/services/silverlinebox.png" alt="" />
+                                                    <p>The 14 mil thick silver lined latex gloves are the go-to choice for anyone looking for latex food processing gloves. These consist of our trademark diamond texture for superb grip and are a good alternative to replace all canners and household latex gloves. These perfect gloves can be used for all sorts of food processing. They can be used multiple times and are also suitable to be worn over a thin cotton sleeve in cold storage conditions. These gloves comply with all food handling certifications. </p>
+                                                </div>
+                                                <div class="read_more_wrap">
+                                                    <div class="read_more_in">
+                                                        <a href="img/services/silverlined.pdf" target="_blank">Download Specifications</a>
                                                     </div>
                                                 </div>
-                                            </li>
-                                            <li>
-                                                <div class="inner">
-                                                    <div class="title_holder">
-                                                        <h3>9 Mil Dark Blue Diamond Textured Nitrile Glove</h3>
-                                                    </div>
-                                                    <div class="description" style="display:inline-block;">
-                                                        <img src="img/services/foodbuddy.png" alt="" style="float: left; width: 40%; margin-right:20px;" />
-                                                        <p>The 9 mil diamond textured nitrile glove provides an impregnable shield against bacterial and microbial penetration. It is the ultimate protection tool for safe food applications. These gloves offer Minimum guaranteed tensile strength of 22MPa with a force at break of 6N. This glove meets all Food Grades and is CAT III Certified.</p>
-                                                    </div>
-                                                    <div class="read_more_wrap">
-                                                        <div class="read_more_in">
-                                                            <a href="img/services/9mildt.pdf" target="_blank">Download Specifications</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="sample_more_wrap"  id="9_Mil_Dark_Blue_Diamond">
-                                                        <div class="sample_more_in">
-                                                            <a target="">Request Samples</a>
-                                                        </div>
+                                                <div class="sample_more_wrap" id="14_Mil_Silverlined">
+                                                    <div class="sample_more_in">
+                                                        <a target="">Request Samples</a>
                                                     </div>
                                                 </div>
-                                            </li>
-                                        </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="inner">
+                                                <div class="title_holder">
+                                                    <h3>9 Mil Dark Blue Diamond Textured Nitrile Glove</h3>
+                                                </div>
+                                                <div class="description" style="display:inline-block;">
+                                                    <img src="img/services/foodbuddy.png" alt="" style="float: left; width: 40%; margin-right:20px;" />
+                                                    <p>The 9 mil diamond textured nitrile glove provides an impregnable shield against bacterial and microbial penetration. It is the ultimate protection tool for safe food applications. These gloves offer Minimum guaranteed tensile strength of 22MPa with a force at break of 6N. This glove meets all Food Grades and is CAT III Certified.</p>
+                                                </div>
+                                                <div class="read_more_wrap">
+                                                    <div class="read_more_in">
+                                                        <a href="img/services/9mildt.pdf" target="_blank">Download Specifications</a>
+                                                    </div>
+                                                </div>
+                                                <div class="sample_more_wrap" id="9_Mil_Dark_Blue_Diamond">
+                                                    <div class="sample_more_in">
+                                                        <a target="">Request Samples</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightbox">
+                            <div class="glax_tm_request_estimate_wrap">
+                                <div class="image_wrap">
+                                    <img src="img/services/silverline.jpg" alt="" />
+                                    <!-- <div class="image"></div> -->
+                                </div>
+                                <div class="definition">
+                                    <div class="text">
+                                        <p>Gloves that <i>meat</i> your expectations.<br><br>Get free samples of our stunning food processors.</p>
+                                    </div>
+                                    <div class="button">
+                                        <a href="contact.html">Request Samples</a>
+                                    </div>
+                                    <div class="first_shape">
+                                        <span class="first"></span>
+                                        <span class="second"></span>
+                                        <span class="third"></span>
+                                    </div>
+                                    <div class="second_shape">
+                                        <span class="first"></span>
+                                        <span class="second"></span>
+                                        <span class="third"></span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="rightbox">
-                                <div class="glax_tm_request_estimate_wrap">
-                                    <div class="image_wrap">
-                                        <img src="img/services/silverline.jpg" alt="" />
-                                        <!-- <div class="image"></div> -->
-                                    </div>
-                                    <div class="definition">
-                                        <div class="text">
-                                            <p>Gloves that <i>meat</i> your expectations.<br><br>Get free samples of our stunning food processors.</p>
+                            <div class="accordion_wrap_all">
+                                <div class="title">
+                                    <h3>How We Do It</h3>
+                                </div>
+                                <div class="accordion_wrap">
+                                    <div class="glax_tm_accordion">
+                                        <div class="accordion_in">
+                                            <div class="acc_head">Off Line Chlorination<div class="wow_shape"><span class="wow_effect"></span></div>
+                                            </div>
+                                            <div class="acc_content">
+                                                Innovative Gloves is one of the only manufacturers to carry out off line chlorination. This is a very expensive and resource heavy process, but Innovative manages to keep costs low through its efficient systems.
+                                            </div>
                                         </div>
-                                        <div class="button">
-                                            <a href="contact.html">Request Samples</a>
+                                        <div class="accordion_in">
+                                            <div class="acc_head">12 Stages of Quality Control
+                                                <div class="wow_shape"><span class="wow_effect"></span></div>
+                                            </div>
+                                            <div class="acc_content">
+                                                Each glove produced is hand picked and goes through 12 stages of quality control before being hand packed into boxes for use.
+                                            </div>
                                         </div>
-                                        <div class="first_shape">
-                                            <span class="first"></span>
-                                            <span class="second"></span>
-                                            <span class="third"></span>
-                                        </div>
-                                        <div class="second_shape">
-                                            <span class="first"></span>
-                                            <span class="second"></span>
-                                            <span class="third"></span>
+                                        <div class="accordion_in">
+                                            <div class="acc_head">We Care and Listen<div class="wow_shape"><span class="wow_effect"></span></div>
+                                            </div>
+                                            <div class="acc_content">
+                                                Innovative believes that the customer should always be happy, and we go a step beyond to give the customer everything they want.
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="accordion_wrap_all">
-                                    <div class="title">
-                                        <h3>How We Do It</h3>
-                                    </div>
-                                    <div class="accordion_wrap">
-                                        <div class="glax_tm_accordion">
-                                            <div class="accordion_in">
-                                                <div class="acc_head">Off Line Chlorination<div class="wow_shape"><span class="wow_effect"></span></div>
-                                                </div>
-                                                <div class="acc_content">
-                                                    Innovative Gloves is one of the only manufacturers to carry out off line chlorination. This is a very expensive and resource heavy process, but Innovative manages to keep costs low through its efficient systems.
-                                                </div>
+                                <div class="glax_tm_section">
+                                    <div class="glax_tm_justified_content" style="margin-top: 45px;">
+                                        <div class="rightpart">
+                                            <div class="title">
+                                                <h4>Additional Information</h4>
                                             </div>
-                                            <div class="accordion_in">
-                                                <div class="acc_head">12 Stages of Quality Control
-                                                    <div class="wow_shape"><span class="wow_effect"></span></div>
-                                                </div>
-                                                <div class="acc_content">
-                                                    Each glove produced is hand picked and goes through 12 stages of quality control before being hand packed into boxes for use.
-                                                </div>
-                                            </div>
-                                            <div class="accordion_in">
-                                                <div class="acc_head">We Care and Listen<div class="wow_shape"><span class="wow_effect"></span></div>
-                                                </div>
-                                                <div class="acc_content">
-                                                    Innovative believes that the customer should always be happy, and we go a step beyond to give the customer everything they want.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="glax_tm_section">
-                                        <div class="glax_tm_justified_content" style="margin-top: 45px;">
-                                            <div class="rightpart">
-                                                <div class="title">
-                                                    <h4>Additional Information</h4>
-                                                </div>
-                                                <div class="infobox">
-                                                    <ul>
-                                                        <li>
-                                                            <label>Colors</label>
-                                                            <span>Blue, Dark Blue, Royal Blue, Yellow</span>
-                                                        </li>
-                                                        <li>
-                                                            <label>Packing Styles</label>
-                                                            <span>Polybag, Box, Zipper Bags, Custom</span>
-                                                        </li>
-                                                        <li>
-                                                            <label>Gloves Per Box</label>
-                                                            <span>12, 20, 24, 25, 50 gloves per inner</span>
-                                                        </li>
-                                                        <li>
-                                                            <label>Boxes Per Carton</label>
-                                                            <span>5, 10 or Custom inners per carton</span>
-                                                        </li>
-                                                        <li>
-                                                            <label>Cuff Lengths</label>
-                                                            <span>290, 300 MM</span>
-                                                        </li>
-                                                        <li>
-                                                            <label>OEM Available</label>
-                                                            <span><b>YES</b></span>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="first_square"></div>
-                                                    <div class="second_square"></div>
-                                                </div>
+                                            <div class="infobox">
+                                                <ul>
+                                                    <li>
+                                                        <label>Colors</label>
+                                                        <span>Blue, Dark Blue, Royal Blue, Yellow</span>
+                                                    </li>
+                                                    <li>
+                                                        <label>Packing Styles</label>
+                                                        <span>Polybag, Box, Zipper Bags, Custom</span>
+                                                    </li>
+                                                    <li>
+                                                        <label>Gloves Per Box</label>
+                                                        <span>12, 20, 24, 25, 50 gloves per inner</span>
+                                                    </li>
+                                                    <li>
+                                                        <label>Boxes Per Carton</label>
+                                                        <span>5, 10 or Custom inners per carton</span>
+                                                    </li>
+                                                    <li>
+                                                        <label>Cuff Lengths</label>
+                                                        <span>290, 300 MM</span>
+                                                    </li>
+                                                    <li>
+                                                        <label>OEM Available</label>
+                                                        <span><b>YES</b></span>
+                                                    </li>
+                                                </ul>
+                                                <div class="first_square"></div>
+                                                <div class="second_square"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="glax_tm_short_contact">
-                                        <div class="text">
-                                            <h3>Quality Guaranteed!</h3>
-                                            <p>Our gloves are tested to be comfortable even after hours of use. <br>Contact us to get samples!</p>
-                                        </div>
-                                        <div class="glax_tm_button_wrap">
-                                            <a href="contact.html">Contact Us!</a>
-                                        </div>
+                                </div>
+                                <div class="glax_tm_short_contact">
+                                    <div class="text">
+                                        <h3>Quality Guaranteed!</h3>
+                                        <p>Our gloves are tested to be comfortable even after hours of use. <br>Contact us to get samples!</p>
+                                    </div>
+                                    <div class="glax_tm_button_wrap">
+                                        <a href="contact.html">Contact Us!</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /SERVICE SINGLE -->
-                <!-- FOOTER -->
-                <footer class="glax_tm_footer_wrap">
-                    <div class="glax_tm_universal_parallax_wrap">
-                        <div class="main_bg">
-                            <div class="overlay_image footer jarallax" data-speed="0"></div>
-                            <div class="overlay_video"></div>
-                            <div class="overlay_color footer"></div>
-                        </div>
-                        <div class="main_content footer">
-                            <div class="glax_tm_footer_wrap">
-                                <div class="container">
-                                    <div class="glax_tm_list_wrap footer" data-column="2" data-space="40">
-                                        <ul class="glax_list">
-                                            <li>
-                                                <div class="inner">
-                                                    <div class="footer_section_title">
-                                                        <h3>About Our Company</h3>
-                                                    </div>
-                                                    <div class="definition">
-                                                        <p>We are a premium glove manufacturing, recognized world wide for our quality products. We strive to produce quality gloves that meet every user's requirements. <br> <br>Contact us to get in touch with how we can provide top care for your hands.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="inner">
-                                                    <div class="footer_section_title">
-                                                        <h3>Business Hours</h3>
-                                                    </div>
-                                                    <div class="inner_list">
-                                                        <ul>
-                                                            <li>
-                                                                <div class="wrap">
-                                                                    <span class="left">Monday-Saturday:</span>
-                                                                    <span class="right">8:00am to 5:30pm</span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="wrap">
-                                                                    <span class="left">Sunday:</span>
-                                                                    <span class="right">Closed</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bottom_wrap">
-                        <div class="container">
-                            <div class="copyright">
-                                <p>&copy; 2001-2020 <a class="constructify" href="#">Innovative Gloves Co., Ltd</a>.<br>All rights reserved.</p>
-                                <a class="glax_tm_totop" href="#">
-                                    <span class="shape"></span>
-                                    <span class="name">To Top</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-                <!-- /FOOTER -->
             </div>
+            <!-- /SERVICE SINGLE -->
+            <!-- FOOTER -->
+            <div id="footer"></div>
+            <!-- /FOOTER -->
         </div>
-        <!-- / WRAPPER ALL -->
-        <!-- SCRIPTS -->
-        <script src="js/jquery.js"></script>
-        <script src="js/plugins.js"></script>
-        <!--[if lt IE 10]> <script type="text/javascript" src="js/ie8.js"></script> <![endif]-->
-        <script src="js/init.js"></script>
-        <!-- /SCRIPTS -->
+    </div>
+    <!-- / WRAPPER ALL -->
+    <!-- SCRIPTS -->
+    <script src="js/jquery.js"></script>
+    <script src="js/plugins.js"></script>
+    <!--[if lt IE 10]> <script type="text/javascript" src="js/ie8.js"></script> <![endif]-->
+    <script src="js/init.js"></script>
+    <!-- /SCRIPTS -->
 </body>
 
 </html>

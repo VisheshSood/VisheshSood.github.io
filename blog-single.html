@@ -24,6 +24,15 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900" rel="stylesheet">
     <!--[if lt IE 9]> <script type="text/javascript" src="js/modernizr.custom.js"></script> <![endif]-->
     <!-- /STYLES -->
+     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+    </script>
+    <script>
+    $(function() {
+        $("#header").load("header.html");
+        $("#subheader").load("subheader.html");
+        $("#footer").load("footer.html");
+    });
+    </script>
 </head>
 
 <body>
@@ -501,69 +510,8 @@
             </div>
             <!-- /BLOG SINGLE -->
             <!-- FOOTER -->
-            <footer class="glax_tm_footer_wrap">
-                <div class="glax_tm_universal_parallax_wrap">
-                    <div class="main_bg">
-                        <div class="overlay_image footer jarallax" data-speed="0"></div>
-                        <div class="overlay_video"></div>
-                        <div class="overlay_color footer"></div>
-                    </div>
-                    <div class="main_content footer">
-                        <div class="glax_tm_footer_wrap">
-                            <div class="container">
-                                <div class="glax_tm_list_wrap footer" data-column="2" data-space="40">
-                                    <ul class="glax_list">
-                                        <li>
-                                            <div class="inner">
-                                                <div class="footer_section_title">
-                                                    <h3>About Our Company</h3>
-                                                </div>
-                                                <div class="definition">
-                                                    <p>We are a premium glove manufacturing, recognized world wide for our quality products. We strive to produce quality gloves that meet every user's requirements. <br> <br>Contact us to get in touch with how we can provide top care for your hands.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="inner">
-                                                <div class="footer_section_title">
-                                                    <h3>Business Hours</h3>
-                                                </div>
-                                                <div class="inner_list">
-                                                    <ul>
-                                                        <li>
-                                                            <div class="wrap">
-                                                                <span class="left">Monday-Saturday:</span>
-                                                                <span class="right">8:00am to 5:30pm</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="wrap">
-                                                                <span class="left">Sunday:</span>
-                                                                <span class="right">Closed</span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bottom_wrap">
-                    <div class="container">
-                        <div class="copyright">
-                            <p>&copy; 2001-2020 <a class="constructify" href="#">Innovative Gloves Co., Ltd</a>.<br>All rights reserved.</p>
-                            <a class="glax_tm_totop" href="#">
-                                <span class="shape"></span>
-                                <span class="name">To Top</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+                    <div id="footer"></div>
+
             <!-- /FOOTER -->
         </div>
     </div>
