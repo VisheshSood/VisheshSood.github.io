@@ -784,11 +784,11 @@ img.svg {
 
 .glax_tm_header_wrap .submenu_wrap {
     position: absolute;
-    min-width: 220px;
+    min-width: 180px;
     height: auto;
     background-color: #111;
-    top: 100%;
-    left: -20px;
+    top: 75%;
+    left: -45px;
     padding: 30px 20px 25px 20px;
 
     opacity: 0;
@@ -812,7 +812,7 @@ img.svg {
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 20px 220px 0px 0px;
+    border-width: 20px 180px 0px 0px;
     border-color: #111 transparent transparent transparent;
     left: 0px;
     top: 100%;
