@@ -519,7 +519,8 @@ img.svg {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    background-color: rgba(0, 0, 0, .65);
+    /* background-color: rgba(0, 0, 0); */
+    background:linear-gradient(to top, rgba(0,0,0,0) 75%, rgba(0,0,0,0.7));
     z-index: 4;
 }
 
@@ -4700,6 +4701,7 @@ img.svg {
     margin: 0px 0px 0px 0px;
     width: 100%;
     float: left;
+    padding-bottom: 20px;
 }
 
 .glax_tm_service_list_wrap ul li .inner {
@@ -4776,6 +4778,7 @@ img.svg {
     right: 0px;
     max-width: calc(100% - 40px);
     z-index: 5;
+    display: none;
 }
 
 .glax_tm_shape_read_more_wrap .read_more_in {
