@@ -6623,9 +6623,10 @@ img.svg {
 .glax_tm_main_contact_wrap .office_list ul li {
     margin: 0px 0px 30px 0px;
     float: left;
-    width: 33.3333%;
+    width: 50%;
     padding-left: 30px;
 }
+
 
 .glax_tm_main_contact_wrap .office_list ul li .inner {
     width: 100%;
@@ -7455,6 +7456,30 @@ ul#horizontal-list li {
         visibility: hidden;
         display: none;
     }
+}
+
+
+@media (max-width: 850px) {
+.glax_tm_main_contact_wrap .office_list ul li {
+    width: 50%;
+    padding-left: 0px;
+    display: none;
+    padding-right: 20px;
+}
+.glax_tm_contact_wrap {
+    position: relative;
+    margin-top: -7px;
+    width: 100%;
+    float: left;
+    clear: none;
+}
+
+.glax_tm_contact_wrap {
+    position: relative;
+    margin-top: -7px;
+    float: left;
+    clear: none;
+}
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
