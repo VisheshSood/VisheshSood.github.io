@@ -2904,7 +2904,7 @@ img.svg {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    background-color: rgba(0, 0, 0, .2);
+    background-color: rgba(0, 0, 0, 0);
 
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
@@ -2914,7 +2914,7 @@ img.svg {
 }
 
 .glax_tm_home_project_wrapper_all .rightbox ul li .inner:hover .image_wrap .overlay_color {
-    background-color: rgba(17, 17, 25, 0.9);
+    background-color: rgba(17, 17, 25, 0.2);
 }
 
 .glax_tm_home_project_wrapper_all .rightbox ul li .inner .image_wrap .plus {
@@ -5810,7 +5810,12 @@ img.svg {
     float: left;
     position: relative;
     margin-bottom: 50px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+}
+
+.cert {
+    border-radius: 7%;
+    padding-top: 15px;
 }
 
 .glax_tm_blog_wrap .blog_list_wrap ul li:last-child .inner {
@@ -7482,6 +7487,18 @@ ul#horizontal-list li {
 }
 }
 
+.certificate-img {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin:auto;
+}
+
+.latest-products {
+    width: 250px;
+    height: 200px;
+    float: right;
+}
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: white;
   font-size: 10px;
