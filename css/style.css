@@ -454,7 +454,7 @@ img.svg {
 
 .glax_tm_hero_header_wrap .swiper_content {
     position: relative;
-    max-width: 500px;
+    max-width: 400px;
     height: auto;
     z-index: 2;
     float: left;
@@ -2885,6 +2885,7 @@ img.svg {
     float: left;
     position: relative;
     min-width: 100%;
+    background: whitesmoke;
 }
 
 .glax_tm_home_project_wrapper_all .rightbox ul li .inner .image_wrap .image {
@@ -2984,7 +2985,7 @@ img.svg {
 .glax_tm_home_project_wrapper_all .rightbox ul li .inner .title_holder h3 {
     font-family: "Rubik";
     font-size: 24px;
-    color: red;
+    color: green;
     line-height: 1;
     margin-bottom: 10px;
 }
@@ -4896,6 +4897,10 @@ img.svg {
     position: relative;
     overflow: hidden;
     margin-bottom: 60px;
+}
+
+.glax_tm_categories_2 {
+    background-color: slategray;
 }
 
 .glax_tm_categories .title_holder_wrap {
