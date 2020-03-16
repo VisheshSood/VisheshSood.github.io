@@ -2977,8 +2977,8 @@ img.svg {
 
 .glax_tm_home_project_wrapper_all .rightbox ul li .inner .title_holder {
     position: absolute;
-    bottom: 34px;
-    left: 50px;
+    top: 34px;
+    left: 80px;
     z-index: 3;
 }
 
@@ -4223,6 +4223,7 @@ img.svg {
     height: auto;
     clear: both;
     float: left;
+    margin-top: 60px;
 }
 
 .glax_tm_view_more_wrap a {
