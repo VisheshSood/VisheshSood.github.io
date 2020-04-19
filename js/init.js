@@ -787,9 +787,19 @@ function glax_tm_contact_form(){
 			success     = jQuery(".contact_form .returnmessage").data('success');
 		}
 		
+		if (name===''||email===''||message==='') {
+			name 		= jQuery(".inner-wrap .contact_form #name").val();
+			email 		= jQuery(".inner-wrap .contact_form #email").val();
+			message 	= jQuery(".inner-wrap .contact_form #message").val();
+			subject 	= jQuery(".inner-wrap .contact_form #subject").val();
+			success     = jQuery(".inner-wrap .contact_form .returnmessage").data('success');
+		}
+
 		//checking for blank fields	
-		if(name===''||email===''||message===''){
-			
+		if(name===''||email===''||message===''){	
+			console.log(name);
+			console.log(email);
+			console.log(message);
 			jQuery('div.empty_notice').slideDown(500).delay(2000).slideUp(500);
 		}
 		else{
