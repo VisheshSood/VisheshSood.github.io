@@ -835,6 +835,14 @@ function glax_tm_contact_form(){
 		var message 	= jQuery(".inner_wrap .contact_form #message").val();
 		var subject 	= jQuery(".inner_wrap .contact_form #subject").val();
 		var success     = jQuery(".inner_wrap .contact_form .returnmessage").data('success');
+
+		if (name===''||email===''||message==='') {
+			name 		= jQuery(".contact_form #name2").val();
+			email 		= jQuery(".contact_form #email2").val();
+			message 	= jQuery(".contact_form #message2").val();
+			subject 	= jQuery(".contact_form #subject2").val();
+			success     = jQuery(".contact_form .returnmessage").data('success');
+		}
 	
 		jQuery(".inner_wrap .contact_form .returnmessage").empty(); //To empty previous error/success message.
 		//checking for blank fields	
