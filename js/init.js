@@ -36,7 +36,7 @@ jQuery(document).ready(function(){
 	glax_tm_magnific_popup();
 	glax_tm_sidebar_shape();
 	glax_tm_contact_form();
-	// request_sample();
+	request_sample();
 	
 	
 	jQuery(window).on('resize',function(e){
@@ -823,6 +823,57 @@ jQuery(".glax_tm_accordion").friendslab_accordion({
 // 		return false; 
 // 	});
 // }
+
+
+function request_sample(){
+	
+	"use strict";
+	
+	jQuery(".contact_form #send_message_short").on('click', function(){
+		
+		var name 		= jQuery(".contact_form #name").val();
+		var email 		= jQuery(".contact_form #email").val();
+		var message 	= jQuery(".contact_form #message").val();
+		var subject 	= jQuery(".contact_form #subject").val();
+		var success     = jQuery(".contact_form .returnmessage").data('success');
+
+		if (name===''||email===''||message==='') {
+			name 		= jQuery(".contact_form #name2").val();
+			email 		= jQuery(".contact_form #email2").val();
+			message 	= jQuery(".contact_form #message2").val();
+			subject 	= jQuery(".contact_form #subject2").val();
+			success     = jQuery(".contact_form .returnmessage").data('success');
+		}
+	
+		jQuery(".contact_form .returnmessage").empty(); //To empty previous error/success message.
+		//checking for blank fields	
+		if(name===''||email===''||message===''){
+			
+			jQuery('div.empty_notice').slideDown(500).delay(2000).slideUp(500);
+		}
+		else{
+			// Returns successful data submission message when the entered information is stored in database.
+			jQuery.post("modal/contact.php",{ ajax_name: name, ajax_email: email, ajax_message:message, ajax_subject: subject}, function(data) {
+				
+				jQuery(".contact_form .returnmessage").append(data);//Append returned message to message paragraph
+				
+				
+				if(jQuery(".contact_form .returnmessage span.contact_error").length){
+					jQuery(".contact_form .returnmessage").slideDown(500).delay(2000).slideUp(500);		
+				}else{
+					jQuery(".contact_form .returnmessage").append("<span class='contact_success'>"+ success +"</span>");
+					jQuery(".contact_form .returnmessage").slideDown(500).delay(4000).slideUp(500);
+				}
+				
+				if(data===""){
+					jQuery("#contact_form")[0].reset();//To reset form fields on success
+				}
+				
+			});
+		}
+		return false; 
+	});
+}
 
 function glax_tm_contact_form(){
 	
