@@ -21,9 +21,9 @@ if (filter_var($php_email, FILTER_VALIDATE_EMAIL)) {
 	$php_headers = 'MIME-Version: 1.0' . "\r\n";
 	$php_headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 	$php_headers .= 'From:' . $php_email . "\r\n"; // Sender's Email
-	$php_headers .= 'Cc:' . $php_email . "\r\n"; // Carbon copy to Sender
+	$php_headers .= 'Cc:' . $php_main_email . "\r\n"; // Carbon copy to Sender
 
-	$php_template = '<div style="padding:50px;">Greetings From Innovative Gloves,  ' . $php_name . '.<br/>'
+	$php_template = '<div style="padding:50px;">Greetings from Innovative Gloves,  ' . $php_name . '.<br/><br/>'
 		. 'We thank you for contacting us at this time. The following details have been sent to us:<br/>'
 		. '<strong style="color:blue;">Name:</strong>  ' . $php_name . '<br/>'
 		. '<strong style="color:blue;">Email:</strong>  ' . $php_email . '<br/>'
@@ -36,7 +36,7 @@ if (filter_var($php_email, FILTER_VALIDATE_EMAIL)) {
 	$php_sendmessage = wordwrap($php_sendmessage, 70);
 
 	// Send mail by PHP Mail Function
-	mail($php_main_email, $php_subject, $php_sendmessage, $php_headers);
+	mail($php_email, $php_subject, $php_sendmessage, $php_headers);
 	echo "";
 
 } else {
