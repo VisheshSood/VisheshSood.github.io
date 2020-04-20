@@ -7403,7 +7403,7 @@ li .row .col-md-12 {
 
 #menu-outer {
     height: 84px;
-    background: url(images/bar-bg.jpg) repeat-x;
+    /*background: url(images/bar-bg.jpg) repeat-x;*/
 }
 
 .table {
