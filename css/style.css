@@ -2158,7 +2158,7 @@ img.svg {
 }
 
 .glax_tm_button_more_wrap a {
-    text-decoration: none;
+    text-decoration: underline;
     font-size: 18px;
     line-height: 24px;
     font-family: 'Rubik';
