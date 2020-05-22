@@ -6976,6 +6976,12 @@ img.svg {
         visibility: hidden;
     }*/
 }
+@media (max-width: 1340px) {
+    .glax_tm_header_wrap .catalog {
+        display: none;
+    }
+}
+
 
 @media (max-width: 1200px) {
     .glax_tm_header_wrap .purchase_button {
