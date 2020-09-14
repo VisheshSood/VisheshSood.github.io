@@ -132,7 +132,7 @@ img.svg {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    background-color: #e2ddd6;
+    background-color: #e9eff4;
     z-index: 1;
 }
 
@@ -723,7 +723,7 @@ img.svg {
     width: 220px;
     top: -90px;
     bottom: 0px;
-    background-color: #7DCBFF;
+    background-color: #081225;
     justify-content: center;
     display: flex;
     align-items: center;
@@ -738,7 +738,7 @@ img.svg {
     height: 0;
     border-style: solid;
     border-width: 40px 220px 0px 0px;
-    border-color: #7DCBFF transparent transparent transparent;
+    border-color: #081225 transparent transparent transparent;
     left: 0px;
     top: 100%;
 }
@@ -748,7 +748,7 @@ img.svg {
     content: "";
     width: 200px;
     height: 15px;
-    background-color: #7DCBFF;
+    background-color: #081225;
     bottom: -33px;
     transform: rotate(-10deg);
 }
@@ -758,7 +758,7 @@ img.svg {
     z-index: 11;
     width: 20px;
     height: 20px;
-    background-color: #7DCBFF;
+    background-color: #081225;
     left: 0px;
     bottom: -51px;
     border-radius: 100%;
@@ -769,7 +769,7 @@ img.svg {
     z-index: 11;
     width: 22px;
     height: 20px;
-    background-color: #7DCBFF;
+    background-color: #081225;
     right: 0px;
     bottom: -15px;
     border-radius: 100%;
@@ -780,7 +780,7 @@ img.svg {
     z-index: 11;
     width: 22px;
     height: 20px;
-    background-color: #7DCBFF;
+    background-color: #081225;
     right: 0px;
     bottom: -12px;
     border-radius: 100%;
@@ -791,7 +791,7 @@ img.svg {
     z-index: 11;
     width: 22px;
     height: 20px;
-    background-color: #7DCBFF;
+    background-color: #081225;
     right: 3px;
     bottom: -16px;
     border-radius: 100%;
