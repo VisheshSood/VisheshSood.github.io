@@ -641,7 +641,7 @@ img.svg {
 }
 
 .glax_tm_header_wrap .header_inner_wrap .menu_wrap>ul>li {
-    margin: 0px 40px 0px 0px;
+    padding: 0px 20px 0px 10px;
     float: left;
     position: relative;
 }
