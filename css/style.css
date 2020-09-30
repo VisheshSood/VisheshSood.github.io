@@ -57,6 +57,13 @@ Popup
     font-family: sans-serif;
 }
 
+.cnt223 li {
+    clear: both;
+    color: black;
+    /* text-align: justify; */
+    font-size: 14px;
+    font-family: sans-serif;
+}
 .cnt223 button {
       box-sizing: border-box;
   appearance: none;
