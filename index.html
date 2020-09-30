@@ -32,20 +32,57 @@
         $("#footer").load("footer.html");
     });
     </script>
-
     <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140531009-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140531009-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'UA-140531009-1');
 </script>
-
+    <script>
+        $(function(){
+            var overlay = $('<div id="overlay"></div>');
+            overlay.show();
+            overlay.appendTo(document.body);
+            $('.popup-onload').show();
+            $('.close').click(function(){
+            $('.popup-onload').hide();
+            overlay.appendTo(document.body).remove();
+            return false;
+            });
+            $('.x').click(function(){
+            $('.popup').hide();
+            overlay.appendTo(document.body).remove();
+            return false;
+            });
+            });
+    </script>
 </head>
 
 <body>
+    <div class='popup-onload'>
+        <div class='cnt223'>
+            <h2>Fraud Alert</h2>
+            <p>
+                During these testing tough times, please be aware of fraudulant companies that are posing to be us by forging certificates, using our addresses, masking our emails, etc. 
+                <br><br>
+                Such companies include:
+                <ul>
+                    <li>Looksorn Vanderhaar Company Limited</li>
+                    <li>Careglove Limited</li>
+                    <li>Care Gloves Limited</li>
+                </ul>
+                <br />
+                We are not in any way affiliated with such companies, and if you have any doubt or suspicion, please <a href="/contact.html">contact us</a> so we can report these frauds and also help prevent people from being scammed.
+                <br><br>
+                To learn more, please visit our news page for updates <a href="/news.html">here</a>!
+                <br><br>
+            </p>
+            <button class='close'>Close</a>
+        </div>
+    </div>
     <!-- WRAPPER ALL -->
     <div class="glax_tm_wrapper_all">
         <!-- LANG BOX -->
@@ -133,7 +170,7 @@
                             </ul>
                         </div>
                         <div class="purchase_button catalog">
-                            <a href="Catalog.pdf" target="_blank" >Catalog</a>
+                            <a href="Catalog.pdf" target="_blank">Catalog</a>
                         </div>
                         <div class="purchase_button">
                             <a href="contact.html">Contact Us!</a>
@@ -177,7 +214,7 @@
                     <div class="container">
                         <div class="inner_wrap">
                             <div class="logo_wrap">
-                                <a href="/"><img src="img/mobile-logo.png" alt=""/></a>
+                                <a href="/"><img src="img/mobile-logo.png" alt="" /></a>
                             </div>
                             <div class="trigger_wrap">
                                 <div class="hamburger hamburger--collapse-r">
@@ -419,6 +456,7 @@
                 <div class="swiper_overlay"></div>
             </div>
             <!-- /HERO HEADER -->
+
             <!-- HOME INTRODUCE -->
             <div class="glax_tm_section introduce">
                 <div class="container">
@@ -798,11 +836,10 @@
                                 <div class="rightbox fn_w_sminibox">
                                     <div class="constructify_fn_sticky_section">
                                         <ul>
-
                                             <li>
                                                 <div class="inner">
                                                     <div class="image_wrap">
-                                                    <img src="img/services/biodegrade.jpeg" alt="" class="latest-products">
+                                                        <img src="img/services/biodegrade.jpeg" alt="" class="latest-products">
                                                         <div class="image"></div>
                                                         <!-- <div class="overlay_color"></div> -->
                                                         <span class="plus"></span>
@@ -822,7 +859,7 @@
                                             <li>
                                                 <div class="inner">
                                                     <div class="image_wrap">
-                                                    <img src="img/services/diamondcover.jpg" alt="" class="latest-products">
+                                                        <img src="img/services/diamondcover.jpg" alt="" class="latest-products">
                                                         <div class="image"></div>
                                                         <!-- <div class="overlay_color"></div> -->
                                                         <span class="plus"></span>
@@ -842,7 +879,7 @@
                                             <li>
                                                 <div class="inner">
                                                     <div class="image_wrap">
-                                                    <img src="img/about/gripper.jpeg" alt="" class="latest-products">
+                                                        <img src="img/about/gripper.jpeg" alt="" class="latest-products">
                                                         <div class="image"></div>
                                                         <!-- <div class="overlay_color"></div> -->
                                                         <span class="plus"></span>

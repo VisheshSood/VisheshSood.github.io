@@ -1,5 +1,118 @@
 @charset "utf-8";
 
+/*
+Popup
+*/
+
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.7;
+    -khtml-opacity: 0.7;
+    opacity: 0.7;
+    z-index: 100;
+    /*display: none;*/
+}
+
+.cnt223 a {
+    font-weight: bold;
+}
+
+.popup-onload {
+    width: 100%;
+    margin: 0 auto;
+    display: none;
+    position: fixed;
+    z-index: 101;
+}
+
+.cnt223 {
+    min-width: 600px;
+    width: 600px;
+    min-height: 150px;
+    margin: 100px auto;
+    background: #f3f3f3;
+    position: relative;
+    z-index: 103;
+    padding: 35px 35px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px #000;
+}
+
+.cnt223 ul {
+    margin-left: 35px;
+}
+
+.cnt223 p {
+    clear: both;
+    color: black;
+    /* text-align: justify; */
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+.cnt223 button {
+      box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid $red;
+  border-radius: 0.6em;
+  color: $red;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  margin-left:38%;
+  &:hover,
+  &:focus {
+    color: #fff;
+    outline: 0;
+  }
+
+}
+
+.cnt223 .x {
+    float: right;
+    height: 35px;
+    left: 22px;
+    position: relative;
+    top: -25px;
+    width: 34px;
+}
+
+.cnt223 .x:hover {
+    cursor: pointer;
+}
+
+.cnt223 h2 {
+    text-align: center;
+    padding-bottom: 10px;
+    margin-top: 0px;
+}
+
+@media screen and (max-width: 900px) {
+    .popup-onload {
+        display: none !important;
+    }
+    #overlay {
+        display: none !important;
+    }
+}
+
 /*------------------------------------------------------------------*/
 /*  01) GLAX BASE
 /*------------------------------------------------------------------*/
@@ -458,7 +571,7 @@ img.svg {
     height: auto;
     z-index: 2;
     float: left;
-    margin:100px;
+    margin: 100px;
 }
 
 .glax_tm_hero_header_wrap .swiper_content .texts_wrap {
@@ -484,24 +597,30 @@ img.svg {
 }
 
 .o-video {
-  width: 100%;
-  height: 0;
-  position: relative;
+    width: 100%;
+    height: 0;
+    position: relative;
 
-  top: 0; right: 0; /* confuse it i guess */
-    bottom: 0; left: 0;
-    margin: auto; /* make em equal */
+    top: 0;
+    right: 0;
+    /* confuse it i guess */
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    /* make em equal */
 
-  padding-top: 10px;
-  padding-bottom: 56.25%; /* 9 / 16 * 100 */
+    padding-top: 10px;
+    padding-bottom: 56.25%;
+    /* 9 / 16 * 100 */
 }
-.o-video > iframe {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border: 0;
+
+.o-video>iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 0;
 }
 
 
@@ -543,7 +662,7 @@ img.svg {
     left: 0px;
     right: 0px;
     /* background-color: rgba(0, 0, 0); */
-    background:linear-gradient(to top, rgba(0,0,0,0) 75%, rgba(0,0,0,0.7));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.7));
     z-index: 4;
 }
 
@@ -6976,6 +7095,7 @@ img.svg {
         visibility: hidden;
     }*/
 }
+
 @media (max-width: 1340px) {
     .glax_tm_header_wrap .catalog {
         display: none;
@@ -7500,33 +7620,34 @@ ul#horizontal-list li {
 
 
 @media (max-width: 850px) {
-.glax_tm_main_contact_wrap .office_list ul li {
-    width: 50%;
-    padding-left: 0px;
-    display: none;
-    padding-right: 20px;
-}
-.glax_tm_contact_wrap {
-    position: relative;
-    margin-top: -7px;
-    width: 100%;
-    float: left;
-    clear: none;
-}
+    .glax_tm_main_contact_wrap .office_list ul li {
+        width: 50%;
+        padding-left: 0px;
+        display: none;
+        padding-right: 20px;
+    }
 
-.glax_tm_contact_wrap {
-    position: relative;
-    margin-top: -7px;
-    float: left;
-    clear: none;
-}
+    .glax_tm_contact_wrap {
+        position: relative;
+        margin-top: -7px;
+        width: 100%;
+        float: left;
+        clear: none;
+    }
+
+    .glax_tm_contact_wrap {
+        position: relative;
+        margin-top: -7px;
+        float: left;
+        clear: none;
+    }
 }
 
 .certificate-img {
     width: 200px;
     height: 200px;
     display: block;
-    margin:auto;
+    margin: auto;
 }
 
 .latest-products {
@@ -7547,6 +7668,7 @@ ul#horizontal-list li {
         margin: auto;
         margin-bottom: 20px;
     }
+
     .definitions_wrap {
         visibility: hidden;
         display: none;
@@ -7559,111 +7681,130 @@ ul#horizontal-list li {
 
 /* Slideshow container */
 .slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
 }
 
 /* Hide the images by default */
 .mySlides {
-  display: none;
+    display: none;
 }
 
 /* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
 }
 
 /* Position the "next button" to the right */
 .next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+    right: 0;
+    border-radius: 3px 0 0 3px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Caption text */
 .text_caption {
-  color: #black;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
+    color: #black;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
 }
 
 /* Number text (1/3 etc) */
 .numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
 }
 
 /* The dots/bullets/indicators */
 .dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
 }
 
-.active, .dot:hover {
-  background-color: #717171;
+.active,
+.dot:hover {
+    background-color: #717171;
 }
 
 /* Fading animation */
 .fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
 }
 
 @keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
 }
 
-*/
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: white;
-  font-size: 10px;
+*/::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: white;
+    font-size: 10px;
 }
-::-moz-placeholder { /* Firefox 19+ */
-  color: white;
-  font-size: 10px;
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: white;
+    font-size: 10px;
 }
-:-ms-input-placeholder { /* IE 10+ */
-  color: white;
-  font-size: 10px;
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    color: white;
+    font-size: 10px;
 }
-:-moz-placeholder { /* Firefox 18- */
-  color: white;
-  font-size: 10px;
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: white;
+    font-size: 10px;
 }
