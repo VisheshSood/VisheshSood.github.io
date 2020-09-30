@@ -111,6 +111,21 @@ Popup
     margin-top: 0px;
 }
 
+
+[class*='close-'] {
+  color: #777;
+  font: 20px/100% arial, sans-serif;
+  position: absolute;
+  right: 20px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #fff;
+  top: 20px;
+}
+
+.close-classic:after {
+  content: '✖'; 
+}
+
 @media screen and (max-width: 900px) {
     .popup-onload {
         display: none !important;
