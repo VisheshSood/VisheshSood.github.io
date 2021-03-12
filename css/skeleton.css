@@ -22,18 +22,18 @@
 /*	SKELETON OR GRID
 /*------------------------------------------------------------------*/
 .container {
-	max-width: 1250px;
-	width:100%;
-	margin-left: auto;
-	margin-right: auto;
-	height:auto;
-	padding:0px 40px;
-	position:relative;
-	clear:both;
+	max-width: 1250px !important;
+	width:100% !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	height:auto !important;
+	padding:0px 40px !important;
+	position:relative !important;
+	clear:both !important;
 	
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	box-sizing: border-box;         /* Opera/IE 8+ */
+	-webkit-box-sizing: border-box !important; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box !important;    /* Firefox, other Gecko */
+	box-sizing: border-box !important;         /* Opera/IE 8+ */
 }
 .container.full{
 	max-width:100%;
