@@ -2611,6 +2611,10 @@ img.svg {
     height: auto;
 }
 
+/*   background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(../img/about/boiler.jpg); */
+
 .glax_tm_rating_wrap .inner .rightbox .bg_image {
     left: 50%;
     margin-left: 40px;
@@ -2621,8 +2625,21 @@ img.svg {
     position: absolute;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url(../img/about/boiler.jpg);
+   /* background-image: url(../img/about/boiler.jpg);  removed by Dinesh */
+   margin-top: 150px;/*added by Dinesh*/
 }
+
+/* left: 50%;
+    margin-left: 40px;
+    /* margin-top: 150px; 
+    top: 55px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 5;
+    /* height: 129% !important; */
+    position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat */
 
 /*------------------------------------------------------------------*/
 /*  09) GLAX PRINCIPLES
