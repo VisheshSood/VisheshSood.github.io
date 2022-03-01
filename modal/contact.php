@@ -1,27 +1,26 @@
 <?php
-
 // Put contacting email here
-$php_main_email = "vishesh@innovativeglove.com, rsood@innovativeglove.com, avi@innovativeglove.com";
+ //$php_main_email = "vishesh@innovativeglove.com, rsood@innovativeglove.com, avi@innovativeglove.com";
 
-//Fetching Values from URL
+// //Fetching Values from URL
 $php_name = $_POST['ajax_name'];
 $php_email = $_POST['ajax_email'];
 $php_message = $_POST['ajax_message'];
 $php_subject1 = $_POST['ajax_subject'];
 
-//Sanitizing email
-$php_email = filter_var($php_email, FILTER_SANITIZE_EMAIL);
+// //Sanitizing email
+ $php_email = filter_var($php_email, FILTER_SANITIZE_EMAIL);
 
-//After sanitization Validation is performed
-if (filter_var($php_email, FILTER_VALIDATE_EMAIL)) {
+// //After sanitization Validation is performed
+// if (filter_var($php_email, FILTER_VALIDATE_EMAIL)) {
 
-	$php_subject = "Innovative Gloves Contact Form Response";
+ 	$php_subject = "Innovative Gloves Contact Form Response";
 
-	// To send HTML mail, the Content-type header must be set
-	$php_headers = 'MIME-Version: 1.0' . "\r\n";
-	$php_headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	$php_headers .= 'From:' . $php_email . "\r\n"; // Sender's Email
-	$php_headers .= 'Cc:' . $php_main_email . "\r\n"; // Carbon copy to Sender
+// 	// To send HTML mail, the Content-type header must be set
+// 	$php_headers = 'MIME-Version: 1.0' . "\r\n";
+// 	$php_headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+// 	$php_headers .= 'From:' . $php_email . "\r\n"; // Sender's Email
+// 	$php_headers .= 'Cc:' . $php_main_email . "\r\n"; // Carbon copy to Sender
 
 	$php_template = '<div style="padding:50px;">Greetings from Innovative Gloves,  ' . $php_name . '.<br/><br/>'
 		. 'We thank you for contacting us at this time. The following details have been sent to us:<br/>'
@@ -35,12 +34,52 @@ if (filter_var($php_email, FILTER_VALIDATE_EMAIL)) {
 	// message lines should not exceed 70 characters (PHP rule), so wrap it
 	$php_sendmessage = wordwrap($php_sendmessage, 70);
 
-	// Send mail by PHP Mail Function
-	mail($php_email, $php_subject, $php_sendmessage, $php_headers);
-	echo "";
+// 	// Send mail by PHP Mail Function
+// 	mail($php_email, $php_subject, $php_sendmessage, $php_headers);
+// 	echo "";
 
-} else {
-	echo "<span class='contact_error'>* Invalid email *</span>";
+// } else {
+// 	echo "<span class='contact_error'>* Invalid email *</span>";
+// }
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require_once  '../src/Exception.php';
+require_once  '../src/PHPMailer.php';
+require_once  '../src/SMTP.php';
+
+// passing true in constructor enables exceptions in PHPMailer
+$mail = new PHPMailer(true);
+
+try {
+    // Server settings
+    //$mail->SMTPDebug = SMTP::DEBUG_SERVER; // for detailed debug output
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
+
+    $mail->Username = 'sales@innovativeglove.com'; // YOUR gmail email
+    $mail->Password = 'mR=AJE4S'; // YOUR gmail password
+
+    // Sender and recipient settings
+    $mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
+    $mail->addAddress('vishesh@innovativeglove.com', 'Vishesh Sood');
+    //$mail->addAddress('dinesh.deltabee@gmail.com', 'Dinesh Jadhav');
+    $mail->addReplyTo($php_email, 'Innovative Gloves'); // to set the reply to
+
+    // Setting the email content
+    $mail->IsHTML(true);
+    $mail->Subject = $php_subject;
+    $mail->Body = $php_sendmessage;
+    //$mail->AltBody = 'Plain text message body for non-HTML email client. Gmail SMTP email body.';
+
+    $mail->send();
+    echo '';
+} catch (Exception $e) {
+    echo "<span class='contact_error'>* Invalid email *</span>";
 }
 
 ?>
