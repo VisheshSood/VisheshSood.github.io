@@ -45,9 +45,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require_once  '../src/Exception.php';
-require_once  '../src/PHPMailer.php';
-require_once  '../src/SMTP.php';
+require_once  getcwd().'/src/Exception.php';
+require_once  getcwd().'/src/PHPMailer.php';
+require_once  getcwd().'/src/SMTP.php';
 
 // passing true in constructor enables exceptions in PHPMailer
 $mail = new PHPMailer(true);
@@ -67,6 +67,7 @@ try {
     // Sender and recipient settings
     $mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
     $mail->addAddress('vishesh@innovativeglove.com', 'Vishesh Sood');
+    $mail->addAddress($php_email, $php_name);
     //$mail->addAddress('dinesh.deltabee@gmail.com', 'Dinesh Jadhav');
     $mail->addReplyTo($php_email, 'Innovative Gloves'); // to set the reply to
 
