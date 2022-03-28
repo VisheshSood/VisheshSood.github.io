@@ -1,4 +1,8 @@
 <?php
+//ini_set('error_reporting', E_ALL);
+//ini_set('display_errors',1);
+//error_reporting(-1);
+//error_reporting(E_ALL);
 // Put contacting email here
  //$php_main_email = "vishesh@innovativeglove.com, rsood@innovativeglove.com, avi@innovativeglove.com";
 
@@ -45,9 +49,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require_once  '../src/Exception.php';
-require_once  '../src/PHPMailer.php';
-require_once  '../src/SMTP.php';
+require_once  getcwd().'/src/Exception.php';
+require_once  getcwd().'/src/PHPMailer.php';
+require_once  getcwd().'/src/SMTP.php';
 
 // passing true in constructor enables exceptions in PHPMailer
 $mail = new PHPMailer(true);
@@ -67,7 +71,7 @@ try {
     // Sender and recipient settings
     $mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
     $mail->addAddress('vishesh@innovativeglove.com', 'Vishesh Sood');
-    //$mail->addAddress('dinesh.deltabee@gmail.com', 'Dinesh Jadhav');
+    $mail->addAddress($php_email, $php_name);
     $mail->addReplyTo($php_email, 'Innovative Gloves'); // to set the reply to
 
     // Setting the email content
