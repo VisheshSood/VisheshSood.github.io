@@ -64,31 +64,33 @@ Popup
     font-size: 14px;
     font-family: sans-serif;
 }
+
 .cnt223 button {
-      box-sizing: border-box;
-  appearance: none;
-  background-color: transparent;
-  border: 2px solid $red;
-  border-radius: 0.6em;
-  color: $red;
-  cursor: pointer;
-  display: flex;
-  align-self: center;
-  font-weight: 400;
-  line-height: 1;
-  margin: 20px;
-  padding: 1.2em 2.8em;
-  text-decoration: none;
-  text-align: center;
-  text-transform: uppercase;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  margin-left:38%;
-  &:hover,
-  &:focus {
-    color: #fff;
-    outline: 0;
-  }
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid $red;
+    border-radius: 0.6em;
+    color: $red;
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    margin-left: 38%;
+
+    &:hover,
+    &:focus {
+        color: #fff;
+        outline: 0;
+    }
 
 }
 
@@ -113,23 +115,24 @@ Popup
 
 
 [class*='close-'] {
-  color: #777;
-  font: 20px/100% arial, sans-serif;
-  position: absolute;
-  right: 20px;
-  text-decoration: none;
-  text-shadow: 0 1px 0 #fff;
-  top: 20px;
+    color: #777;
+    font: 20px/100% arial, sans-serif;
+    position: absolute;
+    right: 20px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fff;
+    top: 20px;
 }
 
 .close-classic:after {
-  content: '✖'; 
+    content: '✖';
 }
 
 @media screen and (max-width: 800px) {
     .popup-onload {
         display: none !important;
     }
+
     #overlay {
         display: none !important;
     }
@@ -2625,8 +2628,9 @@ img.svg {
     position: absolute;
     background-size: cover;
     background-repeat: no-repeat;
-   /* background-image: url(../img/about/boiler.jpg);  removed by Dinesh */
-   margin-top: 150px;/*added by Dinesh*/
+    /* background-image: url(../img/about/boiler.jpg);  removed by Dinesh */
+    margin-top: 150px;
+    /*added by Dinesh*/
 }
 
 /* left: 50%;
@@ -2637,10 +2641,9 @@ img.svg {
     bottom: 0px;
     z-index: 5;
     /* height: 129% !important; */
-    position: absolute;
-    background-size: cover;
-    background-repeat: no-repeat */
-
+position: absolute;
+background-size: cover;
+background-repeat: no-repeat */
 /*------------------------------------------------------------------*/
 /*  09) GLAX PRINCIPLES
 /*------------------------------------------------------------------*/
@@ -5763,6 +5766,50 @@ img.svg {
     background-color: #e9eff4;
     margin-bottom: 35px;
 }
+
+.glax_tm_promises {
+    width: 100%;
+    height: auto;
+    clear: both;
+    float: left;
+}
+
+
+.glax_tm_promises .promises_list_wrap {
+    width: 100%;
+    /*height: auto;*/
+    clear: both;
+    float: left;
+    /*display: inline;*/
+
+}
+
+.glax_tm_promises .promises_list_wrap ul {
+    list-style-type: none;
+    display: table-row;
+}
+
+.glax_tm_promises .promises_list_wrap ul li {
+    width: 33.33%;
+    display: table-cell;
+    padding: 10px;
+    float: left;
+}
+
+.glax_tm_promises .promises_list_wrap ul li:last-child {
+    margin-bottom: 0px;
+}
+
+.glax_tm_promises .promises_list_wrap ul li .inner {
+    width: 100%;
+    height: auto;
+    clear: both;
+    float: left;
+    position: relative;
+    background-color: #e9eff4;
+    padding: 55px 50px 55px 50px;
+}
+
 
 .glax_tm_other_services_wrap {
     width: 100%;
