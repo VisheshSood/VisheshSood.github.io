@@ -1,8 +1,4 @@
 <?php
-//ini_set('error_reporting', E_ALL);
-//ini_set('display_errors',1);
-//error_reporting(-1);
-//error_reporting(E_ALL);
 // Put contacting email here
  //$php_main_email = "vishesh@innovativeglove.com, rsood@innovativeglove.com, avi@innovativeglove.com";
 
@@ -72,6 +68,7 @@ try {
     $mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
     $mail->addAddress('vishesh@innovativeglove.com', 'Vishesh Sood');
     $mail->addAddress($php_email, $php_name);
+    //$mail->addAddress('dinesh.deltabee@gmail.com', 'Dinesh Jadhav');
     $mail->addReplyTo($php_email, 'Innovative Gloves'); // to set the reply to
 
     // Setting the email content
