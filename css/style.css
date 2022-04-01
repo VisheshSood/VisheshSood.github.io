@@ -4,7 +4,6 @@
 Popup
 */
 
-
 #overlay {
     position: fixed;
     top: 0;
@@ -7342,6 +7341,41 @@ background-repeat: no-repeat */
 }
 
 @media (max-width: 1040px) {
+    .glax_tm_promises .promises_list_wrap {
+        width: 100%;
+        /*height: auto;*/
+        clear: both;
+        float: left;
+        /*display: inline;*/
+
+    }
+
+    .glax_tm_promises .promises_list_wrap ul {
+        list-style-type: none;
+        display: table-row;
+    }
+
+    .glax_tm_promises .promises_list_wrap ul li {
+        width: 100%;
+        display: table-cell;
+        padding: 10px;
+        float: left;
+    }
+
+    .glax_tm_promises .promises_list_wrap ul li:last-child {
+        margin-bottom: 0px;
+    }
+
+    .glax_tm_promises .promises_list_wrap ul li .inner {
+        width: 100%;
+        height: auto;
+        clear: both;
+        float: left;
+        position: relative;
+        background-color: #e9eff4;
+        padding: 55px 50px 55px 50px;
+    }
+
     .glax_tm_wrapper_all .lang_box {
         display: none;
     }
