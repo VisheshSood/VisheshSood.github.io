@@ -43,25 +43,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             $("#footer").load("footer.html");
         });
     </script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script>
-        $(function () {
-            var overlay = $('<div id="overlay"></div>');
-            overlay.show();
-            overlay.appendTo(document.body);
-            $('.popup-onload').show();
-            $('.close').click(function () {
-                $('.popup-onload').hide();
-                overlay.appendTo(document.body).remove();
-                return false;
-            });
-            $('.x').click(function () {
-                $('.popup').hide();
-                overlay.appendTo(document.body).remove();
-                return false;
-            });
-        });
-    </script>
 </head>
 
 <body>
