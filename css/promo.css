@@ -1,0 +1,119 @@
+@media (max-width: 1080px) {
+    #banner-support {
+        visibility: hidden;
+        display: none;
+    }
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#banner-support {
+    position: relative;
+    z-index: 5;
+    top: 115px;
+    left: 33%;
+}
+
+#banner {
+    position: absolute;
+    overflow: hidden;
+    width: 400px;
+    height: 100px;
+    border: 1px solid #ccc;
+    background: url(..//img/earth.jpeg) no-repeat center/cover;
+    outline: 8px ridge rgba(0, 154, 23, .6);
+    border-radius: 2rem;
+}
+
+.hand1 {
+    position: absolute;
+    left: 50px;
+    top: 20px;
+    transform: translateX(-50%);
+    transition: all 0.5s;
+    width: 120px;
+}
+
+.hand2 {
+    position: absolute;
+    left: 350px;
+    top: 0px;
+    transform: translateX(-50%);
+    transition: all 0.5s;
+    width: 80px;
+}
+
+#banner:hover .hand1 {
+    left: 600px;
+}
+
+#banner:hover .hand2 {
+    left: -600px;
+}
+
+.tistory {
+    position: absolute;
+    left: 0px;
+    top: -910px;
+    width: 100px;
+    transition: all 0.5s 0.2s;
+}
+
+#banner:hover .tistory {
+    top: 10px;
+}
+
+.txt2 {
+    display: block;
+    text-align: right;
+    position: absolute;
+    left: -600px;
+    bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: skyblue;
+    transition: all 0.5s 0.3s;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+#banner:hover .txt2 {
+    color: skyblue;
+    text-align: right;
+    font-weight: bold;
+    left: 150px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+.logo {
+    display: block;
+    position: absolute;
+    left: 270px;
+    bottom: -50px;
+    font-size: 20px;
+    color: #888;
+    transition: all 0.5s 0.3s;
+}
+
+#banner:hover .logo {
+    bottom: 20px;
+}
+
+.device {
+    display: block;
+    position: absolute;
+    right: 180px;
+    bottom: 10px;
+    font-size: 55px;
+    color: #EA5220;
+    opacity: 0;
+    transition: opacity 0.5s linear 0.2s;
+}
+
+#banner:hover .device {
+    opacity: 1;
+}
