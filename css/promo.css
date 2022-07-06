@@ -24,7 +24,7 @@
     height: 100px;
     border: 1px solid #ccc;
     outline: 6px ridge rgba(0, 154, 23, .9);
-    border-radius: 2rem;
+    border-radius: 1rem;
 }
 
 .hand1 {
@@ -55,7 +55,7 @@
 }
 
 #banner:hover .background {
-    opacity: 0.4;
+    opacity: 0.7;
 }
 
 
