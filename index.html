@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="css/skeleton.css" />
     <link rel="stylesheet" type="text/css" href="css/plugins.css" />
     <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <link rel="stylesheet" type="text/css" href="css/promo.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
@@ -29,10 +30,18 @@
     <script src="js/jquery.min.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
     </script> -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W5D3LM9');</script>
+    <!-- End Google Tag Manager -->
     <script>
         $(document).ready(function () {
             $("#header").load("header.html");
             $("#footer").load("footer.html");
+            $("#promo").load("promo.html");
         });
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -65,6 +74,9 @@
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W5D3LM9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div class='popup-onload'>
         <div class='cnt223'>
             <a href="#" class="close-classic close"></a>
@@ -112,9 +124,9 @@
                     <div class="left_part_wrap">
                         <div class="share_wrap">
                             <ul>
-                                <li><a href="https://www.facebook.com/innovativeglovesthailand/"><i class="xcon-facebook"></i></a></li>
+                                <li><a href="https://www.facebook.com/innovativeglovesthailand/" target="_blank"><i class="xcon-facebook"></i></a></li>
                                 <!-- <li><a href="#"><i class="xcon-twitter"></i></a></li> -->
-                                <li><a href="https://www.linkedin.com/company/innovativegloves/"><i class="xcon-linkedin"></i></a></li>
+                                <li><a href="https://www.linkedin.com/company/innovativegloves/" target="_blank"><i class="xcon-linkedin"></i></a></li>
                             </ul>
                         </div>
                         <!--  -->
@@ -448,10 +460,10 @@
                             <div class="image_wrap swiper-slide">
                                 <div class="bg_img" data-img-url="img/slider/1.jpg" style="background-image: url(img/slider/1.jpg);"></div>
                                 <div class="swiper_content">
-                                    <div class="texts_wrap">
-                                        <h5>We are <b>more</b> than a glove company</h5>
-                                        <!-- <p>Innovative Gloves was founded in 2001 with a goal to produce the most premium, innnovative gloves catering to all users. Bridging the most advanced state-of-the-art technology and a seasoned team of professionals - many of whom had 20+ years of experience in dipping technology and latex - Innovative Gloves was conceived on a land of 20 acres and commissioned in September of 2001.</p> -->
-                                    </div>
+                                    <!-- <div class="texts_wrap">
+    <h5>We are <b>more</b> than a glove company</h5>
+    <p>Innovative Gloves was founded in 2001 with a goal to produce the most premium, innnovative gloves catering to all users. Bridging the most advanced state-of-the-art technology and a seasoned team of professionals - many of whom had 20+ years of experience in dipping technology and latex - Innovative Gloves was conceived on a land of 20 acres and commissioned in September of 2001.</p>
+</div> -->
                                 </div>
                             </div>
                         </div>
@@ -460,6 +472,18 @@
                 <div class="swiper_overlay"></div>
             </div>
             <!-- /HERO HEADER -->
+            <!-- Promo -->
+            <a href="biodegradable.html">
+                <div id="banner-support">
+                    <div id="banner">
+                        <img class="hand1" src="img/biohand.png">
+                        <img class="hand2" src="img/biohand2.png">
+                        <img class="tistory" src="img/brands/biodegrade.png">
+                        <p class="txt2">Biodegradable Nitrile Gloves<br><br>pLearn More!</p>
+                    </div>
+                </div>
+            </a>
+            <!-- /Promo -->
             <!-- HOME INTRODUCE -->
             <div class="glax_tm_section introduce">
                 <div class="container">

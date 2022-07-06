@@ -668,7 +668,7 @@ img.svg {
 }
 
 .glax_tm_hero_header_wrap .swiper-slide .swiper_content {
-    opacity: 0;
+    /*opacity: 0;*/
     padding: 250px 0px;
 }
 
