@@ -852,7 +852,7 @@ function request_sample(){
 			jQuery('div.empty_notice').slideDown(500).delay(2000).slideUp(500);
 		}
 		else{
-			jQuery('.returnmessage').hide()
+			jQuery('.returnmessage').hide();
 			// Returns successful data submission message when the entered information is stored in database.
 			jQuery.post("modal/contact.php",{ ajax_name: name, ajax_email: email, ajax_message:message, ajax_subject: subject}, function(data) {
 				
@@ -903,7 +903,7 @@ function glax_tm_contact_form(){
 			jQuery('div.empty_notice').slideDown(500).delay(2000).slideUp(500);
 		}
 		else{
-			jQuery('#send_message').hide()
+			jQuery('#send_message').hide();
 			// Returns successful data submission message when the entered information is stored in database.
 			jQuery.post("modal/contact.php",{ ajax_name: name, ajax_email: email, ajax_message:message, ajax_subject: subject}, function(data) {
 				
