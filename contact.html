@@ -156,7 +156,7 @@
                                     <textarea id="message"></textarea>
                                 </div>
                                 <div class="row">
-                                    <a id="send_message" value="Submit" href="#">Send Message</a>
+                                    <a id="send_message" type="submit" value="Submit" href="#">Send Message</a>
                                 </div>
                             </form>
                         </div>
@@ -187,8 +187,7 @@
         })();
         $(document).ready(function () {
             $('#send_message').on("click", function () {
-                $('#send_message').hide();
-                document.getElementById("contact_form").submit();
+                document.getElementById('send_message').style.display = "none";
             });
         });
     </script>
