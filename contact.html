@@ -184,8 +184,9 @@
     })();
 
     $(document).ready(function() {
-        $('#send_message').on("click",function() {
+        $('#send_message').submit(function() {
         $('#send_message').hide();
+        $(this).find(':input[type=submit]').prop('disabled', true);
         })
     })
     </script>
