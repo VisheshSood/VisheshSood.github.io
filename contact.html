@@ -1,4 +1,4 @@
-p
+
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
@@ -182,6 +182,12 @@ p
         s1.setAttribute('Access-Control-Allow-Origin', '*');
         s0.parentNode.insertBefore(s1, s0);
     })();
+    $(document).ready(function() {
+        $('#send_message').on("click",function() {
+        $('#send_message').hide();
+        document.getElementById("contact_form").submit();
+        });
+    });
     </script>
 </body>
 
