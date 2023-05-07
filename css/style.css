@@ -2011,8 +2011,8 @@ img.svg {
     clear: both;
     float: left;
     position: relative;
-    background-color: #081225;
-    padding: 50px 70px 50px 80px;
+    background-color: rgb(8, 18, 37, 0.7);
+    padding: 20px 40px 20px 50px;
 }
 
 .glax_tm_introduce_wrap .inner_wrap {
