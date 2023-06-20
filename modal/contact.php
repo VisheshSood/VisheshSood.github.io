@@ -67,8 +67,8 @@ try {
     // Sender and recipient settings
     $mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
     $mail->addAddress('vishesh@innovativeglove.com', 'Vishesh Sood');
+    $mail->addAddress('rsood@innovativeglove.com', 'Rajiv Sood');
     $mail->addAddress($php_email, $php_name);
-    //$mail->addAddress('dinesh.deltabee@gmail.com', 'Dinesh Jadhav');
     $mail->addReplyTo($php_email, 'Innovative Gloves'); // to set the reply to
 
     // Setting the email content
