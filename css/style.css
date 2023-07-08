@@ -238,7 +238,7 @@ img.svg {
 
 .glax_tm_border_wrap .border.left {
     top: 90px;
-    left: 0px;
+    left: 0px !important;
     bottom: 0px;
     width: 80px;
 }
