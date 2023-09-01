@@ -26,9 +26,9 @@ Popup
 .popup-onload {
     width: 100%;
     margin: 0 auto;
-    display: none;
     position: fixed;
     z-index: 101;
+    top: -75px;
 }
 
 .cnt223 {
@@ -332,7 +332,7 @@ img.svg {
 }
 
 .glax_tm_topbar_wrap .left_part_wrap {
-    width: auto;
+    width: 50%;
     height: 90px;
     float: left;
     display: flex;
@@ -7180,7 +7180,7 @@ background-repeat: no-repeat */
     }*/
 }
 
-@media (max-width: 1340px) {
+@media (max-width: 1380px) {
     .glax_tm_header_wrap .catalog {
         display: none;
     }
