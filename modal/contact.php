@@ -55,30 +55,40 @@ $mail = new PHPMailer(true);
 try {
     // Server settings
     //$mail->SMTPDebug = SMTP::DEBUG_SERVER; // for detailed debug output
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+     // Google reCAPTCHA secret key
+     $secretKey = '6LeWTlIqAAAAAHX9C6x9lE0s8lmKmPckDZuhBQZ1';
+     $captchaResponse = $_POST['g-recaptcha-response'];
+ 
+     // Verify CAPTCHA
+     $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$captchaResponse");
+     $responseKeys = json_decode($response, true);
+ 
+     if ($responseKeys["success"]) {
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
 
-    $mail->Username = 'sales@innovativeglove.com'; // YOUR gmail email
-    $mail->Password = 'mR=AJE4S'; // YOUR gmail password
+        $mail->Username = 'sales@innovativeglove.com'; // YOUR gmail email
+        $mail->Password = 'mR=AJE4S'; // YOUR gmail password
 
-    // Sender and recipient settings
-    $mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
-    $mail->addAddress('vishesh@innovativeglove.com', 'Vishesh Sood');
-    $mail->addAddress('rsood@innovativeglove.com', 'Rajeev Sood');
-    $mail->addAddress($php_email, $php_name);
-    $mail->addReplyTo($php_email, 'Innovative Gloves'); // to set the reply to
+        // Sender and recipient settings
+        $mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
+        $mail->addAddress('vishesh@innovativeglove.com', 'Vishesh Sood');
+        $mail->addAddress('rsood@innovativeglove.com', 'Rajeev Sood');
+        $mail->addAddress($php_email, $php_name);
+        $mail->addReplyTo($php_email, 'Innovative Gloves'); // to set the reply to
 
-    // Setting the email content
-    $mail->IsHTML(true);
-    $mail->Subject = $php_subject;
-    $mail->Body = $php_sendmessage;
-    //$mail->AltBody = 'Plain text message body for non-HTML email client. Gmail SMTP email body.';
+        // Setting the email content
+        $mail->IsHTML(true);
+        $mail->Subject = $php_subject;
+        $mail->Body = $php_sendmessage;
+        //$mail->AltBody = 'Plain text message body for non-HTML email client. Gmail SMTP email body.';
 
-    $mail->send();
-    echo '';
+        $mail->send();
+        echo '';
+     }
 } catch (Exception $e) {
     echo "<span class='contact_error'>* Invalid email *</span>";
 }

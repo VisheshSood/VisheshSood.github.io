@@ -47,6 +47,7 @@
 
         gtag('config', 'UA-140531009-1');
     </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -155,8 +156,13 @@
                                     <label>Your Message<span></span></label>
                                     <textarea id="message"></textarea>
                                 </div>
-                                <div class="row">
-                                    <a id="send_message" type="submit" value="Submit" href="#">Send Message</a>
+                                 <!-- Add reCAPTCHA widget -->
+                                <div
+                                    class="g-recaptcha"
+                                    data-sitekey="6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe"
+                                ></div>
+                                <div class="row" style="margin-top: 26%;">
+                                     <a id="send_message" type="submit" value="Submit" href="#">Send Message</a>
                                 </div>
                             </form>
                         </div>
