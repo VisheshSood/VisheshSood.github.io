@@ -55,15 +55,19 @@ $mail = new PHPMailer(true);
 try {
     // Server settings
     //$mail->SMTPDebug = SMTP::DEBUG_SERVER; // for detailed debug output
-     // Google reCAPTCHA secret key
-     $secretKey = '6LeWTlIqAAAAAHX9C6x9lE0s8lmKmPckDZuhBQZ1';
-     $captchaResponse = $_POST['g-recaptcha-response'];
+    // echo "<pre>";
+    // echo $_POST['grecaptcharesponse'];
+    // print_r($_POST);
+    // if (isset($_POST['grecaptcharesponse']) && !empty($_POST['grecaptcharesponse'])) {
+    //     $captchaResponse = $_POST['grecaptcharesponse'];
+    //  // Google reCAPTCHA secret key
+    //  $secretKey = '6Lf-LVMqAAAAAM6_heAnrR-uCI_KZs7p0mW13k-D';
  
-     // Verify CAPTCHA
-     $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$captchaResponse");
-     $responseKeys = json_decode($response, true);
- 
-     if ($responseKeys["success"]) {
+    //  // Verify CAPTCHA
+    //  $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$captchaResponse");
+    //  $responseKeys = json_decode($response, true);
+
+    //  if ($responseKeys["success"]) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -71,7 +75,7 @@ try {
         $mail->Port = 587;
 
         $mail->Username = 'sales@innovativeglove.com'; // YOUR gmail email
-        $mail->Password = 'mR=AJE4S'; // YOUR gmail password
+        $mail->Password = 'SalesIGCL!!'; // YOUR gmail password
 
         // Sender and recipient settings
         $mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
@@ -88,7 +92,12 @@ try {
 
         $mail->send();
         echo '';
-     }
+    //  }else{
+    //     echo "<span class='contact_error'>* Invalid captcha *</span>";
+    //  }
+    // }else{
+    //     echo "<span class='contact_error'>* Please complete the CAPTCHA *</span>";
+    // }
 } catch (Exception $e) {
     echo "<span class='contact_error'>* Invalid email *</span>";
 }
