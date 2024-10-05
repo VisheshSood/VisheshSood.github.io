@@ -87,19 +87,8 @@ s0.parentNode.insertBefore(s1,s0);
         });
     });
     </script>
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-    <script>
-        function validateForm() {
-            var captchaResponse = document.getElementById('g-recaptcha-response').value;
-            console.log(captchaResponse);
-            console.log("****************************************");
-            if (captchaResponse === '') {
-                alert('Please complete the CAPTCHA.');
-                return false;
-            }
-            return true;
-        }
-    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
 </head>
 
 <body>
@@ -333,10 +322,10 @@ s0.parentNode.insertBefore(s1,s0);
                                         </div>
                                         <textarea id="message" placeholder="Message"></textarea>
                                           <!-- Add reCAPTCHA widget -->
-                                        <div
-                                            class="h-captcha"
-                                            data-sitekey="f168ce32-1c88-4014-a9ca-f010e938f8da"
-                                        ></div>
+                                        <!-- <div
+                                            class="g-recaptcha"
+                                            data-sitekey="6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe"
+                                        ></div> -->
                                         <div class="button">
                                             <a id="send_message_short" type="submit" value="Submit" href="#">Send
                                                 Message</a>
@@ -425,7 +414,7 @@ s0.parentNode.insertBefore(s1,s0);
                                 <h3 class="title">Looking for high quality gloves?</h3>
                                 <p class="subtitle">Get in touch!</p>
                                 <div class="inputs_wrap">
-                                    <form action="/" method="post" class="contact_form" id="contact_form" onsubmit="return validateForm();">
+                                    <form action="/modal/contact.php" method="post" class="contact_form" id="contact_form">
                                         <div class="returnmessage" data-success="Your message has been received. We will contact you soon!">
                                         </div>
                                         <div class="empty_notice"><span>Please Fill Required Fields</span></div>
@@ -444,15 +433,17 @@ s0.parentNode.insertBefore(s1,s0);
                                         </div>
                                         <textarea id="message2" placeholder="Message"></textarea>
                                         <!-- Add reCAPTCHA widget -->
-                                        <div
+                                        <!-- <div
                                             class="g-recaptcha"
-                                            data-sitekey="6Lf-LVMqAAAAAMlDRGPLOshka_ajHeeLDR0IFPsz"
-                                        ></div>
-                                        <div class="button">
+                                            data-sitekey="6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe"
+                                        ></div> -->
+                                        <!-- <div class="button">
                                             <a id="send_message_short" type="submit" value="Submit" href="#">Send
                                                 Message</a>
-                                        </div>
-                                        
+                                        </div> -->
+                                        <input id="send_message_short" type="submit" value="Submit">Send
+                                        Message
+                                    </form>
                                 </div>
                             </div>
                         </div>
