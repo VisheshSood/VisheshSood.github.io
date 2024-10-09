@@ -1,6 +1,18 @@
 <script src="../js/jquery.js"></script>
 <script src="../js/plugins.js"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script
+  src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+  async
+  defer
+></script>
+
+<script type="text/javascript">
+  var onloadCallback = function () {
+    grecaptcha.render("g-recaptcha", {
+      sitekey: "6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe",
+    });
+  };
+</script>
 
 <!--[if lt IE 10]>
   <script type="text/javascript" src="js/ie8.js"></script>
@@ -253,14 +265,16 @@
                 </div>
                 <textarea id="message" placeholder="Message"></textarea>
                 <!-- Add reCAPTCHA widget -->
-                <div
-                  class="g-recaptcha"
-                  data-sitekey="6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe"
-                ></div>
+                <div class="g-recaptcha" id="g-recaptcha"></div>
                 <div class="button">
-                  <a id="send_message" type="submit" value="Submit" href="#"
-                    >Send Message</a
+                  <button
+                    id="send_message"
+                    type="submit"
+                    value="Submit"
+                    href="#"
                   >
+                    Send Message
+                  </button>
                 </div>
               </form>
             </div>
@@ -394,10 +408,16 @@
                   </ul>
                 </div>
                 <textarea id="message2" placeholder="Message"></textarea>
+                <div class="g-recaptcha" id="g-recaptcha"></div>
                 <div class="button">
-                  <a id="send_message" type="submit" value="Submit" href="#"
-                    >Send Message</a
+                  <button
+                    id="send_message"
+                    type="submit"
+                    value="Submit"
+                    href="#"
                   >
+                    Send Message
+                  </button>
                 </div>
               </form>
             </div>
@@ -441,3 +461,19 @@
   <div class="glax_tm_widget_window_overlay"></div>
   <!-- /SIDEBAR WIDGET -->
 </div>
+<script>
+  // Callback function executed when reCAPTCHA is successfully completed
+  function onRecaptchaSuccess(token) {
+    console.log("reCAPTCHA completed. Token:", token);
+
+    // Enable the submit button
+    document.getElementById("submitButton").disabled = false;
+
+    // Optionally, you can also manually append the token to the form if needed
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", "g-recaptcha-response");
+    input.setAttribute("value", token);
+    document.getElementById("contact_form").appendChild(input);
+  }
+</script>

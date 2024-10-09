@@ -64,7 +64,19 @@
 
       gtag("config", "UA-140531009-1");
     </script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script
+      src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+      async
+      defer
+    ></script>
+
+    <script type="text/javascript">
+      var onloadCallback = function () {
+        grecaptcha.render("g-recaptcha", {
+          sitekey: "6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe",
+        });
+      };
+    </script>
   </head>
 
   <body>
@@ -337,10 +349,7 @@
                       </div>
                       <textarea id="message" placeholder="Message"></textarea>
                       <!-- Add reCAPTCHA widget -->
-                      <div
-                        class="g-recaptcha"
-                        data-sitekey="6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe"
-                      ></div>
+                      <div class="g-recaptcha" id="g-recaptcha"></div>
                       <div class="button">
                         <a
                           id="send_message"
@@ -489,10 +498,7 @@
                       </div>
                       <textarea id="message" placeholder="Message"></textarea>
                       <!-- Add reCAPTCHA widget -->
-                      <div
-                        class="g-recaptcha"
-                        data-sitekey="6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe"
-                      ></div>
+                      <div class="g-recaptcha" id="g-recaptcha"></div>
                       <div class="button">
                         <a
                           id="send_message"

@@ -4,6 +4,19 @@
   <script type="text/javascript" src="js/ie8.js"></script>
 <![endif]-->
 <script src="js/init.js"></script>
+<script
+  src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+  async
+  defer
+></script>
+
+<script type="text/javascript">
+  var onloadCallback = function () {
+    grecaptcha.render("g-recaptcha", {
+      sitekey: "6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe",
+    });
+  };
+</script>
 <!-- LANG BOX -->
 <!-- <div class="lang_box">
         <ul>
@@ -265,6 +278,7 @@
                   </ul>
                 </div>
                 <textarea id="message" placeholder="Message"></textarea>
+                <div class="g-recaptcha" id="g-recaptcha"></div>
                 <div class="button">
                   <a
                     id="send_message_short"
@@ -405,10 +419,7 @@
                 </div>
                 <textarea id="message2" placeholder="Message"></textarea>
                 <!-- Add reCAPTCHA widget -->
-                <div
-                  class="g-recaptcha"
-                  data-sitekey="6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe"
-                ></div>
+                <div class="g-recaptcha" id="g-recaptcha"></div>
                 <div class="button">
                   <a
                     id="send_message_short"
@@ -460,4 +471,3 @@
   <div class="glax_tm_widget_window_overlay"></div>
   <!-- /SIDEBAR WIDGET -->
 </div>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>

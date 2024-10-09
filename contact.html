@@ -32,6 +32,15 @@
     </script> -->
     <script src="js/jquery.min.js">
     </script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+
+    <script type="text/javascript">
+    var onloadCallback = function() {
+        grecaptcha.render('g-recaptcha', {
+        'sitekey' : '6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe'
+        });
+    };
+    </script>
     <script>
         $(document).ready(function () {
             $("#header").load("header.html");
@@ -47,7 +56,6 @@
 
         gtag('config', 'UA-140531009-1');
     </script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -157,10 +165,7 @@
                                     <textarea id="message"></textarea>
                                 </div>
                                  <!-- Add reCAPTCHA widget -->
-                                <div
-                                    class="g-recaptcha"
-                                    data-sitekey="6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe"
-                                ></div>
+                                 <div class="g-recaptcha" id="g-recaptcha"></div>
                                 <div class="row" style="margin-top: 26%;">
                                      <a id="send_message" type="submit" value="Submit" href="#">Send Message</a>
                                 </div>
