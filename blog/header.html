@@ -461,19 +461,3 @@
   <div class="glax_tm_widget_window_overlay"></div>
   <!-- /SIDEBAR WIDGET -->
 </div>
-<script>
-  // Callback function executed when reCAPTCHA is successfully completed
-  function onRecaptchaSuccess(token) {
-    console.log("reCAPTCHA completed. Token:", token);
-
-    // Enable the submit button
-    document.getElementById("submitButton").disabled = false;
-
-    // Optionally, you can also manually append the token to the form if needed
-    var input = document.createElement("input");
-    input.setAttribute("type", "hidden");
-    input.setAttribute("name", "g-recaptcha-response");
-    input.setAttribute("value", token);
-    document.getElementById("contact_form").appendChild(input);
-  }
-</script>

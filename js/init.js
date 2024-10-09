@@ -895,10 +895,20 @@ function glax_tm_contact_form() {
       success = jQuery(".contact_form .returnmessage").data("success");
     }
 
+    var captchaResponse = grecaptcha.getResponse(); // Get the captcha response
+
     jQuery(".inner_wrap .contact_form .returnmessage").empty(); //To empty previous error/success message.
     //checking for blank fields
     if (name === "" || email === "" || message === "") {
       jQuery("div.empty_notice").slideDown(500).delay(2000).slideUp(500);
+    } else if (captchaResponse === "") {
+      jQuery(".contact_form .returnmessage").append(
+        "Please verify that you are not a robot."
+      );
+      jQuery(".contact_form .returnmessage")
+        .slideDown(500)
+        .delay(2000)
+        .slideUp(500);
     } else {
       //jQuery('#send_message').hide();
       // Returns successful data submission message when the entered information is stored in database.
@@ -909,6 +919,7 @@ function glax_tm_contact_form() {
           ajax_email: email,
           ajax_message: message,
           ajax_subject: subject,
+          "g-recaptcha-response": captchaResponse, // Send the captcha response
         },
         function (data) {
           jQuery(".inner_wrap .contact_form .returnmessage").append(data); //Append returned message to message paragraph
