@@ -13,6 +13,16 @@
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-W5D3LM9');</script>
+
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+
+    <script type="text/javascript">
+    var onloadCallback = function() {
+        grecaptcha.render('g-recaptcha', {
+        'sitekey' : '6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe'
+        });
+    };
+    </script>
     <!-- End Google Tag Manager -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <!-- Google tag (gtag.js) -->
@@ -58,7 +68,7 @@ s0.parentNode.insertBefore(s1,s0);
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
 
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
     </script> -->
@@ -86,9 +96,7 @@ s0.parentNode.insertBefore(s1,s0);
             return false;
         });
     });
-    </script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    
+    </script>    
 </head>
 
 <body>
@@ -322,10 +330,10 @@ s0.parentNode.insertBefore(s1,s0);
                                         </div>
                                         <textarea id="message" placeholder="Message"></textarea>
                                           <!-- Add reCAPTCHA widget -->
-                                        <!-- <div
+                                        <div
                                             class="g-recaptcha"
                                             data-sitekey="6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe"
-                                        ></div> -->
+                                        ></div>
                                         <div class="button">
                                             <a id="send_message_short" type="submit" value="Submit" href="#">Send
                                                 Message</a>
@@ -433,16 +441,17 @@ s0.parentNode.insertBefore(s1,s0);
                                         </div>
                                         <textarea id="message2" placeholder="Message"></textarea>
                                         <!-- Add reCAPTCHA widget -->
-                                        <!-- <div
+                                        <div
                                             class="g-recaptcha"
-                                            data-sitekey="6LeWTlIqAAAAANFPdQDLs30vfAe3rD1JkR8xrCfe"
-                                        ></div> -->
-                                        <!-- <div class="button">
+                                            
+                                            id="g-recaptcha"
+                                        ></div>
+                                        <div class="button">
                                             <a id="send_message_short" type="submit" value="Submit" href="#">Send
                                                 Message</a>
-                                        </div> -->
-                                        <input id="send_message_short" type="submit" value="Submit">Send
-                                        Message
+                                        </div>
+                                        <!-- <input id="send_message_short" type="submit" value="Submit">Send
+                                        Message -->
                                     </form>
                                 </div>
                             </div>

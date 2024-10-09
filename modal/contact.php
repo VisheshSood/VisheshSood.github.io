@@ -55,19 +55,16 @@ $mail = new PHPMailer(true);
 try {
     // Server settings
     //$mail->SMTPDebug = SMTP::DEBUG_SERVER; // for detailed debug output
-    // echo "<pre>";
-    // echo $_POST['grecaptcharesponse'];
-    // print_r($_POST);
-    // if (isset($_POST['grecaptcharesponse']) && !empty($_POST['grecaptcharesponse'])) {
-    //     $captchaResponse = $_POST['grecaptcharesponse'];
-    //  // Google reCAPTCHA secret key
-    //  $secretKey = '6Lf-LVMqAAAAAM6_heAnrR-uCI_KZs7p0mW13k-D';
+    if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
+        $captchaResponse = $_POST['g-recaptcha-response'];
+     // Google reCAPTCHA secret key
+     $secretKey = '6LeWTlIqAAAAAHX9C6x9lE0s8lmKmPckDZuhBQZ1';
  
-    //  // Verify CAPTCHA
-    //  $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$captchaResponse");
-    //  $responseKeys = json_decode($response, true);
+     // Verify CAPTCHA
+     $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$captchaResponse");
+     $responseKeys = json_decode($response, true);
 
-    //  if ($responseKeys["success"]) {
+     if ($responseKeys["success"]) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -78,9 +75,9 @@ try {
         $mail->Password = 'SalesIGCL!!'; // YOUR gmail password
 
         // Sender and recipient settings
-        $mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
-        $mail->addAddress('vishesh@innovativeglove.com', 'Vishesh Sood');
-        $mail->addAddress('rsood@innovativeglove.com', 'Rajeev Sood');
+        //$mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
+        //$mail->addAddress('vishesh@innovativeglove.com', 'Vishesh Sood');
+        //$mail->addAddress('rsood@innovativeglove.com', 'Rajeev Sood');
         $mail->addAddress($php_email, $php_name);
         $mail->addReplyTo($php_email, 'Innovative Gloves'); // to set the reply to
 
@@ -92,12 +89,12 @@ try {
 
         $mail->send();
         echo '';
-    //  }else{
-    //     echo "<span class='contact_error'>* Invalid captcha *</span>";
-    //  }
-    // }else{
-    //     echo "<span class='contact_error'>* Please complete the CAPTCHA *</span>";
-    // }
+     }else{
+        echo "<span class='contact_error'>* Invalid captcha *</span>";
+     }
+    }else{
+        echo "<span class='contact_error'>* Please complete the CAPTCHA *</span>";
+    }
 } catch (Exception $e) {
     echo "<span class='contact_error'>* Invalid email *</span>";
 }
