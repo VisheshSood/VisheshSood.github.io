@@ -91,12 +91,14 @@ try {
         echo '';
      }else{
         echo "<span class='contact_error'>* Invalid captcha *</span>";
+        echo "<script>grecaptcha.reset();</script>";
      }
     }else{
         echo "<span class='contact_error'>* Please complete the CAPTCHA *</span>";
     }
 } catch (Exception $e) {
     echo "<span class='contact_error'>* Invalid email *</span>";
+    echo "<script>grecaptcha.reset();</script>";
 }
 
 ?>
