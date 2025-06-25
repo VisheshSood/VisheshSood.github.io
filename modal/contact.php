@@ -72,7 +72,7 @@ try {
         $mail->Port = 587;
 
         $mail->Username = 'sales@innovativeglove.com'; // YOUR gmail email
-        $mail->Password = 'SalesIGCL!!'; // YOUR gmail password
+        $mail->Password = 'gsijuwyrwouvzupi'; // App Password
 
         // Sender and recipient settings
         $mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
