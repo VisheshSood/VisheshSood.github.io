@@ -75,7 +75,7 @@ try {
         $mail->Password = ''; // App Password
 
         // Sender and recipient settings
-        $mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
+        $mail->setFrom('', 'Innovative Gloves'); //email sales 
         $mail->addAddress('vishesh@innovativeglove.com', 'Vishesh Sood');
         $mail->addAddress('rsood@innovativeglove.com', 'Rajeev Sood');
         $mail->addAddress($php_email, $php_name);
