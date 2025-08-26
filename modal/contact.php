@@ -71,8 +71,8 @@ try {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        $mail->Username = 'sales@innovativeglove.com'; // YOUR gmail email
-        $mail->Password = 'gsijuwyrwouvzupi'; // App Password
+        $mail->Username = ''; // YOUR gmail email Sales
+        $mail->Password = ''; // App Password
 
         // Sender and recipient settings
         $mail->setFrom('sales@innovativeglove.com', 'Innovative Gloves');
