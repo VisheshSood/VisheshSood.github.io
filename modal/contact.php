@@ -35,7 +35,7 @@ $php_subject1 = $_POST['ajax_subject'];
 	$php_sendmessage = wordwrap($php_sendmessage, 70);
 
 // 	// Send mail by PHP Mail Function
-// 	mail($php_email, $php_subject, $php_sendmessage, $php_headers);
+// 	mail($php_email, $php_subject, $php_sendmessage, $php_headers);:
 // 	echo "";
 
 // } else {
