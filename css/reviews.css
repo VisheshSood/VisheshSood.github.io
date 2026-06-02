@@ -1,0 +1,234 @@
+/* ============================================================
+   Amazon Review Carousel — Innovative Gloves
+   Seamless infinite scroll, pauses on hover.
+   ============================================================ */
+
+.ig_reviews_section {
+    padding: 90px 0 100px 0;
+    background: #f7f9fc;
+}
+
+.ig_reviews_section .ig_reviews_heading {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 0 20px;
+}
+
+.ig_reviews_section .ig_reviews_heading h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: #081225;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.5px;
+}
+
+.ig_reviews_section .ig_reviews_heading p {
+    font-family: 'Open Sans', sans-serif;
+    color: #6b7280;
+    font-size: 16px;
+    margin: 0;
+}
+
+.ig_reviews_section .ig_reviews_heading .ig_amazon_badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 2px rgba(8, 18, 37, 0.04);
+}
+
+.ig_reviews_section .ig_reviews_heading .ig_amazon_badge .ig_amz_stars {
+    color: #FFA41C;
+    letter-spacing: 1px;
+    font-size: 12px;
+}
+
+/* ---- Marquee track ---- */
+.ig_reviews_marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+}
+
+.ig_reviews_track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: ig_reviews_scroll 65s linear infinite;
+    will-change: transform;
+}
+
+.ig_reviews_marquee:hover .ig_reviews_track {
+    animation-play-state: paused;
+}
+
+@keyframes ig_reviews_scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* ---- Card ---- */
+.ig_review_card {
+    flex: 0 0 360px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 26px 26px 22px 26px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(8, 18, 37, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ig_review_card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(8, 18, 37, 0.08);
+}
+
+.ig_review_card.has-image {
+    padding: 0 0 22px 0;
+    overflow: hidden;
+}
+
+.ig_review_card .ig_review_image {
+    width: 100%;
+    height: 160px;
+    background: #f3f4f6;
+    background-size: cover;
+    background-position: center;
+    border-radius: 14px 14px 0 0;
+    margin-bottom: 18px;
+}
+
+.ig_review_card.has-image .ig_review_body_wrap {
+    padding: 0 26px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.ig_review_card:not(.has-image) .ig_review_body_wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Header row: stars + verified */
+.ig_review_top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.ig_review_stars {
+    color: #FFA41C;
+    font-size: 16px;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.ig_review_verified {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #C7511F;
+    text-transform: none;
+    white-space: nowrap;
+}
+
+.ig_review_verified.vine {
+    color: #007185;
+}
+
+.ig_review_title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #081225;
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+}
+
+.ig_review_body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #374151;
+    margin: 0 0 20px 0;
+    flex: 1;
+}
+
+.ig_review_footer {
+    border-top: 1px solid #f0f1f4;
+    padding-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.ig_review_reviewer {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #081225;
+    font-weight: 600;
+}
+
+.ig_review_date {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 768px) {
+    .ig_reviews_section {
+        padding: 60px 0 70px 0;
+    }
+    .ig_reviews_section .ig_reviews_heading h2 {
+        font-size: 26px;
+    }
+    .ig_review_card {
+        flex: 0 0 290px;
+        padding: 22px 22px 18px 22px;
+    }
+    .ig_review_card.has-image {
+        padding: 0 0 18px 0;
+    }
+    .ig_review_card.has-image .ig_review_body_wrap {
+        padding: 0 22px;
+    }
+    .ig_review_card .ig_review_image {
+        height: 130px;
+    }
+    .ig_reviews_track {
+        animation-duration: 50s;
+        gap: 16px;
+    }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .ig_reviews_track {
+        animation: none;
+    }
+    .ig_reviews_marquee {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
+    .ig_review_card {
+        scroll-snap-align: center;
+    }
+}
