@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /header.html
+Disallow: /footer.html
+Disallow: /header_news.html
+Disallow: /footer_news.html
+Disallow: /blog/wp-content/
+
+Sitemap: https://www.innovativeglove.com/sitemap.xml
