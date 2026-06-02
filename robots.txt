@@ -6,4 +6,4 @@ Disallow: /header_news.html
 Disallow: /footer_news.html
 Disallow: /blog/wp-content/
 
-Sitemap: https://www.innovativeglove.com/sitemap.xml
+Sitemap: https://www.innovativegloves.net/sitemap.xml
