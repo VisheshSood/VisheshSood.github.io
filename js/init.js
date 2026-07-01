@@ -804,7 +804,7 @@ jQuery(".glax_tm_accordion").friendslab_accordion({
 function request_sample() {
   "use strict";
 
-  jQuery(".contact_form #send_message_short").on("click", function () {
+  jQuery(".contact_form #send_message_short").off("click").on("click", function () {
     var name = jQuery(".contact_form #name").val();
     var email = jQuery(".contact_form #email").val();
     var message = jQuery(".contact_form #message").val();
@@ -878,7 +878,7 @@ function request_sample() {
 function glax_tm_contact_form() {
   "use strict";
 
-  jQuery(".contact_form #send_message").on("click", function () {
+  jQuery(".contact_form #send_message").off("click").on("click", function () {
     var name = jQuery(".inner_wrap .contact_form #name").val();
     var email = jQuery(".inner_wrap .contact_form #email").val();
     var message = jQuery(".inner_wrap .contact_form #message").val();
