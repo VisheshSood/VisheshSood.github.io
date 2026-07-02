@@ -870,7 +870,7 @@ function request_sample() {
             // show a short success popup for 5 seconds, then refresh the page
             jQuery("#msg_popup").remove();
             jQuery("body").append(
-              '<div id="msg_popup" style="position:fixed;top:30px;right:80px;background:#28a745;color:#fff;padding:16px 28px;border-radius:6px;font-size:16px;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:99999;">&#10004; Message sent successfully!</div>'
+              '<div id="msg_popup" style="position:fixed;top:30px;right:95px;background:#28a745;color:#fff;padding:16px 28px;border-radius:6px;font-size:16px;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:99999;">&#10004; Message sent successfully!</div>'
             );
             setTimeout(function () {
               location.reload();
@@ -956,7 +956,7 @@ function glax_tm_contact_form() {
             // show a short success popup for 5 seconds, then refresh the page
             jQuery("#msg_popup").remove();
             jQuery("body").append(
-              '<div id="msg_popup" style="position:fixed;top:30px;right:80px;background:#28a745;color:#fff;padding:16px 28px;border-radius:6px;font-size:16px;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:99999;">&#10004; Message sent successfully!</div>'
+              '<div id="msg_popup" style="position:fixed;top:30px;right:95px;background:#28a745;color:#fff;padding:16px 28px;border-radius:6px;font-size:16px;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:99999;">&#10004; Message sent successfully!</div>'
             );
             setTimeout(function () {
               location.reload();
