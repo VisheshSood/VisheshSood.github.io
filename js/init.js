@@ -867,6 +867,14 @@ function request_sample() {
 
           if (data === "") {
             jQuery("#contact_form")[0].reset(); //To reset form fields on success
+            // show a short success popup for 5 seconds, then refresh the page
+            jQuery("#msg_popup").remove();
+            jQuery("body").append(
+              '<div id="msg_popup" style="position:fixed;top:30px;left:50%;transform:translateX(-50%);background:#28a745;color:#fff;padding:16px 28px;border-radius:6px;font-size:16px;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:99999;">Message sent successfully!</div>'
+            );
+            setTimeout(function () {
+              location.reload();
+            }, 5000);
           }
         }
       );
@@ -945,6 +953,14 @@ function glax_tm_contact_form() {
 
           if (data === "") {
             jQuery("#contact_form")[0].reset(); //To reset form fields on success
+            // show a short success popup for 5 seconds, then refresh the page
+            jQuery("#msg_popup").remove();
+            jQuery("body").append(
+              '<div id="msg_popup" style="position:fixed;top:30px;left:50%;transform:translateX(-50%);background:#28a745;color:#fff;padding:16px 28px;border-radius:6px;font-size:16px;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:99999;">Message sent successfully!</div>'
+            );
+            setTimeout(function () {
+              location.reload();
+            }, 5000);
           }
         }
       );
