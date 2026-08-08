@@ -31,9 +31,25 @@ if (glove.bio) certGroups.push({ label: "Biodegradability", items: ["ASTM D5511"
 
 const chem = chemFor(glove);
 const fmtDeg = (n: number | string) => (typeof n === "number" ? (n > 0 ? "+" : "") + n.toFixed(1) + "%" : n);
+
+// Product structured data for rich results in Google search.
+const prodImage = new URL(glove.img || "/images/og-default.jpg", Astro.site).href;
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: glove.name,
+  description: `${glove.fullName}. ${glove.material}, ${glove.texture} texture. Available in ${glove.colours.join(", ")}. Sizes ${glove.sizes.join(", ")}.`,
+  image: prodImage,
+  category: "Disposable Gloves",
+  material: glove.material,
+  brand: { "@type": "Brand", name: "Innovative Gloves" },
+  manufacturer: { "@type": "Organization", name: "Innovative Gloves Co., Ltd." },
+};
 ---
 
-<PageLayout title={`${glove.name} | Innovative Gloves`} description={`${glove.name}, ${glove.material}, ${glove.texture} textured. Colours: ${glove.colours.join(", ")}. Sizes: ${glove.sizes.join(", ")}.`}>
+<PageLayout title={`${glove.name} | Innovative Gloves`} description={`${glove.name}, ${glove.material}, ${glove.texture} textured. Colours: ${glove.colours.join(", ")}. Sizes: ${glove.sizes.join(", ")}.`} image={glove.img || "/images/og-default.jpg"} ogType="product">
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+
   <section class="section p-hero">
     <div class="container p-grid">
       <div class="p-visual"><GloveVisual glove={glove} ratio="1 / 1" /></div>

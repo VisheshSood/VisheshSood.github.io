@@ -60,7 +60,6 @@ export const mainNav: NavGroup[] = [
       { label: "Catalog", href: "/catalog.pdf" },
       { label: "Certificates", href: "/certifications" },
       { label: "Glove Guides", href: "/resources/guides" },
-      { label: "News", href: "/news" },
     ],
   },
 ];
@@ -102,7 +101,6 @@ export const footerCols: { title: string; links: NavChild[] }[] = [
       { label: "Catalog", href: "/catalog.pdf" },
       { label: "Certifications", href: "/certifications" },
       { label: "Glove Guides", href: "/resources/guides" },
-      { label: "News", href: "/news" },
       { label: "Contact", href: "/contact" },
     ],
   },

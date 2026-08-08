@@ -4,12 +4,47 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  ogType?: string;
+  noindex?: boolean;
 }
 
 const {
   title = "Innovative Gloves | Patented Textured Nitrile Gloves",
   description = "Thailand's premium manufacturer of patented Diamond, Micro Diamond, Zig and Tyre Tread textured nitrile gloves. Engineered for grip where ordinary disposable gloves fall short. SMETA 4-Pillar certified. OEM & private label.",
+  image = "/images/og-default.jpg",
+  ogType = "website",
+  noindex = false,
 } = Astro.props;
+
+// Absolute URLs for canonical / social tags (driven by `site` in astro.config.mjs).
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+const siteName = "Innovative Gloves";
+
+// Organisation structured data (helps Google's Knowledge Graph / brand results).
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Innovative Gloves Co., Ltd.",
+  alternateName: "Innovative Gloves",
+  url: Astro.site?.href,
+  logo: new URL("/images/innovative-gloves-logo-blue.png", Astro.site).href,
+  description:
+    "Family-owned Thai manufacturer of patented textured nitrile and latex gloves, established 2001. Diamond, Micro Diamond, Zig and Tyre Tread grip technologies for automotive, industrial, food, medical and cleaning use.",
+  foundingDate: "2001",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Hat Yai",
+    addressRegion: "Songkhla",
+    addressCountry: "TH",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "sales",
+    email: "sales@innovativeglove.com",
+  },
+};
 ---
 
 <!doctype html>
@@ -18,17 +53,40 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#8cc63f" />
 
-    <!-- Fonts: Archivo (condensed-ish grotesque headings) + Inter (body).
-         Swap here if you want to match the mockup's exact typeface. -->
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp, iMessage link previews) -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Fonts: Archivo (headings) + Inter (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
   </head>
   <body>
     <slot />

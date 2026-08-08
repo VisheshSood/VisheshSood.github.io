@@ -1,10 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
-// https://astro.build/config
+// IMPORTANT: `site` is the canonical production URL. It drives canonical links,
+// Open Graph URLs and the generated sitemap. Change this ONE line if the final
+// domain differs from www.innovativeglove.com.
 export default defineConfig({
-  // Set this to the final URL once you know it (used for sitemap/canonical links).
-  // Preview hosts like Cloudflare Pages / Netlify / Vercel serve at the domain root,
-  // so no `base` path is needed. Example: 'https://www.innovativeglove.com'
-  // site: 'https://your-final-domain.com',
+  site: 'https://www.innovativeglove.com',
+  // Keep placeholder /news sample pages out of the sitemap until real articles exist.
+  integrations: [sitemap({ filter: (page) => !page.includes('/news') })],
 });

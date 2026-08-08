@@ -10,7 +10,7 @@ export function getStaticPaths() {
 const { title } = Astro.props;
 ---
 
-<PageLayout title={`${title} | Innovative Gloves`} description="A sample news article for the Innovative Gloves 25th anniversary.">
+<PageLayout title={`${title} | Innovative Gloves`} description="A sample news article for the Innovative Gloves 25th anniversary." noindex={true}>
   <PageBanner eyebrow="News" title={title} status="Sample article"
     intro="An example news post. Real articles will be authored content with images, published under /news/article-name/." />
 
