@@ -62,8 +62,9 @@ import { mainNav as nav } from "../data/site";
       <span></span><span></span><span></span>
     </button>
   </div>
+</header>
 
-  <div class="mobile-menu" id="mobileMenu" hidden>
+<div class="mobile-menu" id="mobileMenu" hidden>
     <nav class="mm-nav" aria-label="Mobile">
       {nav.map((group) => (
         group.children ? (
@@ -83,7 +84,7 @@ import { mainNav as nav } from "../data/site";
       <a href="/request-samples" class="btn btn--ghost">Request Samples</a>
     </div>
   </div>
-</header>
+
 
 <style>
   .site-header {
