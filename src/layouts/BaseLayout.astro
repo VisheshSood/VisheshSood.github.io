@@ -1,0 +1,36 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Innovative Gloves | Patented Textured Nitrile Gloves",
+  description = "Thailand's premium manufacturer of patented Diamond, Micro Diamond, Zig and Tyre Tread textured nitrile gloves. Engineered for grip where ordinary disposable gloves fall short. SMETA 4-Pillar certified. OEM & private label.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Fonts: Archivo (condensed-ish grotesque headings) + Inter (body).
+         Swap here if you want to match the mockup's exact typeface. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

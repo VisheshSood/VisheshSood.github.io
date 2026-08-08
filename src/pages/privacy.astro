@@ -1,0 +1,74 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+const updated = "8 August 2026";
+---
+
+<PageLayout title="Privacy Policy | Innovative Gloves" description="How Innovative Gloves collects, uses and protects the information you provide through our contact and sample-request forms.">
+  <PageBanner eyebrow="Legal" title="Privacy Policy"
+    intro="How we handle the information you share with us, and the rights you have over it." />
+
+  <section class="section">
+    <div class="container legal">
+      <p class="legal-updated">Last updated: {updated}</p>
+
+      <h2>1. Who we are</h2>
+      <p>This website is operated by <strong>Innovative Gloves Co., Ltd.</strong> ("Innovative Gloves", "we", "us"), a nitrile and latex glove manufacturer with its factory at 830 Moo 4 Sanambin-Banklang Road, Hatyai, Songkhla 90110, Thailand. This policy explains what personal information we collect through this website, how we use it, and the choices you have.</p>
+
+      <h2>2. Information we collect</h2>
+      <p>We only collect what we need to respond to you:</p>
+      <ul>
+        <li><strong>Information you give us</strong> through our contact and sample-request forms, such as your name, email address and the details of your enquiry.</li>
+        <li><strong>Technical information</strong> that is collected automatically when you visit, such as your IP address, browser type, device and pages viewed. This is standard for websites and is used to keep the site secure and working.</li>
+        <li><strong>Cookies and similar technologies</strong>, as described in our <a href="/cookies" class="inline-link">Cookie Policy</a>.</li>
+      </ul>
+      <p>We do not ask for sensitive personal information, and we ask that you do not send it to us through these forms.</p>
+
+      <h2>3. How we use your information</h2>
+      <ul>
+        <li>To respond to your enquiries and provide the information, quotes or samples you request.</li>
+        <li>To arrange delivery of samples where applicable.</li>
+        <li>To operate, secure and improve this website.</li>
+        <li>To comply with our legal obligations.</li>
+      </ul>
+      <p>We do not use your information for automated decision-making, and we do not sell it.</p>
+
+      <h2>4. Legal basis</h2>
+      <p>Depending on the situation, we process your information because you have asked us to respond to an enquiry, because it is in our legitimate interest to run our business and website, or because we are required to by law. Where consent is required, we ask for it.</p>
+
+      <h2>5. Sharing your information</h2>
+      <p>We do not sell or rent your personal information. We may share it with trusted service providers who help us operate, for example email or hosting providers and couriers who deliver samples, and only so they can perform that service for us. We may also disclose information where required by law or to protect our rights.</p>
+
+      <h2>6. International transfers</h2>
+      <p>We are based in Thailand, so information you send us is processed there. If you contact us from another country, your information may be transferred to and processed in Thailand and by our service providers.</p>
+
+      <h2>7. How long we keep it</h2>
+      <p>We keep enquiry and sample-request information only for as long as we need it to deal with your request and for a reasonable period afterwards, then delete it or keep it in an anonymised form.</p>
+
+      <h2>8. Security</h2>
+      <p>We take reasonable technical and organisational measures to protect your information against loss, misuse and unauthorised access. No method of transmission over the internet is completely secure, so we cannot guarantee absolute security.</p>
+
+      <h2>9. Your rights</h2>
+      <p>Subject to applicable law, including Thailand's Personal Data Protection Act and, for visitors in the EU or UK, the GDPR, you may have the right to access, correct, delete or restrict the use of your personal information, to object to certain processing, and to withdraw consent. To exercise any of these, contact us using the details below.</p>
+
+      <h2>10. Children</h2>
+      <p>This website and our products are intended for businesses and adults. We do not knowingly collect information from children.</p>
+
+      <h2>11. Changes to this policy</h2>
+      <p>We may update this policy from time to time. When we do, we will revise the "last updated" date above.</p>
+
+      <h2>12. Contact us</h2>
+      <p>For any question about this policy or your information, email <a href="mailto:sales@innovativeglove.com" class="inline-link">sales@innovativeglove.com</a> or write to us at the factory address above.</p>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .legal { max-width: 760px; }
+  .legal-updated { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 28px; }
+  .legal h2 { font-size: 1.15rem; margin: 30px 0 10px; }
+  .legal p { font-size: 1rem; line-height: 1.7; color: var(--text); margin-bottom: 12px; }
+  .legal ul { margin: 0 0 12px; padding-left: 20px; display: grid; gap: 8px; }
+  .legal li { font-size: 1rem; line-height: 1.6; color: var(--text); }
+  .inline-link { color: var(--green-dark); text-decoration: underline; }
+</style>

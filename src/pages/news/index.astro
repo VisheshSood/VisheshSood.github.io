@@ -1,0 +1,42 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+
+const posts = [
+  { title: "Celebrating 25 Years of Innovative Gloves", slug: "25-years", tag: "Anniversary" },
+  { title: "New Micro Diamond glove launches", slug: "25-years", tag: "Product" },
+  { title: "Achieving our latest certification", slug: "25-years", tag: "Certification" },
+  { title: "Investing in sustainable manufacturing", slug: "25-years", tag: "Sustainability" },
+];
+---
+
+<PageLayout title="News & Insights | Innovative Gloves" description="Company updates, new products, trade shows, certifications, patents, manufacturing investments, sustainability projects and the 25th anniversary.">
+  <PageBanner eyebrow="News & Insights" title={`Always<br>Developing<span class="dot">.</span>`}
+    intro="Genuine company updates and technical insights, proof that Innovative is active and continually developing." />
+
+  <section class="section news">
+    <div class="container">
+      <div class="news-grid">
+        {posts.map((p) => (
+          <a class="news-card" href={`/news/${p.slug}`}>
+            <div class="img-slot news-img" data-label="Article image"></div>
+            <div class="news-body">
+              <span class="news-tag">{p.tag}</span>
+              <h3>{p.title}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  .news-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; transition: transform 0.2s ease, border-color 0.2s ease; }
+  .news-card:hover { transform: translateY(-4px); border-color: var(--green); }
+  .news-img { aspect-ratio: 16 / 9; }
+  .news-body { padding: 18px; }
+  .news-tag { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-dark); }
+  .news-body h3 { font-size: 1.05rem; margin-top: 8px; }
+</style>

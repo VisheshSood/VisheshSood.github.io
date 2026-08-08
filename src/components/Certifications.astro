@@ -1,0 +1,63 @@
+---
+const certs = [
+  { name: "SMETA 4-Pillar", img: "/images/certs/cert-smeta.png" },
+  { name: "ISO 9001", img: "/images/certs/cert-iso9001.png" },
+  { name: "EN ISO 13485", img: "/images/certs/cert-iso13485.png" },
+  { name: "CE / PPE", img: "/images/certs/cert-ce.png" },
+  { name: "US FDA", img: "/images/certs/cert-fda.png" },
+  { name: "Australia TGA", img: "/images/certs/cert-tga.png" },
+  { name: "Health Canada", img: "/images/certs/cert-healthcanada.png" },
+];
+---
+
+<section class="section certs">
+  <div class="container">
+    <header class="certs-head">
+      <p class="eyebrow">Certified for Global Markets</p>
+      <h2>Compliance You Can Trust<span class="dot">.</span></h2>
+      <p class="muted certs-lede">Everything distributors and procurement teams need to specify and import our gloves with confidence.</p>
+    </header>
+
+    <ul class="cert-row">
+      {certs.map((c) => (
+        <li class="cert-card">
+          <img src={c.img} alt={`${c.name} certification`} loading="lazy" />
+          <span class="cert-name">{c.name}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="certs-cta">
+      <a href="/certifications" class="btn btn--ghost">View Certifications</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .certs { background: var(--bg); }
+  .certs-head { text-align: center; max-width: 640px; margin: 0 auto clamp(28px, 4vw, 44px); }
+  .certs-head h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); margin: 10px 0 12px; }
+  .certs-lede { font-size: 0.98rem; }
+
+  .cert-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 16px;
+    margin-bottom: 34px;
+  }
+  .cert-card {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    padding: 20px 12px;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    background: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .cert-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
+  .cert-card img { height: 52px; width: auto; max-width: 100%; object-fit: contain; }
+  .cert-name { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); text-align: center; }
+
+  .certs-cta { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+
+  @media (max-width: 900px) { .cert-row { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 560px) { .cert-row { grid-template-columns: repeat(2, 1fr); } }
+</style>

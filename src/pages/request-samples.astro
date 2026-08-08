@@ -1,0 +1,35 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+---
+
+<PageLayout title="Request Samples | Innovative Gloves" description="Request glove samples from Innovative Gloves, the best way to feel the difference. Tell us your industry, the gloves of interest and where to ship.">
+  <PageBanner eyebrow="Request Samples" title={`Feel the<br>Difference<span class="dot">.</span>`}
+    intro="Samples are the strongest proof of our grip technologies. Tell us what you need and our team will respond quickly." />
+
+  <section class="section">
+    <div class="container form-wrap">
+      <form class="form" onsubmit="return false" aria-label="Request samples">
+        <div class="row2">
+          <div class="field"><label for="name">Name</label><input id="name" type="text" placeholder="Your name" /></div>
+          <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="you@example.com" /></div>
+        </div>
+        <div class="field"><label for="details">What would you like to try?</label><textarea id="details" rows="5" placeholder="Which gloves you're interested in, and where we should send them…"></textarea></div>
+        <button type="submit" class="btn btn--primary">Send Sample Request <span class="arrow" aria-hidden="true">&rarr;</span></button>
+        <p class="form-note muted">This form isn't live yet, we'll connect it to email before launch.</p>
+      </form>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .form-wrap { max-width: 760px; }
+  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+  input, select, textarea { font: inherit; font-size: 0.95rem; padding: 12px 14px; border: 1px solid var(--border-strong); border-radius: var(--radius); background: #fff; color: var(--ink); width: 100%; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--green-dark); box-shadow: 0 0 0 3px rgba(140,198,63,0.18); }
+  .form .btn { margin-top: 6px; }
+  .form-note { font-size: 0.78rem; margin-top: 14px; }
+  @media (max-width: 600px) { .row2 { grid-template-columns: 1fr; } }
+</style>

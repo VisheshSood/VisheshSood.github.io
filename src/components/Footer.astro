@@ -1,0 +1,72 @@
+---
+import { footerCols as cols } from "../data/site";
+---
+
+<footer class="site-footer" id="contact">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="/">
+        <span class="brand-name">INNOVATIVE</span>
+        <span class="brand-sub">GLOVES</span>
+      </a>
+      <p class="footer-tag">
+        25 years of engineering better protection. Patented grip technologies,
+        developed and manufactured in Thailand.
+      </p>
+      <a href="/contact" class="btn btn--primary btn--sm">Request a Sample <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </div>
+
+    {cols.map((c) => (
+      <nav class="footer-col" aria-label={c.title}>
+        <h4>{c.title}</h4>
+        <ul>
+          {c.links.map((l) => <li><a href={l.href} target={l.href.endsWith(".pdf") ? "_blank" : undefined} rel={l.href.endsWith(".pdf") ? "noopener" : undefined}>{l.label}</a></li>)}
+        </ul>
+      </nav>
+    ))}
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <span>&copy; 2001&ndash;2026 Innovative Gloves. All rights reserved.</span>
+      <nav class="footer-legal" aria-label="Legal">
+        <a href="/faq">FAQ</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/cookies">Cookies</a>
+        <a href="/terms">Terms</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: #14171a; color: #c7ccc7; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(4, 1fr);
+    gap: clamp(28px, 4vw, 56px);
+    padding-block: clamp(48px, 6vw, 80px);
+  }
+  .footer-brand .brand { display: flex; flex-direction: column; line-height: 0.9; margin-bottom: 18px; }
+  .footer-brand .brand-name { font-family: var(--font-head); font-weight: 800; font-size: 1.35rem; letter-spacing: 0.08em; color: #fff; }
+  .footer-brand .brand-sub { font-family: var(--font-head); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.42em; color: var(--green); }
+  .footer-tag { font-size: 0.88rem; line-height: 1.6; max-width: 34ch; margin-bottom: 22px; color: #9aa09a; }
+  .btn--sm { padding: 0.7em 1.2em; font-size: 0.72rem; }
+
+  .footer-col h4 { color: #fff; font-size: 0.82rem; letter-spacing: 0.06em; margin-bottom: 16px; }
+  .footer-col ul { display: grid; gap: 10px; }
+  .footer-col a { font-size: 0.86rem; color: #9aa09a; transition: color 0.15s ease; }
+  .footer-col a:hover { color: var(--green); }
+
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); }
+  .footer-bottom-inner {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    padding-block: 22px; font-size: 0.78rem; color: #767c76;
+  }
+  .footer-legal { display: flex; gap: 18px; }
+  .footer-legal a { color: #767c76; transition: color 0.15s ease; }
+  .footer-legal a:hover { color: var(--green); }
+
+  @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
+  @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,211 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import GloveVisual from "../../components/GloveVisual.astro";
+import { catalogue, facets, colourSwatch } from "../../data/catalogue";
+
+const count = catalogue.length;
+---
+
+<PageLayout
+  title={`${count} Gloves. One Manufacturer. | Innovative Gloves`}
+  description={`Our full current range, ${count} nitrile and latex glove families across textures, thicknesses, colours and cuff lengths. Filter by technology, material, thickness, colour and more.`}
+>
+  <section class="page-banner">
+    <div class="container">
+      <div class="pb-inner">
+        <p class="eyebrow">The Complete Range</p>
+        <h1>{count} Gloves.<br />One Manufacturer<span class="dot">.</span></h1>
+        <p class="pb-intro">Everything from everyday disposables to patented specialist gloves, proof that Innovative can be your single glove-supply partner. Filter the full current range below.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section catalogue">
+    <div class="container">
+      <div class="cat-layout">
+        <!-- FILTERS -->
+        <aside class="filters" aria-label="Filter gloves">
+          <div class="filters-head">
+            <strong>Filters</strong>
+            <button type="button" id="clearFilters" class="clear-btn">Clear all</button>
+          </div>
+
+          <div class="fgroup">
+            <p class="flabel">Technology / Texture</p>
+            <div class="chips">
+              {facets.textures.map((t) => (
+                <label class="chip"><input type="checkbox" class="filter-cb" data-group="texture" value={t} /><span>{t}</span></label>
+              ))}
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <p class="flabel">Material</p>
+            <div class="chips">
+              {facets.materials.map((m) => (
+                <label class="chip"><input type="checkbox" class="filter-cb" data-group="material" value={m} /><span>{m}</span></label>
+              ))}
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <p class="flabel">Thickness (mil)</p>
+            <div class="chips">
+              {facets.thicknesses.map((t) => (
+                <label class="chip chip--sm"><input type="checkbox" class="filter-cb" data-group="thickness" value={String(t)} /><span>{t}</span></label>
+              ))}
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <p class="flabel">Length (mm)</p>
+            <div class="chips">
+              {facets.lengths.map((l) => (
+                <label class="chip chip--sm"><input type="checkbox" class="filter-cb" data-group="length" value={String(l)} /><span>{l}</span></label>
+              ))}
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <p class="flabel">Colour</p>
+            <div class="chips chips--colour">
+              {facets.colours.map((c) => (
+                <label class="chip chip--colour" title={c}>
+                  <input type="checkbox" class="filter-cb" data-group="colour" value={c} />
+                  <span class="swatch" style={`background:${colourSwatch(c)}`}></span>
+                </label>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        <!-- GRID -->
+        <div class="cat-main">
+          <p class="cat-count"><span id="resultCount">{count}</span> gloves</p>
+          <div class="glove-grid" id="gloveGrid">
+            {catalogue.map((g) => (
+              <a
+                class="gcard"
+                href={`/gloves/${g.slug}`}
+                data-texture={g.texture}
+                data-material={g.material}
+                data-grade={g.grade}
+                data-thickness={g.thickness ?? ""}
+                data-length={g.length ?? ""}
+                data-colours={g.colours.join("|")}
+                data-bio={g.bio ? "1" : "0"}
+                data-longcuff={g.longCuff ? "1" : "0"}
+              >
+                <GloveVisual glove={g} />
+                <div class="gcard-body">
+                  <h3>{g.name}</h3>
+                  <div class="gcard-dots">
+                    {g.colours.slice(0, 7).map((c) => (
+                      <span class="gdot" style={`background:${colourSwatch(c)}`} title={c}></span>
+                    ))}
+                    {g.colours.length > 7 && <span class="gdot-more">+{g.colours.length - 7}</span>}
+                  </div>
+                  <div class="gcard-meta">
+                    {g.thickness && <span>{g.thickness} mil</span>}
+                    {g.length && <span>{g.length} mm</span>}
+                    <span>{g.material}</span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+          <p class="no-results" id="noResults" hidden>No gloves match those filters. <button type="button" id="clearFilters2" class="clear-btn">Clear all</button></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .page-banner { background: var(--bg-2); border-bottom: 1px solid var(--border); padding-block: clamp(40px, 6vw, 80px); }
+  .pb-inner { max-width: 760px; }
+  .page-banner h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); margin: 12px 0 0; }
+  .pb-intro { color: var(--text-muted); font-size: 1.05rem; margin-top: 18px; max-width: 60ch; }
+
+  .cat-layout { display: grid; grid-template-columns: 250px 1fr; gap: clamp(24px, 3vw, 44px); align-items: start; }
+
+  .filters { position: sticky; top: 92px; max-height: calc(100vh - 108px); overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; background: var(--surface); }
+  .filters-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .filters-head strong { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.9rem; }
+  .clear-btn { background: none; border: 0; color: var(--green-dark); font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer; }
+  .clear-btn:hover { text-decoration: underline; }
+  .fgroup { padding: 14px 0; border-top: 1px solid var(--border); }
+  .flabel { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-muted); margin-bottom: 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { cursor: pointer; }
+  .chip input { position: absolute; opacity: 0; pointer-events: none; }
+  .chip span { display: inline-block; padding: 5px 11px; border: 1px solid var(--border-strong); border-radius: 999px; font-size: 0.76rem; font-weight: 600; color: var(--text); transition: all 0.12s ease; }
+  .chip--sm span { padding: 5px 9px; min-width: 28px; text-align: center; }
+  .chip input:checked + span { background: var(--green); border-color: var(--green); color: #14210a; }
+
+  .chips--colour { gap: 7px; }
+  .chip--colour span.swatch { width: 22px; height: 22px; border-radius: 50%; padding: 0; border: 2px solid var(--border-strong); box-sizing: border-box; }
+  .chip--colour input:checked + .swatch { border-color: var(--green); box-shadow: 0 0 0 2px var(--green); }
+
+  .cat-count { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; font-weight: 600; }
+  .cat-count span { color: var(--ink); font-weight: 800; }
+  .glove-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; }
+
+  .gcard { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .gcard:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.1); }
+  .gcard-body { padding: 15px 16px 16px; }
+  .gcard-body h3 { font-size: 0.98rem; margin-bottom: 10px; line-height: 1.15; }
+  .gcard-dots { display: flex; align-items: center; gap: 4px; margin-bottom: 12px; }
+  .gdot { width: 13px; height: 13px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); }
+  .gdot-more { font-size: 0.66rem; color: var(--text-muted); font-weight: 600; margin-left: 2px; }
+  .gcard-meta { display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--green-dark); }
+  .gcard-meta span:not(:last-child)::after { content: "·"; margin-left: 10px; color: var(--text-dim); }
+
+  .no-results { margin-top: 30px; color: var(--text-muted); }
+
+  @media (max-width: 860px) {
+    .cat-layout { grid-template-columns: 1fr; }
+    .filters { position: static; max-height: none; overflow-y: visible; }
+  }
+</style>
+
+<script>
+  const cards = Array.from(document.querySelectorAll<HTMLElement>(".gcard"));
+  const controls = Array.from(document.querySelectorAll<HTMLInputElement>(".filter-cb"));
+  const countEl = document.getElementById("resultCount");
+  const noRes = document.getElementById("noResults");
+  const grid = document.getElementById("gloveGrid");
+
+  const groups = ["texture", "material", "thickness", "length", "colour"];
+  const sel = (group: string) => controls.filter((c) => c.dataset.group === group && c.checked).map((c) => c.value);
+
+  function apply() {
+    const s: Record<string, string[]> = {};
+    groups.forEach((g) => (s[g] = sel(g)));
+    let shown = 0;
+    cards.forEach((card) => {
+      let ok = true;
+      for (const g of groups) {
+        if (!s[g].length) continue;
+        if (g === "colour") {
+          const cs = (card.dataset.colours || "").split("|");
+          if (!s[g].some((v) => cs.includes(v))) { ok = false; break; }
+        } else if (g === "flag") {
+          if (!s[g].every((v) => card.dataset[v] === "1")) { ok = false; break; }
+        } else {
+          if (!s[g].includes(card.dataset[g] || "")) { ok = false; break; }
+        }
+      }
+      card.style.display = ok ? "" : "none";
+      if (ok) shown++;
+    });
+    if (countEl) countEl.textContent = String(shown);
+    if (noRes) noRes.hidden = shown !== 0;
+    if (grid) (grid as HTMLElement).style.display = shown === 0 ? "none" : "";
+  }
+
+  controls.forEach((c) => c.addEventListener("change", apply));
+  document.querySelectorAll(".clear-btn, #clearFilters2").forEach((b) =>
+    b.addEventListener("click", () => { controls.forEach((c) => (c.checked = false)); apply(); }),
+  );
+</script>

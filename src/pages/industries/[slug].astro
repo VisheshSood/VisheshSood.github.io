@@ -1,0 +1,138 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import GloveCard from "../../components/GloveCard.astro";
+import { industries } from "../../data/site";
+import { industryContent, industryPhotos } from "../../data/industry-content";
+import { catalogue, boxBySlug } from "../../data/catalogue";
+
+export function getStaticPaths() {
+  return industries.map((ind) => ({ params: { slug: ind.slug }, props: { industry: ind } }));
+}
+const { industry } = Astro.props;
+const c = industryContent[industry.slug];
+const recommended = (c?.recommended ?? [])
+  .map((slug) => catalogue.find((g) => g.slug === slug))
+  .filter((g): g is NonNullable<typeof g> => !!g);
+
+// One photo per industry, shown beside the intro.
+const photo = (industryPhotos[industry.slug] ?? [])[0] ?? null;
+---
+
+<PageLayout title={`${industry.name} Gloves | Innovative Gloves`} description={c?.overview ?? industry.intro}>
+  <!-- HERO, intro text with one photo alongside -->
+  <section class="ind-hero">
+    <div class="container ind-hero-grid">
+      <div class="ind-hero-copy">
+        <p class="eyebrow">Industry</p>
+        <h1 class="ind-hero-title">{industry.name}<span class="dot">.</span></h1>
+        <p class="ind-hero-intro">{c?.overview ?? industry.intro}</p>
+      </div>
+      <div class="ind-hero-media">
+        {photo
+          ? <div class="ind-hero-img" style={`background-image:url('${photo}')`}></div>
+          : <div class="ind-hero-img ind-hero-img--empty" data-label={`${industry.name}, gloves in action`}><span>Photo coming soon</span></div>}
+      </div>
+    </div>
+  </section>
+
+  {c && (
+    <section class="section ind-body">
+      <div class="container ind-grid">
+        <div class="ind-col">
+          <p class="eyebrow">What This Work Demands</p>
+          <h2>The Challenge<span class="dot">.</span></h2>
+          <ul class="ind-list ind-list--need">
+            {c.needs.map((n) => (<li><span class="ic" aria-hidden="true"></span>{n}</li>))}
+          </ul>
+        </div>
+        <div class="ind-col ind-col--solve">
+          <p class="eyebrow">How Innovative Delivers</p>
+          <h2>How Our Gloves Help<span class="dot">.</span></h2>
+          <ul class="ind-list ind-list--solve">
+            {c.solutions.map((s) => (
+              <li>
+                <span class="ic ic--check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6"/></svg></span>
+                {s}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section ind-recs">
+    <div class="container">
+      <header class="recs-head">
+        <p class="eyebrow">Our Recommendation</p>
+        <h2>Recommended for {industry.name}<span class="dot">.</span></h2>
+      </header>
+      {recommended.length > 0 ? (
+        <div class="recs-grid">
+          {recommended.map((g) => (<GloveCard glove={g} box={boxBySlug[g.slug]} />))}
+        </div>
+      ) : (
+        <div class="recs-empty">
+          <p class="muted">We're finalising our top picks for this sector. In the meantime, explore the full range or let the finder match a glove to your job.</p>
+          <div class="recs-actions">
+            <a href="/glove-finder" class="btn btn--primary">Find Your Glove <span class="arrow" aria-hidden="true">&rarr;</span></a>
+            <a href="/gloves" class="btn btn--ghost">Browse All Gloves</a>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section ind-cta">
+    <div class="container ind-cta-inner">
+      <h2>Not Sure Which Glove Fits Your Line<span class="dot">.</span></h2>
+      <p class="muted">Tell us the application and we'll recommend the right product, and send samples to test.</p>
+      <div class="recs-actions">
+        <a href="/request-samples" class="btn btn--primary">Request Samples <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/contact" class="btn btn--ghost">Talk to Us</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .ind-hero { background: var(--bg-2); border-bottom: 1px solid var(--border); padding-block: clamp(36px, 5vw, 68px); }
+  .ind-hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+  .ind-hero-title { font-size: clamp(2rem, 4.4vw, 3.2rem); margin: 12px 0 0; }
+  .ind-hero-intro { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-top: 18px; max-width: 56ch; }
+  .ind-hero-img { aspect-ratio: 4 / 3; border-radius: var(--radius); border: 1px solid var(--border); background-color: var(--bg); background-size: cover; background-position: center; box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+  .ind-hero-img--empty { display: grid; place-items: center; border-style: dashed; border-color: var(--border-strong); position: relative; box-shadow: none; }
+  .ind-hero-img--empty span { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-dim); }
+  .ind-hero-img--empty::after { content: attr(data-label); position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; font-size: 0.72rem; color: var(--text-muted); padding: 0 12px; }
+
+  .ind-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
+  .ind-col--solve { padding-left: clamp(0px, 3vw, 40px); border-left: 1px solid var(--border); }
+  .ind-col h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin: 10px 0 18px; }
+  .ind-list { display: grid; gap: 12px; }
+  .ind-list li { display: flex; align-items: flex-start; gap: 11px; font-size: 0.95rem; line-height: 1.5; color: var(--text); }
+  .ind-list--need .ic { flex: none; width: 8px; height: 8px; margin-top: 8px; border-radius: 50%; background: var(--text-dim); }
+  .ic--check { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); margin-top: 1px; }
+  .ic--check svg { width: 13px; height: 13px; }
+  .ind-list--solve li { font-weight: 500; color: var(--ink); }
+
+  .ind-recs { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .recs-head { margin-bottom: clamp(22px, 3vw, 34px); }
+  .recs-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-top: 10px; }
+  .recs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; }
+  .recs-empty { border: 1px dashed var(--border-strong); border-radius: var(--radius); padding: clamp(24px, 4vw, 40px); text-align: center; background: var(--surface); }
+  .recs-empty p { max-width: 60ch; margin: 0 auto 18px; }
+  .recs-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+
+  .ind-cta { background: radial-gradient(120% 120% at 50% 0%, rgba(140,198,63,0.12), rgba(140,198,63,0) 60%), var(--bg); border-top: 1px solid var(--border); text-align: center; }
+  .ind-cta-inner { max-width: 620px; margin-inline: auto; }
+  .ind-cta-inner h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); margin-bottom: 12px; }
+
+  @media (max-width: 860px) {
+    .ind-hero-grid { grid-template-columns: 1fr; }
+    .ind-hero-media { order: -1; }
+  }
+  @media (max-width: 760px) {
+    .ind-grid { grid-template-columns: 1fr; }
+    .ind-col--solve { padding-left: 0; border-left: 0; border-top: 1px solid var(--border); padding-top: 28px; }
+  }
+</style>

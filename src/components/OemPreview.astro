@@ -1,0 +1,38 @@
+---
+const points = ["Custom colours & textures", "Your branding & packaging", "Product co-development", "Export-ready supply"];
+---
+
+<section class="section oem">
+  <div class="container oem-grid">
+    <div class="oem-copy">
+      <p class="eyebrow">OEM / Private Label</p>
+      <h2>Our Manufacturing.<br />Your Brand<span class="dot">.</span></h2>
+      <p class="muted oem-lede">
+        From your logo on a standard glove to a co-developed specialist product,
+        we're a true manufacturing partner, not just a supplier.
+      </p>
+      <div class="oem-cta">
+        <a href="/private-label" class="btn btn--primary">Build With Us <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/request-quote" class="btn btn--ghost">Request a Quote</a>
+      </div>
+    </div>
+    <ul class="oem-points">
+      {points.map((p) => (
+        <li><span class="o-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg></span>{p}</li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .oem { background: var(--bg-2); }
+  .oem-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(28px, 5vw, 60px); align-items: center; }
+  .oem-copy h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin: 12px 0 16px; }
+  .oem-lede { font-size: 1rem; margin-bottom: 24px; max-width: 44ch; }
+  .oem-cta { display: flex; flex-wrap: wrap; gap: 14px; }
+  .oem-points { display: grid; gap: 14px; }
+  .oem-points li { display: flex; align-items: center; gap: 12px; font-size: 1rem; font-weight: 600; color: var(--ink); padding: 16px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+  .o-check { flex: none; width: 22px; height: 22px; color: var(--green-dark); }
+  .o-check svg { width: 100%; height: 100%; }
+  @media (max-width: 760px) { .oem-grid { grid-template-columns: 1fr; } }
+</style>

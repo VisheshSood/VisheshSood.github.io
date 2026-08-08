@@ -1,0 +1,72 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+import GloveCard from "../../components/GloveCard.astro";
+import { catalogue } from "../../data/catalogue";
+
+const isHeavy = (t: number | null) => !!t && t >= 8;
+const heavyNitrile = catalogue.filter((g) => g.material.includes("Nitrile") && isHeavy(g.thickness)).sort((a, b) => (b.thickness || 0) - (a.thickness || 0));
+const heavyLatex = catalogue.filter((g) => g.material === "Latex" && isHeavy(g.thickness)).sort((a, b) => (b.thickness || 0) - (a.thickness || 0));
+const total = heavyNitrile.length + heavyLatex.length;
+---
+
+<PageLayout title="Heavy Duty Gloves | Innovative Gloves" description={`Our thickest, toughest gloves, ${total} heavy-duty nitrile and latex families from 8 to 14 mil, with aggressive grip and long-cuff options for the most demanding work.`}>
+  <PageBanner eyebrow="Heavy Duty" title={`Built for the<br>Toughest Jobs<span class="dot">.</span>`}
+    intro="When ordinary disposables tear, our heavy-duty range takes over, thicker gauges (8–14 mil), aggressive patented grip and extended cuffs, in both nitrile and latex. This is where our specialist expertise really shows." />
+
+  <section class="section hd-section">
+    <div class="container">
+      <header class="range-head">
+        <div>
+          <p class="eyebrow">Nitrile · Heavy Duty</p>
+          <h2>Heavy-Duty Nitrile<span class="dot">.</span></h2>
+        </div>
+      </header>
+      <div class="range-grid">
+        {heavyNitrile.map((g) => (<GloveCard glove={g} />))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section hd-section hd-alt">
+    <div class="container">
+      <header class="range-head">
+        <div>
+          <p class="eyebrow">Latex · Heavy Duty</p>
+          <h2>Heavy-Duty Latex<span class="dot">.</span></h2>
+        </div>
+      </header>
+      {heavyLatex.length > 0 ? (
+        <div class="range-grid">
+          {heavyLatex.map((g) => (<GloveCard glove={g} />))}
+        </div>
+      ) : (
+        <p class="muted">Our heavy-duty latex options run to 14 mil, see the full <a href="/gloves/latex" class="inline-link">latex range</a>.</p>
+      )}
+    </div>
+  </section>
+
+  <section class="section hd-cta-band">
+    <div class="container hd-cta-inner">
+      <h2>Need Something Even Tougher<span class="dot">.</span></h2>
+      <p class="muted">We develop custom thicknesses, textures and cuff lengths to spec. Tell us the job.</p>
+      <div class="hd-cta">
+        <a href="/request-samples" class="btn btn--primary">Request Samples <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/private-label" class="btn btn--ghost">Build Your Glove</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .hd-alt { background: var(--bg-2); }
+  .range-head { margin-bottom: clamp(24px, 3vw, 40px); }
+  .range-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-top: 10px; }
+  .range-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; }
+  .inline-link { color: var(--green-dark); text-decoration: underline; }
+
+  .hd-cta-band { background: radial-gradient(120% 120% at 50% 0%, rgba(140,198,63,0.12), rgba(140,198,63,0) 60%), var(--bg); border-top: 1px solid var(--border); text-align: center; }
+  .hd-cta-inner { max-width: 620px; margin-inline: auto; }
+  .hd-cta-inner h2 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); margin-bottom: 12px; }
+  .hd-cta { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+</style>

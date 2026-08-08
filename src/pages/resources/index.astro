@@ -1,0 +1,74 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+
+const downloads = [
+  { title: "Product Catalogue", desc: "Our full current range of nitrile and latex gloves in one document.", href: "/catalog.pdf", type: "PDF" },
+  { title: "Declaration of Conformity, Nitrile", desc: "EU Declaration of Conformity for our nitrile glove range.", href: "/declaration-of-conformity-nitrile.pdf", type: "PDF" },
+  { title: "Declaration of Conformity, Latex", desc: "EU Declaration of Conformity for our latex glove range.", href: "/declaration-of-conformity-latex.pdf", type: "PDF" },
+];
+---
+
+<PageLayout
+  title="Resources & Downloads | Innovative Gloves"
+  description="Download the Innovative Gloves product catalogue and our EU Declarations of Conformity for nitrile and latex gloves."
+>
+  <PageBanner eyebrow="Resources" title={`Downloads<span class="dot">.</span>`}
+    intro="The documents distributors and buyers ask for most. More is available on request." />
+
+  <section class="section res-dl">
+    <div class="container">
+      <ul class="dl-grid">
+        {downloads.map((d) => (
+          <li class="dl-card">
+            <span class="dl-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3v5h5"/><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M12 12v6"/><path d="M9 15l3 3 3-3"/></svg>
+            </span>
+            <div class="dl-body">
+              <h3>{d.title}</h3>
+              <p class="muted">{d.desc}</p>
+            </div>
+            <a class="dl-btn" href={d.href} target="_blank" rel="noopener">
+              <span>{d.type}</span>
+              <span class="arrow" aria-hidden="true">&darr;</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="res-note">
+        <h3>Need something more specific<span class="dot">.</span></h3>
+        <p class="muted">The exact chemical classification, thickness, length and certifications for each glove are shown on its product page. If you need product-specific documentation for a project, just get in touch and our team will help.</p>
+        <div class="res-note-actions">
+          <a href="/gloves" class="btn btn--ghost">Browse the Range</a>
+          <a href="/certifications" class="btn btn--ghost">Certifications</a>
+          <a href="/contact" class="btn btn--primary">Contact Us <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .res-dl { background: var(--bg); }
+  .dl-grid { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; max-width: 780px; }
+  .dl-card { display: flex; align-items: center; gap: 18px; padding: 20px 22px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+  .dl-card:hover { border-color: var(--green); box-shadow: 0 12px 26px rgba(0,0,0,0.06); }
+  .dl-icon { flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: var(--radius); background: rgba(140,198,63,0.16); color: var(--green-dark); }
+  .dl-icon svg { width: 24px; height: 24px; }
+  .dl-body { flex: 1; min-width: 0; }
+  .dl-body h3 { font-size: 1.02rem; margin-bottom: 4px; }
+  .dl-body p { font-size: 0.88rem; line-height: 1.5; }
+  .dl-btn { flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: var(--radius); background: var(--green); color: #14210a; font-weight: 800; font-size: 0.78rem; letter-spacing: 0.04em; }
+  .dl-btn:hover { background: var(--green-dark); color: #fff; }
+
+  .res-note { max-width: 780px; margin-top: clamp(30px, 4vw, 48px); padding: clamp(24px, 4vw, 34px); border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-2); }
+  .res-note h3 { font-size: 1.2rem; margin-bottom: 10px; }
+  .res-note p { line-height: 1.65; margin-bottom: 18px; max-width: 66ch; }
+  .res-note-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  @media (max-width: 520px) {
+    .dl-card { flex-wrap: wrap; }
+    .dl-btn { width: 100%; justify-content: center; }
+  }
+</style>

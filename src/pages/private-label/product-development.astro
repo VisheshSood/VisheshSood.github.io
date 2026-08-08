@@ -1,0 +1,13 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+import SectionStub from "../../components/SectionStub.astro";
+---
+
+<PageLayout title="Custom Product Development | Innovative Gloves" description="Work with Innovative Gloves to develop new glove concepts, colours, textures, packaging and specialized performance requirements.">
+  <PageBanner eyebrow="Custom Development" title={`Build Something<br>New With Us<span class="dot">.</span>`}
+    intro="Reinforcing our innovation positioning, customers can co-develop genuinely new products with our R&D and manufacturing teams." />
+
+  <SectionStub tone="light" eyebrow="What We Can Develop Together" title="Your Idea, Our R&D" lead="A partnership from concept to production." layout="grid"
+    items={["New glove concepts", "New colours", "New textures", "Packaging", "Specialized performance requirements", "Prototype to production"]} />
+</PageLayout>

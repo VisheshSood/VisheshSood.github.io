@@ -1,0 +1,96 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+import { technologies } from "../../data/site";
+
+// Head-to-head advantages, tested against competitor gloves.
+const proof = [
+  { t: "They Last Longer", d: "In side-by-side wear testing our gloves outlast competitor products, one durable pair does the work of several cheap ones." },
+  { t: "Better Grip", d: "Our patented textures hold on wet, dry and oily, measured performance, not marketing. Ordinary gloves slip where ours grip." },
+  { t: "Stronger Chemical Resistance", d: "Independently tested to EN ISO 374 for permeation and degradation, the exact classification is on every product page." },
+  { t: "No Fillers", d: "We never bulk our gloves with cheap fillers that weaken the film. Just high-grade nitrile that stays strong and tear-resistant." },
+  { t: "Sustainably Made", d: "Produced with solar power, harvested rainwater and recycled water, with biodegradable nitrile options across the range." },
+  { t: "Invented & Patented", d: "Real R&D and granted design patents stand behind our grip, these are our technologies, not copies of someone else's glove." },
+];
+// Patented grip technologies only, Diamond (invented, not patented) and
+// Biodegradable live elsewhere, so they're excluded from this page.
+const techs = technologies.filter((t) => ["diamond", "zig", "tread"].includes(t.icon));
+---
+
+<PageLayout
+  title="Our Technologies, Patented Grip | Innovative Gloves"
+  description="Innovative Gloves develops products, not generic gloves. Explore our patented grip technologies: Micro Diamond, Zig Grip and Tyre Tread / Gripper."
+>
+  <PageBanner eyebrow="Patented Technologies" title={`We Develop Products.<br>Not Generic Gloves<span class="dot">.</span>`}
+    intro="Innovation is our defining difference. These are the proprietary, patented grip technologies we invented, tested and manufacture ourselves, engineered to perform where ordinary disposable gloves fall short." />
+
+  <section class="section tech-overview">
+    <div class="container">
+      <p class="eyebrow">Explore Each Technology</p>
+      <h2>Grip, Engineered<span class="dot">.</span></h2>
+      <div class="tech-cards">
+        {techs.map((t) => (
+          <a class={`tech-card tex--${t.icon}`} href={`/technologies/${t.slug}`}>
+            <div class="tc-overlay">
+              <h3>{t.name}</h3>
+              <p>{t.tagline}</p>
+              <span class="tc-link">Explore <span aria-hidden="true">&rarr;</span></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section proof">
+    <div class="container">
+      <header class="proof-head">
+        <p class="eyebrow">Tested, Not Claimed</p>
+        <h2>Proven Against the Rest<span class="dot">.</span></h2>
+        <p class="muted">We put our gloves head-to-head against competitor products, and measured the difference. Here's where our technology pulls ahead.</p>
+      </header>
+      <ul class="proof-grid">
+        {proof.map((p) => (
+          <li class="proof-card">
+            <span class="proof-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6"/></svg></span>
+            <h3>{p.t}</h3>
+            <p class="muted">{p.d}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="proof-cta">
+        <a href="/gloves" class="btn btn--primary">See the Range <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/why-innovative" class="btn btn--ghost">Why Innovative</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .tech-overview h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin: 10px 0 28px; }
+  .tech-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+  .tech-card { position: relative; aspect-ratio: 3 / 3.2; border-radius: var(--radius); display: block; overflow: hidden; background: #14180f; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .tech-card::before { content: ""; position: absolute; inset: 0; background-image: var(--tex); background-size: cover; background-position: center; transition: transform 0.25s ease; }
+  .tech-card:hover { transform: translateY(-5px); box-shadow: 0 16px 34px rgba(0,0,0,0.18); }
+  .tech-card:hover::before { transform: scale(1.05); }
+  /* Same grip macros as the homepage */
+  .tex--diamond { --tex: url("/images/tex-micro-diamond.jpg"); }
+  .tex--zig     { --tex: url("/images/tex-zig-grip.png"); }
+  .tex--tread   { --tex: url("/images/tex-tyre-tread.jpg"); }
+  .tex--diamond::before { filter: brightness(1.4) contrast(1.25); }
+  .tc-overlay { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 22px; background: linear-gradient(to top, rgba(10,12,10,0.88) 14%, rgba(10,12,10,0.1) 64%); }
+  .tc-overlay h3 { color: #fff; font-size: 1.1rem; margin-bottom: 8px; }
+  .tc-overlay p { color: rgba(255,255,255,0.72); font-size: 0.86rem; margin-bottom: 14px; }
+  .tc-link { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); }
+
+  .proof { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .proof-head { max-width: 640px; margin-bottom: clamp(26px, 4vw, 42px); }
+  .proof-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin: 10px 0 12px; }
+  .proof-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+  .proof-card { padding: 26px 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .proof-check { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); margin-bottom: 14px; }
+  .proof-check svg { width: 17px; height: 17px; }
+  .proof-card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+  .proof-card p { font-size: 0.88rem; line-height: 1.55; }
+  .proof-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: clamp(26px, 4vw, 40px); }
+</style>

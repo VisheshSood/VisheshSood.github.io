@@ -1,0 +1,1340 @@
+[
+  {
+    "slug": "finger-textured-3-nitrile",
+    "name": "Finger Textured 3 mil Nitrile",
+    "fullName": "Nitrile Powder Free Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Finger Textured",
+    "treatment": "Polymer Coating",
+    "thickness": 3,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "White",
+      "Blue",
+      "Black",
+      "Violet"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "diamond-5-nitrile-long",
+    "name": "Diamond 5 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free Ultimate Grip Long Cuff Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Diamond",
+    "treatment": "Polymer Coating",
+    "thickness": 5,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Light Blue"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "diamond-6-nitrile",
+    "name": "Diamond 6 mil Nitrile",
+    "fullName": "Nitrile Powder Free Ultimate Grip Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Diamond",
+    "treatment": "Polymer Coating",
+    "thickness": 6,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Blue",
+      "Orange",
+      "Green",
+      "Military Green",
+      "Red",
+      "Yellow"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "diamond-6-nitrile-long",
+    "name": "Diamond 6 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free Ultimate Grip Long Cuff Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Diamond",
+    "treatment": "Polymer Coating",
+    "thickness": 6,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Blue"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "diamond-8-nitrile",
+    "name": "Diamond 8 mil Nitrile",
+    "fullName": "Nitrile Powder Free Ultimate Grip Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Diamond",
+    "treatment": "Polymer Coating",
+    "thickness": 8,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Orange",
+      "Yellow",
+      "Green",
+      "Black",
+      "Blue"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "2X-Large",
+      "3X-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "diamond-8-nitrile-long",
+    "name": "Diamond 8 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free Ultimate Grip Long Cuff Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Diamond",
+    "treatment": "Polymer Coating",
+    "thickness": 8,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "2X-Large",
+      "3X-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "diamond-9-nitrile-long",
+    "name": "Diamond 9 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free House Hold Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Diamond",
+    "treatment": "Polymer Coating",
+    "thickness": 9,
+    "length": 300,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Dark Blue",
+      "Yellow"
+    ],
+    "sizes": [
+      "Small(7)",
+      "Medium(8)",
+      "Large(9)",
+      "X-Large(10)",
+      "2X-Large(11)"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "diamond-8-5-nitrile-long",
+    "name": "Diamond 8.5 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free House Hold Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Diamond",
+    "treatment": "Polymer Coating",
+    "thickness": 8.5,
+    "length": 300,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Dark Blue"
+    ],
+    "sizes": [
+      "Small(7)",
+      "Medium(8)",
+      "Large(9)",
+      "X-Large(10)",
+      "2X-Large(11)"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "tyre-tread-6-nitrile",
+    "name": "Tyre Tread 6 mil Nitrile",
+    "fullName": "Nitrile Powder Free Gripper Textured Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Tyre Tread",
+    "treatment": "Polymer Coating",
+    "thickness": 6,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Orange",
+      "Bloody Red",
+      "Blue"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": "US Design Patent Number D779, 130 S Feb 14th 2017 &"
+  },
+  {
+    "slug": "tyre-tread-7-nitrile",
+    "name": "Tyre Tread 7 mil Nitrile",
+    "fullName": "Nitrile Powder Free Gripper Textured Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Tyre Tread",
+    "treatment": "Polymer Coating",
+    "thickness": 7,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Orange",
+      "Red"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": "US Design Patent Number D779, 130 S Feb 14th 2017 &"
+  },
+  {
+    "slug": "tyre-tread-7-nitrile-long",
+    "name": "Tyre Tread 7 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free Gripper Textured Long Cuff Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Tyre Tread",
+    "treatment": "Polymer Coating",
+    "thickness": 7,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Orange"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": "US Design Patent Number D779, 130 S Feb 14th 2017 &"
+  },
+  {
+    "slug": "micro-diamond-6-nitrile",
+    "name": "Micro Diamond 6 mil Nitrile",
+    "fullName": "Nitrile Powder Free Micro Diamond Textured Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Micro Diamond",
+    "treatment": "Polymer Coating",
+    "thickness": 6,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Orange",
+      "Green"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "2X-Large",
+      "3X-Large"
+    ],
+    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )"
+  },
+  {
+    "slug": "micro-diamond-6-nitrile-long",
+    "name": "Micro Diamond 6 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free Micro Diamond Textured Long Cuff Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Micro Diamond",
+    "treatment": "Polymer Coating",
+    "thickness": 6,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Orange",
+      "Green",
+      "Royal Blue"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "2X-Large",
+      "3X-Large"
+    ],
+    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )"
+  },
+  {
+    "slug": "micro-diamond-8-nitrile",
+    "name": "Micro Diamond 8 mil Nitrile",
+    "fullName": "Nitrile Powder Free Micro Diamond Textured Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Micro Diamond",
+    "treatment": "Polymer Coating",
+    "thickness": 8,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Orange",
+      "Green",
+      "Black"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "2X-Large",
+      "3X-Large"
+    ],
+    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )"
+  },
+  {
+    "slug": "finger-textured-4-nitrile-long",
+    "name": "Finger Textured 4 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Finger Textured",
+    "treatment": "Polymer Coating",
+    "thickness": 4,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue",
+      "White"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "micro-diamond-9-nitrile-long",
+    "name": "Micro Diamond 9 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free Micro Diamond Textured Gloves Long Cuff",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Micro Diamond",
+    "treatment": "Polymer Coating",
+    "thickness": 9,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Royal Blue"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "2X-Large",
+      "3X-Large"
+    ],
+    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )"
+  },
+  {
+    "slug": "micro-diamond-9-nitrile",
+    "name": "Micro Diamond 9 mil Nitrile",
+    "fullName": "Nitrile Powder Free Micro Diamond Textured Gloves Long Cuff",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Micro Diamond",
+    "treatment": "Polymer Coating",
+    "thickness": 9,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Royal Blue"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "2X-Large",
+      "3X-Large"
+    ],
+    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )"
+  },
+  {
+    "slug": "fully-textured-4-nitrile",
+    "name": "Fully Textured 4 mil Nitrile",
+    "fullName": "Nitrile Powder Free Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Polymer Coating",
+    "thickness": 4,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Blue",
+      "Red",
+      "Purple",
+      "White"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "fully-textured-4-nitrile-long",
+    "name": "Fully Textured 4 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free Long Cuff Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Polymer Coating",
+    "thickness": 4,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue",
+      "Black"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "finger-textured-3-nitrile-2",
+    "name": "Finger Textured 3 mil Nitrile · Powdered",
+    "fullName": "Nitrile Powdered Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Finger Textured",
+    "treatment": "Coated with USP Grade Corn Starch",
+    "thickness": 3,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "White",
+      "Blue"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-4-nitrile",
+    "name": "Fully Textured 4 mil Nitrile · Powdered",
+    "fullName": "Nitrile Powdered Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Coated with USP Grade Corn Starch",
+    "thickness": 4,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-5-nitrile",
+    "name": "Fully Textured 5 mil Nitrile · Powdered",
+    "fullName": "Nitrile Powdered Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Coated with USP Grade Corn Starch",
+    "thickness": 5,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue",
+      "Light Blue"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-6-nitrile",
+    "name": "Fully Textured 6 mil Nitrile · Powdered",
+    "fullName": "Nitrile Powdered Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Coated with USP Grade Corn Starch",
+    "thickness": 6,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-8-nitrile",
+    "name": "Fully Textured 8 mil Nitrile · Powdered",
+    "fullName": "Nitrile Powdered Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Coated with USP Grade Corn Starch",
+    "thickness": 8,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue",
+      "Light Blue",
+      "Majestic Blue"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "fully-textured-4-bio-nitrile",
+    "name": "Fully Textured 4 mil Bio Nitrile",
+    "fullName": "Nitrile Powder Free Biodegradable Gloves",
+    "material": "Bio Nitrile",
+    "bio": true,
+    "texture": "Fully Textured",
+    "treatment": "Polymer Coating",
+    "thickness": 4,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "finger-textured-4-5-nitrile",
+    "name": "Finger Textured 4.5 mil Nitrile",
+    "fullName": "Nitrile Powder Free Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Finger Textured",
+    "treatment": "Polymer Coating",
+    "thickness": 4.5,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Reflex Green"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "fully-textured-5-nitrile",
+    "name": "Fully Textured 5 mil Nitrile",
+    "fullName": "Nitrile Powder Free Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Polymer Coating",
+    "thickness": 5,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Blue",
+      "Light Blue",
+      "Orange",
+      "Green"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "fully-textured-5-nitrile-long",
+    "name": "Fully Textured 5 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free Long Cuff Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Polymer Coating",
+    "thickness": 5,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "fully-textured-6-nitrile",
+    "name": "Fully Textured 6 mil Nitrile",
+    "fullName": "Nitrile Powder Free Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Polymer Coating",
+    "thickness": 6,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Blue",
+      "Orange",
+      "Purple",
+      "Green",
+      "Yellow"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "fully-textured-6-nitrile-long",
+    "name": "Fully Textured 6 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free Long Cuff Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Polymer Coating",
+    "thickness": 6,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Blue",
+      "Violet"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "fully-textured-8-nitrile",
+    "name": "Fully Textured 8 mil Nitrile",
+    "fullName": "Nitrile Powder Free Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Polymer Coating",
+    "thickness": 8,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Blue",
+      "Light Blue",
+      "Majestic Blue"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "2X-Large. 3X-Large",
+      "2XL-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "fully-textured-8-nitrile-long",
+    "name": "Fully Textured 8 mil Nitrile Long Cuff",
+    "fullName": "Nitrile Powder Free Long Cuff Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Polymer Coating",
+    "thickness": 8,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Blue",
+      "Green"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "2X-Large",
+      "3X-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "zig-6-nitrile",
+    "name": "Zig 6 mil Nitrile",
+    "fullName": "Nitrile Powder Free Zig Textured Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Zig",
+    "treatment": "Polymer Coating",
+    "thickness": 6,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Blue",
+      "Orange",
+      "Green",
+      "Red",
+      "Arctic Blue"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": "US Design Patent Number D1, 068,207 S Apr. 1st 2025 &"
+  },
+  {
+    "slug": "zig-8-nitrile",
+    "name": "Zig 8 mil Nitrile",
+    "fullName": "Nitrile Powder Free Zig Textured Gloves",
+    "material": "Nitrile",
+    "bio": false,
+    "texture": "Zig",
+    "treatment": "Polymer Coating",
+    "thickness": 8,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Blue",
+      "Orange",
+      "Green",
+      "Red",
+      "Dual Tone (Black and Green)"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": "US Design Patent Number D1, 068,207 S Apr. 1st 2025 &"
+  },
+  {
+    "slug": "zig-6-bio-nitrile",
+    "name": "Zig 6 mil Bio Nitrile",
+    "fullName": "Nitrile Powder Free Biodegradable Zig Gloves",
+    "material": "Bio Nitrile",
+    "bio": true,
+    "texture": "Zig",
+    "treatment": "Polymer Coating",
+    "thickness": 6,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black",
+      "Blue",
+      "Red",
+      "Orange",
+      "Green",
+      "Royal Blue",
+      "Arctic Blue"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": "US Design Patent Number D1, 068,207 S Apr. 1st 2025 &"
+  },
+  {
+    "slug": "smooth-latex",
+    "name": "Smooth Latex",
+    "fullName": "Latex Powder Free Smooth Gloves (Economy)",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Smooth",
+    "treatment": "Mild Washing with Chlorine Solution and Extensive Washing",
+    "thickness": null,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "White",
+      "Blue",
+      "Black"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-10-latex-long",
+    "name": "Fully Textured 10 mil Latex Long Cuff",
+    "fullName": "Latex 10.0 Mil Powder Free Long Cuff (High Risk) Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Mild Washing with Chlorine Solution and Extensive Washing",
+    "thickness": 10,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-14-latex-long",
+    "name": "Fully Textured 14 mil Latex Long Cuff",
+    "fullName": "Latex 14.0 Mil Powder Free Long Cuff (High Risk) Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Mild Washing with Chlorine Solution and Extensive Washing",
+    "thickness": 14,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "diamond-14-latex-long",
+    "name": "Diamond 14 mil Latex Long Cuff",
+    "fullName": "Latex Powder Free Diamond Textured House Hold Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Diamond",
+    "treatment": "Mild Washing with Chlorine Solution and Extensive Washing",
+    "thickness": 14,
+    "length": 300,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue",
+      "White",
+      "Orange"
+    ],
+    "sizes": [
+      "Small (7)",
+      "Medium (8)",
+      "Large (9)",
+      "X-Large (10)",
+      "XX-Large (11)"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "micro-diamond-14-latex-long",
+    "name": "Micro Diamond 14 mil Latex Long Cuff",
+    "fullName": "Latex Powder Free Micro Diamond Textured House Hold Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Micro Diamond",
+    "treatment": "Mild Washing with Chlorine Solution and Extensive Washing",
+    "thickness": 14,
+    "length": 300,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue and White"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "2X-Large",
+      "3X-Large"
+    ],
+    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )"
+  },
+  {
+    "slug": "smooth-latex-2",
+    "name": "Smooth Latex · Powdered",
+    "fullName": "Latex Powdered Smooth Gloves (Economy)",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Smooth",
+    "treatment": "Coated with USP Grade Corn Starch",
+    "thickness": null,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "White",
+      "Blue"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-latex",
+    "name": "Fully Textured Latex · Powdered",
+    "fullName": "Latex Powdered Fully Textured Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Coated with USP Grade Corn Starch",
+    "thickness": null,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "White"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-latex-long",
+    "name": "Fully Textured Latex Long Cuff · Powdered",
+    "fullName": "Latex Powdered Fully Textured Long Cuff Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Coated with USP Grade Corn Starch",
+    "thickness": null,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "White"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-8-latex",
+    "name": "Fully Textured 8 mil Latex · Powdered",
+    "fullName": "Latex 8.0 Mil Powdered Fully Textured Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Coated with USP Grade Corn Starch",
+    "thickness": 8,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "zig-14-latex-long",
+    "name": "Zig 14 mil Latex Long Cuff",
+    "fullName": "Latex Powder Free Zig Textured House Hold Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Zig",
+    "treatment": "Mild Washing with Chlorine Solution and Extensive Washing",
+    "thickness": 14,
+    "length": 300,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Blue and White"
+    ],
+    "sizes": [
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "2X-Large",
+      "3X-Large"
+    ],
+    "patent": "US Design Patent Number D1, 068,207 S Apr. 1st 2025 &"
+  },
+  {
+    "slug": "textured-latex-2",
+    "name": "Fully Textured Latex",
+    "fullName": "Latex Powder Free Fully Textured Gloves (Economy)",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Polymer Coated",
+    "thickness": null,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "White",
+      "Blue"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-latex-long-2",
+    "name": "Fully Textured Latex Long Cuff",
+    "fullName": "Latex Powder Free Fully Textured Long Cuff Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Mild Washing with Chlorine Solution and Extensive Washing",
+    "thickness": null,
+    "length": 290,
+    "longCuff": true,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "White"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-7-latex",
+    "name": "Fully Textured 7 mil Latex",
+    "fullName": "Latex 7.0 Mil Powder Free Fully Textured Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Mild Washing with Chlorine Solution and Extensive Washing",
+    "thickness": 7,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "White"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-8-latex-2",
+    "name": "Fully Textured 8 mil Latex",
+    "fullName": "Latex 8.0 Mil Powder Free Fully Textured Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Mild Washing with Chlorine Solution and Extensive Washing",
+    "thickness": 8,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "White"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "smooth-8-latex",
+    "name": "Smooth 8 mil Latex",
+    "fullName": "Latex 8.0 Mil Powder Free Smooth Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Smooth",
+    "treatment": "Mild Washing with Chlorine Solution and Extensive Washing",
+    "thickness": 8,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "Black"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  },
+  {
+    "slug": "textured-9-latex",
+    "name": "Fully Textured 9 mil Latex",
+    "fullName": "Latex 9.0 Mil Powder Free Fully Textured Gloves",
+    "material": "Latex",
+    "bio": false,
+    "texture": "Fully Textured",
+    "treatment": "Mild Washing with Chlorine Solution and Extensive Washing",
+    "thickness": 9,
+    "length": 240,
+    "longCuff": false,
+    "grade": "Disposable & Examination",
+    "colours": [
+      "White"
+    ],
+    "sizes": [
+      "X-Small",
+      "Small",
+      "Medium",
+      "Large",
+      "X-Large",
+      "XX-Large"
+    ],
+    "patent": ""
+  }
+]

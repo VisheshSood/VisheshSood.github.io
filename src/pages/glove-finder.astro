@@ -1,0 +1,172 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+import GloveCard from "../components/GloveCard.astro";
+import { catalogue } from "../data/catalogue";
+
+// Guided-selection questions. Each option carries a `key` used by the client script.
+const needs = [
+  { key: "oilgrip", label: "Maximum grip in oil", hint: "Diamond & Micro Diamond textures" },
+  { key: "drygrip", label: "Best dry grip", hint: "Patented Zig texture" },
+  { key: "rugged", label: "Rugged / heavy-duty", hint: "Tyre Tread & thick gauges" },
+  { key: "chemical", label: "Chemical & long-cuff", hint: "Extended protection" },
+  { key: "everyday", label: "Everyday value", hint: "Lightweight all-rounders" },
+  { key: "bio", label: "Biodegradable", hint: "Lower-footprint nitrile" },
+];
+const materials = [
+  { key: "any", label: "Any material" },
+  { key: "Nitrile", label: "Nitrile" },
+  { key: "Latex", label: "Latex" },
+];
+const cuffs = [
+  { key: "any", label: "Any cuff" },
+  { key: "standard", label: "Standard" },
+  { key: "long", label: "Long cuff" },
+];
+---
+
+<PageLayout title="Find Your Glove | Innovative Gloves" description="Answer a few quick questions, what you need, material and cuff, and we'll recommend the right Innovative glove for the job from our full range.">
+  <PageBanner eyebrow="Find Your Glove" title={`Tell Us the Job. We'll Find the Glove<span class="dot">.</span>`}
+    intro="Pick what matters most, narrow by material and cuff, and we'll shortlist the right products, instantly." />
+
+  <section class="section finder">
+    <div class="container">
+      <div class="finder-controls">
+        <div class="fq">
+          <p class="fq-label"><span class="fq-num">1</span> What matters most?</p>
+          <div class="fq-opts" data-group="need">
+            {needs.map((n) => (
+              <button type="button" class="fopt fopt--need" data-key={n.key}>
+                <span class="fopt-title">{n.label}</span>
+                <span class="fopt-hint">{n.hint}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div class="fq-row">
+          <div class="fq">
+            <p class="fq-label"><span class="fq-num">2</span> Material</p>
+            <div class="fq-opts" data-group="material">
+              {materials.map((m, i) => (<button type="button" class="fopt fopt--pill" data-key={m.key} data-default={i === 0 ? "1" : undefined}>{m.label}</button>))}
+            </div>
+          </div>
+          <div class="fq">
+            <p class="fq-label"><span class="fq-num">3</span> Cuff</p>
+            <div class="fq-opts" data-group="cuff">
+              {cuffs.map((c, i) => (<button type="button" class="fopt fopt--pill" data-key={c.key} data-default={i === 0 ? "1" : undefined}>{c.label}</button>))}
+            </div>
+          </div>
+          <button type="button" id="finderReset" class="finder-reset">Reset</button>
+        </div>
+      </div>
+
+      <div class="finder-results">
+        <p class="finder-count" id="finderCount">Pick an option above to see recommendations.</p>
+        <div class="finder-grid" id="finderGrid">
+          {catalogue.map((g) => (
+            <div class="find-card" data-texture={g.texture} data-material={g.material}
+              data-bio={g.bio ? "1" : "0"} data-longcuff={g.longCuff ? "1" : "0"}
+              data-thickness={g.thickness ?? ""} hidden>
+              <GloveCard glove={g} />
+            </div>
+          ))}
+        </div>
+        <p class="finder-empty" id="finderEmpty" hidden>No exact match, try widening the material or cuff, or <a href="/gloves">browse all gloves</a>.</p>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .finder-controls { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: clamp(20px, 3vw, 30px); margin-bottom: clamp(28px, 4vw, 44px); }
+  .fq-row { margin-top: 22px; }
+  .fq-label { display: flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 800; font-size: 1.02rem; margin-bottom: 14px; }
+  .fq-num { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--green); color: #14210a; font-size: 0.8rem; font-weight: 800; }
+
+  .fq-opts { display: flex; flex-wrap: wrap; gap: 10px; }
+  .fopt { cursor: pointer; border: 1px solid var(--border-strong); background: var(--bg); border-radius: var(--radius); transition: all 0.14s ease; text-align: left; }
+  .fopt--need { display: flex; flex-direction: column; gap: 3px; padding: 12px 16px; min-width: 160px; }
+  .fopt-title { font-weight: 700; font-size: 0.92rem; color: var(--ink); }
+  .fopt-hint { font-size: 0.74rem; color: var(--text-muted); }
+  .fopt--pill { padding: 9px 16px; font-weight: 600; font-size: 0.88rem; color: var(--text); border-radius: 999px; }
+  .fopt:hover { border-color: var(--green); }
+  .fopt.is-active { background: var(--green); border-color: var(--green); }
+  .fopt.is-active .fopt-title, .fopt--pill.is-active { color: #14210a; }
+  .fopt.is-active .fopt-hint { color: #2b3a17; }
+
+  .fq-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 24px 40px; }
+  .finder-reset { margin-left: auto; align-self: flex-end; background: none; border: 0; color: var(--green-dark); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; padding: 9px 0; }
+  .finder-reset:hover { text-decoration: underline; }
+
+  .finder-count { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); margin-bottom: 18px; }
+  .finder-count strong { color: var(--ink); }
+  .finder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; }
+  .finder-empty { margin-top: 20px; color: var(--text-muted); }
+  .finder-empty a { color: var(--green-dark); font-weight: 700; text-decoration: underline; }
+
+  @media (max-width: 560px) { .fopt--need { min-width: 0; flex: 1 1 46%; } }
+</style>
+
+<script>
+  type Need = "oilgrip" | "drygrip" | "rugged" | "chemical" | "everyday" | "bio";
+  const cards = Array.from(document.querySelectorAll<HTMLElement>(".find-card"));
+  const countEl = document.getElementById("finderCount");
+  const emptyEl = document.getElementById("finderEmpty");
+
+  const state = { need: null as Need | null, material: "any", cuff: "any" };
+
+  const needMatch: Record<Need, (c: DOMStringMap) => boolean> = {
+    oilgrip: (c) => c.texture === "Micro Diamond" || c.texture === "Diamond",
+    drygrip: (c) => c.texture === "Zig",
+    rugged: (c) => c.texture === "Tyre Tread" || Number(c.thickness) >= 8,
+    chemical: (c) => c.longcuff === "1" || Number(c.thickness) >= 8,
+    everyday: (c) => ["Fully Textured", "Finger Textured", "Smooth"].includes(c.texture || "") && (c.thickness === "" || Number(c.thickness) <= 5),
+    bio: (c) => c.bio === "1",
+  };
+
+  function apply() {
+    let shown = 0;
+    for (const card of cards) {
+      const d = card.dataset;
+      let ok = state.need ? needMatch[state.need](d) : false;
+      if (ok && state.material !== "any") ok = state.material === "Latex" ? d.material === "Latex" : (d.material || "").includes("Nitrile");
+      if (ok && state.cuff !== "any") ok = state.cuff === "long" ? d.longcuff === "1" : d.longcuff === "0";
+      card.hidden = !ok;
+      if (ok) shown++;
+    }
+    if (!state.need) {
+      if (countEl) countEl.textContent = "Pick an option above to see recommendations.";
+      if (emptyEl) emptyEl.hidden = true;
+      return;
+    }
+    if (countEl) countEl.innerHTML = `<strong>${shown}</strong> recommended ${shown === 1 ? "glove" : "gloves"}`;
+    if (emptyEl) emptyEl.hidden = shown !== 0;
+  }
+
+  document.querySelectorAll<HTMLElement>(".fq-opts").forEach((group) => {
+    const g = group.dataset.group;
+    group.querySelectorAll<HTMLButtonElement>(".fopt").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        group.querySelectorAll(".fopt").forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        const key = btn.dataset.key as string;
+        if (g === "need") state.need = key as Need;
+        else if (g === "material") state.material = key;
+        else if (g === "cuff") state.cuff = key;
+        apply();
+      });
+    });
+  });
+
+  document.getElementById("finderReset")?.addEventListener("click", () => {
+    state.need = null; state.material = "any"; state.cuff = "any";
+    document.querySelectorAll(".fopt").forEach((b) => b.classList.remove("is-active"));
+    document.querySelectorAll<HTMLElement>('.fopt[data-default="1"]').forEach((b) => b.classList.add("is-active"));
+    apply();
+  });
+
+  // default the "any" pills to active
+  document.querySelectorAll<HTMLElement>('.fopt[data-default="1"]').forEach((b) => b.classList.add("is-active"));
+  apply();
+</script>

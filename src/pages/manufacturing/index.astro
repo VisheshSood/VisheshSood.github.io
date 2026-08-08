@@ -1,0 +1,145 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+
+const stats = [
+  { n: "14", l: "Production lines" },
+  { n: "1 bn+", l: "Gloves a year" },
+  { n: "In-house", l: "Testing & R&D" },
+  { n: "35+ yrs", l: "Of expertise" },
+];
+
+// The production journey, each step with a real photo from our floor.
+const steps = [
+  {
+    kicker: "Step 01 · Materials",
+    title: "Responsible Sourcing",
+    body: "Every glove starts with the right materials. As industry veterans in raw-material procurement, we source only high-grade nitrile and latex, and we hold our suppliers to the same ethical and quality standards we set for ourselves. We never bulk our gloves with cheap fillers, so the film stays strong and tear-resistant.",
+    img: "/images/mfg-materials.jpg",
+    label: "Latex & compound storage tanks",
+  },
+  {
+    kicker: "Step 02 · Compounding",
+    title: "Compounding & Mixing",
+    body: "Raw materials are precisely compounded and mixed to our own formulations, the recipes behind our patented grip and durability. Every material is quality-checked, and any change to a formulation is approved and tested before it ever reaches a production line.",
+    img: "/images/mfg-compounding.jpg",
+    label: "Raw-material & chemical store",
+  },
+  {
+    kicker: "Step 03 · Forming",
+    title: "Dipping & Forming",
+    body: "Ceramic hand formers travel through our dipping lines, building each glove layer by layer. We run 14 production lines, giving us the capacity for over a billion gloves a year across nitrile and latex, in every thickness and cuff length we offer.",
+    img: "/images/mfg-lines.jpg",
+    label: "Production lines IG.1 to IG.14",
+  },
+  {
+    kicker: "Step 04 · Curing",
+    title: "Curing & Stripping",
+    body: "The gloves are cured for strength and consistency, then stripped from the formers. This is where our textures, Diamond, Micro Diamond, Zig and Tyre Tread, take their final shape, embossed into the surface rather than coated on.",
+    img: "/images/mfg-dipline.jpg",
+    label: "Gloves leaving the dip line",
+  },
+  {
+    kicker: "Step 05 · Quality & Packing",
+    title: "Inspection & Packing",
+    body: "Every batch is inspected and tested in our own labs, tensile strength, elongation and post-aging, before it is hand-checked, packed and boxed. Nothing leaves the factory until it meets our standard.",
+    img: "/images/mfg-packing.jpg",
+    label: "Inspection & packing hall",
+  },
+];
+---
+
+<PageLayout
+  title="Manufacturing | Innovative Gloves"
+  description="How Innovative Gloves are made: responsible raw-material sourcing, in-house compounding, 14 dipping lines producing over a billion gloves a year, curing, and full in-house inspection and testing, all in Thailand."
+>
+  <PageBanner eyebrow="Manufacturing" title={`Made by Us,<br>End to End<span class="dot">.</span>`}
+    intro="Our technologies aren't outsourced. We develop and manufacture them ourselves, in Thailand, from raw material to packed box. Here's how every glove is made." />
+
+  <!-- STATS -->
+  <section class="section mfg-stats-sec">
+    <div class="container">
+      <ul class="mfg-stats">
+        {stats.map((s) => (<li><span class="ms-n">{s.n}</span><span class="ms-l">{s.l}</span></li>))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROCESS STEPS -->
+  {steps.map((s) => (
+    <section class="section mfg-step">
+      <div class="container mfg-row">
+        <div class="mfg-copy">
+          <p class="eyebrow">{s.kicker}</p>
+          <h2>{s.title}<span class="dot">.</span></h2>
+          <p class="muted">{s.body}</p>
+        </div>
+        <div class="mfg-media">
+          <div class="mfg-img" style={`background-image:url('${s.img}')`} role="img" aria-label={s.label}></div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- QUALITY CALLOUT -->
+  <section class="section mfg-quality">
+    <div class="container mfg-q-inner">
+      <p class="eyebrow">Control</p>
+      <h2>Tested at Every Stage<span class="dot">.</span></h2>
+      <p class="muted">Consistency isn't luck. On-site tensile, elongation and advanced post-aging testing, backed by our own R&amp;D, keep every glove performing, batch after batch. It's how we can put patented grip and heavy-duty durability in writing.</p>
+      <div class="mfg-q-actions">
+        <a href="/manufacturing/quality" class="btn btn--primary">Quality &amp; Testing <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/certifications" class="btn btn--ghost">Certifications</a>
+        <a href="/sustainability" class="btn btn--ghost">Sustainability</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section mfg-cta">
+    <div class="container mfg-cta-inner">
+      <h2>Build It With Us<span class="dot">.</span></h2>
+      <p class="muted">The same factory makes our own patented range and private-label gloves for brands worldwide. Tell us what you need.</p>
+      <div class="mfg-q-actions">
+        <a href="/private-label" class="btn btn--primary">OEM &amp; Private Label <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/request-samples" class="btn btn--ghost">Request Samples</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .mfg-stats-sec { background: var(--bg); }
+  .mfg-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .mfg-stats li { display: flex; flex-direction: column; gap: 4px; padding: 20px 22px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .ms-n { font-family: var(--font-head); font-weight: 900; font-size: clamp(1.4rem, 2.6vw, 2.1rem); color: var(--green-dark); }
+  .ms-l { font-size: 0.8rem; color: var(--text-muted); }
+
+  .mfg-step { border-top: 1px solid var(--border); }
+  .mfg-step:nth-child(even) { background: var(--bg-2); }
+  .mfg-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+  .mfg-step:nth-child(odd) .mfg-media { order: 2; }
+  .mfg-step:nth-child(even) .mfg-copy { order: 2; }
+  .mfg-copy h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin: 10px 0 14px; }
+  .mfg-copy p { line-height: 1.65; }
+  .mfg-img { aspect-ratio: 3 / 2; border-radius: var(--radius); border: 1px solid var(--border); background-size: cover; background-position: center; box-shadow: 0 16px 40px rgba(0,0,0,0.10); }
+
+  .mfg-quality { background: radial-gradient(120% 120% at 100% 0%, rgba(140,198,63,0.14), rgba(140,198,63,0) 55%), var(--bg); border-top: 1px solid var(--border); }
+  .mfg-q-inner { max-width: 720px; }
+  .mfg-quality h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); margin: 10px 0 14px; }
+  .mfg-quality p { line-height: 1.65; margin-bottom: 22px; }
+  .mfg-q-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  .mfg-cta { background: var(--bg-2); border-top: 1px solid var(--border); text-align: center; }
+  .mfg-cta-inner { max-width: 620px; margin-inline: auto; }
+  .mfg-cta-inner h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); margin-bottom: 12px; }
+  .mfg-cta .mfg-q-actions { justify-content: center; }
+
+  @media (max-width: 820px) {
+    .mfg-stats { grid-template-columns: repeat(2, 1fr); }
+    .mfg-row { grid-template-columns: 1fr; }
+    .mfg-step:nth-child(odd) .mfg-media,
+    .mfg-step:nth-child(even) .mfg-copy { order: 0; }
+    .mfg-media { order: -1 !important; }
+  }
+</style>

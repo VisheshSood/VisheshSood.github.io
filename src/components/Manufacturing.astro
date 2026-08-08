@@ -1,0 +1,87 @@
+---
+const stats = [
+  { num: "14", label: "Production Lines", icon: "factory" },
+  { num: "12", label: "Stages of Quality Control", icon: "shield-check" },
+  { num: "35+", label: "Years of Experience", icon: "sliders" },
+  { num: "100%", label: "Focus on Protection", icon: "shield" },
+];
+---
+
+<section class="manufacturing" id="manufacturing">
+  <div class="mf-content">
+    <p class="eyebrow">Manufactured with Precision</p>
+    <h2>Quality Is<br />In Our DNA<span class="dot">.</span></h2>
+    <p class="mf-lede muted">
+      State-of-the-art facilities, strict quality control and passionate people
+      behind every glove we make.
+    </p>
+    <a href="#manufacturing" class="btn btn--ghost">Discover Our Manufacturing <span class="arrow" aria-hidden="true">&rarr;</span></a>
+
+    <ul class="mf-stats">
+      {stats.map((s) => (
+        <li class="mf-stat">
+          <span class="mf-icon" aria-hidden="true">
+            {s.icon === "factory" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21V10l6 4V10l6 4V6l6 3v12z"/><path d="M3 21h18"/></svg>)}
+            {s.icon === "shield-check" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>)}
+            {s.icon === "sliders" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>)}
+            {s.icon === "shield" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg>)}
+          </span>
+          <span class="mf-num">{s.num}</span>
+          <span class="mf-label">{s.label}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="mf-media">
+    <div class="mf-img" style="background-image: url('/images/manufacturing-floor.jpg')"></div>
+  </div>
+</section>
+
+<style>
+  .manufacturing {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: stretch;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+  .mf-content {
+    padding-block: clamp(48px, 7vw, 96px);
+    padding-inline: var(--gutter);
+    align-self: center;
+    max-width: 660px;
+    margin-left: auto;
+    width: 100%;
+  }
+  .mf-content h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); margin: 12px 0 16px; }
+  .mf-lede { max-width: 42ch; margin-bottom: 26px; }
+
+  .mf-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .mf-stat { display: flex; flex-direction: column; gap: 6px; padding-right: 8px; }
+  .mf-stat + .mf-stat { border-left: 1px solid var(--border); padding-left: 16px; }
+  .mf-icon { color: var(--green-dark); width: 26px; height: 26px; }
+  .mf-icon svg { width: 100%; height: 100%; }
+  .mf-num { font-family: var(--font-head); font-weight: 800; font-size: 1.9rem; color: var(--ink); margin-top: 4px; }
+  .mf-label { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-muted); line-height: 1.3; }
+
+  .mf-media { position: relative; min-height: 340px; }
+  .mf-img { position: absolute; inset: 0; border: 0; background-size: cover; background-position: center; background-repeat: no-repeat; }
+
+  @media (max-width: 900px) {
+    .manufacturing { grid-template-columns: 1fr; }
+    .mf-content { margin-left: 0; max-width: none; }
+    .mf-media { min-height: 300px; order: -1; }
+  }
+  @media (max-width: 560px) {
+    .mf-stats { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
+    .mf-stat:nth-child(3) { border-left: 0; padding-left: 0; }
+  }
+</style>

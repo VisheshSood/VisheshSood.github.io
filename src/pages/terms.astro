@@ -1,0 +1,63 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+const updated = "8 August 2026";
+---
+
+<PageLayout title="Terms of Use | Innovative Gloves" description="The terms that govern your use of the Innovative Gloves website.">
+  <PageBanner eyebrow="Legal" title="Terms of Use"
+    intro="The terms on which we make this website available. Please read them before using the site." />
+
+  <section class="section">
+    <div class="container legal">
+      <p class="legal-updated">Last updated: {updated}</p>
+
+      <h2>1. About these terms</h2>
+      <p>This website is operated by <strong>Innovative Gloves Co., Ltd.</strong> ("Innovative Gloves", "we", "us"). By accessing or using this website you agree to these Terms of Use. If you do not agree, please do not use the site.</p>
+
+      <h2>2. About this website</h2>
+      <p>This website provides general information about our company and products. It is intended for information only and does not constitute an offer to sell, technical advice, or a binding commitment. We may change, suspend or withdraw any part of the site at any time.</p>
+
+      <h2>3. Using the site</h2>
+      <p>You may use this website for lawful purposes and to learn about our products and services. You agree not to misuse the site, including by attempting to gain unauthorised access, introducing malicious code, disrupting the site, or scraping content for competing commercial use without our permission.</p>
+
+      <h2>4. Intellectual property</h2>
+      <p>All content on this website, including text, images, logos, product designs, brand names and page design, is owned by or licensed to Innovative Gloves and is protected by intellectual-property laws. Our grip technologies are protected by registered design patents, and our brand names are our trademarks. You may not copy, reproduce, or reuse our content, designs, patented textures or brands without our prior written permission.</p>
+
+      <h2>5. Product information and specifications</h2>
+      <p>We work to keep product information, specifications, images and certification details accurate and up to date, but they are provided for general guidance and may change without notice. Colours, textures and packaging shown on screen may differ slightly from the physical product. Nothing on this site is a warranty or guarantee of any particular specification or result.</p>
+
+      <h2>6. Selecting the right glove</h2>
+      <p>Choosing a suitable glove for a specific task, chemical, medical or food-contact application is the responsibility of the user. You should review the relevant tested data, certifications and documentation for the specific product, and satisfy yourself that it is appropriate for your intended use, conditions and applicable regulations. Test data is obtained under laboratory conditions and does not guarantee performance in every real-world situation.</p>
+
+      <h2>7. Enquiries and orders</h2>
+      <p>Submitting an enquiry, sample request or quote request through this website does not create a contract of sale. Any supply of products is subject to a separate agreement and to our terms and conditions of sale, agreed at the time of order.</p>
+
+      <h2>8. Third-party links</h2>
+      <p>This website may link to third-party websites for convenience. We do not control and are not responsible for the content, products or practices of those sites, and a link does not imply our endorsement.</p>
+
+      <h2>9. Disclaimers</h2>
+      <p>This website is provided "as is" and "as available". To the fullest extent permitted by law, we exclude all warranties, express or implied, regarding the site and its content, including accuracy, availability, and fitness for a particular purpose.</p>
+
+      <h2>10. Limitation of liability</h2>
+      <p>To the fullest extent permitted by law, Innovative Gloves will not be liable for any indirect, incidental or consequential loss, or for any loss of profit, data or business, arising from your use of, or inability to use, this website. Nothing in these terms excludes any liability that cannot be excluded under applicable law.</p>
+
+      <h2>11. Governing law</h2>
+      <p>These Terms of Use are governed by the laws of Thailand, and any dispute relating to them or to this website is subject to the jurisdiction of the Thai courts.</p>
+
+      <h2>12. Changes to these terms</h2>
+      <p>We may update these Terms of Use from time to time. When we do, we will revise the "last updated" date above. Your continued use of the site means you accept the updated terms.</p>
+
+      <h2>13. Contact us</h2>
+      <p>Questions about these terms? Email <a href="mailto:sales@innovativeglove.com" class="inline-link">sales@innovativeglove.com</a> or write to us at 830 Moo 4 Sanambin-Banklang Road, Hatyai, Songkhla 90110, Thailand.</p>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .legal { max-width: 760px; }
+  .legal-updated { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 28px; }
+  .legal h2 { font-size: 1.15rem; margin: 30px 0 10px; }
+  .legal p { font-size: 1rem; line-height: 1.7; color: var(--text); margin-bottom: 12px; }
+  .inline-link { color: var(--green-dark); text-decoration: underline; }
+</style>

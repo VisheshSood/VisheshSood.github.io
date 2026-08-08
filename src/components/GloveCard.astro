@@ -1,0 +1,34 @@
+---
+import GloveVisual from "./GloveVisual.astro";
+import { colourSwatch, type Glove } from "../data/catalogue";
+interface Props { glove: Glove; box?: string; }
+const { glove, box } = Astro.props;
+---
+
+<a class="gcard" href={`/gloves/${glove.slug}`}>
+  <GloveVisual glove={glove} box={box} />
+  <div class="gcard-body">
+    <h3>{glove.name}</h3>
+    <div class="gcard-dots">
+      {glove.colours.slice(0, 7).map((c) => (<span class="gdot" style={`background:${colourSwatch(c)}`} title={c}></span>))}
+      {glove.colours.length > 7 && <span class="gdot-more">+{glove.colours.length - 7}</span>}
+    </div>
+    <div class="gcard-meta">
+      {glove.thickness && <span>{glove.thickness} mil</span>}
+      {glove.length && <span>{glove.length} mm</span>}
+      <span>{glove.material}</span>
+    </div>
+  </div>
+</a>
+
+<style>
+  .gcard { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease; display: block; }
+  .gcard:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.1); }
+  .gcard-body { padding: 15px 16px 16px; }
+  .gcard-body h3 { font-size: 0.98rem; margin-bottom: 10px; line-height: 1.15; }
+  .gcard-dots { display: flex; align-items: center; gap: 4px; margin-bottom: 12px; }
+  .gdot { width: 13px; height: 13px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); }
+  .gdot-more { font-size: 0.66rem; color: var(--text-muted); font-weight: 600; margin-left: 2px; }
+  .gcard-meta { display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--green-dark); }
+  .gcard-meta span:not(:last-child)::after { content: "·"; margin-left: 10px; color: var(--text-dim); }
+</style>

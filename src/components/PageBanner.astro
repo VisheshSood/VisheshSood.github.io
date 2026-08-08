@@ -1,0 +1,38 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+}
+const { eyebrow, title, intro } = Astro.props;
+---
+
+<section class="page-banner">
+  <div class="container">
+    <div class="pb-inner">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1 set:html={title} />
+      {intro && <p class="pb-intro">{intro}</p>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-banner {
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--border);
+    padding-block: clamp(26px, 3.5vw, 48px);
+  }
+  .pb-inner { max-width: 760px; }
+  .page-banner h1 {
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    margin: 8px 0 0;
+    line-height: 1.1;
+  }
+  .pb-intro {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-top: 12px;
+    max-width: 62ch;
+  }
+</style>

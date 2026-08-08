@@ -1,0 +1,142 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+
+const tests = [
+  { t: "Tensile Strength & Elongation", d: "We pull samples from every batch to failure on a calibrated Tinius Olsen tester, verifying force and stretch against EN 455-2, before and after aging." },
+  { t: "Post-Aging Testing", d: "Accelerated aging confirms gloves still perform at the end of their shelf life, not just fresh off the line. Durability you can rely on months later." },
+  { t: "Freedom from Holes", d: "Water-leak and AQL inspection to EN 455-1 catches pinholes before they ship, sampled batch by batch for a dependable barrier." },
+  { t: "Thickness & Dimensions", d: "Every gauge and cuff length is measured against spec. A 6 mil glove should be a 6 mil glove, every time." },
+  { t: "Chemical Permeation & Degradation", d: "Independent EN ISO 374-1 and -4 testing produces the exact permeation and degradation data printed on each product page." },
+  { t: "Micro-organism Protection", d: "EN ISO 374-5 verification of protection against bacteria, fungi and viruses for the applications that need it." },
+];
+
+const flow = [
+  { n: "01", t: "Incoming", d: "Raw materials are inspected and approved before use. Any change to a formulation is re-tested before it reaches a line." },
+  { n: "02", t: "In-Process", d: "Line parameters, temperatures and thickness are controlled throughout production to keep every glove consistent." },
+  { n: "03", t: "Finished Goods", d: "Tensile, aging, leak, AQL and visual inspection are carried out before gloves are hand-packed and boxed." },
+];
+
+const standards = ["EN 455 (Parts 1–4)", "EN ISO 374-1 / -4 / -5", "ISO 9001", "EN ISO 13485"];
+---
+
+<PageLayout
+  title="Quality & Testing | Innovative Gloves"
+  description="Quality is a process, not a claim. On-site tensile and elongation testing, post-aging, freedom-from-holes and AQL, thickness and EN ISO 374 chemical testing, in our own labs, on every batch."
+>
+  <PageBanner eyebrow="Quality & Testing" title={`Proven in Our<br>Own Labs<span class="dot">.</span>`}
+    intro="Quality is a process, not simply a claim. We control it where it's made, on our own lines and in our own labs, and we test every batch before it ships." />
+
+  <!-- FEATURE: real testing -->
+  <section class="section qc-feature">
+    <div class="container qc-feat-grid">
+      <div class="qc-feat-copy">
+        <p class="eyebrow">Tested, Not Assumed</p>
+        <h2>Real Machines. Real Data<span class="dot">.</span></h2>
+        <p class="muted">Behind every claim of grip and durability is a measurement. Our in-house lab pulls, ages, leak-tests and measures gloves from every batch, so the performance on the box is the performance in your hand.</p>
+        <p class="muted">It is also what lets us stand behind patented grip and heavy-duty ratings in writing, and give distributors the documentation they need.</p>
+        <div class="qc-feat-actions">
+          <a href="/certifications" class="btn btn--primary">Certifications <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="/gloves" class="btn btn--ghost">See Per-Product Data</a>
+        </div>
+      </div>
+      <div class="qc-feat-media">
+        <div class="qc-img" style="background-image:url('/images/qc-tensile.jpg')" role="img" aria-label="Tensile and elongation testing machine with a glove specimen"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTS -->
+  <section class="section qc-tests">
+    <div class="container">
+      <header class="qc-head">
+        <p class="eyebrow">In-House Testing</p>
+        <h2>What We Test, and Why<span class="dot">.</span></h2>
+        <p class="muted">The checks every glove is measured against before it earns our name.</p>
+      </header>
+      <ul class="qc-grid">
+        {tests.map((t) => (
+          <li class="qc-card">
+            <span class="qc-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6"/></svg></span>
+            <h3>{t.t}</h3>
+            <p class="muted">{t.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="section qc-flow-sec">
+    <div class="container">
+      <header class="qc-head">
+        <p class="eyebrow">The Process</p>
+        <h2>A 12-Stage Quality System<span class="dot">.</span></h2>
+        <p class="muted">Every glove moves through a structured, documented 12-stage quality-control process, from raw-material preparation to finished goods. In broad strokes, it runs across three phases.</p>
+      </header>
+      <ol class="qc-flow">
+        {flow.map((f) => (
+          <li class="qc-stage">
+            <span class="qc-stage-n">{f.n}</span>
+            <h3>{f.t}</h3>
+            <p class="muted">{f.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- STANDARDS -->
+  <section class="section qc-standards">
+    <div class="container qc-std-inner">
+      <p class="eyebrow">Tested to Standard</p>
+      <h2>The Benchmarks We Hold Every Glove To<span class="dot">.</span></h2>
+      <ul class="qc-std-chips">
+        {standards.map((s) => (<li class="qc-std-chip"><span class="c" aria-hidden="true">&#10003;</span>{s}</li>))}
+      </ul>
+      <div class="qc-feat-actions">
+        <a href="/certifications" class="btn btn--primary">All Certifications <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/request-samples" class="btn btn--ghost">Request Samples</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .qc-feature { background: var(--bg); }
+  .qc-feat-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+  .qc-feat-copy h2 { font-size: clamp(1.6rem, 3.2vw, 2.4rem); margin: 10px 0 14px; }
+  .qc-feat-copy p { line-height: 1.65; margin-bottom: 12px; }
+  .qc-feat-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
+  .qc-img { aspect-ratio: 4 / 5; border-radius: var(--radius); border: 1px solid var(--border); background-color: #eef0ec; background-size: cover; background-position: center; box-shadow: 0 16px 40px rgba(0,0,0,0.12); max-width: 460px; margin-inline: auto; }
+
+  .qc-tests { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .qc-head { max-width: 640px; margin-bottom: clamp(24px, 3vw, 38px); }
+  .qc-head h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin: 10px 0 12px; }
+  .qc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+  .qc-card { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .qc-check { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); margin-bottom: 14px; }
+  .qc-check svg { width: 16px; height: 16px; }
+  .qc-card h3 { font-size: 1.02rem; margin-bottom: 8px; }
+  .qc-card p { font-size: 0.88rem; line-height: 1.55; }
+
+  .qc-flow-sec { background: var(--bg); border-top: 1px solid var(--border); }
+  .qc-flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; list-style: none; padding: 0; margin: 0; }
+  .qc-stage { padding: 26px 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .qc-stage-n { font-family: var(--font-head); font-weight: 900; font-size: 1.4rem; color: var(--green); }
+  .qc-stage h3 { font-size: 1.05rem; margin: 8px 0 8px; }
+  .qc-stage p { font-size: 0.88rem; line-height: 1.55; }
+
+  .qc-standards { background: radial-gradient(120% 120% at 0% 0%, rgba(140,198,63,0.14), rgba(140,198,63,0) 55%), var(--bg-2); border-top: 1px solid var(--border); }
+  .qc-std-inner { max-width: 720px; }
+  .qc-standards h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: 10px 0 18px; }
+  .qc-std-chips { display: flex; flex-wrap: wrap; gap: 10px 12px; margin-bottom: 24px; }
+  .qc-std-chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); font-weight: 700; font-size: 0.85rem; }
+  .qc-std-chip .c { color: var(--green-dark); font-weight: 900; }
+
+  @media (max-width: 820px) {
+    .qc-feat-grid { grid-template-columns: 1fr; }
+    .qc-feat-media { order: -1; }
+    .qc-flow { grid-template-columns: 1fr; }
+  }
+</style>

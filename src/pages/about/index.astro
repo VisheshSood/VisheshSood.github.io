@@ -1,0 +1,178 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+
+const stats = [
+  { n: "2001", l: "Founded in Hat Yai, Thailand" },
+  { n: "25 yrs", l: "Of glove manufacturing" },
+  { n: "1 bn+", l: "Gloves produced a year" },
+  { n: "14", l: "Production lines" },
+  { n: "550+", l: "People on our team" },
+];
+
+const strengths = [
+  { t: "Onsite Tensile & Elongation Testing", d: "We test physical strength and stretch in-house, on every batch, not just on paper." },
+  { t: "Research & Development", d: "A dedicated R&D effort behind our patented grip textures and new products." },
+  { t: "Advanced Post-Aging Testing", d: "We verify that gloves still perform after real shelf life, not just fresh off the line." },
+  { t: "Clean Technology", d: "The first glove producer in southern Thailand to adopt clean-burning technology." },
+];
+---
+
+<PageLayout
+  title="Our Story | Innovative Gloves"
+  description="Founded in Hat Yai, Thailand in 2001, Innovative Gloves grew from a conventional glove maker into an innovation-led manufacturer of patented nitrile and latex gloves, producing over a billion gloves a year for global markets."
+>
+  <PageBanner eyebrow="Our Story" title={`Innovation Is Our<br>Defining Difference<span class="dot">.</span>`}
+    intro="From a single factory in southern Thailand to a billion gloves a year, the story of how a family manufacturer became known for gloves other people can't make." />
+
+  <!-- LEAD -->
+  <section class="section story-lead">
+    <div class="container">
+      <div class="story-hero-img" style="background-image:url('/images/about-gate.jpg')" role="img" aria-label="Innovative Gloves Co., Ltd. factory entrance"></div>
+      <p class="lead-para">
+        Founded in <strong>2001</strong>, Innovative Gloves is a leading <strong>OEM and private-label manufacturer</strong>
+        of high-performance <strong>nitrile and latex gloves</strong>. Strategically located in <strong>Hat Yai, Thailand</strong>,
+        we use modern manufacturing technology to produce gloves that meet the stringent requirements of
+        <strong>medical, industrial and food-handling</strong> applications, and our commitment to quality,
+        compliance and sustainable production has made us a trusted supplier in global markets.
+      </p>
+      <ul class="stat-strip">
+        {stats.map((s) => (
+          <li><span class="stat-n">{s.n}</span><span class="stat-l">{s.l}</span></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- GREW -->
+  <section class="section story-grew">
+    <div class="container grew-wrap">
+      <div class="grew-text">
+        <div class="grew-col">
+          <p class="eyebrow">Our Commitment to Excellence</p>
+          <h2>Responsible Growth<span class="dot">.</span></h2>
+          <p class="muted">Today Innovative Gloves produces <strong>over a billion gloves a year</strong> and keeps growing, with continual investment in infrastructure, training and expansion. We prioritise responsible growth, improving every part of the company from production and quality assurance to administration and our workforce.</p>
+        </div>
+        <div class="grew-col">
+          <p class="eyebrow">Driving Innovation</p>
+          <h2>Products, Not Commodities<span class="dot">.</span></h2>
+          <p class="muted">Innovation is at the core of our mission. Rather than compete on price alone, we develop new products and adopt the latest technologies, including our <strong>patented Diamond, Micro Diamond, Zig and Tyre Tread grip textures</strong>. It's what draws discerning buyers who want more than a generic glove.</p>
+        </div>
+      </div>
+      <div class="grew-media" style="background-image:url('/images/about-production.jpg')" role="img" aria-label="Nitrile glove production lines"></div>
+    </div>
+  </section>
+
+  <!-- STRENGTHS -->
+  <section class="section story-strengths">
+    <div class="container">
+      <header class="ss-head">
+        <p class="eyebrow">Our Strengths</p>
+        <h2>Built on Testing and R&amp;D<span class="dot">.</span></h2>
+        <p class="muted">We control quality where it's made, in our own labs and on our own lines.</p>
+      </header>
+      <ul class="ss-grid">
+        {strengths.map((s) => (
+          <li class="ss-card">
+            <span class="ss-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6"/></svg></span>
+            <h3>{s.t}</h3>
+            <p class="muted">{s.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- GROUNDS BAND -->
+  <div class="about-band" style="background-image:url('/images/about-grounds.jpg')" role="img" aria-label="Innovative Gloves factory grounds"></div>
+
+  <!-- PHILOSOPHY -->
+  <section class="section story-philosophy">
+    <div class="container phil-grid">
+      <div class="phil-copy">
+        <p class="eyebrow">The IGCL Philosophy</p>
+        <blockquote class="phil-quote">
+          "We believe our stewardship of Mother Earth mirrors the care we show our own mothers."
+        </blockquote>
+        <p class="muted phil-sub">
+          It's more than a slogan. We were the first glove producer in southern Thailand to adopt clean-burning
+          technology; our treated wastewater runs clear enough to raise edible fish that we donate to nearby villages;
+          and every employee has planted a tree on our grounds, turning the factory into an orchard of mango, guava
+          and rambutan. Doing this well, and doing it responsibly, are the same thing to us.
+        </p>
+        <div class="phil-actions">
+          <a href="/sustainability" class="btn btn--ghost">Our Sustainability</a>
+          <a href="/about/history" class="btn btn--ghost">25 Years of Innovative</a>
+        </div>
+      </div>
+      <div class="phil-media" style="background-image:url('/images/about-solar.jpg')" role="img" aria-label="Solar panels on the Innovative Gloves site"></div>
+    </div>
+  </section>
+
+  <!-- EXPLORE / CTA -->
+  <section class="section story-cta">
+    <div class="container cta-inner">
+      <h2>Get to Know Us Better<span class="dot">.</span></h2>
+      <p class="muted">See how we make our gloves, what makes them different, and why partners trust us.</p>
+      <div class="cta-actions">
+        <a href="/why-innovative" class="btn btn--primary">Why Innovative <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/manufacturing" class="btn btn--ghost">Manufacturing</a>
+        <a href="/gloves" class="btn btn--ghost">The Range</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .story-lead { background: var(--bg); }
+  .lead-para { font-size: clamp(1.05rem, 1.8vw, 1.3rem); line-height: 1.6; max-width: 70ch; color: var(--text); }
+  .lead-para strong { color: var(--ink); }
+  .stat-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin-top: clamp(28px, 4vw, 44px); border-top: 1px solid var(--border); padding-top: 26px; }
+  .stat-strip li { display: flex; flex-direction: column; gap: 4px; }
+  .stat-n { font-family: var(--font-head); font-weight: 900; font-size: clamp(1.4rem, 2.4vw, 2rem); color: var(--green-dark); }
+  .stat-l { font-size: 0.78rem; color: var(--text-muted); line-height: 1.35; }
+
+  .story-hero-img { margin-bottom: clamp(28px, 4vw, 44px); aspect-ratio: 21 / 8; border-radius: var(--radius); border: 1px solid var(--border); background-size: cover; background-position: center; box-shadow: 0 18px 44px rgba(0,0,0,0.10); }
+
+  .story-grew { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .grew-wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+  .grew-text { display: grid; gap: clamp(22px, 3vw, 34px); }
+  .grew-col h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin: 10px 0 12px; }
+  .grew-col p { line-height: 1.6; }
+  .grew-media { aspect-ratio: 4 / 3; border-radius: var(--radius); border: 1px solid var(--border); background-size: cover; background-position: center; box-shadow: 0 16px 40px rgba(0,0,0,0.10); }
+
+  .about-band { height: clamp(220px, 34vw, 420px); background-size: cover; background-position: center; border-block: 1px solid var(--border); }
+
+  .story-strengths { background: var(--bg); }
+  .ss-head { max-width: 640px; margin-bottom: clamp(24px, 3vw, 36px); }
+  .ss-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: 10px 0 12px; }
+  .ss-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+  .ss-card { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .ss-check { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); margin-bottom: 14px; }
+  .ss-check svg { width: 16px; height: 16px; }
+  .ss-card h3 { font-size: 0.98rem; margin-bottom: 8px; }
+  .ss-card p { font-size: 0.85rem; line-height: 1.5; }
+
+  .story-philosophy { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .phil-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+  .phil-media { aspect-ratio: 4 / 3; border-radius: var(--radius); border: 1px solid var(--border); background-size: cover; background-position: center; box-shadow: 0 16px 40px rgba(0,0,0,0.10); }
+  .phil-quote { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.4rem, 3vw, 2.1rem); line-height: 1.3; color: var(--ink); margin: 12px 0 18px; }
+  .phil-sub { line-height: 1.65; max-width: 66ch; }
+  .phil-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
+
+  .story-cta { background: radial-gradient(120% 120% at 50% 0%, rgba(140,198,63,0.12), rgba(140,198,63,0) 60%), var(--bg); border-top: 1px solid var(--border); text-align: center; }
+  .cta-inner { max-width: 620px; margin-inline: auto; }
+  .cta-inner h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 12px; }
+  .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+
+  @media (max-width: 860px) {
+    .grew-wrap { grid-template-columns: 1fr; }
+    .grew-media { order: -1; }
+    .phil-grid { grid-template-columns: 1fr; }
+    .phil-media { order: -1; }
+  }
+  @media (max-width: 760px) {
+    .stat-strip { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .story-hero-img { aspect-ratio: 16 / 10; }
+  }
+</style>

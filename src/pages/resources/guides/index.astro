@@ -1,0 +1,38 @@
+---
+import PageLayout from "../../../layouts/PageLayout.astro";
+import PageBanner from "../../../components/PageBanner.astro";
+import { guides } from "../../../data/guides";
+---
+
+<PageLayout
+  title="Glove Knowledge Centre | Innovative Gloves"
+  description="Practical guides on choosing glove thickness, nitrile vs latex, grip textures, chemical permeation, oily environments and food-safe selection, from a manufacturer that makes them."
+>
+  <PageBanner eyebrow="Glove Knowledge Centre" title={`Know Before<br>You Choose<span class="dot">.</span>`}
+    intro="Straight-talking guides to help you pick the right glove for the job, written by the people who make them." />
+
+  <section class="section guides">
+    <div class="container">
+      <div class="guide-grid">
+        {guides.map((g) => (
+          <a class="guide-card" href={`/resources/guides/${g.slug}`}>
+            <span class="guide-tag">{g.tag}</span>
+            <h3 class="guide-title">{g.title}</h3>
+            <p class="guide-excerpt muted">{g.excerpt}</p>
+            <span class="guide-link">Read guide <span aria-hidden="true">&rarr;</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .guide-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+  .guide-card { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 24px; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+  .guide-card:hover { transform: translateY(-4px); border-color: var(--green); box-shadow: 0 14px 30px rgba(0,0,0,0.08); }
+  .guide-tag { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 12px; }
+  .guide-title { font-size: 1.1rem; line-height: 1.2; margin-bottom: 10px; }
+  .guide-excerpt { font-size: 0.88rem; line-height: 1.55; margin-bottom: 16px; flex: 1; }
+  .guide-link { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--green-dark); }
+</style>

@@ -1,0 +1,61 @@
+---
+import ReviewsCarousel from "./ReviewsCarousel.astro";
+
+const features = [
+  { title: "35+ Years of Expertise", desc: "Over three decades of hands-on experience engineering and manufacturing gloves." },
+  { title: "Patented Grip Technologies", desc: "Proprietary textures we invented, tested and own." },
+  { title: "60+ Glove Variations", desc: "Specialist products plus a complete standard range." },
+  { title: "Heavy-Duty Specialists", desc: "Serious industrial gloves, not just thin disposables." },
+  { title: "12-Stage Quality Control", desc: "Quality controlled from raw material to finished glove." },
+  { title: "OEM & Private Label", desc: "Our manufacturing, your brand, built to spec." },
+];
+---
+
+<section class="why" id="why">
+  <div class="container why-top">
+    <header class="why-head">
+      <div>
+        <p class="eyebrow">Why Innovative</p>
+        <h2>Built Different. Proven Different<span class="dot">.</span></h2>
+      </div>
+      <a href="/why-innovative" class="btn btn--ghost">Why Innovative Gloves <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </header>
+  </div>
+
+  <ReviewsCarousel />
+
+  <div class="container why-bottom">
+    <ul class="why-grid">
+      {features.map((f) => (
+        <li class="why-card">
+          <span class="why-check" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg>
+          </span>
+          <div>
+            <h3>{f.title}</h3>
+            <p class="muted">{f.desc}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .why { background: var(--bg); }
+  .why-top { padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(30px, 4vw, 44px); }
+  .why-bottom { padding-top: clamp(40px, 5vw, 64px); padding-bottom: clamp(56px, 8vw, 104px); }
+
+  .why-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .why-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin-top: 10px; }
+
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .why-card { display: flex; gap: 14px; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .why-check { flex: none; width: 26px; height: 26px; color: var(--green-dark); background: rgba(140,198,63,0.14); border-radius: 50%; display: grid; place-items: center; }
+  .why-check svg { width: 15px; height: 15px; }
+  .why-card h3 { font-size: 1.02rem; margin-bottom: 6px; }
+  .why-card p { font-size: 0.88rem; }
+
+  @media (max-width: 860px) { .why-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .why-grid { grid-template-columns: 1fr; } }
+</style>

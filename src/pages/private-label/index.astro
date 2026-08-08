@@ -1,0 +1,150 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+
+// Our own trademarked brands, real proof that we already do private label.
+const brands = [
+  { name: "Anaconda", img: "/images/prod-anaconda-microdiamond.jpg" },
+  { name: "Food Buddy", img: "/images/prod-foodbuddy-diamond.jpg" },
+  { name: "Orange Gripper", img: "/images/prod-orange-gripper.jpg" },
+  { name: "Mammoth", img: "/images/prod-mammoth-8.png" },
+  { name: "Black Beauty", img: "/images/prod-beauty.jpg" },
+  { name: "Black Barrier", img: "/images/prod-barrier.jpg" },
+  { name: "High Risk", img: "/images/prod-highrisk.jpg" },
+  { name: "Nitri-hand", img: "/images/prod-nitrihand.jpg" },
+  { name: "Avi Nitri-SkinPro", img: "/images/prod-avi-skinpro.jpg" },
+  { name: "Silverline", img: "/images/prod-silverlined-diamond-14.jpg" },
+  { name: "Zig", img: "/images/prod-dual-tone-zig-8.jpg" },
+  { name: "Zig Biodegradable", img: "/images/prod-green-zig-bio-6.jpg" },
+];
+
+const capabilities = [
+  { t: "Your Brand on Any Glove", d: "Put your name on any of our 50+ glove families, from everyday disposables to patented specialist grips." },
+  { t: "Patented Grip Textures", d: "Micro Diamond, Zig, Tyre Tread and Diamond are all available under your label, not just plain gloves." },
+  { t: "Custom Colours", d: "Choose from our full colour range, or match a specific colour to your brand." },
+  { t: "Thickness & Cuff", d: "Specify gauge and cuff length, from thin exam gloves to heavy-duty long-cuff builds." },
+  { t: "Artwork & Packaging", d: "Custom box artwork, dispenser boxes, cartons and inners designed and printed to your spec." },
+  { t: "Certified for Export", d: "CAT III and EN ISO 374 certified, with the documentation to import into regulated markets worldwide." },
+];
+
+const steps = [
+  { n: "01", t: "Enquiry", d: "Tell us the glove, the market and roughly the volumes you're planning." },
+  { n: "02", t: "Samples", d: "We send samples of the base gloves so you can feel the difference before committing." },
+  { n: "03", t: "Artwork & Spec", d: "We finalise the specification, colours, packaging and artwork with you." },
+  { n: "04", t: "Production", d: "Your order is manufactured on the same lines as our own brands, and fully tested." },
+  { n: "05", t: "Export", d: "We pack, document and ship, ready for your market." },
+];
+---
+
+<PageLayout
+  title="OEM & Private Label | Innovative Gloves"
+  description="Our manufacturing, your brand. Put your name on patented Micro Diamond, Zig, Tyre Tread and everyday gloves, with custom colours, thickness, artwork and packaging, certified for export worldwide."
+>
+  <PageBanner eyebrow="OEM / Private Label" title={`Our Manufacturing.<br>Your Brand<span class="dot">.</span>`}
+    intro="From your branding on a standard glove to a co-developed specialist product, we're a product-development partner, not just a supplier." />
+
+  <!-- BRAND PROOF -->
+  <section class="section pl-brands">
+    <div class="container">
+      <header class="pl-head">
+        <p class="eyebrow">Proof, Not a Promise</p>
+        <h2>Brands We Already Make<span class="dot">.</span></h2>
+        <p class="muted">These are our own trademarked brands, produced on the very same lines your gloves would be. Yours could be next.</p>
+      </header>
+      <ul class="brand-grid">
+        {brands.map((b) => (
+          <li class="brand-card">
+            <div class="brand-img" style={`background-image:url('${b.img}')`} role="img" aria-label={`${b.name} glove box`}></div>
+            <span class="brand-name">{b.name}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section class="section pl-caps">
+    <div class="container">
+      <header class="pl-head">
+        <p class="eyebrow">What You Can Customise</p>
+        <h2>Made to Your Specification<span class="dot">.</span></h2>
+      </header>
+      <ul class="caps-grid">
+        {capabilities.map((c) => (
+          <li class="caps-card">
+            <span class="caps-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6"/></svg></span>
+            <h3>{c.t}</h3>
+            <p class="muted">{c.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section pl-process">
+    <div class="container">
+      <header class="pl-head">
+        <p class="eyebrow">How It Works</p>
+        <h2>From Enquiry to Export<span class="dot">.</span></h2>
+      </header>
+      <ol class="pl-steps">
+        {steps.map((s) => (
+          <li class="pl-step">
+            <span class="pl-step-n">{s.n}</span>
+            <h3>{s.t}</h3>
+            <p class="muted">{s.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section pl-cta">
+    <div class="container pl-cta-inner">
+      <h2>Let's Build Your Glove<span class="dot">.</span></h2>
+      <p class="muted">Tell us what you have in mind and we'll come back with samples and a quote.</p>
+      <div class="pl-actions">
+        <a href="/request-quote" class="btn btn--primary">Request a Quote <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/request-samples" class="btn btn--ghost">Request Samples</a>
+        <a href="/contact" class="btn btn--ghost">Talk to Us</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .pl-head { max-width: 660px; margin-bottom: clamp(24px, 3vw, 40px); }
+  .pl-head h2 { font-size: clamp(1.6rem, 3.2vw, 2.4rem); margin: 10px 0 12px; }
+
+  .pl-brands { background: var(--bg); }
+  .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+  .brand-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .brand-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.1); }
+  .brand-img { aspect-ratio: 4 / 3; background-color: #fff; background-size: contain; background-position: center; background-repeat: no-repeat; }
+  .brand-name { display: block; padding: 12px 14px; font-family: var(--font-head); font-weight: 800; font-size: 0.9rem; color: var(--ink); border-top: 1px solid var(--border); }
+
+  .pl-caps { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .caps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+  .caps-card { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .caps-check { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); margin-bottom: 14px; }
+  .caps-check svg { width: 16px; height: 16px; }
+  .caps-card h3 { font-size: 1.02rem; margin-bottom: 8px; }
+  .caps-card p { font-size: 0.88rem; line-height: 1.55; }
+
+  .pl-process { background: var(--bg); border-top: 1px solid var(--border); }
+  .pl-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; list-style: none; padding: 0; margin: 0; }
+  .pl-step { padding: 22px 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .pl-step-n { font-family: var(--font-head); font-weight: 900; font-size: 1.3rem; color: var(--green); }
+  .pl-step h3 { font-size: 1rem; margin: 6px 0 8px; }
+  .pl-step p { font-size: 0.84rem; line-height: 1.5; }
+
+  .pl-cta { background: radial-gradient(120% 120% at 50% 0%, rgba(140,198,63,0.12), rgba(140,198,63,0) 60%), var(--bg-2); border-top: 1px solid var(--border); text-align: center; }
+  .pl-cta-inner { max-width: 620px; margin-inline: auto; }
+  .pl-cta-inner h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 12px; }
+  .pl-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+
+  @media (max-width: 900px) { .pl-steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .pl-steps { grid-template-columns: 1fr; } }
+</style>

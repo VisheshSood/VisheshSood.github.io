@@ -1,0 +1,96 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+
+const milestones = [
+  { year: "2001", title: "The Beginning", body: "Innovative Gloves Co., Ltd. is established in Thailand as a family-owned manufacturer with a clear objective: produce high-quality disposable gloves while continuously developing products that offer something different from conventional gloves. From the start, the focus is on manufacturing consistency, product development and long-term relationships rather than competing purely on volume." },
+  { year: "2001 to 2005", title: "Building the Foundation", body: "The company steadily develops its manufacturing capabilities and technical expertise in latex and nitrile disposable gloves, built around disciplined manufacturing, strict quality control and the ability to develop products for different requirements. It establishes the philosophy that still guides us: manufacture better products, not simply more products." },
+  { year: "2006", title: "Responding to the Oil Crisis", body: "Rising global oil prices place heavy pressure on energy-intensive glove production. Innovative Gloves responds by reducing its dependence on oil and transitioning part of its energy needs to coal, managing costs and improving resilience. It reinforces a mindset that shapes every future decision: when conditions get difficult, improve the process rather than pass costs forward." },
+  { year: "2007 to 2010", title: "Toward Specialized Industrial Gloves", body: "The focus shifts increasingly toward specialized and heavy-duty disposable gloves for demanding applications, automotive, mechanical, industrial maintenance, cleaning, agriculture and chemical handling, rather than standard commodity gloves. This direction leads to one of the company's most important innovations." },
+  { year: "2011", title: "Diamond Texture", body: "Innovative Gloves develops its original Diamond Texture disposable glove. The raised diamond pattern delivers significantly improved grip in wet, oily and demanding conditions. It becomes a defining innovation and sets the direction for the next 15 years: develop distinctive glove technologies rather than reproduce standard products." },
+  { year: "2012 to 2016", title: "Expanding the Heavy-Duty Range", body: "Different nitrile and latex constructions, thicknesses, cuff lengths and formulations are developed for increasingly demanding applications. The portfolio grows from conventional disposables into a broad range of industrial gloves where grip, durability and chemical protection matter." },
+  { year: "2017", title: "Tyre Tread", body: "Innovative Gloves introduces Tyre Tread, a distinctive surface design for enhanced industrial grip, and its first patented texture (US Design Patent D779,130). It proves Diamond was not a single innovation, but the start of an ongoing product-development program." },
+  { year: "2019", title: "Micro Diamond", body: "Micro Diamond refines the diamond concept into a smaller, denser gripping surface that delivers excellent grip while keeping flexibility and comfort. It is patented (US Design Patent D870,976) and becomes a key platform across thicknesses, colours and cuffs." },
+  { year: "2020 to 2021", title: "Innovation Over Expansion", body: "The pandemic sends glove demand soaring, and the industry pours money into new lines and factories. Innovative Gloves deliberately does the opposite, and does not spend a single dollar on manufacturing expansion. Instead it invests in innovation, efficiency and long-term cost reduction, including solar energy, water recycling, wastewater treatment and rainwater collection. When demand later normalizes, the company has avoided excess capacity while keeping the benefits of those investments." },
+  { year: "2022 to 2024", title: "Efficiency, Quality & Sustainability", body: "Sustainability infrastructure expands around solar power, rainwater harvesting, water recycling and wastewater treatment, with carbon and sand filtration supporting water management. Quality stays central through a structured 12-stage quality-control system, from raw-material preparation to finished gloves, alongside a strengthening international compliance framework." },
+  { year: "2025", title: "Zig Grip", body: "Innovative Gloves introduces Zig Grip, its latest proprietary grip technology. The directional texture is patented (US Design Patent D1,068,207) and developed across multiple nitrile constructions, including biodegradable nitrile, continuing a journey spanning more than a decade." },
+  { year: "2026", title: "25 Years", body: "Innovative Gloves celebrates 25 years of manufacturing in Thailand. What began as a family-owned manufacturer in 2001 is now a specialized international manufacturer running 14 production lines, 24 hours a day, with a range spanning roughly 4 to 14 mil across nitrile, latex, long-cuff, heavy-duty, chemical-protection and biodegradable gloves, supplied to industries worldwide." },
+];
+
+const lineage = [
+  { g: "Diamond", y: "2011" },
+  { g: "Tyre Tread", y: "2017" },
+  { g: "Micro Diamond", y: "2019" },
+  { g: "Zig Grip", y: "2025" },
+];
+---
+
+<PageLayout
+  title="25 Years, Our History | Innovative Gloves"
+  description="From founding in Thailand in 2001 to our 25th anniversary in 2026: the milestones and patented grip technologies that shaped Innovative Gloves, Diamond, Tyre Tread, Micro Diamond and Zig."
+>
+  <PageBanner eyebrow="2001 to 2026" title={`25 Years of<br>Innovation<span class="dot">.</span>`}
+    intro="A quarter-century of a single idea: don't simply manufacture another glove, find a way to make the glove better." />
+
+  <section class="section timeline-sec">
+    <div class="container">
+      <ol class="timeline">
+        {milestones.map((m) => (
+          <li class="tl-item">
+            <div class="tl-marker"><span class="tl-dot" aria-hidden="true"></span></div>
+            <div class="tl-content">
+              <span class="tl-year">{m.year}</span>
+              <h3>{m.title}</h3>
+              <p class="muted">{m.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- LINEAGE + PHILOSOPHY -->
+  <section class="section tl-forward">
+    <div class="container tl-fwd-inner">
+      <p class="eyebrow">25 Years of Innovation</p>
+      <h2>Four Grips. One Obsession<span class="dot">.</span></h2>
+      <ul class="lineage-row">
+        {lineage.map((l) => (
+          <li class="lineage-chip"><span class="lc-year">{l.y}</span><span class="lc-name">{l.g}</span></li>
+        ))}
+      </ul>
+      <blockquote class="hist-quote">"Do not simply manufacture another glove. Find a way to make the glove better."</blockquote>
+      <p class="muted hist-tag">25 Years of Innovation. Built in Thailand. Trusted Worldwide.</p>
+      <div class="tl-fwd-actions">
+        <a href="/technologies" class="btn btn--primary">Our Technologies <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/why-innovative" class="btn btn--ghost">Why Innovative</a>
+        <a href="/request-samples" class="btn btn--ghost">Request Samples</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .timeline-sec { background: var(--bg); }
+  .timeline { list-style: none; padding: 0; margin: 0; max-width: 760px; }
+  .tl-item { display: grid; grid-template-columns: 28px 1fr; gap: 20px; }
+  .tl-marker { position: relative; display: flex; justify-content: center; }
+  .tl-marker::before { content: ""; position: absolute; top: 0; bottom: -28px; width: 2px; background: var(--border); }
+  .tl-item:last-child .tl-marker::before { display: none; }
+  .tl-dot { position: relative; z-index: 1; width: 16px; height: 16px; margin-top: 4px; border-radius: 50%; background: var(--green); border: 3px solid var(--bg); box-shadow: 0 0 0 1px var(--green); }
+  .tl-content { padding-bottom: 34px; }
+  .tl-year { display: inline-block; font-family: var(--font-head); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-dark); background: rgba(140,198,63,0.14); padding: 4px 10px; border-radius: 999px; margin-bottom: 8px; }
+  .tl-content h3 { font-size: 1.15rem; margin-bottom: 8px; }
+  .tl-content p { line-height: 1.65; max-width: 62ch; }
+
+  .tl-forward { background: radial-gradient(120% 120% at 50% 0%, rgba(140,198,63,0.12), rgba(140,198,63,0) 60%), var(--bg-2); border-top: 1px solid var(--border); }
+  .tl-fwd-inner { max-width: 720px; }
+  .tl-forward h2 { font-size: clamp(1.6rem, 3.2vw, 2.4rem); margin: 10px 0 18px; }
+  .lineage-row { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0 0 24px; }
+  .lineage-chip { display: inline-flex; align-items: baseline; gap: 8px; padding: 8px 16px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); }
+  .lc-year { font-family: var(--font-head); font-weight: 900; color: var(--green-dark); font-size: 0.9rem; }
+  .lc-name { font-weight: 700; font-size: 0.9rem; }
+  .hist-quote { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.3; color: var(--ink); margin: 0 0 16px; }
+  .hist-tag { font-weight: 700; color: var(--green-dark); margin-bottom: 24px; }
+  .tl-fwd-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+</style>

@@ -1,0 +1,70 @@
+---
+import PageLayout from "../../../layouts/PageLayout.astro";
+import { guides } from "../../../data/guides";
+
+export function getStaticPaths() {
+  return guides.map((g) => ({ params: { slug: g.slug }, props: { guide: g } }));
+}
+const { guide } = Astro.props;
+const related = guides.filter((g) => g.slug !== guide.slug).slice(0, 3);
+---
+
+<PageLayout title={`${guide.title} | Glove Knowledge Centre`} description={guide.excerpt}>
+  <article class="section guide-article">
+    <div class="container">
+      <a href="/resources/guides" class="back-link">&larr; Knowledge Centre</a>
+      <p class="ga-tag">{guide.tag}</p>
+      <h1>{guide.title}</h1>
+      <p class="ga-lead">{guide.excerpt}</p>
+      <div class="ga-body">
+        {guide.body.map((para) => (<p>{para}</p>))}
+      </div>
+
+      <div class="ga-cta">
+        <p class="muted">Want help matching this to a product? Our range is built for exactly these decisions.</p>
+        <div class="ga-cta-actions">
+          <a href="/glove-finder" class="btn btn--primary">Find Your Glove <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="/gloves" class="btn btn--ghost">Browse All Gloves</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <section class="section ga-related">
+    <div class="container">
+      <h2>Keep Reading<span class="dot">.</span></h2>
+      <div class="rel-grid">
+        {related.map((g) => (
+          <a class="rel-card" href={`/resources/guides/${g.slug}`}>
+            <span class="guide-tag">{g.tag}</span>
+            <h3>{g.title}</h3>
+            <p class="muted">{g.excerpt}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .guide-article { background: var(--bg); }
+  .back-link { font-size: 0.8rem; font-weight: 600; color: var(--green-dark); }
+  .ga-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-dark); margin-top: 16px; }
+  .guide-article h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin: 8px 0 14px; max-width: 20ch; }
+  .ga-lead { font-size: 1.15rem; line-height: 1.55; color: var(--text-muted); max-width: 62ch; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .ga-body { max-width: 68ch; }
+  .ga-body p { font-size: 1.02rem; line-height: 1.75; margin-bottom: 20px; color: var(--text); }
+
+  .ga-cta { max-width: 68ch; margin-top: 32px; padding: 26px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-2); }
+  .ga-cta p { margin-bottom: 16px; }
+  .ga-cta-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  .ga-related { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .ga-related h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 22px; }
+  .rel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+  .rel-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 22px; transition: transform 0.2s ease, border-color 0.2s ease; }
+  .rel-card:hover { transform: translateY(-4px); border-color: var(--green); }
+  .rel-card .guide-tag { display: block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 10px; }
+  .rel-card h3 { font-size: 1.02rem; line-height: 1.2; margin-bottom: 8px; }
+  .rel-card p { font-size: 0.85rem; line-height: 1.5; }
+</style>

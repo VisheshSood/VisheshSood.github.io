@@ -1,0 +1,90 @@
+---
+import { reviews } from "../data/reviews";
+// Auto-scrolling "Verified Amazon Reviews" carousel.
+const loop = [...reviews, ...reviews];
+---
+
+<section class="revcar" id="reviews">
+  <div class="container revcar-head">
+    <p class="eyebrow"><span class="revcar-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> Verified Amazon Reviews</p>
+    <h2>What Our Customers Are Saying<span class="dot">.</span></h2>
+    <p class="muted">Real reviews from people using Innovative Gloves every day.</p>
+  </div>
+
+  <div class="revcar-marquee">
+    <div class="revcar-track">
+      {loop.map((r) => (
+        <article class:list={["revcard", r.img && "revcard--photo"]}>
+          {r.img && <div class="revcard-img" style={`background-image: url('${r.img}')`}></div>}
+          <div class="revcard-content">
+            <div class="revcard-top">
+              <span class="revcard-rstars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="revcard-verified">Verified Purchase</span>
+            </div>
+            <h3>{r.title}</h3>
+            <p class="revcard-body">{r.body}</p>
+            <div class="revcard-foot">
+              <span class="revcard-name">{r.name}</span>
+              <span class="revcard-date">{r.date}</span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .revcar { background: var(--bg-2); padding-block: clamp(56px, 8vw, 100px); overflow: hidden; }
+  .revcar-head { text-align: center; max-width: 640px; margin: 0 auto clamp(32px, 4vw, 48px); }
+  .revcar-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin: 10px 0 12px; }
+  .revcar-stars { color: var(--green); letter-spacing: 2px; }
+
+  .revcar-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  }
+  .revcar-track {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+    width: max-content;
+    padding-inline: 20px;
+    animation: revscroll 70s linear infinite;
+  }
+  .revcar-marquee:hover .revcar-track { animation-play-state: paused; }
+  @keyframes revscroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .revcard {
+    flex: 0 0 340px;
+    height: 380px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .revcard-img { flex: none; height: 158px; background-size: cover; background-position: center; }
+  .revcard-content { padding: 20px 22px; display: flex; flex-direction: column; flex: 1; min-height: 0; }
+
+  .revcard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .revcard-rstars { color: var(--green); letter-spacing: 2px; font-size: 0.95rem; }
+  .revcard-verified { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-dark); }
+  .revcard h3 { font-family: var(--font-head); font-weight: 800; font-size: 1rem; color: var(--ink); text-transform: none; letter-spacing: 0; margin-bottom: 8px; line-height: 1.2; }
+  .revcard-body {
+    color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; flex: 1; margin-bottom: 14px;
+    display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; -webkit-line-clamp: 7;
+  }
+  .revcard--photo .revcard-body { -webkit-line-clamp: 3; }
+  .revcard-foot { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 12px; }
+  .revcard-name { font-weight: 700; color: var(--ink); font-size: 0.85rem; }
+  .revcard-date { font-size: 0.78rem; color: var(--text-dim); }
+
+  @media (max-width: 520px) { .revcard { flex-basis: 280px; } }
+  @media (prefers-reduced-motion: reduce) { .revcar-track { animation: none; } }
+</style>

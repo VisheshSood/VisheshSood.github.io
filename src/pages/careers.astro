@@ -1,0 +1,13 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+import SectionStub from "../components/SectionStub.astro";
+---
+
+<PageLayout title="Careers | Innovative Gloves" description="Join Innovative Gloves, a serious manufacturing company in Thailand. Company culture, our team and open positions.">
+  <PageBanner eyebrow="Careers" title={`Build the Next<br>25 Years With Us<span class="dot">.</span>`}
+    intro="A serious manufacturing company always looking for good people. Here's who we are and how to join." />
+
+  <SectionStub tone="light" eyebrow="Working Here" title="Culture, Team & Openings" lead="What it's like to work at Innovative Gloves." layout="grid"
+    items={["Company culture", "Factory & team", "Open positions", "Contact HR"]} />
+</PageLayout>

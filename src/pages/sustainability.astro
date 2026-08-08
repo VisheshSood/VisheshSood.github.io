@@ -1,0 +1,169 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+
+// Each pillar: real facility systems mined from the old site. `img` null = labelled
+// placeholder for a photo still being gathered.
+const pillars = [
+  {
+    kicker: "Energy",
+    title: "Clean Coal Burning Technology",
+    body: [
+      "When the 2007 oil crisis sent fuel prices up more than 300% almost overnight, most glove makers were caught out. We adapted fast, applying for a clean coal-burning permit at a time the government rarely granted them, wary of factories that had misused permits to burn low-quality, polluting coal.",
+      "Trusted on our reputation, we were approved, and we committed to burning only the highest-quality coal, imported from Indonesia, for minimal emissions. The proof is visible: no smoke rises from our chimneys, and none of the odour you expect from an industrial site. We invite anyone to visit and see for themselves.",
+      "Today three clean coal-burning boilers, including one we developed in-house, supply heat to all 14 production lines. Ongoing research keeps improving efficiency, so we burn less coal for every glove we make.",
+    ],
+    img: "/images/sus-cleancoal.jpg",
+    label: "Clean-burning boiler house",
+  },
+  {
+    kicker: "Water",
+    title: "100% Rainwater Harvesting",
+    body: [
+      "Water is essential to glove quality, it strengthens the nitrile polymer and washes extractable proteins out of latex, but it is also a limited resource where we operate.",
+      "So rather than lean on outside supply, we capture it ourselves. On-site reservoirs harvest and store rainwater through the year, cutting our draw on municipal and ground water while keeping a steady, high-quality supply for production.",
+    ],
+    img: "/images/sus-rainwater.jpg",
+    label: "On-site rainwater reservoir",
+  },
+  {
+    kicker: "Water",
+    title: "Recycled, Treated, Returned Clean",
+    body: [
+      "Advanced filtration and water-recycling systems clean and reuse water throughout the production process, so far less of it goes to waste.",
+      "The result is water that leaves cleaner than most. Our treatment runs so clean that the ponds on our grounds support thriving populations of edible fish, some over 15 kilograms, which we share regularly with our team and the villages around us.",
+    ],
+    img: "/images/sus-water.jpg",
+    label: "Water treatment & filtration",
+  },
+  {
+    kicker: "Clean Energy",
+    title: "Solar Power On Site",
+    body: [
+      "We generate clean electricity on site with rooftop solar across our buildings, reducing our demand on the grid and lowering the footprint of every glove we produce.",
+      "It is part of a simple idea: the cleaner we can make our own operation, the less the planet pays for the protection our customers rely on.",
+    ],
+    img: "/images/sus-solar.jpg",
+    label: "Rooftop solar panels",
+  },
+  {
+    kicker: "People & Place",
+    title: "Green Grounds & Community",
+    body: [
+      "Every factory visitor has planted a tree on our premises, turning the factory into one of the greenest sites in the region, complete with an orchard of mango, guava and rambutan.",
+      "The fish from our clean ponds and the fruit from our trees go to our people and the neighbouring communities. To us, environmental care and community welfare are the same commitment.",
+    ],
+    img: "/images/sus-greenery.jpg",
+    label: "Factory grounds & orchard",
+  },
+];
+
+const systems = ["Clean coal boilers", "Water recycling", "Rainwater harvesting", "Solar power", "Wastewater treatment", "Carbon & sand filtration", "Tree planting", "Biodegradable nitrile"];
+---
+
+<PageLayout
+  title="Sustainability | Innovative Gloves"
+  description="Real factory systems, not green marketing: clean coal-burning boilers, 100% water harvesting and recycling, solar power, wastewater treatment with edible-fish ponds, tree planting and biodegradable nitrile."
+>
+  <PageBanner eyebrow="Sustainability" title={`Real Systems.<br>Not Slogans<span class="dot">.</span>`}
+    intro="We avoid generic green marketing. These are the actual systems built into how our factory runs, and the measurable ways we lower the footprint of every glove." />
+
+  <!-- SYSTEMS AT A GLANCE -->
+  <section class="section sys-glance">
+    <div class="container">
+      <p class="eyebrow">Built Into the Factory</p>
+      <h2>Environmental Responsibility, Engineered In<span class="dot">.</span></h2>
+      <ul class="sys-chips">
+        {systems.map((s) => (<li class="sys-chip"><span class="c" aria-hidden="true">&#10003;</span>{s}</li>))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  {pillars.map((p) => (
+    <section class="section sus-pillar">
+      <div class="container sus-row">
+        <div class="sus-copy">
+          <p class="eyebrow">{p.kicker}</p>
+          <h2>{p.title}<span class="dot">.</span></h2>
+          {p.body.map((para) => (<p class="muted">{para}</p>))}
+        </div>
+        <div class="sus-media">
+          {p.img
+            ? <div class="sus-img" style={`background-image:url('${p.img}')`} role="img" aria-label={p.label}></div>
+            : <div class="sus-img sus-img--empty" data-label={p.label}><span>Photo coming soon</span></div>}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- BIODEGRADABLE -->
+  <section class="section sus-bio">
+    <div class="container sus-bio-inner">
+      <div>
+        <p class="eyebrow">Lower-Footprint Products</p>
+        <h2>Biodegradable Nitrile<span class="dot">.</span></h2>
+        <p class="muted">Protection shouldn't mean permanent waste. Our Bio Nitrile gloves are engineered to break down far faster in active landfill conditions, independently verified to <strong>ASTM D5511</strong> and <strong>ISO 15985</strong>, without compromising the grip and durability our gloves are known for.</p>
+        <a href="/technologies/biodegradable" class="btn btn--primary">Biodegradable Technology <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="section sus-philosophy">
+    <div class="container phil-grid">
+      <div class="phil-copy">
+        <p class="eyebrow">The IGCL Philosophy</p>
+        <blockquote class="phil-quote">"We believe our stewardship of Mother Earth mirrors the care we show our own mothers."</blockquote>
+        <p class="muted">It is not a slogan. It is why the water leaves our factory cleaner than most, why our chimneys don't smoke, and why our grounds are an orchard. Doing this well and doing it responsibly are the same thing to us.</p>
+        <div class="phil-actions">
+          <a href="/about" class="btn btn--ghost">Our Story</a>
+          <a href="/certifications" class="btn btn--ghost">Certifications</a>
+        </div>
+      </div>
+      <div class="phil-media" style="background-image:url('/images/sus-aerial.jpg')" role="img" aria-label="Aerial view of the Innovative Gloves factory with rooftop solar"></div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .sys-glance { background: var(--bg); }
+  .sys-glance h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: 10px 0 20px; }
+  .sys-chips { display: flex; flex-wrap: wrap; gap: 10px 14px; }
+  .sys-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); font-weight: 600; font-size: 0.86rem; }
+  .sys-chip .c { color: var(--green-dark); font-weight: 900; }
+
+  .sus-pillar { border-top: 1px solid var(--border); }
+  .sus-pillar:nth-child(even) { background: var(--bg-2); }
+  .sus-row { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+  .sus-pillar:nth-child(odd) .sus-media { order: 2; }
+  .sus-pillar:nth-child(even) .sus-copy { order: 2; }
+  .sus-copy h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin: 10px 0 14px; }
+  .sus-copy p { line-height: 1.65; margin-bottom: 12px; }
+  .sus-copy p:last-child { margin-bottom: 0; }
+  .sus-img { aspect-ratio: 4 / 3; border-radius: var(--radius); border: 1px solid var(--border); background-size: cover; background-position: center; box-shadow: 0 16px 40px rgba(0,0,0,0.10); }
+  .sus-img--empty { display: grid; place-items: center; border-style: dashed; border-color: var(--border-strong); position: relative; box-shadow: none; background: var(--bg-2); }
+  .sus-img--empty span { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-dim); }
+  .sus-img--empty::after { content: attr(data-label); position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; font-size: 0.72rem; color: var(--text-muted); padding: 0 12px; }
+
+  .sus-bio { background: radial-gradient(120% 120% at 0% 0%, rgba(140,198,63,0.14), rgba(140,198,63,0) 55%), var(--bg); border-top: 1px solid var(--border); }
+  .sus-bio-inner { max-width: 720px; }
+  .sus-bio h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 10px 0 14px; }
+  .sus-bio p { line-height: 1.65; margin-bottom: 20px; }
+
+  .sus-philosophy { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .phil-inner { max-width: 760px; }
+  .phil-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+  .phil-media { aspect-ratio: 3 / 2; border-radius: var(--radius); border: 1px solid var(--border); background-size: cover; background-position: center; box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+  @media (max-width: 820px) { .phil-grid { grid-template-columns: 1fr; } .phil-media { order: -1; } }
+  .phil-quote { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.4rem, 3vw, 2.1rem); line-height: 1.3; color: var(--ink); margin: 12px 0 16px; }
+  .phil-inner p { line-height: 1.65; }
+  .phil-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+
+  @media (max-width: 820px) {
+    .sus-row { grid-template-columns: 1fr; }
+    .sus-pillar:nth-child(odd) .sus-media,
+    .sus-pillar:nth-child(even) .sus-copy { order: 0; }
+    .sus-media { order: -1 !important; }
+  }
+</style>

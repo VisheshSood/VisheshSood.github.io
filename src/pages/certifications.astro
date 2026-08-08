@@ -1,0 +1,180 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+
+// Accreditations & market approvals (logos we hold)
+const accreditations = [
+  { name: "SMETA 4-Pillar", img: "/images/certs/cert-smeta.png", desc: "Sedex ethical audit, labour, health & safety, environment and business ethics." },
+  { name: "ISO 9001", img: "/images/certs/cert-iso9001.png", desc: "Quality Management System governing every stage of production." },
+  { name: "EN ISO 13485", img: "/images/certs/cert-iso13485.png", desc: "Quality Management System specific to medical devices." },
+  { name: "EU MDR", img: "/images/certs/cert-eumdr.webp", desc: "Compliance with the EU Medical Device Regulation (2017/745) for medical gloves placed on the European market." },
+  { name: "CE / PPE", img: "/images/certs/cert-ce.png", desc: "European conformity under the PPE Regulation (EU) 2016/425 and EN 455." },
+  { name: "US FDA", img: "/images/certs/cert-fda.png", desc: "Cleared for the US market, medical examination and food-contact use." },
+  { name: "Australia TGA", img: "/images/certs/cert-tga.png", desc: "Listed with the Therapeutic Goods Administration for the Australian market." },
+  { name: "Health Canada", img: "/images/certs/cert-healthcanada.png", desc: "Medical device licensing for the Canadian market." },
+];
+
+// Standards every glove is tested and certified to
+const standardGroups = [
+  {
+    label: "Quality & Medical",
+    items: [
+      { code: "ISO 9001", desc: "Quality Management System" },
+      { code: "EN ISO 13485", desc: "Medical-device Quality Management System" },
+      { code: "EN 455 (Parts 1–4)", desc: "Medical gloves for single use, holes, physical properties, biological evaluation & shelf life" },
+    ],
+  },
+  {
+    label: "Food Contact",
+    items: [
+      { code: "US FDA 21 CFR 177.2600", desc: "Rubber articles intended for repeated food contact" },
+      { code: "EU Regulation 10/2011", desc: "Overall Migration, materials in contact with food" },
+    ],
+  },
+  {
+    label: "Chemical & Biological Protection",
+    items: [
+      { code: "EN ISO 374-1:2016+A1:2018", desc: "Permeation classification (Type B / Type C)" },
+      { code: "EN ISO 374-4:2019", desc: "Degradation by chemicals" },
+      { code: "EN ISO 374-5:2016", desc: "Protection against bacteria, fungi and viruses" },
+    ],
+  },
+  {
+    label: "Biodegradability, Bio Nitrile",
+    items: [
+      { code: "ASTM D5511", desc: "Anaerobic biodegradation in high-solids conditions" },
+      { code: "ISO 15985", desc: "Anaerobic biodegradation and disintegration" },
+    ],
+  },
+];
+---
+
+<PageLayout
+  title="Certifications & Compliance | Innovative Gloves"
+  description="Innovative Gloves is certified for global markets: ISO 9001, EN ISO 13485, CE/PPE, US FDA, TGA and Health Canada, with EN 455, EN ISO 374, food-contact and biodegradability standards, plus SMETA ethical compliance."
+>
+  <PageBanner eyebrow="Certifications & Compliance" title={`Certified for<br>Global Markets<span class="dot">.</span>`}
+    intro="Everything distributors and procurement teams need to specify and import our gloves with confidence, the accreditations we hold and the standards every glove is tested against." />
+
+  <!-- ACCREDITATIONS -->
+  <section class="section acc">
+    <div class="container">
+      <header class="sec-head">
+        <p class="eyebrow">Accreditations &amp; Market Approvals</p>
+        <h2>Recognised Where It Matters<span class="dot">.</span></h2>
+        <p class="muted">Independently audited and approved for the world's most demanding regulated markets.</p>
+      </header>
+      <ul class="acc-grid">
+        {accreditations.map((c) => (
+          <li class="acc-card">
+            <div class="acc-logo"><img src={c.img} alt={`${c.name} certification`} loading="lazy" /></div>
+            <div class="acc-body">
+              <h3>{c.name}</h3>
+              <p class="muted">{c.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- STANDARDS -->
+  <section class="section standards">
+    <div class="container">
+      <header class="sec-head">
+        <p class="eyebrow">Tested to Standard</p>
+        <h2>The Standards Behind Every Glove<span class="dot">.</span></h2>
+        <p class="muted">Each product page lists the exact classification for that glove. Across the range we certify to:</p>
+      </header>
+      <div class="std-grid">
+        {standardGroups.map((g) => (
+          <div class="std-card">
+            <p class="std-label">{g.label}</p>
+            <ul class="std-list">
+              {g.items.map((it) => (
+                <li class="std-item">
+                  <span class="std-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6"/></svg></span>
+                  <span><strong>{it.code}</strong><span class="std-desc">{it.desc}</span></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ETHICAL -->
+  <section class="section ethical">
+    <div class="container ethical-inner">
+      <div class="ethical-logo"><img src="/images/certs/cert-smeta.png" alt="SMETA 4-Pillar audit" loading="lazy" /></div>
+      <div class="ethical-copy">
+        <p class="eyebrow">Ethical Manufacturing</p>
+        <h2>Audited on All Four Pillars<span class="dot">.</span></h2>
+        <p class="muted">Our facility is audited under SMETA (Sedex Members Ethical Trade Audit) across all four pillars, so partners can source from us with confidence in how our gloves are made, not just how they perform.</p>
+        <ul class="pillars">
+          <li><span class="c" aria-hidden="true">&#10003;</span> Labour standards</li>
+          <li><span class="c" aria-hidden="true">&#10003;</span> Health &amp; safety</li>
+          <li><span class="c" aria-hidden="true">&#10003;</span> Environment</li>
+          <li><span class="c" aria-hidden="true">&#10003;</span> Business ethics</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section certs-cta-band">
+    <div class="container cta-inner">
+      <h2>Need Documentation for a Product<span class="dot">.</span></h2>
+      <p class="muted">We provide Declarations of Conformity, technical data sheets and test certificates for specific products on request.</p>
+      <div class="cta-actions">
+        <a href="/contact" class="btn btn--primary">Request Documentation <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/gloves" class="btn btn--ghost">Browse the Range</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .sec-head { max-width: 680px; margin-bottom: clamp(26px, 4vw, 42px); }
+  .sec-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin: 10px 0 12px; }
+
+  .acc { background: var(--bg); }
+  .acc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .acc-card { display: flex; align-items: center; gap: 18px; padding: 18px 20px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .acc-card:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(0,0,0,0.08); }
+  .acc-logo { flex: none; width: 76px; height: 76px; display: grid; place-items: center; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 10px; }
+  .acc-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .acc-body h3 { font-size: 1rem; margin-bottom: 5px; }
+  .acc-body p { font-size: 0.85rem; line-height: 1.5; }
+
+  .standards { background: var(--bg-2); }
+  .std-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .std-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 24px; }
+  .std-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 16px; }
+  .std-list { display: grid; gap: 14px; }
+  .std-item { display: flex; align-items: flex-start; gap: 11px; font-size: 0.9rem; }
+  .std-item strong { display: block; color: var(--ink); font-weight: 700; }
+  .std-desc { display: block; color: var(--text-muted); font-size: 0.82rem; margin-top: 2px; line-height: 1.45; }
+  .std-check { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); margin-top: 1px; }
+  .std-check svg { width: 13px; height: 13px; }
+
+  .ethical { background: var(--bg); }
+  .ethical-inner { display: grid; grid-template-columns: 160px 1fr; gap: clamp(24px, 4vw, 48px); align-items: center; }
+  .ethical-logo { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; display: grid; place-items: center; }
+  .ethical-logo img { max-width: 100%; height: auto; }
+  .ethical-copy h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 10px 0 12px; }
+  .pillars { margin-top: 18px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 20px; max-width: 440px; }
+  .pillars li { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.92rem; }
+  .pillars .c { color: var(--green-dark); font-weight: 900; }
+
+  .certs-cta-band { background: radial-gradient(120% 120% at 50% 0%, rgba(140,198,63,0.12), rgba(140,198,63,0) 60%), var(--bg-2); border-top: 1px solid var(--border); text-align: center; }
+  .cta-inner { max-width: 620px; margin-inline: auto; }
+  .cta-inner h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 12px; }
+  .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+
+  @media (max-width: 680px) {
+    .ethical-inner { grid-template-columns: 1fr; }
+    .ethical-logo { max-width: 160px; }
+  }
+</style>

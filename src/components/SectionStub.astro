@@ -1,0 +1,97 @@
+---
+// Wireframe section placeholder. Each page is assembled from these to show
+// the PLANNED structure before real content is written.
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  items?: string[];
+  layout?: "grid" | "checklist" | "media";
+  tone?: "light" | "gray";
+  id?: string;
+}
+const { eyebrow, title, lead, items = [], layout = "grid", tone = "light", id } = Astro.props;
+---
+
+<section class:list={["section", "stub", `stub--${tone}`]} id={id}>
+  <div class="container">
+    <header class="stub-head">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h2>{title}</h2>
+      {lead && <p class="stub-lead muted">{lead}</p>}
+    </header>
+
+    {layout === "grid" && items.length > 0 && (
+      <div class="stub-grid">
+        {items.map((it) => (
+          <div class="stub-card">
+            <div class="img-slot stub-img" data-label="Content block"></div>
+            <p class="stub-card-label">{it}</p>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {layout === "checklist" && items.length > 0 && (
+      <ul class="stub-checklist">
+        {items.map((it) => (
+          <li>
+            <span class="check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg>
+            </span>
+            {it}
+          </li>
+        ))}
+      </ul>
+    )}
+
+    {layout === "media" && (
+      <div class="stub-media">
+        <div class="img-slot stub-media-img" data-label="Imagery / video"></div>
+        <ul class="stub-checklist">
+          {items.map((it) => (
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg>
+              </span>
+              {it}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .stub--light { background: var(--bg); }
+  .stub--gray { background: var(--bg-2); }
+  .stub { border-top: 1px solid var(--border); }
+
+  .stub-head { max-width: 720px; margin-bottom: clamp(28px, 4vw, 44px); }
+  .stub-head h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); margin-top: 10px; }
+  .stub-lead { margin-top: 14px; font-size: 1rem; }
+
+  .stub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 18px;
+  }
+  .stub-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .stub-img { aspect-ratio: 16 / 10; }
+  .stub-card-label { padding: 14px 16px; font-weight: 600; font-size: 0.92rem; color: var(--ink); }
+
+  .stub-checklist { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px 24px; }
+  .stub-checklist li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.95rem; color: var(--text); }
+  .check { flex: none; width: 20px; height: 20px; color: var(--green-dark); margin-top: 2px; }
+  .check svg { width: 100%; height: 100%; }
+
+  .stub-media { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 48px); align-items: center; }
+  .stub-media-img { aspect-ratio: 4 / 3; border-radius: var(--radius); }
+  @media (max-width: 760px) { .stub-media { grid-template-columns: 1fr; } }
+</style>

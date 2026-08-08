@@ -1,0 +1,233 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import GloveVisual from "../../components/GloveVisual.astro";
+import { catalogue, colourSwatch, texTechSlug } from "../../data/catalogue";
+import { chemFor } from "../../data/chem-resistance";
+
+export function getStaticPaths() {
+  return catalogue.map((g) => ({ params: { slug: g.slug }, props: { glove: g } }));
+}
+const { glove } = Astro.props;
+const related = catalogue.filter((g) => g.texture === glove.texture && g.slug !== glove.slug).slice(0, 4);
+const techSlug = texTechSlug[glove.texture];
+// Diamond was invented (not patented), we pioneered it. Others with a tech page are patented.
+const eyebrowLabel = glove.texture === "Diamond" ? "Inventor & Pioneer" : techSlug ? "Patented Grip Technology" : glove.material;
+const specs: [string, string][] = [
+  ["Material", glove.material],
+  ["Texture", glove.texture],
+  ["Surface treatment", glove.treatment || "—"],
+  ["Thickness", glove.thickness ? glove.thickness + " mil" : "—"],
+  ["Length", glove.length ? glove.length + " mm" : "—"],
+  ["Grade", glove.grade],
+];
+
+// Certifications, every glove carries the quality & food-contact standards;
+// bio nitrile gloves additionally carry the biodegradability standards.
+const certGroups: { label: string; items: string[] }[] = [
+  { label: "Quality & Medical", items: ["ISO 9001", "ISO 13485", "EN 455"] },
+  { label: "Food Contact", items: ["US FDA 21 CFR 177.2600", "Overall Migration, EU Regulation 10/2011"] },
+];
+if (glove.bio) certGroups.push({ label: "Biodegradability", items: ["ASTM D5511", "ISO 15985"] });
+
+const chem = chemFor(glove);
+const fmtDeg = (n: number | string) => (typeof n === "number" ? (n > 0 ? "+" : "") + n.toFixed(1) + "%" : n);
+---
+
+<PageLayout title={`${glove.name} | Innovative Gloves`} description={`${glove.name}, ${glove.material}, ${glove.texture} textured. Colours: ${glove.colours.join(", ")}. Sizes: ${glove.sizes.join(", ")}.`}>
+  <section class="section p-hero">
+    <div class="container p-grid">
+      <div class="p-visual"><GloveVisual glove={glove} ratio="1 / 1" /></div>
+      <div class="p-info">
+        <a href="/gloves" class="back-link">&larr; All Gloves</a>
+        <p class="eyebrow">{eyebrowLabel}</p>
+        <h1>{glove.name}</h1>
+        <p class="p-full">{glove.fullName}</p>
+
+        <dl class="spec-table">
+          {specs.map(([k, v]) => (<div class="spec-row"><dt>{k}</dt><dd>{v}</dd></div>))}
+        </dl>
+
+        <div class="p-opt">
+          <span class="p-opt-label">Colours ({glove.colours.length})</span>
+          <div class="p-colours">
+            {glove.colours.map((c) => (<span class="p-colour"><span class="dot" style={`background:${colourSwatch(c)}`}></span>{c}</span>))}
+          </div>
+        </div>
+        <div class="p-opt">
+          <span class="p-opt-label">Sizes</span>
+          <div class="p-sizes">{glove.sizes.map((s) => (<span class="p-size">{s}</span>))}</div>
+        </div>
+
+        <div class="p-cta">
+          <a href="/request-samples" class="btn btn--primary">Request a Sample <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="/request-quote" class="btn btn--ghost">Request a Quote</a>
+        </div>
+
+        {techSlug && <p class="p-tech">Grip technology: <a href={`/technologies/${techSlug}`}>{glove.texture} &rarr;</a></p>}
+        {glove.patent && <p class="p-patent">&#9670; {glove.patent.replace(/[&\s]+$/, "")}</p>}
+      </div>
+    </div>
+  </section>
+
+  <section class="section p-certs">
+    <div class="container">
+      <header class="certs-head">
+        <p class="eyebrow">Certified &amp; Compliant</p>
+        <h2>Tested to International Standards<span class="dot">.</span></h2>
+        <p class="muted">Every Innovative glove is manufactured and certified to recognised quality, medical and food-contact standards{glove.bio ? ", plus independently verified biodegradability" : ""}.</p>
+      </header>
+      <div class="certs-groups">
+        {certGroups.map((grp) => (
+          <div class="cert-group">
+            <p class="cert-group-label">{grp.label}</p>
+            <ul class="cert-list">
+              {grp.items.map((it) => (
+                <li class="cert-badge">
+                  <span class="cert-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6"/></svg></span>
+                  <span>{it}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {chem && (
+    <section class="section p-chem">
+      <div class="container">
+        <header class="chem-head">
+          <p class="eyebrow">Chemical &amp; Biological Protection</p>
+          <h2>EN ISO 374 Classification<span class="dot">.</span></h2>
+          <p class="muted">Independently tested chemical permeation, degradation and micro-organism protection, certified <strong>{chem.type}</strong> to {chem.permStandard}.</p>
+        </header>
+
+        <div class="chem-tablewrap">
+          <table class="chem-table">
+            <thead>
+              <tr>
+                <th>Test Chemical</th>
+                <th>{chem.permStandard} <span class="th-sub">/ {chem.type}</span></th>
+                <th>{chem.degStandard}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {chem.chemicals.map((c) => (
+                <tr>
+                  <td><span class="chem-name">{c.name}</span> <span class="chem-code">({c.code})</span></td>
+                  <td><span class="chem-level">Level {c.level}</span></td>
+                  <td>{fmtDeg(c.degradation)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {chem.micro && (
+          <div class="chem-micro">
+            <p class="chem-micro-label">{chem.microStandard}</p>
+            <ul class="micro-list">
+              {chem.micro.map((m) => (
+                <li class="micro-item">
+                  <span class="micro-result" data-pass={m.result === "Pass" ? "1" : "0"}>{m.result}</span>
+                  Protection against {m.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <p class="chem-note muted">Permeation performance levels 0–6 per EN ISO 374-1. Degradation (EN ISO 374-4) shows change in puncture resistance after contact; a negative value indicates swelling.</p>
+      </div>
+    </section>
+  )}
+
+  {related.length > 0 && (
+    <section class="section p-related">
+      <div class="container">
+        <h2>More {glove.texture} Gloves<span class="dot">.</span></h2>
+        <div class="rel-grid">
+          {related.map((g) => (
+            <a class="rel-card" href={`/gloves/${g.slug}`}>
+              <GloveVisual glove={g} />
+              <div class="rel-body"><h3>{g.name}</h3><span class="rel-meta">{g.thickness ? g.thickness + " mil · " : ""}{g.material}</span></div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</PageLayout>
+
+<style>
+  .p-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 5vw, 60px); align-items: start; }
+  .p-visual :global(.gv) { border: 1px solid var(--border); }
+  .back-link { font-size: 0.8rem; font-weight: 600; color: var(--green-dark); }
+  .p-info .eyebrow { margin-top: 14px; }
+  .p-info h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin: 8px 0 8px; }
+  .p-full { color: var(--text-muted); font-size: 1rem; margin-bottom: 24px; }
+
+  .spec-table { border-top: 1px solid var(--border); margin-bottom: 24px; }
+  .spec-row { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--border); }
+  .spec-row dt { color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+  .spec-row dd { font-weight: 700; color: var(--ink); text-align: right; }
+
+  .p-opt { margin-bottom: 18px; }
+  .p-opt-label { display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .p-colours { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+  .p-colour { display: inline-flex; align-items: center; gap: 6px; font-size: 0.84rem; }
+  .p-colour .dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); }
+  .p-sizes { display: flex; flex-wrap: wrap; gap: 6px; }
+  .p-size { display: inline-flex; padding: 4px 11px; border: 1px solid var(--border-strong); border-radius: var(--radius); font-size: 0.8rem; font-weight: 600; }
+
+  .p-cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 16px; }
+  .p-tech { font-size: 0.9rem; color: var(--text-muted); }
+  .p-tech a { color: var(--green-dark); font-weight: 700; }
+  .p-patent { font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; }
+  .p-patent span { color: var(--green); }
+
+  .p-certs { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .certs-head { max-width: 640px; margin-bottom: clamp(24px, 3vw, 36px); }
+  .certs-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: 10px 0 12px; }
+  .certs-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .cert-group { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 22px; }
+  .cert-group-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 14px; }
+  .cert-list { display: grid; gap: 10px; }
+  .cert-badge { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+  .cert-check { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); }
+  .cert-check svg { width: 13px; height: 13px; }
+
+  .p-chem { background: var(--bg); border-top: 1px solid var(--border); }
+  .chem-head { max-width: 680px; margin-bottom: clamp(22px, 3vw, 32px); }
+  .chem-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: 10px 0 12px; }
+  .chem-tablewrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .chem-table { width: 100%; border-collapse: collapse; min-width: 520px; }
+  .chem-table th, .chem-table td { text-align: left; padding: 13px 18px; border-bottom: 1px solid var(--border); }
+  .chem-table thead th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 700; background: var(--bg-2); }
+  .chem-table thead th:nth-child(2), .chem-table thead th:nth-child(3) { white-space: nowrap; }
+  .th-sub { color: var(--green-dark); }
+  .chem-table tbody tr:last-child td { border-bottom: 0; }
+  .chem-name { font-weight: 700; color: var(--ink); }
+  .chem-code { color: var(--text-muted); font-weight: 600; }
+  .chem-level { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 999px; background: rgba(140,198,63,0.16); color: var(--green-dark); font-weight: 700; font-size: 0.82rem; }
+  .chem-table td:last-child { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+  .chem-micro { margin-top: 20px; }
+  .chem-micro-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+  .micro-list { display: grid; gap: 8px; }
+  .micro-item { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+  .micro-result { flex: none; min-width: 48px; text-align: center; padding: 3px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+  .micro-result[data-pass="1"] { background: rgba(140,198,63,0.2); color: var(--green-dark); }
+  .micro-result[data-pass="0"] { background: rgba(192,57,43,0.14); color: #c0392b; }
+  .chem-note { font-size: 0.76rem; margin-top: 18px; max-width: 70ch; }
+
+  .p-related h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 24px; }
+  .rel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
+  .rel-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; transition: transform 0.2s ease; }
+  .rel-card:hover { transform: translateY(-4px); }
+  .rel-body { padding: 14px; }
+  .rel-body h3 { font-size: 0.95rem; margin-bottom: 5px; }
+  .rel-meta { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; color: var(--green-dark); }
+
+  @media (max-width: 760px) { .p-grid { grid-template-columns: 1fr; } }
+</style>

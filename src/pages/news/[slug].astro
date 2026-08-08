@@ -1,0 +1,19 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+import SectionStub from "../../components/SectionStub.astro";
+
+// Sample article route. Real posts will come from a content collection later.
+export function getStaticPaths() {
+  return [{ params: { slug: "25-years" }, props: { title: "Celebrating 25 Years of Innovative Gloves" } }];
+}
+const { title } = Astro.props;
+---
+
+<PageLayout title={`${title} | Innovative Gloves`} description="A sample news article for the Innovative Gloves 25th anniversary.">
+  <PageBanner eyebrow="News" title={title} status="Sample article"
+    intro="An example news post. Real articles will be authored content with images, published under /news/article-name/." />
+
+  <SectionStub tone="light" eyebrow="Article" title="Article Body" lead="Full article content goes here." layout="media"
+    items={["Headline & date", "Rich body content", "Images", "Links to related products / technologies"]} />
+</PageLayout>

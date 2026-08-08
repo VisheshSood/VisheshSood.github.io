@@ -1,0 +1,52 @@
+---
+// Placeholder testimonials, to be replaced with real verified reviews from the
+// current site. Attributed by sector/region only until real quotes are supplied.
+const reviews = [
+  { quote: "The grip on oily parts is unlike any disposable we've used. Our technicians won't go back.", who: "Automotive workshop", where: "Germany", attr: "Grip · Automotive" },
+  { quote: "Thick, durable and consistent batch to batch. Exactly what heavy-duty work demands.", who: "Industrial distributor", where: "United Kingdom", attr: "Durability" },
+  { quote: "Great dexterity without losing strength, ideal for our food processing lines.", who: "Food processor", where: "Australia", attr: "Dexterity · Food" },
+];
+---
+
+<section class="section reviews">
+  <div class="container">
+    <header class="rev-head">
+      <div>
+        <p class="eyebrow">What Customers Say</p>
+        <h2>Trusted on the Job<span class="dot">.</span></h2>
+      </div>
+      <a href="/reviews" class="btn btn--ghost">Read All Reviews <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </header>
+
+    <div class="rev-grid">
+      {reviews.map((r) => (
+        <figure class="rev-card">
+          <span class="rev-mark" aria-hidden="true">&ldquo;</span>
+          <blockquote>{r.quote}</blockquote>
+          <figcaption>
+            <span class="rev-who">{r.who}</span>
+            <span class="rev-where">{r.where}</span>
+            <span class="rev-attr">{r.attr}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews { background: var(--bg-2); }
+  .rev-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(28px, 4vw, 44px); }
+  .rev-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin-top: 10px; }
+
+  .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .rev-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; position: relative; }
+  .rev-mark { position: absolute; top: 10px; right: 18px; font-family: var(--font-head); font-size: 3rem; color: rgba(140,198,63,0.3); line-height: 1; }
+  .rev-card blockquote { font-size: 1rem; line-height: 1.55; color: var(--ink); margin-bottom: 20px; }
+  .rev-card figcaption { display: flex; flex-direction: column; gap: 2px; }
+  .rev-who { font-weight: 700; color: var(--ink); font-size: 0.9rem; }
+  .rev-where { font-size: 0.82rem; color: var(--text-muted); }
+  .rev-attr { margin-top: 8px; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-dark); }
+
+  @media (max-width: 860px) { .rev-grid { grid-template-columns: 1fr; } }
+</style>

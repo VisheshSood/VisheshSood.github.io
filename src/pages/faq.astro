@@ -1,0 +1,99 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+
+const groups = [
+  {
+    title: "Company & Manufacturing",
+    items: [
+      { q: "Are you a manufacturer?", a: "Yes. Innovative Gloves is a manufacturer, not a trader. We have made nitrile and latex gloves since 2001 in our own factory, and we develop our own patented grip technologies in-house." },
+      { q: "Where are your gloves made?", a: "In our own facility in Hat Yai, Thailand, on 14 production lines producing over a billion gloves a year. Everything from raw material to packed box happens under our roof." },
+      { q: "Do you support product development?", a: "Yes. We are a product-development partner, not just a supplier. We can co-develop a specialist glove around your requirements or put your brand on an existing product. See our OEM / Private Label page for details." },
+    ],
+  },
+  {
+    title: "Products & Materials",
+    items: [
+      { q: "What materials do you offer?", a: "Nitrile, biodegradable (bio) nitrile, and natural rubber latex, across disposable and examination grades." },
+      { q: "What thicknesses are available?", a: "From around 3 mil up to 14 mil, in standard and long-cuff options (up to 300 mm). If you are not sure which you need, our Glove Finder can narrow it down in a few clicks." },
+      { q: "Can I get custom colours?", a: "Yes. Our standard range spans around 20 colours, and for private-label orders we can match a colour to your brand or use colour coding for hygiene zoning." },
+      { q: "Do you have biodegradable gloves?", a: "Yes. Our Bio Nitrile gloves are engineered to break down far faster in active landfill conditions, independently verified to ASTM D5511 and ISO 15985, without giving up grip or durability." },
+    ],
+  },
+  {
+    title: "Certifications & Compliance",
+    items: [
+      { q: "What certifications do you hold?", a: "ISO 9001 and EN ISO 13485 quality systems, CE / PPE conformity, and US FDA, Australia TGA and Health Canada market approvals, plus SMETA 4-Pillar ethical auditing. Gloves are tested to EN 455 and EN ISO 374. Full details are on our Certifications page." },
+      { q: "Do you have food-safe gloves?", a: "Yes. Our gloves are certified to US FDA 21 CFR 177.2600 and EU Regulation 10/2011 (overall migration). Because fatty, acidic and high-temperature foods behave differently, always check the specific product's food-contact documentation for your food type." },
+      { q: "Do you make medical gloves?", a: "We manufacture to EN 455 under an EN ISO 13485 medical-device quality system. Whether a specific glove is offered as a medical device depends on its classification and the approvals for your market, so ask us about the exact product you have in mind." },
+      { q: "Do you offer chemical gloves?", a: "Yes. Our gloves are tested to EN ISO 374, and the exact permeation and degradation data appears on every product page. Always match the glove to your specific chemical, its concentration and the expected contact time." },
+    ],
+  },
+  {
+    title: "Ordering, Samples & Private Label",
+    items: [
+      { q: "Do you offer private label?", a: "Yes. We already produce our own trademarked brands (Anaconda, Food Buddy, Orange Gripper and more) and we manufacture private-label gloves for partners worldwide, with custom artwork, packaging, colours and specifications." },
+      { q: "Can I get samples?", a: "Yes, and it is the best way to feel the difference. Send us a quick sample request and our team will get them to you." },
+      { q: "What is the MOQ?", a: "It depends on the product, packaging and level of customisation. Tell us what you are planning and we will give you clear minimum-order guidance." },
+      { q: "What are your shipping terms?", a: "We export worldwide and can work to the Incoterms that suit you. Share your destination and volumes and our team will confirm terms and lead times." },
+    ],
+  },
+];
+---
+
+<PageLayout
+  title="FAQ | Innovative Gloves"
+  description="Answers on manufacturing, materials, thickness, certifications, food-safe and medical gloves, biodegradable options, samples, MOQ, private label and shipping."
+>
+  <PageBanner eyebrow="FAQ" title={`Quick<br>Answers<span class="dot">.</span>`}
+    intro="The questions distributors and buyers ask most, answered, so you don't have to wait for sales." />
+
+  <section class="section faq">
+    <div class="container faq-wrap">
+      {groups.map((g) => (
+        <div class="faq-group">
+          <h2 class="faq-group-title">{g.title}</h2>
+          <div class="faq-list">
+            {g.items.map((item) => (
+              <details class="faq-item">
+                <summary>{item.q}<span class="faq-icon" aria-hidden="true"></span></summary>
+                <p class="muted">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="faq-cta">
+        <h3>Still have a question<span class="dot">.</span></h3>
+        <p class="muted">Our team is happy to help with specs, documentation, samples or a private-label enquiry.</p>
+        <div class="faq-cta-actions">
+          <a href="/contact" class="btn btn--primary">Contact Us <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="/request-samples" class="btn btn--ghost">Request Samples</a>
+          <a href="/private-label" class="btn btn--ghost">OEM / Private Label</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .faq-wrap { max-width: 820px; }
+  .faq-group { margin-bottom: clamp(28px, 4vw, 44px); }
+  .faq-group-title { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 14px; }
+  .faq-list { display: grid; gap: 10px; }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+  .faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; list-style: none; padding: 18px 20px; font-family: var(--font-head); font-weight: 800; font-size: 1.02rem; color: var(--ink); }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-icon { position: relative; flex: none; width: 16px; height: 16px; }
+  .faq-icon::before, .faq-icon::after { content: ""; position: absolute; background: var(--green-dark); border-radius: 2px; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .faq-icon::before { top: 7px; left: 0; width: 16px; height: 2px; }
+  .faq-icon::after { top: 0; left: 7px; width: 2px; height: 16px; }
+  .faq-item[open] .faq-icon::after { transform: rotate(90deg); opacity: 0; }
+  .faq-item p { padding: 0 20px 20px; line-height: 1.65; font-size: 0.95rem; }
+
+  .faq-cta { margin-top: clamp(30px, 5vw, 52px); padding: clamp(24px, 4vw, 36px); border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-2); text-align: center; }
+  .faq-cta h3 { font-size: 1.3rem; margin-bottom: 8px; }
+  .faq-cta p { max-width: 52ch; margin: 0 auto 18px; }
+  .faq-cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+</style>

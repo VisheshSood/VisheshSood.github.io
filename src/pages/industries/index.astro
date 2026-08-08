@@ -1,0 +1,45 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+import { industries } from "../../data/site";
+import { industryPhotos } from "../../data/industry-content";
+---
+
+<PageLayout title="A Glove for Every Industry | Innovative Gloves" description="Specialist and everyday gloves across a very broad application spectrum, automotive, oil & gas, chemical, food, medical, construction, cleaning, laboratory and more.">
+  <PageBanner eyebrow="Built for the Real World" title={`A Glove for<br>Every Industry<span class="dot">.</span>`}
+    intro="Whatever the job, there is an Innovative Glove designed for it. Each sector has its own hazards, requirements and recommended products." />
+
+  <section class="section ind-index">
+    <div class="container">
+      <div class="ind-index-grid">
+        {industries.map((ind) => {
+          const photo = industryPhotos[ind.slug]?.[0];
+          return (
+          <a class="ii-card" href={`/industries/${ind.slug}`}>
+            {photo
+              ? <div class="ii-img ii-img--photo" style={`background-image:url('${photo}')`}></div>
+              : <div class="img-slot img-slot--dark ii-img" data-label={ind.name}></div>}
+            <div class="ii-body">
+              <h3>{ind.name}</h3>
+              <p class="muted">{ind.intro}</p>
+              <span class="ii-link">Explore <span aria-hidden="true">&rarr;</span></span>
+            </div>
+          </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .ind-index-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .ii-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; transition: transform 0.2s ease, border-color 0.2s ease; }
+  .ii-card:hover { transform: translateY(-4px); border-color: var(--green); }
+  .ii-img { aspect-ratio: 16 / 9; }
+  .ii-img--photo { background-color: var(--bg-2); background-size: cover; background-position: center; }
+  .ii-body { padding: 20px; }
+  .ii-body h3 { font-size: 1.05rem; margin-bottom: 8px; }
+  .ii-body p { font-size: 0.86rem; margin-bottom: 14px; }
+  .ii-link { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-dark); }
+</style>

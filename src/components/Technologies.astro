@@ -1,0 +1,114 @@
+---
+import { technologies } from "../data/site";
+// Homepage shows the four signature grip textures (biodegradable lives on its own page).
+const techs = technologies
+  .filter((t) => t.icon !== "leaf")
+  .map((t) => ({ name: t.name.replace(" / Specialist Textures", ""), tagline: t.tagline, icon: t.icon, href: `/technologies/${t.slug}` }));
+---
+
+<section class="section technologies" id="technologies">
+  <div class="container">
+    <header class="sec-head">
+      <p class="eyebrow">Invented Technologies</p>
+      <h2>Engineered Differently<span class="dot">.</span></h2>
+      <hr class="rule" />
+    </header>
+
+    <div class="tech-grid">
+      {techs.map((t) => (
+        <a class={`tech-card img-slot img-slot--dark tex--${t.icon}`} href={t.href} data-label={`${t.name} texture macro`}>
+          <div class="tech-overlay">
+            <span class="tech-icon" aria-hidden="true">
+              {t.icon === "diamond" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 21 9 12 21 3 9z"/><path d="M3 9h18M8.5 9 12 3l3.5 6M12 21 8.5 9M12 21l3.5-12"/></svg>
+              )}
+              {t.icon === "zig" && (
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2 7l4 4 4-4 4 4 4-4M2 17l4 4 4-4 4 4 4-4"/>
+  <path d="M10 14.2l2-2M15 12.2l2 2" stroke-width="1.8"  transform="translate(-3.2 1)"/>
+</svg>
+              )}
+              {t.icon === "tread" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 4-4 4 4 4-4M2 16l4 4 4-4 4 4 4-4"/></svg>
+              )}
+              {t.icon === "raised" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4l7 8-7 8-7-8z"/><path d="M12 8l3.2 4-3.2 4-3.2-4z"/></svg>
+              )}
+            </span>
+            <h3>{t.name}</h3>
+            <p class="tech-tag">{t.tagline}</p>
+            <span class="tech-link">Explore <span class="arrow" aria-hidden="true">&rarr;</span></span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .technologies { background: var(--bg); }
+  .sec-head { text-align: center; margin-bottom: clamp(36px, 5vw, 60px); }
+  .sec-head h2 { font-size: clamp(1.9rem, 4.2vw, 3.1rem); margin-top: 10px; }
+
+  .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+  .tech-card {
+    position: relative;
+    aspect-ratio: 3 / 3.4;
+    border-radius: var(--radius);
+    display: block;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  /* Texture layer, brightened & contrasted so dark rubber reads vividly */
+  .tech-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: var(--tex);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(1.22) contrast(1.12);
+    transition: filter 0.25s ease, transform 0.35s ease;
+  }
+  /* The two diamond textures photograph darkest, give them extra lift */
+  .tex--diamond::before, .tex--raised::before { filter: brightness(1.5) contrast(1.28); }
+  .tech-card::after { content: ""; } /* suppress placeholder label on real tiles */
+  .tech-card:hover { transform: translateY(-5px); box-shadow: 0 16px 34px rgba(0,0,0,0.28); outline: 2px solid var(--green); outline-offset: -2px; }
+  .tech-card:hover::before { transform: scale(1.05); filter: brightness(1.34) contrast(1.16); }
+  .tex--diamond:hover::before, .tex--raised:hover::before { transform: scale(1.05); filter: brightness(1.62) contrast(1.3); }
+
+  /* Placeholder grip textures (CSS), swap each for a real macro photo later:
+     .tex--diamond { background-image: url("/images/tex-micro-diamond.jpg"); background-size: cover; } */
+  /* Real macro textures, set as a CSS var, painted on .tech-card::before so
+     brightness/contrast can be tuned without washing out the text overlay. */
+  .tex--diamond { --tex: url("/images/tex-micro-diamond.jpg"); }
+  .tex--raised  { --tex: url("/images/tex-raised-diamond.webp"); }
+  .tex--zig     { --tex: url("/images/tex-zig-grip.png"); }
+  .tex--tread   { --tex: url("/images/tex-tyre-tread.jpg"); }
+
+  .tech-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 22px;
+    background: linear-gradient(to top, rgba(6,8,6,0.9) 8%, rgba(6,8,6,0.12) 44%, rgba(6,8,6,0.08) 100%);
+  }
+  .tech-icon { color: var(--green); width: 30px; height: 30px; margin-bottom: auto; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.75)); }
+  .tech-icon svg { width: 100%; height: 100%; }
+  .tech-overlay h3 { color: #fff; font-size: 1.12rem; letter-spacing: 0.02em; margin-bottom: 8px; text-shadow: 0 1px 8px rgba(0,0,0,0.85); }
+  .tech-tag { color: rgba(255,255,255,0.82); font-size: 0.88rem; line-height: 1.4; margin-bottom: 14px; text-shadow: 0 1px 6px rgba(0,0,0,0.85); }
+  .tech-link {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--green); display: inline-flex; align-items: center; gap: 6px;
+  }
+  .tech-card:hover .tech-link .arrow { transform: translateX(4px); }
+
+  @media (max-width: 960px) { .tech-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .tech-grid { grid-template-columns: 1fr; } .tech-card { aspect-ratio: 3 / 2.4; } }
+</style>

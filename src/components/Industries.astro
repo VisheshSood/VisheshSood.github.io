@@ -1,0 +1,95 @@
+---
+const industries = [
+  { label: "Automotive & Engineering", icon: "car", href: "/industries/automotive", img: "/images/ind-automotive.jpg" },
+  { label: "Food Processing", icon: "food", href: "/industries/food-processing", img: "/images/ind-food.jpg" },
+  { label: "Oil, Chemical & Industrial", icon: "flask", href: "/industries/oil-gas", img: "/images/ind-oil.jpg" },
+  { label: "Construction", icon: "hardhat", href: "/industries/construction", img: "/images/ind-construction.jpg" },
+  { label: "Medical & Healthcare", icon: "cross", href: "/industries/medical", img: "/images/ind-medical.jpg" },
+  { label: "Cleaning & Janitorial", icon: "cart", href: "/industries/cleaning", img: "/images/ind-cleaning.jpg" },
+];
+---
+
+<section class="industries" id="industries">
+  <div class="container ind-grid">
+    <div class="ind-intro">
+      <p class="eyebrow">Built for the Real World</p>
+      <h2>Protection That Performs Across Every Industry<span class="dot">.</span></h2>
+      <a href="/industries" class="btn btn--ghost">View All Industries <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </div>
+
+    <ul class="ind-tiles">
+      {industries.map((ind) => (
+        <li class="ind-tile">
+          <a class="ind-tile-link" href={ind.href} aria-label={ind.label}>
+          <div class="ind-img" style={`background-image: url('${ind.img}')`}></div>
+          <div class="ind-overlay">
+            <span class="ind-icon" aria-hidden="true">
+              {ind.icon === "car" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13l2-5a2 2 0 0 1 1.9-1.3h10.2A2 2 0 0 1 19 8l2 5v5h-3v-2H6v2H3z"/><circle cx="7" cy="16" r="1.4"/><circle cx="17" cy="16" r="1.4"/></svg>)}
+              {ind.icon === "food" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h10.5a1 1 0 0 1 1 1v7H4z"/><path d="M15.5 8h3.5a1.5 1.5 0 0 1 0 3h-3.5"/><circle cx="12.2" cy="8" r="0.7"/></svg>)}
+              {ind.icon === "flask" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3h6M10 3v6l-5 9a1.5 1.5 0 0 0 1.3 2.3h11.4A1.5 1.5 0 0 0 19 18l-5-9V3"/><path d="M7.5 15h9"/></svg>)}
+              {ind.icon === "hardhat" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>)}
+              {ind.icon === "cross" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg>)}
+              {ind.icon === "cart" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 21h4a1.5 1.5 0 0 0 1.5-1.5V12a2 2 0 0 0-2-2h-3a2 2 0 0 0-2 2v7.5A1.5 1.5 0 0 0 9.5 21z"/><path d="M10 10V7.5h3.5a1 1 0 0 1 1 1V10"/><path d="M10.5 7.5V5h2.5v2.5"/><path d="M15.5 6.6h2.3M16 4.8l2-.7M16 8.4l2 .7"/></svg>)}
+            </span>
+            <span class="ind-label">{ind.label}</span>
+          </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .industries { background: var(--bg-2); border-block: 1px solid var(--border); }
+  .ind-grid {
+    display: grid;
+    grid-template-columns: minmax(230px, 300px) 1fr;
+    gap: clamp(20px, 3vw, 40px);
+    align-items: stretch;
+    padding-block: 0;
+  }
+
+  .ind-intro { align-self: center; padding-block: clamp(40px, 6vw, 72px); }
+  .ind-intro h2 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); margin: 12px 0 24px; }
+
+  .ind-tiles {
+    display: flex;
+    min-height: 420px;
+    overflow: hidden;
+  }
+  /* Expanding panels: equal strips at rest, hovered tile widens to reveal the photo */
+  .ind-tile {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    transition: flex-grow 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .ind-tiles:hover .ind-tile { flex-grow: 0.7; }
+  .ind-tiles .ind-tile:hover { flex-grow: 3; }
+  .ind-tile-link { position: absolute; inset: 0; display: block; }
+  .ind-img { position: absolute; inset: 0; border: 0; border-left: 1px solid var(--border); background-size: cover; background-position: center; background-repeat: no-repeat; }
+  .ind-overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;
+    padding: 18px 14px;
+    background: linear-gradient(to top, rgba(11,13,11,0.92) 10%, rgba(11,13,11,0.15) 70%);
+    transition: background 0.2s ease;
+  }
+  .ind-tile:hover .ind-overlay { background: linear-gradient(to top, rgba(11,13,11,0.92) 10%, rgba(140,198,63,0.18) 90%); }
+  .ind-icon { color: var(--green); width: 26px; height: 26px; }
+  .ind-icon svg { width: 100%; height: 100%; }
+  .ind-label {
+    font-family: var(--font-head); text-transform: uppercase; font-weight: 700;
+    font-size: 0.78rem; letter-spacing: 0.03em; line-height: 1.15; color: #fff;
+  }
+
+  @media (max-width: 900px) {
+    .ind-grid { grid-template-columns: 1fr; }
+    .ind-tiles { display: grid; grid-template-columns: repeat(3, 1fr); min-height: unset; }
+    .ind-tile { flex: none; aspect-ratio: 3 / 4; }
+    .ind-tiles:hover .ind-tile, .ind-tiles .ind-tile:hover { flex-grow: 0; }
+    .ind-intro { padding-bottom: 8px; }
+  }
+  @media (max-width: 520px) { .ind-tiles { grid-template-columns: repeat(2, 1fr); } }
+</style>

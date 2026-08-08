@@ -1,0 +1,49 @@
+---
+import { colourHex, colourLight, texPattern, type Glove } from "../data/catalogue";
+interface Props { glove: Glove; ratio?: string; box?: string; }
+const { glove, ratio = "4 / 3", box } = Astro.props;
+const primary = glove.colours?.[0] || "Blue";
+const hex = colourHex(primary);
+const light = colourLight(primary);
+const pat = texPattern[glove.texture] || "full";
+// Prefer an explicit box render (packaged shot), then the plain glove photo, then a generated card.
+const photo = box || glove.img;
+---
+
+{photo ? (
+  <div class="gv gv--photo" style={`aspect-ratio:${ratio}; background-image:url('${photo}')`}></div>
+) : (
+  <div class:list={["gv", "gv--gen", `pat-${pat}`, light && "is-light"]} style={`aspect-ratio:${ratio}; --bg:${hex}`}>
+    <span class="gv-tex">{glove.texture}</span>
+  </div>
+)}
+
+<style>
+  .gv { border-radius: var(--radius); overflow: hidden; position: relative; }
+  .gv--photo { background-color: #fff; background-size: contain; background-position: center; background-repeat: no-repeat; }
+
+  .gv--gen { background: var(--bg); --pat: rgba(255,255,255,0.18); }
+  .gv--gen.is-light { --pat: rgba(0,0,0,0.16); }
+  .gv--gen::after { content: ""; position: absolute; inset: 0; }
+  .gv-tex {
+    position: absolute; left: 12px; bottom: 10px; z-index: 1;
+    font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
+    font-size: 0.62rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.85);
+  }
+  .is-light .gv-tex { color: rgba(0,0,0,0.55); }
+
+  .pat-micro::after { background: repeating-linear-gradient(45deg, var(--pat) 0 1.5px, transparent 1.5px 7px), repeating-linear-gradient(-45deg, var(--pat) 0 1.5px, transparent 1.5px 7px); }
+  .pat-raised::after { background: repeating-linear-gradient(45deg, var(--pat) 0 3px, transparent 3px 18px), repeating-linear-gradient(-45deg, var(--pat) 0 3px, transparent 3px 18px); }
+  .pat-zig::after {
+    background:
+      linear-gradient(135deg, var(--pat) 25%, transparent 25%) -11px 0,
+      linear-gradient(225deg, var(--pat) 25%, transparent 25%) -11px 0,
+      linear-gradient(315deg, var(--pat) 25%, transparent 25%),
+      linear-gradient(45deg, var(--pat) 25%, transparent 25%);
+    background-size: 22px 22px;
+  }
+  .pat-tread::after { background: repeating-linear-gradient(90deg, var(--pat) 0 7px, transparent 7px 16px), repeating-linear-gradient(0deg, rgba(0,0,0,0.14) 0 9px, transparent 9px 18px); }
+  .pat-full::after { background: radial-gradient(var(--pat) 1.4px, transparent 1.7px); background-size: 9px 9px; }
+  .pat-finger::after { background: radial-gradient(var(--pat) 1.3px, transparent 1.6px); background-size: 13px 13px; opacity: 0.75; }
+  .pat-smooth::after { background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(0,0,0,0.06)); }
+</style>

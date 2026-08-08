@@ -1,0 +1,39 @@
+---
+const points = ["Solar energy", "Rainwater harvesting", "Water recycling", "Biodegradable nitrile"];
+---
+
+<section class="section sustain">
+  <div class="container sustain-grid">
+    <div class="sustain-img" style="background-image: url('/images/sustainability-bg.jpg')"></div>
+    <div class="sustain-copy">
+      <p class="eyebrow">Sustainability</p>
+      <h2>Real Systems.<br />Not Slogans<span class="dot">.</span></h2>
+      <p class="muted sustain-lede">
+        We skip the generic green marketing. Our environmental responsibility is
+        built into the factory itself, measurable systems, not statements.
+      </p>
+      <ul class="sustain-list">
+        {points.map((p) => (
+          <li>
+            <span class="s-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg></span>
+            {p}
+          </li>
+        ))}
+      </ul>
+      <a href="/sustainability" class="btn btn--ghost">See Our Systems <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sustain { background: var(--bg-2); }
+  .sustain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 60px); align-items: center; }
+  .sustain-img { aspect-ratio: 4 / 3; border-radius: var(--radius); background-size: cover; background-position: center; background-repeat: no-repeat; }
+  .sustain-copy h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin: 12px 0 16px; }
+  .sustain-lede { font-size: 1rem; margin-bottom: 22px; max-width: 46ch; }
+  .sustain-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; margin-bottom: 26px; }
+  .sustain-list li { display: flex; align-items: center; gap: 9px; font-size: 0.92rem; font-weight: 500; }
+  .s-check { flex: none; width: 20px; height: 20px; color: var(--green-dark); }
+  .s-check svg { width: 100%; height: 100%; }
+  @media (max-width: 760px) { .sustain-grid { grid-template-columns: 1fr; } .sustain-img { order: -1; } }
+</style>

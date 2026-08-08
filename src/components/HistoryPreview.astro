@@ -1,0 +1,52 @@
+---
+const milestones = [
+  { year: "2001", text: "Founded in Thailand" },
+  { year: "2010s", text: "Proprietary grip textures developed" },
+  { year: "2020s", text: "Patents & biodegradable innovation" },
+  { year: "2026", text: "25 years, and counting" },
+];
+---
+
+<section class="section history">
+  <div class="container">
+    <header class="hist-head">
+      <p class="eyebrow">2001 – 2026</p>
+      <h2>25 Years in the Making<span class="dot">.</span></h2>
+      <p class="muted hist-lede">From a conventional glove maker into a specialist, innovation-led manufacturer. This is where the anniversary lives.</p>
+    </header>
+
+    <ol class="timeline">
+      {milestones.map((m) => (
+        <li class="tl-item">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <span class="tl-year">{m.year}</span>
+          <span class="tl-text">{m.text}</span>
+        </li>
+      ))}
+    </ol>
+
+    <div class="hist-cta">
+      <a href="/about/history" class="btn btn--ghost">Explore Our Story <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .history { background: var(--bg); }
+  .hist-head { text-align: center; max-width: 640px; margin: 0 auto clamp(32px, 5vw, 52px); }
+  .hist-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin: 10px 0 12px; }
+  .hist-lede { font-size: 0.98rem; }
+
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; margin-bottom: 36px; }
+  .timeline::before { content: ""; position: absolute; top: 6px; left: 8%; right: 8%; height: 2px; background: var(--border); }
+  .tl-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; position: relative; }
+  .tl-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--green); border: 3px solid var(--bg); position: relative; z-index: 1; }
+  .tl-year { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--ink); margin-top: 6px; }
+  .tl-text { font-size: 0.86rem; color: var(--text-muted); max-width: 20ch; }
+  .hist-cta { display: flex; justify-content: center; }
+
+  @media (max-width: 640px) {
+    .timeline { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .timeline::before { display: none; }
+  }
+</style>

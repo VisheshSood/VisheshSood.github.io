@@ -1,0 +1,56 @@
+---
+import { flagship } from "../data/catalogue";
+---
+
+<section class="section products" id="products">
+  <div class="container">
+    <header class="prod-head">
+      <div>
+        <p class="eyebrow eyebrow--dark">Flagship Products</p>
+        <h2>Our Best. Engineered for More<span class="dot">.</span></h2>
+      </div>
+      <a href="/gloves" class="btn btn--ghost-dark">View All Products <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </header>
+
+    <div class="prod-grid">
+      {flagship.map(({ glove: g, box }) => (
+        <a class="prod-card" href={`/gloves/${g.slug}`}>
+          <div class="prod-visual" style={`background-image:url('${box}')`}></div>
+          <div class="prod-body">
+            <h3>{g.name}</h3>
+            <dl class="specs">
+              <div class="spec"><dt>{g.thickness ?? "—"} MIL</dt><dd>Thickness</dd></div>
+              <div class="spec"><dt>{g.length ?? "—"} MM</dt><dd>Length</dd></div>
+              <div class="spec"><dt>{g.bio ? "Bio" : g.material}</dt><dd>Material</dd></div>
+            </dl>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .products { background: var(--light-bg); color: var(--ink); }
+  .eyebrow--dark { color: var(--green-dark); }
+  .prod-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(30px, 4vw, 48px); }
+  .prod-head h2 { color: var(--ink); font-size: clamp(1.7rem, 3.4vw, 2.6rem); margin-top: 10px; }
+
+  .prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .prod-card { background: var(--light-surface); border: 1px solid var(--light-border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .prod-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.10); }
+
+  .prod-visual { aspect-ratio: 4 / 3; background-color: #fff; background-size: contain; background-position: center; background-repeat: no-repeat; }
+  .prod-body { padding: 16px; display: flex; flex-direction: column; height: 100%; }
+  .prod-body h3 { color: var(--ink); font-size: 1rem; margin-bottom: 14px; line-height: 1.15; }
+
+  .specs { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--light-border); padding-top: 12px; margin-top: auto; }
+  .spec { text-align: left; padding-right: 6px; }
+  .spec + .spec { border-left: 1px solid var(--light-border); padding-left: 10px; }
+  .spec dt { font-family: var(--font-head); font-weight: 800; font-size: 0.8rem; color: var(--ink); }
+  .spec dd { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-top: 3px; }
+
+  @media (max-width: 1080px) { .prod-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 720px) { .prod-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 460px) { .prod-grid { grid-template-columns: 1fr; } }
+</style>

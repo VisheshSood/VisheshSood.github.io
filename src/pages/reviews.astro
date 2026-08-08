@@ -1,0 +1,115 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import { reviews } from "../data/reviews";
+
+const count = reviews.length;
+const avg = (reviews.reduce((s, r) => s + r.rating, 0) / count).toFixed(1);
+const allFive = reviews.every((r) => r.rating === 5);
+
+// Key findings, the differentiators customers keep repeating
+const findings = [
+  { t: "Unbeatable durability", d: "No rips, no tears, where ordinary gloves fail in a single job." },
+  { t: "Grip that beats oil", d: "The textured palm keeps a confident hold on tools through oil, grease and fluids." },
+  { t: "True heavy-duty thickness", d: "When you compare our gloves to other " },
+  { t: "A fit that stays put", d: "Snug and precise, no sagging, comfortable over long shifts, even touchscreen-friendly." },
+  { t: "They save you money", d: "One durable pair replaces three or four cheap gloves, leading to less waste, less mess." },
+];
+---
+
+<PageLayout title="Reviews, What Customers Say | Innovative Gloves" description="Verified 5-star reviews from people using Innovative Gloves every day, durability, grip, fit and heavy-duty performance in their own words.">
+  <section class="page-banner">
+    <div class="container">
+      <div class="pb-inner">
+        <p class="eyebrow"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> Verified Amazon Reviews</p>
+        <h1>What Customers Say<span class="dot">.</span></h1>
+        <p class="pb-intro">Don't take our word for it. Here's what people using Innovative Gloves every day have to say, unedited.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY FINDINGS -->
+  <section class="section findings">
+    <div class="container">
+      <header class="find-head">
+        <p class="eyebrow">The Verdict</p>
+        <h2>What Sets Us Apart, In Their Words<span class="dot">.</span></h2>
+        <p class="muted">The same themes come up again and again across every review.</p>
+      </header>
+      <ul class="find-grid">
+        {findings.map((f) => (
+          <li class="find-card">
+            <span class="find-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg></span>
+            <h3>{f.t}</h3>
+            <p class="muted">{f.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ALL REVIEWS -->
+  <section class="section reviews-all">
+    <div class="container">
+      <header class="ra-head">
+        <p class="eyebrow">Every Review</p>
+        <h2>Straight From Customers<span class="dot">.</span></h2>
+      </header>
+      <div class="rev-masonry">
+        {reviews.map((r) => (
+          <article class="rev-item">
+            {r.img && <div class="rev-photo" style={`background-image:url('${r.img}')`}></div>}
+            <div class="rev-body">
+              <div class="rev-top">
+                <span class="rev-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span class="rev-verified">Verified Purchase</span>
+              </div>
+              <h3>{r.title}</h3>
+              <p class="rev-text">{r.body}</p>
+              <div class="rev-foot">
+                <span class="rev-name">{r.name}</span>
+                <span class="rev-date">{r.date}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .page-banner { background: var(--bg-2); border-bottom: 1px solid var(--border); padding-block: clamp(40px, 6vw, 80px); }
+  .pb-inner { max-width: 760px; }
+  .page-banner h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); margin: 12px 0 0; }
+  .stars { color: var(--green); letter-spacing: 2px; }
+  .pb-intro { color: var(--text-muted); font-size: 1.05rem; margin-top: 18px; max-width: 60ch; }
+
+  .findings { background: var(--bg); }
+  .find-head { max-width: 680px; margin-bottom: clamp(28px, 4vw, 44px); }
+  .find-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin: 10px 0 12px; }
+  .find-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+  .find-card { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .find-check { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: rgba(140,198,63,0.15); color: var(--green-dark); margin-bottom: 14px; }
+  .find-check svg { width: 17px; height: 17px; }
+  .find-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+  .find-card p { font-size: 0.9rem; }
+
+  .reviews-all { background: var(--bg-2); }
+  .ra-head { margin-bottom: clamp(24px, 3vw, 40px); }
+  .ra-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin-top: 10px; }
+
+  .rev-masonry { columns: 3 300px; column-gap: 20px; }
+  .rev-item { break-inside: avoid; margin-bottom: 20px; display: inline-block; width: 100%; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .rev-photo { height: 180px; background-size: cover; background-position: center; }
+  .rev-body { padding: 20px 22px; }
+  .rev-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .rev-stars { color: var(--green); letter-spacing: 2px; font-size: 0.95rem; }
+  .rev-verified { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-dark); }
+  .rev-item h3 { font-family: var(--font-head); font-weight: 800; font-size: 1.05rem; color: var(--ink); text-transform: none; letter-spacing: 0; margin-bottom: 10px; }
+  .rev-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.55; margin-bottom: 16px; }
+  .rev-foot { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 12px; }
+  .rev-name { font-weight: 700; color: var(--ink); font-size: 0.85rem; }
+  .rev-date { font-size: 0.78rem; color: var(--text-dim); }
+
+  @media (max-width: 640px) { .rev-masonry { columns: 1; } }
+</style>

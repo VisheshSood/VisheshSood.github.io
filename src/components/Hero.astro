@@ -1,0 +1,130 @@
+---
+// Hero, full-bleed image (right), copy (left), matching the mockup treatment.
+---
+
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="hero-years">EST 2001</p>
+      <h1>
+        25 Years of<br />
+        Engineering<br />
+        Better Protection<span class="dot">.</span>
+      </h1>
+      <p class="hero-lede">
+        From patented grip technologies to specialist heavy-duty gloves, we
+        develop solutions designed to perform where ordinary disposable gloves
+        fall short.
+      </p>
+      <div class="hero-cta">
+        <a href="/technologies" class="btn btn--primary">
+          Explore Our Technologies <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="/gloves" class="btn btn--ghost">
+          Find Your Glove <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-media">
+      <img class="hero-img" src="/images/hero-glove-wrench.jpg" alt="Green textured nitrile glove gripping a wrench in a workshop" width="1122" height="1402" />
+      <div class="hero-badge" aria-hidden="true">
+        <span class="hero-badge-num">25</span>
+        <span class="hero-badge-yrs">Years</span>
+        <span class="hero-badge-txt">of Innovation</span>
+        <span class="hero-badge-since">Since 2001</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: min(76vh, 700px);
+  }
+
+  /* Left copy, aligned to the site container's left edge, roomy on the right */
+  .hero-copy {
+    padding-block: clamp(40px, 6vw, 80px);
+    padding-left: max(var(--gutter), calc((100vw - var(--maxw)) / 2 + var(--gutter)));
+    padding-right: clamp(28px, 4vw, 64px);
+    position: relative;
+    z-index: 2;
+  }
+  .hero-years {
+    color: var(--green-dark);
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 5.6vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -0.015em;
+    line-height: 0.95;
+    margin-bottom: 26px;
+  }
+  .hero-lede {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 42ch;
+    margin-bottom: 34px;
+  }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  /* Right media, full-bleed to top/bottom/right, soft fade into bg on the left */
+  .hero-media { position: relative; align-self: stretch; min-height: 320px; }
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 32%;
+    display: block;
+  }
+  .hero-media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to right, var(--bg) 0%, rgba(255,255,255,0) 24%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    position: absolute;
+    right: clamp(18px, 3vw, 40px);
+    bottom: clamp(18px, 3vw, 36px);
+    z-index: 2;
+    display: grid;
+    justify-items: end;
+    text-align: right;
+    line-height: 1;
+    font-family: var(--font-head);
+    text-shadow: 0 1px 10px rgba(0,0,0,0.55);
+  }
+  .hero-badge-num { font-size: 2.8rem; font-weight: 900; color: #fff; }
+  .hero-badge-yrs { font-size: 0.95rem; letter-spacing: 0.2em; color: #fff; }
+  .hero-badge-txt { font-size: 0.72rem; letter-spacing: 0.24em; color: #fff; margin-top: 4px; }
+  .hero-badge-since { font-size: 0.62rem; letter-spacing: 0.2em; color: var(--green); margin-top: 6px; }
+
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-copy {
+      padding-inline: var(--gutter);
+      order: 2;
+    }
+    .hero-media { order: 1; min-height: 46vh; }
+    .hero-media::before { background: linear-gradient(to top, var(--bg) 0%, rgba(255,255,255,0) 30%); }
+  }
+</style>

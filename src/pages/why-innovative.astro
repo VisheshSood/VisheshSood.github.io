@@ -1,0 +1,143 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+
+const features = [
+  { t: "35+ Years of Expertise", d: "Over three decades of hands-on experience making nitrile and latex gloves, and refining how they're made." },
+  { t: "Family-Owned & Invested", d: "A family business that reinvests in R&D, people and the factory, not just output." },
+  { t: "Innovation-Led", d: "Patented Diamond, Micro Diamond, Zig and Tyre Tread grip textures we engineered ourselves." },
+  { t: "Specialist + Complete Range", d: "60+ variations, from patented specialist grips to everyday disposables, one supplier." },
+  { t: "Heavy-Duty Specialism", d: "Where thin economy gloves give up, our thicker, tougher gauges are built to keep going." },
+  { t: "Strict Quality Control", d: "In-house tensile, elongation and post-aging testing on our own lines, every batch." },
+  { t: "No Fillers", d: "We don't bulk our gloves with cheap fillers that weaken the film. Just high-grade material." },
+  { t: "OEM & Private Label", d: "Extensive customisation, your brand, colours, thickness and packaging, made to spec." },
+  { t: "Certified for Global Markets", d: "ISO 9001, EN ISO 13485, CE/PPE, FDA, TGA, Health Canada and SMETA-audited." },
+];
+
+const lineage = [
+  { k: "The lesson", t: "We invented the Diamond grip", d: "Our raised Diamond texture gave gloves a grip ordinary disposables didn't have, but we didn't patent it, and watched others copy it. We never made that mistake again." },
+  { k: "First patent", t: "Tyre Tread / Gripper", d: "Our aggressive Tyre Tread pattern became our first patented grip, engineered for the toughest, most demanding handling." },
+  { k: "Superior grip", t: "Micro Diamond", d: "We re-engineered the diamond concept into a finer, denser texture and patented it, a superior grip, especially through oils." },
+  { k: "Refined over years", t: "Zig", d: "Five years of refining the Gripper produced Zig, a patented directional texture that's our best dry grip yet, scientifically proven." },
+];
+---
+
+<PageLayout
+  title="Why Innovative Gloves"
+  description="35+ years of expertise, patented grip technologies, 60+ variations, in-house testing and OEM capability. Why distributors, brands and procurement teams choose Innovative Gloves."
+>
+  <PageBanner eyebrow="Why Innovative" title={`We Make Gloves Others<br>Simply Can't<span class="dot">.</span>`}
+    intro="Anyone can press out a plain glove. Very few can invent, patent and manufacture their own grip technologies, and still supply the everyday range too. That combination is why partners choose us." />
+
+  <div class="wi-hero-img" style="background-image:url('/images/wi-dipline.jpg')" role="img" aria-label="Glove dipping line at the Innovative Gloves factory"></div>
+
+  <!-- FEATURES -->
+  <section class="section wi-features">
+    <div class="container">
+      <header class="wi-head">
+        <p class="eyebrow">What Sets Us Apart</p>
+        <h2>One Manufacturer. Every Reason to Choose Us<span class="dot">.</span></h2>
+        <p class="muted">The specialist innovation of a product company, with the range and reliability of a complete glove supplier.</p>
+      </header>
+      <ul class="wi-grid">
+        {features.map((f) => (
+          <li class="wi-card">
+            <span class="wi-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6"/></svg></span>
+            <h3>{f.t}</h3>
+            <p class="muted">{f.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- INNOVATION STORY -->
+  <section class="section wi-lineage">
+    <div class="container">
+      <header class="wi-head">
+        <p class="eyebrow">Our Innovation Story</p>
+        <h2>Four Grips. One Obsession<span class="dot">.</span></h2>
+        <p class="muted">We didn't set out to make ordinary gloves. Each of our patented textures came from a real lesson learned on the factory floor.</p>
+      </header>
+      <div class="lin-grid">
+        <ol class="lineage">
+          {lineage.map((l, i) => (
+            <li class="lin-item">
+              <span class="lin-num">{i + 1}</span>
+              <div class="lin-body">
+                <span class="lin-kicker">{l.k}</span>
+                <h3>{l.t}</h3>
+                <p class="muted">{l.d}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div class="lin-media" style="background-image:url('/images/wi-tanks.jpg')" role="img" aria-label="Compound mixing and storage tanks"></div>
+      </div>
+      <div class="lin-cta">
+        <a href="/technologies" class="btn btn--primary">Explore the Technologies <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACILITY DUO -->
+  <div class="wi-duo">
+    <div class="wi-duo-img" style="background-image:url('/images/wi-campus.jpg')" role="img" aria-label="Innovative Gloves factory campus"></div>
+    <div class="wi-duo-img" style="background-image:url('/images/wi-pond.jpg')" role="img" aria-label="On-site water-treatment ponds"></div>
+  </div>
+
+  <!-- CTA -->
+  <section class="section wi-cta">
+    <div class="container cta-inner">
+      <h2>See It for Yourself<span class="dot">.</span></h2>
+      <p class="muted">Browse the range, read what customers say, or request samples to put our gloves to the test.</p>
+      <div class="cta-actions">
+        <a href="/request-samples" class="btn btn--primary">Request Samples <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/reviews" class="btn btn--ghost">Customer Reviews</a>
+        <a href="/about" class="btn btn--ghost">Our Story</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .wi-hero-img { height: clamp(240px, 38vw, 460px); background-size: cover; background-position: center; border-bottom: 1px solid var(--border); }
+
+  .wi-features { background: var(--bg); }
+  .wi-head { max-width: 680px; margin-bottom: clamp(26px, 4vw, 42px); }
+  .wi-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin: 10px 0 12px; }
+  .wi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+  .wi-card { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .wi-check { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); margin-bottom: 14px; }
+  .wi-check svg { width: 16px; height: 16px; }
+  .wi-card h3 { font-size: 1rem; margin-bottom: 8px; }
+  .wi-card p { font-size: 0.86rem; line-height: 1.5; }
+
+  .wi-lineage { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .lin-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(24px, 3.5vw, 48px); align-items: start; }
+  .lin-media { position: sticky; top: 100px; aspect-ratio: 3 / 4; border-radius: var(--radius); border: 1px solid var(--border); background-size: cover; background-position: center; box-shadow: 0 16px 40px rgba(0,0,0,0.10); }
+  .lineage { display: grid; gap: 14px; list-style: none; padding: 0; margin: 0; }
+  .lin-item { display: flex; gap: 18px; padding: 22px 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .lin-num { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--green); color: #14210a; font-family: var(--font-head); font-weight: 900; font-size: 1rem; }
+  .lin-kicker { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-dark); }
+  .lin-body h3 { font-size: 1.1rem; margin: 4px 0 7px; }
+  .lin-body p { font-size: 0.9rem; line-height: 1.55; }
+  .lin-cta { margin-top: clamp(24px, 3vw, 34px); }
+
+  .wi-duo { display: grid; grid-template-columns: 1fr 1fr; }
+  .wi-duo-img { height: clamp(200px, 26vw, 340px); background-size: cover; background-position: center; border-top: 1px solid var(--border); }
+  .wi-duo-img:first-child { border-right: 1px solid var(--border); }
+
+  .wi-cta { background: radial-gradient(120% 120% at 50% 0%, rgba(140,198,63,0.12), rgba(140,198,63,0) 60%), var(--bg); border-top: 1px solid var(--border); text-align: center; }
+  .cta-inner { max-width: 620px; margin-inline: auto; }
+  .cta-inner h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 12px; }
+  .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+
+  @media (max-width: 860px) {
+    .lin-grid { grid-template-columns: 1fr; }
+    .lin-media { position: static; aspect-ratio: 16 / 10; }
+    .wi-duo { grid-template-columns: 1fr; }
+    .wi-duo-img:first-child { border-right: 0; }
+  }
+  @media (max-width: 560px) { .lin-item { flex-direction: column; gap: 12px; } }
+</style>

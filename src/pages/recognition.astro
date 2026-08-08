@@ -1,0 +1,142 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+
+const patents = [
+  { name: "Tyre Tread", meta: "US Design Patent D779,130 · 2017", desc: "Our first patented grip texture. An aggressive tyre-tread pattern engineered to shed oil and water and hold fast in demanding conditions." },
+  { name: "Micro Diamond", meta: "US Design Patent D870,976 · 2019", desc: "A finer, denser diamond texture for superior grip through oils. Protected in the US, the EU (Community Design 004675619) and Australia (201810657)." },
+  { name: "Zig Grip", meta: "US Design Patent D1,068,207 · 2025", desc: "Our latest patented directional texture and best dry grip, protected worldwide." },
+  { name: "Diamond Texture", meta: "Invented 2011", desc: "The original raised diamond-textured disposable glove. We introduced it to the world; it remains the benchmark others copy." },
+];
+
+const awards = [
+  { name: "CSR-DIW Award", year: "2015", desc: "The Corporate Social Responsibility standard of Thailand's Department of Industrial Works (Ministry of Industry). In 2015 we were the only glove manufacturer among around 120 companies nationwide to receive it." },
+  { name: "Gold Labour Award", year: "Gold tier", desc: "Awarded the gold rating, the highest possible, for the labour safety, security and welfare standards we maintain year after year." },
+];
+
+const milestones = [
+  { y: "2001", t: "Founded in Thailand" },
+  { y: "2011", t: "Diamond Texture invented" },
+  { y: "2017", t: "Tyre Tread, first patent" },
+  { y: "2019", t: "Micro Diamond patented" },
+  { y: "2025", t: "Zig Grip patented" },
+  { y: "2026", t: "25th anniversary" },
+];
+---
+
+<PageLayout
+  title="Recognition | Innovative Gloves"
+  description="Patents, awards and milestones for Innovative Gloves: patented Tyre Tread, Micro Diamond and Zig grip technologies, the CSR-DIW Award, a gold labour rating, and exhibiting at A+A Dusseldorf 2027."
+>
+  <PageBanner eyebrow="Recognition" title={`Earned,<br>Not Claimed<span class="dot">.</span>`}
+    intro="The patents, awards and milestones that genuinely back up how we talk about our gloves." />
+
+  <!-- PATENTS -->
+  <section class="section rec-patents">
+    <div class="container">
+      <header class="rec-head">
+        <p class="eyebrow">Patented Technology</p>
+        <h2>Grip We Own<span class="dot">.</span></h2>
+        <p class="muted">We don't just claim our grip is different, we hold the design patents that prove it.</p>
+      </header>
+      <ul class="rec-grid">
+        {patents.map((p) => (
+          <li class="rec-card">
+            <span class="rec-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 L7 22l5-3 5 3-1.5-8"/></svg></span>
+            <h3>{p.name}</h3>
+            <p class="rec-meta">{p.meta}</p>
+            <p class="muted">{p.desc}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section class="section rec-awards">
+    <div class="container">
+      <header class="rec-head">
+        <p class="eyebrow">Awards</p>
+        <h2>Recognised for How We Operate<span class="dot">.</span></h2>
+      </header>
+      <ul class="award-grid">
+        {awards.map((a) => (
+          <li class="award-card">
+            <div class="award-top">
+              <h3>{a.name}</h3>
+              <span class="award-year">{a.year}</span>
+            </div>
+            <p class="muted">{a.desc}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="rec-note muted">See our full quality and ethical accreditations on the <a href="/certifications" class="inline-link">Certifications</a> page.</p>
+    </div>
+  </section>
+
+  <!-- MILESTONES -->
+  <section class="section rec-miles">
+    <div class="container">
+      <header class="rec-head">
+        <p class="eyebrow">Milestones</p>
+        <h2>A Quarter-Century of Firsts<span class="dot">.</span></h2>
+      </header>
+      <ul class="mile-row">
+        {milestones.map((m) => (
+          <li class="mile-chip"><span class="mc-year">{m.y}</span><span class="mc-text">{m.t}</span></li>
+        ))}
+      </ul>
+      <a href="/about/history" class="btn btn--ghost">The Full 25-Year Story <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- EXHIBITIONS -->
+  <section class="section rec-expo">
+    <div class="container rec-expo-inner">
+      <p class="eyebrow">Exhibitions</p>
+      <h2>Meet Us at A+A Dusseldorf 2027<span class="dot">.</span></h2>
+      <p class="muted">We'll next be exhibiting at A+A Dusseldorf in 2027, the world's leading trade fair for safety, security and health at work. It's the best place to feel the difference in our grip technologies for yourself, come and say hello.</p>
+      <div class="rec-expo-actions">
+        <a href="/contact" class="btn btn--primary">Get in Touch <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/request-samples" class="btn btn--ghost">Request Samples</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .rec-head { max-width: 640px; margin-bottom: clamp(24px, 3vw, 38px); }
+  .rec-head h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); margin: 10px 0 12px; }
+
+  .rec-patents { background: var(--bg); }
+  .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
+  .rec-card { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .rec-badge { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); margin-bottom: 14px; }
+  .rec-badge svg { width: 18px; height: 18px; }
+  .rec-card h3 { font-size: 1.08rem; margin-bottom: 4px; }
+  .rec-meta { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 10px; }
+  .rec-card p.muted { font-size: 0.88rem; line-height: 1.55; }
+
+  .rec-awards { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .award-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .award-card { padding: 26px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .award-top { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 10px; }
+  .award-top h3 { font-size: 1.15rem; }
+  .award-year { flex: none; font-family: var(--font-head); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--green-dark); background: rgba(140,198,63,0.14); padding: 4px 10px; border-radius: 999px; }
+  .award-card p { line-height: 1.6; font-size: 0.92rem; }
+  .rec-note { margin-top: 20px; font-size: 0.88rem; }
+
+  .rec-miles { background: var(--bg); border-top: 1px solid var(--border); }
+  .mile-row { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0 0 24px; }
+  .mile-chip { display: inline-flex; align-items: baseline; gap: 8px; padding: 9px 15px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); }
+  .mc-year { font-family: var(--font-head); font-weight: 900; color: var(--green-dark); font-size: 0.9rem; }
+  .mc-text { font-weight: 600; font-size: 0.86rem; }
+
+  .rec-expo { background: radial-gradient(120% 120% at 50% 0%, rgba(140,198,63,0.12), rgba(140,198,63,0) 60%), var(--bg-2); border-top: 1px solid var(--border); text-align: center; }
+  .rec-expo-inner { max-width: 640px; margin-inline: auto; }
+  .rec-expo h2 { font-size: clamp(1.6rem, 3.2vw, 2.4rem); margin: 10px 0 14px; }
+  .rec-expo p { line-height: 1.65; }
+  .rec-expo-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+
+  .inline-link { color: var(--green-dark); text-decoration: underline; }
+</style>

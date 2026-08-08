@@ -1,0 +1,13 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+import SectionStub from "../components/SectionStub.astro";
+---
+
+<PageLayout title="Request a Quote | Innovative Gloves" description="Request a commercial quotation from Innovative Gloves, specify products, sizes, quantity, packaging, destination and private-label requirements.">
+  <PageBanner eyebrow="Request a Quote" title={`Let's Talk<br>Numbers<span class="dot">.</span>`}
+    intro="Ready for pricing? Send us your requirements and we'll prepare a quotation." />
+
+  <SectionStub tone="light" eyebrow="What to Include" title="Quotation Details" lead="The information we need to quote accurately." layout="checklist"
+    items={["Products", "Sizes", "Quantity", "Packaging", "Destination", "Private label", "Shipment timing"]} />
+</PageLayout>
