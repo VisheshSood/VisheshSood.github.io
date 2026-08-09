@@ -40,9 +40,28 @@ const indSlug: Record<string, string> = {
   "General Industrial": "general-purpose",
   "General Purpose": "general-purpose",
 };
+
+// "At a Glance" facts, derived from the real catalogue so nothing is invented.
+const introduced: Record<string, string> = { "micro-diamond": "2019", "zig-grip": "2025", "tyre-tread": "2017", "raised-diamond": "2011" };
+const family = catalogue.filter((g) => (isBio ? g.bio : g.texture === texByTech[tech.slug]));
+const mats = [...new Set(family.map((g) => g.material))].join(", ");
+const thNums = family.map((g) => g.thickness).filter((n): n is number => n != null);
+const thRange = thNums.length ? `${Math.min(...thNums)}–${Math.max(...thNums)} mil` : "";
+const cuffOpts = family.some((g) => g.longCuff) ? "Standard and long cuff" : "Standard";
+const status = isInvented ? "Invented by Innovative (not patented)" : isBio ? "Biodegradable material innovation" : "Patented design";
+const glance: { k: string; v: string }[] = [
+  { k: "Developer", v: "Innovative Gloves Co., Ltd." },
+  { k: "Introduced", v: introduced[tech.slug] ?? "" },
+  { k: "Status", v: status },
+  { k: "Materials", v: mats },
+  { k: "Thicknesses", v: thRange },
+  { k: "Cuff options", v: cuffOpts },
+  { k: "Primary benefit", v: tech.tagline },
+  { k: "Typical applications", v: tech.bestFor.join(", ") },
+].filter((r) => r.v);
 ---
 
-<PageLayout title={isBio ? `${tech.name} Nitrile | Innovative Gloves` : `${tech.name}, ${isInvented ? "Invented by Innovative" : "Patented Grip"} | Innovative Gloves`} description={`${tech.name}: ${tech.tagline} ${tech.intro}`}>
+<PageLayout title={isBio ? "Biodegradable Nitrile Gloves | Innovative Gloves" : `${tech.name} Nitrile Gloves | ${isInvented ? "Invented by Innovative" : "Patented Grip Technology"} | Innovative Gloves`} description={`${tech.name}: ${tech.tagline} ${tech.intro}`}>
   <!-- HERO -->
   <section class="th-hero">
     <div class="container th-hero-grid">
@@ -61,6 +80,16 @@ const indSlug: Record<string, string> = {
       <div class:list={["th-media", tech.imgFit === "contain" && "th-media--contain"]}>
         <div class="th-img" style={`background-image: url('${tech.img}')`}></div>
       </div>
+    </div>
+  </section>
+
+  <!-- AT A GLANCE -->
+  <section class="section th-glance-sec">
+    <div class="container">
+      <h2 class="th-glance-title">{tech.name} at a Glance<span class="dot">.</span></h2>
+      <dl class="th-glance">
+        {glance.map((r) => (<div class="th-glance-row"><dt>{r.k}</dt><dd>{r.v}</dd></div>))}
+      </dl>
     </div>
   </section>
 
@@ -177,6 +206,13 @@ const indSlug: Record<string, string> = {
   .th-story-text { font-family: var(--font-head); font-weight: 700; text-transform: none; font-size: clamp(1.2rem, 2.4vw, 1.7rem); line-height: 1.4; max-width: 62ch; margin-top: 14px; color: #fff; letter-spacing: 0; }
 
   /* Difference + benefits */
+  .th-glance-sec { background: var(--bg); border-top: 1px solid var(--border); }
+  .th-glance-title { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 20px; }
+  .th-glance { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+  .th-glance-row { padding: 16px 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .th-glance-row dt { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+  .th-glance-row dd { margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--ink); }
+
   .th-diff { background: var(--bg); }
   .th-diff-head { max-width: 720px; margin-bottom: clamp(28px, 4vw, 44px); }
   .th-diff-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); }
