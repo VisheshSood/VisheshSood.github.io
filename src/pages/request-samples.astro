@@ -20,6 +20,15 @@ import PageBanner from "../components/PageBanner.astro";
       </form>
     </div>
   </section>
+
+  <script>
+    // Pre-fill the message when arriving from the Glove Finder's "Request Samples of These".
+    const items = new URLSearchParams(location.search).get("items");
+    if (items) {
+      const t = document.getElementById("details") as HTMLTextAreaElement | null;
+      if (t) t.value = `I'd like to try: ${items}\n\nPlease ship to:\n`;
+    }
+  </script>
 </PageLayout>
 
 <style>

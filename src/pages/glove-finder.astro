@@ -3,6 +3,20 @@ import PageLayout from "../layouts/PageLayout.astro";
 import PageBanner from "../components/PageBanner.astro";
 import GloveCard from "../components/GloveCard.astro";
 import { catalogue } from "../data/catalogue";
+import { industryContent } from "../data/industry-content";
+import { industries } from "../data/site";
+
+// Reverse map: which industries recommend each glove (powers the industry quick-paths).
+const industryOf: Record<string, string[]> = {};
+for (const [slug, c] of Object.entries(industryContent)) {
+  for (const g of c.recommended ?? []) (industryOf[g] ||= []).push(slug);
+}
+
+// A curated set of one-tap industry shortcuts.
+const quickSlugs = ["automotive", "oil-gas", "chemical", "food-processing", "medical", "general-purpose"];
+const quickPaths = quickSlugs
+  .map((slug) => industries.find((i) => i.slug === slug))
+  .filter((i): i is NonNullable<typeof i> => !!i);
 
 // Guided-selection questions. Each option carries a `key` used by the client script.
 const needs = [
@@ -25,15 +39,22 @@ const cuffs = [
 ];
 ---
 
-<PageLayout title="Find Your Glove | Innovative Gloves" description="Answer a few quick questions, what you need, material and cuff, and we'll recommend the right Innovative glove for the job from our full range.">
+<PageLayout title="Find Your Glove | Innovative Gloves" description="Answer a few quick questions, or start from your industry, and we'll recommend the right Innovative glove for the job from our full range.">
   <PageBanner eyebrow="Find Your Glove" title={`Tell Us the Job. We'll Find the Glove<span class="dot">.</span>`}
-    intro="Pick what matters most, narrow by material and cuff, and we'll shortlist the right products, instantly." />
+    intro="Start with your industry, or pick what matters most, and we'll shortlist the right products, instantly." />
 
   <section class="section finder">
     <div class="container">
       <div class="finder-controls">
         <div class="fq">
-          <p class="fq-label"><span class="fq-num">1</span> What matters most?</p>
+          <p class="fq-label"><span class="fq-num">1</span> Start with your industry <span class="fq-opt">optional</span></p>
+          <div class="fq-opts" data-group="industry">
+            {quickPaths.map((i) => (<button type="button" class="fopt fopt--pill" data-key={i.slug}>{i.name}</button>))}
+          </div>
+        </div>
+
+        <div class="fq fq--or">
+          <p class="fq-label"><span class="fq-num">2</span> Or tell us what matters most</p>
           <div class="fq-opts" data-group="need">
             {needs.map((n) => (
               <button type="button" class="fopt fopt--need" data-key={n.key}>
@@ -46,13 +67,13 @@ const cuffs = [
 
         <div class="fq-row">
           <div class="fq">
-            <p class="fq-label"><span class="fq-num">2</span> Material</p>
+            <p class="fq-label"><span class="fq-num">3</span> Material</p>
             <div class="fq-opts" data-group="material">
               {materials.map((m, i) => (<button type="button" class="fopt fopt--pill" data-key={m.key} data-default={i === 0 ? "1" : undefined}>{m.label}</button>))}
             </div>
           </div>
           <div class="fq">
-            <p class="fq-label"><span class="fq-num">3</span> Cuff</p>
+            <p class="fq-label"><span class="fq-num">4</span> Cuff</p>
             <div class="fq-opts" data-group="cuff">
               {cuffs.map((c, i) => (<button type="button" class="fopt fopt--pill" data-key={c.key} data-default={i === 0 ? "1" : undefined}>{c.label}</button>))}
             </div>
@@ -62,15 +83,23 @@ const cuffs = [
       </div>
 
       <div class="finder-results">
-        <p class="finder-count" id="finderCount">Pick an option above to see recommendations.</p>
+        <p class="finder-count" id="finderCount">Pick an industry or an option above to see recommendations.</p>
+        <p class="finder-why" id="finderWhy" hidden></p>
+        <p class="finder-chem" id="finderChem" hidden>
+          Chemical protection depends on the exact chemical, its concentration and contact time. Check the EN ISO 374 permeation data on each product page and <a href="/industries/chemical">our chemical-handling guidance</a> before choosing.
+        </p>
         <div class="finder-grid" id="finderGrid">
           {catalogue.map((g) => (
             <div class="find-card" data-texture={g.texture} data-material={g.material}
               data-bio={g.bio ? "1" : "0"} data-longcuff={g.longCuff ? "1" : "0"}
-              data-thickness={g.thickness ?? ""} hidden>
+              data-thickness={g.thickness ?? ""} data-industries={(industryOf[g.slug] ?? []).join("|")}
+              data-name={g.name} hidden>
               <GloveCard glove={g} />
             </div>
           ))}
+        </div>
+        <div class="finder-actions" id="finderActions" hidden>
+          <a class="btn btn--primary" id="finderSample" href="/request-samples">Request Samples of These <span class="arrow" aria-hidden="true">&rarr;</span></a>
         </div>
         <p class="finder-empty" id="finderEmpty" hidden>No exact match, try widening the material or cuff, or <a href="/gloves">browse all gloves</a>.</p>
       </div>
@@ -80,9 +109,11 @@ const cuffs = [
 
 <style>
   .finder-controls { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: clamp(20px, 3vw, 30px); margin-bottom: clamp(28px, 4vw, 44px); }
-  .fq-row { margin-top: 22px; }
+  .fq + .fq { margin-top: 22px; }
+  .fq--or { padding-top: 22px; border-top: 1px dashed var(--border); }
   .fq-label { display: flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 800; font-size: 1.02rem; margin-bottom: 14px; }
   .fq-num { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--green); color: #14210a; font-size: 0.8rem; font-weight: 800; }
+  .fq-opt { font-family: var(--font-body); font-weight: 600; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; }
 
   .fq-opts { display: flex; flex-wrap: wrap; gap: 10px; }
   .fopt { cursor: pointer; border: 1px solid var(--border-strong); background: var(--bg); border-radius: var(--radius); transition: all 0.14s ease; text-align: left; }
@@ -95,13 +126,17 @@ const cuffs = [
   .fopt.is-active .fopt-title, .fopt--pill.is-active { color: #14210a; }
   .fopt.is-active .fopt-hint { color: #2b3a17; }
 
-  .fq-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 24px 40px; }
+  .fq-row { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 24px 40px; }
   .finder-reset { margin-left: auto; align-self: flex-end; background: none; border: 0; color: var(--green-dark); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; padding: 9px 0; }
   .finder-reset:hover { text-decoration: underline; }
 
-  .finder-count { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); margin-bottom: 18px; }
+  .finder-count { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
   .finder-count strong { color: var(--ink); }
+  .finder-why { font-size: 0.95rem; line-height: 1.55; color: var(--text); margin-bottom: 16px; max-width: 68ch; }
+  .finder-chem { font-size: 0.85rem; line-height: 1.55; color: var(--text-muted); margin-bottom: 18px; max-width: 68ch; padding: 12px 16px; border-left: 3px solid var(--green); background: var(--bg-2); border-radius: 0 var(--radius) var(--radius) 0; }
+  .finder-chem a { color: var(--green-dark); font-weight: 700; }
   .finder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; }
+  .finder-actions { margin-top: clamp(22px, 3vw, 32px); }
   .finder-empty { margin-top: 20px; color: var(--text-muted); }
   .finder-empty a { color: var(--green-dark); font-weight: 700; text-decoration: underline; }
 
@@ -112,9 +147,13 @@ const cuffs = [
   type Need = "oilgrip" | "drygrip" | "rugged" | "chemical" | "everyday" | "bio";
   const cards = Array.from(document.querySelectorAll<HTMLElement>(".find-card"));
   const countEl = document.getElementById("finderCount");
+  const whyEl = document.getElementById("finderWhy");
+  const chemEl = document.getElementById("finderChem");
   const emptyEl = document.getElementById("finderEmpty");
+  const actionsEl = document.getElementById("finderActions");
+  const sampleBtn = document.getElementById("finderSample") as HTMLAnchorElement | null;
 
-  const state = { need: null as Need | null, material: "any", cuff: "any" };
+  const state = { industry: null as string | null, need: null as Need | null, material: "any", cuff: "any" };
 
   const needMatch: Record<Need, (c: DOMStringMap) => boolean> = {
     oilgrip: (c) => c.texture === "Micro Diamond" || c.texture === "Diamond",
@@ -125,23 +164,56 @@ const cuffs = [
     bio: (c) => c.bio === "1",
   };
 
+  const needWhy: Record<Need, string> = {
+    oilgrip: "You asked for grip in oil, so these are our Diamond and Micro Diamond textures, engineered to bite through films of oil and grease.",
+    drygrip: "For the best dry grip we're showing our patented Zig texture.",
+    rugged: "For heavy-duty work these are our Tyre Tread and thicker-gauge gloves, built to take punishment.",
+    chemical: "For chemical and splash work these are our longer-cuff and heavier-gauge gloves.",
+    everyday: "For everyday value these are our lightweight, high-dexterity all-rounders.",
+    bio: "These are our biodegradable nitrile gloves, engineered to break down far faster in active landfill.",
+  };
+
   function apply() {
     let shown = 0;
+    const names: string[] = [];
     for (const card of cards) {
       const d = card.dataset;
-      let ok = state.need ? needMatch[state.need](d) : false;
-      if (ok && state.material !== "any") ok = state.material === "Latex" ? d.material === "Latex" : (d.material || "").includes("Nitrile");
-      if (ok && state.cuff !== "any") ok = state.cuff === "long" ? d.longcuff === "1" : d.longcuff === "0";
+      let ok = false;
+      if (state.industry) {
+        ok = (d.industries || "").split("|").includes(state.industry);
+      } else if (state.need) {
+        ok = needMatch[state.need](d);
+        if (ok && state.material !== "any") ok = state.material === "Latex" ? d.material === "Latex" : (d.material || "").includes("Nitrile");
+        if (ok && state.cuff !== "any") ok = state.cuff === "long" ? d.longcuff === "1" : d.longcuff === "0";
+      }
       card.hidden = !ok;
-      if (ok) shown++;
+      if (ok) { shown++; if (d.name) names.push(d.name); }
     }
-    if (!state.need) {
-      if (countEl) countEl.textContent = "Pick an option above to see recommendations.";
+
+    const active = state.industry || state.need;
+    if (!active) {
+      if (countEl) countEl.textContent = "Pick an industry or an option above to see recommendations.";
+      if (whyEl) whyEl.hidden = true;
+      if (chemEl) chemEl.hidden = true;
       if (emptyEl) emptyEl.hidden = true;
+      if (actionsEl) actionsEl.hidden = true;
       return;
     }
+
     if (countEl) countEl.innerHTML = `<strong>${shown}</strong> recommended ${shown === 1 ? "glove" : "gloves"}`;
+    if (whyEl) {
+      if (state.industry) {
+        const label = document.querySelector<HTMLElement>(`[data-group="industry"] .fopt[data-key="${state.industry}"]`)?.textContent?.trim();
+        whyEl.textContent = `Our recommended gloves for ${label || "this industry"}. Every one is backed by real grip data and certifications.`;
+      } else if (state.need) {
+        whyEl.textContent = needWhy[state.need];
+      }
+      whyEl.hidden = false;
+    }
+    if (chemEl) chemEl.hidden = !(state.need === "chemical" || state.industry === "chemical");
     if (emptyEl) emptyEl.hidden = shown !== 0;
+    if (actionsEl) actionsEl.hidden = shown === 0;
+    if (sampleBtn) sampleBtn.href = shown > 0 ? `/request-samples?items=${encodeURIComponent(names.join(", "))}` : "/request-samples";
   }
 
   document.querySelectorAll<HTMLElement>(".fq-opts").forEach((group) => {
@@ -151,8 +223,15 @@ const cuffs = [
         group.querySelectorAll(".fopt").forEach((b) => b.classList.remove("is-active"));
         btn.classList.add("is-active");
         const key = btn.dataset.key as string;
-        if (g === "need") state.need = key as Need;
-        else if (g === "material") state.material = key;
+        if (g === "industry") {
+          state.industry = key;
+          state.need = null;
+          document.querySelectorAll('[data-group="need"] .fopt').forEach((b) => b.classList.remove("is-active"));
+        } else if (g === "need") {
+          state.need = key as Need;
+          state.industry = null;
+          document.querySelectorAll('[data-group="industry"] .fopt').forEach((b) => b.classList.remove("is-active"));
+        } else if (g === "material") state.material = key;
         else if (g === "cuff") state.cuff = key;
         apply();
       });
@@ -160,7 +239,7 @@ const cuffs = [
   });
 
   document.getElementById("finderReset")?.addEventListener("click", () => {
-    state.need = null; state.material = "any"; state.cuff = "any";
+    state.industry = null; state.need = null; state.material = "any"; state.cuff = "any";
     document.querySelectorAll(".fopt").forEach((b) => b.classList.remove("is-active"));
     document.querySelectorAll<HTMLElement>('.fopt[data-default="1"]').forEach((b) => b.classList.add("is-active"));
     apply();
