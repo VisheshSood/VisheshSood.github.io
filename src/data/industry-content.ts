@@ -78,15 +78,15 @@ export const industryContent: Record<string, IndustryContent> = {
   },
   "food-processing": {
     overview:
-      "Food handling needs certified food-contact safety, a secure grip on wet and slippery product, and colour options that help prevent cross-contamination.",
+      "Food handling needs verified food-contact safety, a secure grip on wet and slippery product, and colour options that help prevent cross-contamination.",
     needs: [
-      "Certified food-contact compliance",
+      "Verified food-contact compliance",
       "Grip on wet, slippery product",
       "Dexterity for prep, portioning and packing",
       "Colour coding to support hygiene zoning",
     ],
     solutions: [
-      "Certified to US FDA 21 CFR 177.2600 and EU Regulation 10/2011",
+      "Compliant with US FDA 21 CFR 177.2600 and EU Regulation 10/2011",
       "Textured grips handle wet and slippery product securely",
       "Thin, dexterous gauges keep precise control for detailed work",
       "A wide colour range supports zoning and visual detection",

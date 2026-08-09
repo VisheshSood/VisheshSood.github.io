@@ -1,16 +1,17 @@
 ---
-const points = ["Solar energy", "Rainwater harvesting", "Water recycling", "Biodegradable nitrile"];
+const points = ["Free rice for every employee", "Gold-rated, SMETA-audited", "Solar power & water recycling", "Biodegradable nitrile"];
 ---
 
 <section class="section sustain">
   <div class="container sustain-grid">
     <div class="sustain-img" style="background-image: url('/images/sustainability-bg.jpg')"></div>
     <div class="sustain-copy">
-      <p class="eyebrow">Sustainability</p>
-      <h2>Real Systems.<br />Not Slogans<span class="dot">.</span></h2>
+      <p class="eyebrow">Responsibility</p>
+      <h2>Responsible<br />by Design<span class="dot">.</span></h2>
       <p class="muted sustain-lede">
-        We skip the generic green marketing. Our environmental responsibility is
-        built into the factory itself, measurable systems, not statements.
+        We look after the people who make our gloves and the place we make them in.
+        Free rice and a gold-rated workplace, solar power and water recycling.
+        Real commitments, not statements.
       </p>
       <ul class="sustain-list">
         {points.map((p) => (
@@ -20,7 +21,10 @@ const points = ["Solar energy", "Rainwater harvesting", "Water recycling", "Biod
           </li>
         ))}
       </ul>
-      <a href="/sustainability" class="btn btn--ghost">See Our Systems <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <div class="sustain-actions">
+        <a href="/responsibility" class="btn btn--primary">Our Responsibility <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/sustainability" class="btn btn--ghost">Environmental Systems</a>
+      </div>
     </div>
   </div>
 </section>
@@ -35,5 +39,6 @@ const points = ["Solar energy", "Rainwater harvesting", "Water recycling", "Biod
   .sustain-list li { display: flex; align-items: center; gap: 9px; font-size: 0.92rem; font-weight: 500; }
   .s-check { flex: none; width: 20px; height: 20px; color: var(--green-dark); }
   .s-check svg { width: 100%; height: 100%; }
+  .sustain-actions { display: flex; flex-wrap: wrap; gap: 12px; }
   @media (max-width: 760px) { .sustain-grid { grid-template-columns: 1fr; } .sustain-img { order: -1; } }
 </style>

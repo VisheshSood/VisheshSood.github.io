@@ -1,0 +1,125 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+
+// People: how we look after the team and community that make our gloves.
+const people = [
+  { t: "Free Rice Every Day", d: "Every employee receives a free rice allowance. Looking after the people who make our gloves comes first, not last." },
+  { t: "Safe & Ethical Workplace", d: "Independently audited under SMETA across all four pillars: labour, health & safety, environment and business ethics." },
+  { t: "Gold Labour Award", d: "The highest gold rating for the labour safety, security and welfare standards we maintain year after year." },
+  { t: "CSR-DIW Award", d: "Thailand's Department of Industrial Works CSR standard. In 2015 we were the only glove manufacturer to earn it." },
+  { t: "Welfare & Security", d: "Fair, stable employment in a safe environment, the foundations a family business is built to protect." },
+  { t: "Shared With Our Community", d: "The fish from our clean ponds go to our team and the villages around us." },
+];
+
+// Planet: a summary; the Sustainability page carries the full detail.
+const planet = [
+  { t: "Solar Power On Site", d: "Rooftop solar across our buildings cuts our demand on the grid and the footprint of every glove." },
+  { t: "Extensive Rainwater Harvesting", d: "On-site reservoirs capture and store rainwater through the year, reducing our draw on outside water." },
+  { t: "Water Recycling & Wastewater", d: "Filtration and recycling reuse water through production; treated water is clean enough for edible-fish ponds." },
+  { t: "High-Efficiency Boilers", d: "Three boilers run on high-quality fuel, and ongoing research burns less for every glove." },
+  { t: "Green Grounds & Trees", d: "An orchard of mango, guava and rambutan and years of tree planting make ours one of the greenest sites in the region." },
+  { t: "Biodegradable Nitrile", d: "A product-level option engineered to break down far faster in biologically active landfill (ASTM D5511 / ISO 15985)." },
+];
+---
+
+<PageLayout
+  title="Responsibility | Innovative Gloves"
+  description="Responsible by design: free rice and a gold-rated, SMETA-audited workplace for our people, plus solar power, rainwater harvesting, water recycling and biodegradable nitrile for the planet. Family-owned in Hat Yai, Thailand since 2001."
+>
+  <PageBanner eyebrow="Responsibility" title={`Responsible<br>by Design<span class="dot">.</span>`}
+    intro="Better for people. Better for the planet. For a family business, responsibility isn't a department, it's how we've chosen to grow for 25 years." />
+
+  <div class="resp-hero-img" style="background-image:url('/images/sus-aerial.jpg')" role="img" aria-label="Aerial view of the Innovative Gloves factory with solar panels and green grounds"></div>
+
+  <!-- INTRO -->
+  <section class="section resp-intro">
+    <div class="container resp-intro-inner">
+      <p class="lead">We've always believed a glove factory can be judged by more than the gloves it ships: by how it treats the people who run it, and the place it operates in. That belief shapes the decisions others cut corners on.</p>
+    </div>
+  </section>
+
+  <!-- PEOPLE -->
+  <section class="section resp-people">
+    <div class="container">
+      <header class="resp-head">
+        <p class="eyebrow">People</p>
+        <h2>Better for People<span class="dot">.</span></h2>
+        <p class="muted">The team who make our gloves, and the community around our factory in Hat Yai, share in how the business does.</p>
+      </header>
+      <ul class="resp-grid">
+        {people.map((f) => (
+          <li class="resp-card">
+            <span class="resp-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6"/></svg></span>
+            <h3>{f.t}</h3>
+            <p class="muted">{f.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- PLANET -->
+  <section class="section resp-planet">
+    <div class="container">
+      <header class="resp-head">
+        <p class="eyebrow">Planet</p>
+        <h2>Better for the Planet<span class="dot">.</span></h2>
+        <p class="muted">Real factory systems, not green marketing. The Sustainability page has the full detail on each.</p>
+      </header>
+      <ul class="resp-grid">
+        {planet.map((f) => (
+          <li class="resp-card">
+            <span class="resp-check resp-check--leaf" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></span>
+            <h3>{f.t}</h3>
+            <p class="muted">{f.d}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="resp-planet-cta">
+        <a href="/sustainability" class="btn btn--ghost">See the Full Sustainability Story <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section resp-cta">
+    <div class="container cta-inner">
+      <h2>Proof, Not Slogans<span class="dot">.</span></h2>
+      <p class="muted">Our responsibility record is backed by real awards and audits, the same way our grip is backed by real patents.</p>
+      <div class="cta-actions">
+        <a href="/recognition" class="btn btn--primary">Awards &amp; Recognition <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="/certifications" class="btn btn--ghost">Certifications</a>
+        <a href="/about" class="btn btn--ghost">Our Story</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .resp-hero-img { height: clamp(240px, 38vw, 460px); background-size: cover; background-position: center; border-bottom: 1px solid var(--border); }
+
+  .resp-intro { background: var(--bg); }
+  .resp-intro-inner { max-width: 760px; }
+  .lead { font-size: clamp(1.1rem, 2vw, 1.4rem); line-height: 1.6; color: var(--ink); }
+
+  .resp-head { max-width: 680px; margin-bottom: clamp(26px, 4vw, 42px); }
+  .resp-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin: 10px 0 12px; }
+
+  .resp-people { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .resp-planet { background: var(--bg); border-top: 1px solid var(--border); }
+
+  .resp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+  .resp-card { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .resp-check { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); margin-bottom: 14px; }
+  .resp-check svg { width: 18px; height: 18px; }
+  .resp-card h3 { font-size: 1.02rem; margin-bottom: 8px; }
+  .resp-card p { font-size: 0.88rem; line-height: 1.55; }
+
+  .resp-planet-cta { margin-top: clamp(24px, 3vw, 34px); }
+
+  .resp-cta { background: radial-gradient(120% 120% at 50% 0%, rgba(140,198,63,0.12), rgba(140,198,63,0) 60%), var(--bg-2); border-top: 1px solid var(--border); text-align: center; }
+  .cta-inner { max-width: 620px; margin-inline: auto; }
+  .cta-inner h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 12px; }
+  .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+</style>

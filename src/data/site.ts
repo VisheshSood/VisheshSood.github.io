@@ -41,6 +41,7 @@ export const mainNav: NavGroup[] = [
       { label: "Manufacturing Overview", href: "/manufacturing" },
       { label: "Quality & Testing", href: "/manufacturing/quality" },
       { label: "Sustainability", href: "/sustainability" },
+      { label: "Responsibility", href: "/responsibility" },
       { label: "Certifications", href: "/certifications" },
     ],
   },
@@ -95,6 +96,7 @@ export const footerCols: { title: string; links: NavChild[] }[] = [
       { label: "Why Innovative", href: "/why-innovative" },
       { label: "Manufacturing", href: "/manufacturing" },
       { label: "Sustainability", href: "/sustainability" },
+      { label: "Responsibility", href: "/responsibility" },
     ],
   },
   {

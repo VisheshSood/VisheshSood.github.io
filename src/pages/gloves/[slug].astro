@@ -24,7 +24,7 @@ const specs: [string, string][] = [
 // Certifications, every glove carries the quality & food-contact standards;
 // bio nitrile gloves additionally carry the biodegradability standards.
 const certGroups: { label: string; items: string[] }[] = [
-  { label: "Quality & Medical", items: ["ISO 9001", "ISO 13485", "EN 455"] },
+  { label: "Quality & Medical", items: ["ISO 9001", "EN ISO 13485", "EN 455", "EU MDR"] },
   { label: "Food Contact", items: ["US FDA 21 CFR 177.2600", "Overall Migration, EU Regulation 10/2011"] },
 ];
 if (glove.bio) certGroups.push({ label: "Biodegradability", items: ["ASTM D5511", "ISO 15985"] });
