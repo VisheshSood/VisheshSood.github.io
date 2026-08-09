@@ -45,6 +45,14 @@ const orgSchema = {
     email: "sales@innovativeglove.com",
   },
 };
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Innovative Gloves",
+  url: Astro.site?.href,
+  publisher: { "@type": "Organization", name: "Innovative Gloves Co., Ltd." },
+};
 ---
 
 <!doctype html>
@@ -90,6 +98,7 @@ const orgSchema = {
     />
 
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   </head>
   <body>
     <slot />

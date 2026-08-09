@@ -1,4 +1,26 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.innovativeglove.com/sitemap-index.xml
+# AI answer-engine crawlers, explicitly welcomed
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.innovativegloves.net/sitemap-index.xml
