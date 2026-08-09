@@ -124,6 +124,34 @@ assign("gc-fully-black.jpg", ["fully-textured-6-nitrile", "fully-textured-6-nitr
 
 export const catalogue: Glove[] = (raw as Glove[]).map((g) => ({ ...g, img: photoBySlug[g.slug] }));
 
+// Card badges: the flags we surface visually on a glove. Diamond is invented (not
+// patented); Micro Diamond, Zig and Tyre Tread are patented. Ordered by priority.
+export function gloveBadges(g: Glove): { label: string; kind: string }[] {
+  const out: { label: string; kind: string }[] = [];
+  if (g.texture === "Diamond") out.push({ label: "Invented", kind: "invented" });
+  else if (["Micro Diamond", "Zig", "Tyre Tread"].includes(g.texture)) out.push({ label: "Patented", kind: "patented" });
+  if (g.bio) out.push({ label: "Bio", kind: "bio" });
+  if (g.longCuff) out.push({ label: "Long Cuff", kind: "long" });
+  if ((g.thickness ?? 0) >= 8) out.push({ label: "Heavy Duty", kind: "heavy" });
+  return out;
+}
+
+// Default catalogue ordering: lead with our flagship grip technologies (patented,
+// then the invented Diamond), then textured, and everyday smooth gloves last, so the
+// range never opens on commodity thin gloves.
+const TEX_RANK: Record<string, number> = {
+  "Micro Diamond": 0, "Zig": 1, "Tyre Tread": 2, "Diamond": 3,
+  "Fully Textured": 5, "Finger Textured": 6, "Textured": 5, "Smooth": 9,
+};
+export const catalogueRanked = (): Glove[] =>
+  [...catalogue].sort((a, b) => {
+    const ra = TEX_RANK[a.texture] ?? 7, rb = TEX_RANK[b.texture] ?? 7;
+    if (ra !== rb) return ra - rb;
+    const ma = /Latex/.test(a.material) ? 1 : 0, mb = /Latex/.test(b.material) ? 1 : 0;
+    if (ma !== mb) return ma - mb; // nitrile (incl. bio) leads latex within a texture
+    return (b.thickness ?? 0) - (a.thickness ?? 0);
+  });
+
 // Studio BOX renders (packaged product shots), keyed by slug. Used by the homepage
 // Flagship section and the industry recommendation cards. Adding box renders here
 // never affects the catalogue, which always keeps its plain glove photos.

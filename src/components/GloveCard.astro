@@ -1,12 +1,20 @@
 ---
 import GloveVisual from "./GloveVisual.astro";
-import { colourSwatch, type Glove } from "../data/catalogue";
+import { colourSwatch, gloveBadges, type Glove } from "../data/catalogue";
 interface Props { glove: Glove; box?: string; }
 const { glove, box } = Astro.props;
+const badges = gloveBadges(glove);
 ---
 
 <a class="gcard" href={`/gloves/${glove.slug}`}>
-  <GloveVisual glove={glove} box={box} />
+  <div class="gcard-visual">
+    <GloveVisual glove={glove} box={box} />
+    {badges.length > 0 && (
+      <div class="gbadges">
+        {badges.slice(0, 2).map((b) => (<span class={`gbadge gbadge--${b.kind}`}>{b.label}</span>))}
+      </div>
+    )}
+  </div>
   <div class="gcard-body">
     <h3>{glove.name}</h3>
     <div class="gcard-dots">
@@ -24,6 +32,14 @@ const { glove, box } = Astro.props;
 <style>
   .gcard { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease; display: block; }
   .gcard:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.1); }
+  .gcard-visual { position: relative; }
+  .gbadges { position: absolute; top: 8px; left: 8px; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; z-index: 2; pointer-events: none; }
+  .gbadge { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 7px; border-radius: 4px; line-height: 1; box-shadow: 0 1px 3px rgba(0,0,0,0.18); }
+  .gbadge--patented { background: var(--green); color: #14210a; }
+  .gbadge--invented { background: var(--ink); color: #fff; }
+  .gbadge--bio { background: #2f7d32; color: #fff; }
+  .gbadge--long { background: #fff; color: var(--ink); border: 1px solid var(--border-strong); }
+  .gbadge--heavy { background: #3a3a3a; color: #fff; }
   .gcard-body { padding: 15px 16px 16px; }
   .gcard-body h3 { font-size: 0.98rem; margin-bottom: 10px; line-height: 1.15; }
   .gcard-dots { display: flex; align-items: center; gap: 4px; margin-bottom: 12px; }
