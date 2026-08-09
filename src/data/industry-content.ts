@@ -18,7 +18,7 @@ export const industryContent: Record<string, IndustryContent> = {
       "Enough dexterity for small fasteners and clips",
     ],
     solutions: [
-      "Our patented Diamond and Micro Diamond textures bite through oil for a sure grip, wet or dry",
+      "Our Diamond and Micro Diamond textures bite through oil for a sure grip, wet or dry",
       "High-grade nitrile shrugs off automotive fluids where thin gloves break down",
       "Thicker 6–8 mil gauges resist snags, so one pair survives the whole job",
       "No cheap fillers means the film stays strong instead of tearing when it matters",

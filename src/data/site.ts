@@ -10,7 +10,7 @@ export const mainNav: NavGroup[] = [
     children: [
       { label: "All Gloves", href: "/gloves" },
       { label: "Find Your Gloves", href: "/glove-finder" },
-      { label: "Patented Textures", href: "/technologies" },
+      { label: "Grip Technologies", href: "/technologies" },
       { label: "Heavy Duty", href: "/gloves/heavy-duty" },
       { label: "Biodegradable", href: "/technologies/biodegradable" },
       { label: "Nitrile", href: "/gloves/nitrile" },
