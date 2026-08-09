@@ -13,9 +13,10 @@ return [
     'smtp_pass'   => 'PASTE-APP-PASSWORD-HERE',   // the one-time APP PASSWORD you generate (NOT the mailbox login password)
 
     // --- Delivery ---
-    'mail_to'   => 'sales@innovativeglove.com',   // where enquiries are delivered
-    'mail_from' => 'sales@innovativeglove.com',   // must be allowed to send from the SMTP account above
-    'from_name' => 'Innovative Gloves Website',
+    // Team who receive each enquiry (the customer is auto-added as CC and thanked).
+    'mail_to'   => ['vishesh@innovativeglove.com', 'rsood@innovativeglove.com'],
+    'mail_from' => 'sales@innovativeglove.com',   // must match/allow the SMTP account above
+    'from_name' => 'Innovative Gloves',
 
     // --- Cloudflare Turnstile SECRET key (from the Turnstile dashboard) ---
     'turnstile_secret' => 'PASTE-TURNSTILE-SECRET-KEY-HERE',

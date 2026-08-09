@@ -87,16 +87,27 @@ try {
     $mail->CharSet    = 'UTF-8';
 
     $mail->setFrom($config['mail_from'], $config['from_name']);
-    $mail->addAddress($config['mail_to']);
-    $mail->addReplyTo($email, $name);
+    foreach ((array)$config['mail_to'] as $addr) {
+        $mail->addAddress($addr);          // the internal team
+    }
+    $mail->addCC($email);                  // the customer gets a copy (thank-you)
+    $mail->addReplyTo($email, $name);      // hitting Reply goes to the customer
 
     $safeName = str_replace(["\r", "\n"], ' ', $name);
-    $mail->Subject = "[{$formType}] Website enquiry from {$safeName}";
+    $mail->Subject = "Thank you for contacting Innovative Gloves";
     $mail->Body    =
-        "Form: {$formType}\n" .
+        "Hi {$safeName},\n\n" .
+        "Thank you for reaching out to Innovative Gloves. We've received your enquiry " .
+        "and a member of our team will get back to you shortly.\n\n" .
+        "For your reference, here is what you sent us:\n\n" .
+        "Enquiry type: {$formType}\n" .
         "Name: {$name}\n" .
         "Email: {$email}\n\n" .
-        "Message:\n{$message}\n";
+        "Message:\n{$message}\n\n" .
+        "Kind regards,\n" .
+        "Innovative Gloves\n" .
+        "sales@innovativeglove.com\n" .
+        "www.innovativegloves.net\n";
 
     $mail->send();
     echo json_encode(['ok' => true]);
