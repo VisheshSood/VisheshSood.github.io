@@ -100,7 +100,7 @@ assign("gc-zig-dualtone.png", ["zig-8-nitrile"]);
 assign("gc-zig-latex-blue.png", ["zig-14-latex-long"]);
 // Micro Diamond latex long cuff (blue); orange silverline household (diamond latex)
 assign("gc-microdiamond-latex-blue.png", ["micro-diamond-14-latex-long"]);
-assign("gc-silverline-orange.png", ["diamond-14-latex-long"]);
+assign("gc-silverline-orange.png", ["diamond-17-latex-long"]);
 // Latex, black / white short cuff
 assign("gc-latex-black.jpg", ["smooth-8-latex", "smooth-8-latex-2", "smooth-8-latex-3", "textured-8-latex"]);
 assign("gc-latex-white.png", ["smooth-latex", "smooth-latex-2", "smooth-latex-3", "textured-latex", "textured-latex-2", "textured-latex-3", "textured-latex-4", "textured-latex-5", "textured-latex-6", "textured-7-latex", "textured-8-latex-2", "textured-9-latex", "textured-latex-long", "textured-latex-long-2"]);
@@ -163,7 +163,7 @@ export const boxBySlug: Record<string, string> = {
   "micro-diamond-9-nitrile-long": "/images/prod-royal-blue-micro-diamond-6.png",
   "zig-6-bio-nitrile": "/images/prod-green-zig-bio-6.jpg",
   "fully-textured-4-bio-nitrile": "/images/prod-bioblue-fully-textured-4.png",
-  "diamond-14-latex-long": "/images/prod-silverlined-diamond-14.jpg",
+  "diamond-17-latex-long": "/images/prod-silverlined-diamond-14.jpg",
   "micro-diamond-8-nitrile": "/images/prod-anaconda-microdiamond.jpg",
   "tyre-tread-7-nitrile": "/images/prod-orange-gripper.jpg",
   "tyre-tread-7-nitrile-long": "/images/prod-orange-gripper.jpg",
@@ -179,7 +179,7 @@ export const boxBySlug: Record<string, string> = {
 };
 
 // Homepage Flagship Products, in a fixed running order.
-const flagshipOrder = ["micro-diamond-6-nitrile", "zig-8-nitrile", "diamond-8-nitrile", "fully-textured-6-nitrile", "micro-diamond-9-nitrile-long", "zig-6-bio-nitrile", "fully-textured-4-bio-nitrile", "diamond-14-latex-long"];
+const flagshipOrder = ["micro-diamond-6-nitrile", "zig-8-nitrile", "diamond-8-nitrile", "fully-textured-6-nitrile", "micro-diamond-9-nitrile-long", "zig-6-bio-nitrile", "fully-textured-4-bio-nitrile", "diamond-17-latex-long"];
 export const flagship: { glove: Glove; box: string }[] = flagshipOrder
   .map((slug) => ({ glove: catalogue.find((g) => g.slug === slug)!, box: boxBySlug[slug] }))
   .filter((x) => x.glove);

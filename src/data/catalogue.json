@@ -1010,14 +1010,14 @@
     "patent": ""
   },
   {
-    "slug": "diamond-14-latex-long",
-    "name": "Diamond 14 mil Latex Long Cuff",
+    "slug": "diamond-17-latex-long",
+    "name": "Diamond 17 mil Latex Long Cuff",
     "fullName": "Latex Powder Free Diamond Textured House Hold Gloves",
     "material": "Latex",
     "bio": false,
     "texture": "Diamond",
     "treatment": "Mild Washing with Chlorine Solution and Extensive Washing",
-    "thickness": 14,
+    "thickness": 17,
     "length": 300,
     "longCuff": true,
     "grade": "Disposable & Examination",

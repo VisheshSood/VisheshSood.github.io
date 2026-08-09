@@ -91,7 +91,7 @@ export const industryContent: Record<string, IndustryContent> = {
       "Thin, dexterous gauges keep precise control for detailed work",
       "A wide colour range supports zoning and visual detection",
     ],
-    recommended: ["micro-diamond-9-nitrile", "micro-diamond-6-nitrile-long", "diamond-14-latex-long", "diamond-9-nitrile-long"], // food-processing
+    recommended: ["micro-diamond-9-nitrile", "micro-diamond-6-nitrile-long", "diamond-17-latex-long", "diamond-9-nitrile-long"], // food-processing
   },
   construction: {
     overview:
@@ -159,7 +159,7 @@ export const industryContent: Record<string, IndustryContent> = {
       "A comfortable, flexible fit suits repetitive tasks",
       "Durable, reusable gauges, including biodegradable nitrile",
     ],
-    recommended: ["diamond-14-latex-long", "fully-textured-8-nitrile-long", "textured-14-latex-long", "micro-diamond-9-nitrile"], // cleaning
+    recommended: ["diamond-17-latex-long", "fully-textured-8-nitrile-long", "textured-14-latex-long", "micro-diamond-9-nitrile"], // cleaning
   },
   agriculture: {
     overview:
