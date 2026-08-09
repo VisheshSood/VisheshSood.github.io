@@ -15,7 +15,7 @@ const articleSchema = {
   "@type": "Article",
   headline: guide.title,
   description: guide.excerpt,
-  image: new URL("/images/og-default.jpg", Astro.site).href,
+  image: new URL("/images/sus-aerial.jpg", Astro.site).href,
   author: { "@type": "Organization", name: "Innovative Gloves" },
   publisher: { "@type": "Organization", name: "Innovative Gloves", logo: { "@type": "ImageObject", url: new URL("/images/innovative-gloves-logo-blue.png", Astro.site).href } },
   mainEntityOfPage: new URL(`/resources/guides/${guide.slug}`, Astro.site).href,
