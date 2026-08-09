@@ -71,6 +71,7 @@ export const footerCols: { title: string; links: NavChild[] }[] = [
   {
     title: "Technologies",
     links: [
+      { label: "Raised Diamond", href: "/technologies/raised-diamond" },
       { label: "Micro Diamond", href: "/technologies/micro-diamond" },
       { label: "Zig Grip", href: "/technologies/zig-grip" },
       { label: "Tyre Tread / Gripper", href: "/technologies/tyre-tread" },
@@ -192,12 +193,12 @@ export const technologies: Technology[] = [
     bestFor: ["Oil, Gas & Petrochemical", "Construction", "Automotive", "General Industrial"],
     patentStatus: "Our first patented glove.",
     story:
-      "Tyre Tread was our first patented glove, and it came from a hard lesson. We had invented raised diamond back in 2011 but never patented it, and watched the market copy it. So when the idea for tyre tread struck, inspired by watching tyres grip wet roads in the rain, we patented it from day one. Available in 6 and 7 mil, in black, orange, red, green or custom shades.",
+      "Tyre Tread was our first patented glove. Having pioneered the raised diamond back in 2011 and seen the whole industry follow our lead, we knew our next breakthrough deserved protection from day one. So when the idea struck, inspired by watching tyres grip wet roads in the rain, we patented it immediately. Available in 6 and 7 mil, in black, orange, red, green or custom shades.",
     img: "/images/tex-tyre-tread.jpg",
   },
   {
     slug: "raised-diamond",
-    name: "Raised Diamond / Specialist Textures",
+    name: "Raised Diamond Grip",
     shortName: "Raised Diamond",
     tagline: "The original raised diamond.",
     icon: "raised",
@@ -212,7 +213,7 @@ export const technologies: Technology[] = [
       { title: "Custom textures", desc: "Bespoke specialist patterns developed on request." },
     ],
     bestFor: ["General Industrial", "Construction", "Automotive", "Maintenance / MRO"],
-    patentStatus: "Not patented, but invented by Innovative in 2011. We remain the pioneers.",
+    patentStatus: "Invented by Innovative in 2011, the original raised diamond glove. We remain the pioneers.",
     story:
       "We invented the raised diamond texture in 2011, the first of its kind. It has since been copied across the industry, but we remain the pioneers, and no one matches our quality. Buy raised diamond from Innovative and you're buying it from the company that created it.",
     img: "/images/tex-raised-diamond.webp",

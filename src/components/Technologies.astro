@@ -3,7 +3,7 @@ import { technologies } from "../data/site";
 // Homepage shows the four signature grip textures (biodegradable lives on its own page).
 const techs = technologies
   .filter((t) => t.icon !== "leaf")
-  .map((t) => ({ name: t.name.replace(" / Specialist Textures", ""), tagline: t.tagline, icon: t.icon, href: `/technologies/${t.slug}` }));
+  .map((t) => ({ name: t.shortName ?? t.name, tagline: t.tagline, icon: t.icon, href: `/technologies/${t.slug}` }));
 ---
 
 <section class="section technologies" id="technologies">
