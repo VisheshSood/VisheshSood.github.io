@@ -48,7 +48,7 @@ const mats = [...new Set(family.map((g) => g.material))].join(", ");
 const thNums = family.map((g) => g.thickness).filter((n): n is number => n != null);
 const thRange = thNums.length ? `${Math.min(...thNums)}–${Math.max(...thNums)} mil` : "";
 const cuffOpts = family.some((g) => g.longCuff) ? "Standard and long cuff" : "Standard";
-const status = isInvented ? "Invented by Innovative (not patented)" : isBio ? "Biodegradable material innovation" : "Patented design";
+const status = isInvented ? "Invented by Innovative" : isBio ? "Biodegradable material innovation" : "Patented design";
 const glance: { k: string; v: string }[] = [
   { k: "Developer", v: "Innovative Gloves Co., Ltd." },
   { k: "Introduced", v: introduced[tech.slug] ?? "" },
