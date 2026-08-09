@@ -12,9 +12,18 @@ const tests = [
 ];
 
 const flow = [
-  { n: "01", t: "Incoming", d: "Raw materials are inspected and approved before use. Any change to a formulation is re-tested before it reaches a line." },
-  { n: "02", t: "In-Process", d: "Line parameters, temperatures and thickness are controlled throughout production to keep every glove consistent." },
-  { n: "03", t: "Finished Goods", d: "Tensile, aging, leak, AQL and visual inspection are carried out before gloves are hand-packed and boxed." },
+  { n: "01", t: "Raw Materials", d: "Nitrile, latex, chemicals, pigments and packaging are checked against approved specifications and supplier certificates before use." },
+  { n: "02", t: "Compounding", d: "Materials are weighed and mixed, then verified for viscosity, pH, solids, colour and formulation accuracy before release to production." },
+  { n: "03", t: "Line Preparation", d: "Ceramic formers are cleaned and inspected, and line settings, tanks and process conditions are verified before dipping begins." },
+  { n: "04", t: "Dipping Control", d: "Coagulant, dip time, temperature and line speed are monitored through every dip to keep glove formation consistent." },
+  { n: "05", t: "Curing", d: "Oven temperatures and curing conditions are controlled so each glove reaches its required physical properties." },
+  { n: "06", t: "Surface Treatment", d: "Leaching, washing and chlorination are checked for cleanliness, donning performance and process consistency." },
+  { n: "07", t: "Online Inspection", d: "Gloves are inspected during stripping for holes, tears, thin spots, stains, deformation and texture defects." },
+  { n: "08", t: "Physical Testing", d: "Thickness, length, width, weight, tensile strength and elongation are tested against specification." },
+  { n: "09", t: "AQL Testing", d: "Statistical samples are water-leak tested for pinholes and freedom from holes to the applicable AQL standard." },
+  { n: "10", t: "Packing Control", d: "Size, colour, texture, cuff, count, artwork, labels, barcodes and lot numbers are verified before boxing." },
+  { n: "11", t: "Final Inspection", d: "Finished cartons are sampled again for product conformity, packaging condition, quantity and documentation." },
+  { n: "12", t: "Container Release", d: "The container is checked and loaded, cargo secured, records taken and the seal number logged before closure." },
 ];
 
 const standards = ["EN 455 (Parts 1–4)", "EN ISO 374-1 / -4 / -5", "ISO 9001", "EN ISO 13485"];
@@ -72,7 +81,7 @@ const standards = ["EN 455 (Parts 1–4)", "EN ISO 374-1 / -4 / -5", "ISO 9001",
       <header class="qc-head">
         <p class="eyebrow">The Process</p>
         <h2>A 12-Stage Quality System<span class="dot">.</span></h2>
-        <p class="muted">Every glove moves through a structured, documented 12-stage quality-control process, from raw-material preparation to finished goods. In broad strokes, it runs across three phases.</p>
+        <p class="muted">Every glove moves through a structured, documented 12-stage quality-control process, from incoming raw materials to the sealed shipping container. Here is every stage.</p>
       </header>
       <ol class="qc-flow">
         {flow.map((f) => (
