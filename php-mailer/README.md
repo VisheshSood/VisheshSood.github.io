@@ -24,9 +24,15 @@ key). It is **gitignored** and is created directly on the server. The public key
 Add site → domain `innovativegloves.net`). You get a **site key** (public) and a
 **secret key** (private).
 
-**3. Generate the mailbox app password** for `sales@innovativeglove.com` (e.g. a
-Google Workspace *App Password*). This is the "one-time password" — not the normal
-login password.
+**3. Generate the mailbox app password** for `sales@innovativeglove.com`. This
+account is on **Google Workspace**, so:
+- SMTP settings are `smtp.gmail.com`, port `587`, `tls` (already the defaults in
+  `config.example.php`).
+- App Passwords require **2-Step Verification enabled** on the account first
+  (myaccount.google.com → Security → 2-Step Verification → App passwords). The
+  Workspace admin must also allow App Passwords for the org.
+- The 16-character App Password is the "one-time password" — not the normal login
+  password.
 
 **4. Create `config.php` on the server** by copying `config.example.php` and filling
 in the SMTP host/port, the app password, and the Turnstile **secret** key. Then:
