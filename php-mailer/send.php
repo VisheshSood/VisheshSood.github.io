@@ -1,13 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 // -----------------------------------------------------------------------------
-// Innovative Gloves — contact / sample form mailer.
-// Secrets (SMTP password, Turnstile secret) live in config.php, which is
-// gitignored and must never be committed or served publicly.
+// Website contact / sample form endpoint.
+// Validates the submission + Cloudflare Turnstile, then sends via the shared
+// mailer (mailer.php), which the ERP can also reuse.
 // -----------------------------------------------------------------------------
 
 $configPath = __DIR__ . '/config.php';
@@ -17,6 +14,7 @@ if (!is_file($configPath)) {
     echo json_encode(['ok' => false, 'error' => 'Mailer is not configured yet.']);
     exit;
 }
+require __DIR__ . '/mailer.php';
 $config = require $configPath;
 
 // --- CORS: only allow our own site origins ---
@@ -36,7 +34,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     exit;
 }
 
-// --- Read + trim inputs ---
+// --- Inputs ---
 $name     = trim((string)($_POST['name'] ?? ''));
 $email    = trim((string)($_POST['email'] ?? ''));
 $message  = trim((string)($_POST['message'] ?? $_POST['details'] ?? ''));
@@ -44,7 +42,7 @@ $formType = trim((string)($_POST['form'] ?? 'Website'));
 $token    = (string)($_POST['cf-turnstile-response'] ?? '');
 $honey    = trim((string)($_POST['company_website'] ?? ''));
 
-// --- Honeypot: real users never fill this hidden field. Silently drop bots. ---
+// --- Honeypot: bots fill this hidden field. Silently drop. ---
 if ($honey !== '') { echo json_encode(['ok' => true]); exit; }
 
 // --- Validate ---
@@ -70,48 +68,34 @@ if (!verifyTurnstile($config['turnstile_secret'], $token, $_SERVER['REMOTE_ADDR'
     exit;
 }
 
-// --- Send via SMTP (PHPMailer) ---
-require __DIR__ . '/PHPMailer/Exception.php';
-require __DIR__ . '/PHPMailer/PHPMailer.php';
-require __DIR__ . '/PHPMailer/SMTP.php';
+// --- One email: team in To, customer in Cc + thanked ---
+$safeName = str_replace(["\r", "\n"], ' ', $name);
+$body =
+    "Hi {$safeName},\n\n" .
+    "Thank you for reaching out to Innovative Gloves. We've received your enquiry " .
+    "and a member of our team will get back to you shortly.\n\n" .
+    "For your reference, here is what you sent us:\n\n" .
+    "Enquiry type: {$formType}\n" .
+    "Name: {$name}\n" .
+    "Email: {$email}\n\n" .
+    "Message:\n{$message}\n\n" .
+    "Kind regards,\n" .
+    "Innovative Gloves\n" .
+    "sales@innovativeglove.com\n" .
+    "www.innovativegloves.net\n";
 
-$mail = new PHPMailer(true);
-try {
-    $mail->isSMTP();
-    $mail->Host       = $config['smtp_host'];
-    $mail->SMTPAuth   = true;
-    $mail->Username   = $config['smtp_user'];
-    $mail->Password   = $config['smtp_pass'];
-    $mail->SMTPSecure = $config['smtp_secure']; // 'tls' (port 587) or 'ssl' (port 465)
-    $mail->Port       = (int)$config['smtp_port'];
-    $mail->CharSet    = 'UTF-8';
+$ok = ig_send_mail([
+    'to'            => $config['mail_to'],   // internal team
+    'cc'            => [$email],             // customer gets a copy
+    'reply_to'      => $email,
+    'reply_to_name' => $name,
+    'subject'       => 'Thank you for contacting Innovative Gloves',
+    'text'          => $body,
+]);
 
-    $mail->setFrom($config['mail_from'], $config['from_name']);
-    foreach ((array)$config['mail_to'] as $addr) {
-        $mail->addAddress($addr);          // the internal team
-    }
-    $mail->addCC($email);                  // the customer gets a copy (thank-you)
-    $mail->addReplyTo($email, $name);      // hitting Reply goes to the customer
-
-    $safeName = str_replace(["\r", "\n"], ' ', $name);
-    $mail->Subject = "Thank you for contacting Innovative Gloves";
-    $mail->Body    =
-        "Hi {$safeName},\n\n" .
-        "Thank you for reaching out to Innovative Gloves. We've received your enquiry " .
-        "and a member of our team will get back to you shortly.\n\n" .
-        "For your reference, here is what you sent us:\n\n" .
-        "Enquiry type: {$formType}\n" .
-        "Name: {$name}\n" .
-        "Email: {$email}\n\n" .
-        "Message:\n{$message}\n\n" .
-        "Kind regards,\n" .
-        "Innovative Gloves\n" .
-        "sales@innovativeglove.com\n" .
-        "www.innovativegloves.net\n";
-
-    $mail->send();
+if ($ok) {
     echo json_encode(['ok' => true]);
-} catch (Exception $e) {
+} else {
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => 'Could not send your message. Please email sales@innovativeglove.com directly.']);
 }
