@@ -5,7 +5,7 @@
 // Fill these two in once you have them:
 //   MAILER_ENDPOINT   = the URL where php-mailer/send.php is hosted on your PHP host
 //   TURNSTILE_SITEKEY = the Cloudflare Turnstile "site key" (public half; NOT the secret key)
-export const MAILER_ENDPOINT = "https://REPLACE-WITH-YOUR-PHP-HOST/mailer/send.php";
+export const MAILER_ENDPOINT = "/mailer/send.php";
 
 // Turnstile SITE key (public half — safe to commit). Its matching SECRET key must
 // go ONLY in php-mailer/config.php on the server, never in git.
