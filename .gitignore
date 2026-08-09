@@ -26,3 +26,7 @@ pnpm-debug.log*
 # raw spec source docs (not used by the site; catalogue.json is the source of truth)
 src/data/specs-raw/
 src/data/specs-txt/
+
+# PHP mailer secrets — created on the server only, NEVER committed
+php-mailer/config.php
+php-mailer/PHPMailer/

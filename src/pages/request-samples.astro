@@ -1,6 +1,7 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import PageBanner from "../components/PageBanner.astro";
+import { MAILER_ENDPOINT, TURNSTILE_SITEKEY } from "../data/forms";
 ---
 
 <PageLayout title="Request Samples | Innovative Gloves" description="Request glove samples from Innovative Gloves, the best way to feel the difference. Tell us your industry, the gloves of interest and where to ship.">
@@ -9,14 +10,16 @@ import PageBanner from "../components/PageBanner.astro";
 
   <section class="section">
     <div class="container form-wrap">
-      <form class="form" onsubmit="return false" aria-label="Request samples">
+      <form class="form js-mailform" id="sampleForm" data-endpoint={MAILER_ENDPOINT} data-form="Sample Request" aria-label="Request samples">
         <div class="row2">
-          <div class="field"><label for="name">Name</label><input id="name" type="text" placeholder="Your name" /></div>
-          <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="you@example.com" /></div>
+          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required /></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" required /></div>
         </div>
-        <div class="field"><label for="details">What would you like to try?</label><textarea id="details" rows="5" placeholder="Which gloves you're interested in, and where we should send them…"></textarea></div>
+        <div class="field"><label for="details">What would you like to try?</label><textarea id="details" name="details" rows="5" placeholder="Which gloves you're interested in, and where we should send them…" required></textarea></div>
+        <div class="hp" aria-hidden="true"><label>Leave this field empty<input name="company_website" tabindex="-1" autocomplete="off" /></label></div>
+        <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY}></div>
         <button type="submit" class="btn btn--primary">Send Sample Request <span class="arrow" aria-hidden="true">&rarr;</span></button>
-        <p class="form-note muted">This form isn't live yet, we'll connect it to email before launch.</p>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite" hidden></p>
       </form>
     </div>
   </section>
@@ -27,6 +30,47 @@ import PageBanner from "../components/PageBanner.astro";
     if (items) {
       const t = document.getElementById("details") as HTMLTextAreaElement | null;
       if (t) t.value = `I'd like to try: ${items}\n\nPlease ship to:\n`;
+    }
+  </script>
+
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script>
+    const form = document.getElementById("sampleForm") as HTMLFormElement | null;
+    const statusEl = document.getElementById("formStatus");
+    if (form && statusEl) {
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const data = new URLSearchParams(new FormData(form) as any);
+        if (!data.get("cf-turnstile-response")) {
+          statusEl.hidden = false;
+          statusEl.className = "form-status is-err";
+          statusEl.textContent = "Please complete the anti-spam check.";
+          return;
+        }
+        statusEl.hidden = false;
+        statusEl.className = "form-status";
+        statusEl.textContent = "Sending…";
+        if (btn) btn.disabled = true;
+        try {
+          const res = await fetch(form.dataset.endpoint || "", { method: "POST", body: data });
+          const j = await res.json().catch(() => ({}));
+          if (res.ok && j.ok) {
+            form.reset();
+            if ((window as any).turnstile) (window as any).turnstile.reset();
+            statusEl.className = "form-status is-ok";
+            statusEl.textContent = "Thanks, your sample request has been sent. We'll be in touch shortly.";
+          } else {
+            statusEl.className = "form-status is-err";
+            statusEl.textContent = j.error || "Something went wrong. Please email sales@innovativeglove.com directly.";
+          }
+        } catch {
+          statusEl.className = "form-status is-err";
+          statusEl.textContent = "Could not reach the server. Please email sales@innovativeglove.com directly.";
+        } finally {
+          if (btn) btn.disabled = false;
+        }
+      });
     }
   </script>
 </PageLayout>
@@ -40,5 +84,10 @@ import PageBanner from "../components/PageBanner.astro";
   input:focus, select:focus, textarea:focus { outline: none; border-color: var(--green-dark); box-shadow: 0 0 0 3px rgba(140,198,63,0.18); }
   .form .btn { margin-top: 6px; }
   .form-note { font-size: 0.78rem; margin-top: 14px; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .cf-turnstile { margin: 8px 0 4px; }
+  .form-status { margin-top: 14px; font-size: 0.9rem; font-weight: 600; }
+  .form-status.is-ok { color: var(--green-dark); }
+  .form-status.is-err { color: #c0392b; }
   @media (max-width: 600px) { .row2 { grid-template-columns: 1fr; } }
 </style>
