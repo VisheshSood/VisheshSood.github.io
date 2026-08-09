@@ -45,14 +45,27 @@ $honey    = trim((string)($_POST['company_website'] ?? ''));
 // --- Honeypot: bots fill this hidden field. Silently drop. ---
 if ($honey !== '') { echo json_encode(['ok' => true]); exit; }
 
-// --- Validate ---
+// --- Validate (presence + sane length caps to blunt abuse) ---
 $bad = [];
-if ($name === '') $bad[] = 'name';
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $bad[] = 'email';
-if ($message === '') $bad[] = 'message';
+if ($name === '' || mb_strlen($name) > 100)          $bad[] = 'name';
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)
+    || mb_strlen($email) > 254)                       $bad[] = 'email';
+if ($message === '' || mb_strlen($message) > 5000)   $bad[] = 'message';
 if ($bad) {
     http_response_code(422);
     echo json_encode(['ok' => false, 'error' => 'Please complete all fields.', 'fields' => $bad]);
+    exit;
+}
+
+// --- Rate limit BEFORE the Turnstile call, per-IP and globally. -------------
+// Even with a solved captcha, no single IP (or the box as a whole) can be used
+// to blast mail. Storage is a throwaway dir in the system temp path, so it
+// needs no special permissions and never touches the repo or the ERP.
+$ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+if (!rate_ok('ip:' . $ip, 5, 3600) || !rate_ok('global', 100, 3600)) {
+    http_response_code(429);
+    header('Retry-After: 3600');
+    echo json_encode(['ok' => false, 'error' => 'Too many requests. Please try again later, or email sales@innovativeglove.com directly.']);
     exit;
 }
 
@@ -98,6 +111,40 @@ if ($ok) {
 } else {
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => 'Could not send your message. Please email sales@innovativeglove.com directly.']);
+}
+
+/**
+ * Sliding-window rate limiter backed by one small file per key in the system
+ * temp dir. Returns true if this hit is allowed (and records it), false if the
+ * key has already used up $max hits within the last $window seconds.
+ */
+function rate_ok(string $key, int $max, int $window): bool
+{
+    $dir = sys_get_temp_dir() . '/ig_mailer_rl';
+    if (!is_dir($dir)) { @mkdir($dir, 0700, true); }
+    $file = $dir . '/' . hash('sha256', $key);
+    $now  = time();
+
+    $fh = @fopen($file, 'c+');
+    if ($fh === false) { return true; } // fail-open: never block a real customer on a temp-fs hiccup
+    @flock($fh, LOCK_EX);
+
+    $raw   = stream_get_contents($fh) ?: '';
+    $times = array_filter(
+        array_map('intval', array_filter(explode("\n", $raw), 'strlen')),
+        static fn(int $t): bool => $t > $now - $window
+    );
+
+    $allowed = count($times) < $max;
+    if ($allowed) { $times[] = $now; }
+
+    ftruncate($fh, 0);
+    rewind($fh);
+    fwrite($fh, implode("\n", $times));
+    @flock($fh, LOCK_UN);
+    fclose($fh);
+
+    return $allowed;
 }
 
 /** Server-side validation of the Turnstile token with Cloudflare. */

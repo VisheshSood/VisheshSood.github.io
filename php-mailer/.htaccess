@@ -1,10 +1,22 @@
-# Never serve the secret config (or the template) over the web.
-<FilesMatch "^config(\.example)?\.php$">
-  <IfModule mod_authz_core.c>
+# --- Innovative Gloves mailer: lock the directory down to ONE public endpoint.
+# The only URL that should ever respond is /mailer/send.php. Everything else in
+# here (config.php with the SMTP password, mailer.php, the PHPMailer library,
+# the README) must never be fetchable over the web, and the folder must not be
+# browsable.
+
+# No directory listing.
+Options -Indexes
+
+# Deny every .php / .md file in this folder and its subfolders EXCEPT send.php.
+# (config.php, config.example.php, mailer.php, PHPMailer/*.php, README.md ...)
+<IfModule mod_authz_core.c>
+  <FilesMatch "^(?!send\.php$).+\.(php|md)$">
     Require all denied
-  </IfModule>
-  <IfModule !mod_authz_core.c>
+  </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+  <FilesMatch "^(?!send\.php$).+\.(php|md)$">
     Order allow,deny
     Deny from all
-  </IfModule>
-</FilesMatch>
+  </FilesMatch>
+</IfModule>
