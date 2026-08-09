@@ -1,0 +1,13 @@
+{
+  // Static-assets deploy for the Astro site.
+  // The site is fully static (output: "static"), so it needs no Workers runtime,
+  // adapter, or prerender step. This config makes `wrangler deploy` upload the
+  // built dist/ directly and SKIPS the auto "astro add cloudflare" step, whose
+  // auto-generated compatibility_date = today outruns Cloudflare's build-image
+  // runtime by a day and crashes the build.
+  "name": "innovative-gloves-site",
+  "compatibility_date": "2024-11-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}
