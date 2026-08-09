@@ -122,7 +122,18 @@ assign("gc-bio-blue.png", ["fully-textured-4-bio-nitrile"]);
 // The 6 mil fully-textured families (short + long) use a dedicated black photo.
 assign("gc-fully-black.jpg", ["fully-textured-6-nitrile", "fully-textured-6-nitrile-long"]);
 
-export const catalogue: Glove[] = (raw as Glove[]).map((g) => ({ ...g, img: photoBySlug[g.slug] }));
+// Display name convention: [thickness] [texture] [material] [cuff].
+// e.g. "9 mil Micro Diamond Nitrile Long Cuff". Generated from fields so it stays
+// consistent across the whole catalogue. Powdered (corn-starch coated) variants keep
+// a "· Powdered" suffix so they stay distinct from their powder-free siblings.
+const displayName = (g: Glove): string => {
+  const base = [g.thickness != null ? `${g.thickness} mil` : null, g.texture, g.material, g.longCuff ? "Long Cuff" : null]
+    .filter(Boolean)
+    .join(" ");
+  return /corn starch/i.test(g.treatment || "") ? `${base} · Powdered` : base;
+};
+
+export const catalogue: Glove[] = (raw as Glove[]).map((g) => ({ ...g, img: photoBySlug[g.slug], name: displayName(g) }));
 
 // Card badges: the flags we surface visually on a glove. Diamond is invented (not
 // patented); Micro Diamond, Zig and Tyre Tread are patented. Ordered by priority.
