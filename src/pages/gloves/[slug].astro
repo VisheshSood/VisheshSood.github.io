@@ -3,6 +3,7 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import GloveVisual from "../../components/GloveVisual.astro";
 import { catalogue, colourSwatch, texTechSlug } from "../../data/catalogue";
 import { chemFor } from "../../data/chem-resistance";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
 export function getStaticPaths() {
   return catalogue.map((g) => ({ params: { slug: g.slug }, props: { glove: g } }));
@@ -54,7 +55,7 @@ const productSchema = {
     <div class="container p-grid">
       <div class="p-visual"><GloveVisual glove={glove} ratio="1 / 1" /></div>
       <div class="p-info">
-        <a href="/gloves" class="back-link">&larr; All Gloves</a>
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Gloves", href: "/gloves" }, { label: glove.name }]} />
         <p class="eyebrow">{eyebrowLabel}</p>
         <h1>{glove.name}</h1>
         <p class="p-full">{glove.fullName}</p>

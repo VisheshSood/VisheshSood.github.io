@@ -1,18 +1,32 @@
 ---
 import PageLayout from "../../../layouts/PageLayout.astro";
 import { guides } from "../../../data/guides";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 
 export function getStaticPaths() {
   return guides.map((g) => ({ params: { slug: g.slug }, props: { guide: g } }));
 }
 const { guide } = Astro.props;
 const related = guides.filter((g) => g.slug !== guide.slug).slice(0, 3);
+
+// Article structured data for the knowledge-centre guides.
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: guide.title,
+  description: guide.excerpt,
+  image: new URL("/images/og-default.jpg", Astro.site).href,
+  author: { "@type": "Organization", name: "Innovative Gloves" },
+  publisher: { "@type": "Organization", name: "Innovative Gloves", logo: { "@type": "ImageObject", url: new URL("/images/innovative-gloves-logo-blue.png", Astro.site).href } },
+  mainEntityOfPage: new URL(`/resources/guides/${guide.slug}`, Astro.site).href,
+};
 ---
 
 <PageLayout title={`${guide.title} | Glove Knowledge Centre`} description={guide.excerpt}>
   <article class="section guide-article">
     <div class="container">
-      <a href="/resources/guides" class="back-link">&larr; Knowledge Centre</a>
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Knowledge Centre", href: "/resources/guides" }, { label: guide.title }]} />
+      <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
       <p class="ga-tag">{guide.tag}</p>
       <h1>{guide.title}</h1>
       <p class="ga-lead">{guide.excerpt}</p>

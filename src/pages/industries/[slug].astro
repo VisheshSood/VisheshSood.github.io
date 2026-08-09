@@ -4,6 +4,7 @@ import GloveCard from "../../components/GloveCard.astro";
 import { industries } from "../../data/site";
 import { industryContent, industryPhotos } from "../../data/industry-content";
 import { catalogue, boxBySlug } from "../../data/catalogue";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
 export function getStaticPaths() {
   return industries.map((ind) => ({ params: { slug: ind.slug }, props: { industry: ind } }));
@@ -23,6 +24,7 @@ const photo = (industryPhotos[industry.slug] ?? [])[0] ?? null;
   <section class="ind-hero">
     <div class="container ind-hero-grid">
       <div class="ind-hero-copy">
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Industries", href: "/industries" }, { label: industry.name }]} />
         <p class="eyebrow">Industry</p>
         <h1 class="ind-hero-title">{industry.name}<span class="dot">.</span></h1>
         <p class="ind-hero-intro">{c?.overview ?? industry.intro}</p>

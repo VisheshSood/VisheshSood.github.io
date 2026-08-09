@@ -39,12 +39,24 @@ const groups = [
     ],
   },
 ];
+
+// FAQPage structured data, eligible for FAQ rich results in Google.
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: groups.flatMap((g) => g.items).map((it) => ({
+    "@type": "Question",
+    name: it.q,
+    acceptedAnswer: { "@type": "Answer", text: it.a },
+  })),
+};
 ---
 
 <PageLayout
   title="FAQ | Innovative Gloves"
   description="Answers on manufacturing, materials, thickness, certifications, food-safe and medical gloves, biodegradable options, samples, MOQ, private label and shipping."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <PageBanner eyebrow="FAQ" title={`Quick<br>Answers<span class="dot">.</span>`}
     intro="The questions distributors and buyers ask most, answered, so you don't have to wait for sales." />
 

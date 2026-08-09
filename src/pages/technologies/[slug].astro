@@ -3,13 +3,17 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import { technologies } from "../../data/site";
 import { catalogue } from "../../data/catalogue";
 import GloveVisual from "../../components/GloveVisual.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
 export function getStaticPaths() {
   return technologies.map((t) => ({ params: { slug: t.slug }, props: { tech: t } }));
 }
 const { tech } = Astro.props;
 
-const eyebrow = tech.icon === "leaf" ? "Material Innovation" : "Patented Technology";
+const isBio = tech.slug === "biodegradable";
+const isInvented = tech.slug === "raised-diamond";
+// Diamond was invented (not patented); biodegradable is a material innovation, not a grip patent.
+const eyebrow = isBio ? "Material Innovation" : isInvented ? "Invented by Innovative" : "Patented Grip Technology";
 
 // Gloves that use this technology (from the real catalogue)
 const texByTech: Record<string, string> = {
@@ -38,11 +42,12 @@ const indSlug: Record<string, string> = {
 };
 ---
 
-<PageLayout title={`${tech.name}, Patented Grip | Innovative Gloves`} description={`${tech.name}: ${tech.tagline} ${tech.intro}`}>
+<PageLayout title={isBio ? `${tech.name} Nitrile | Innovative Gloves` : `${tech.name}, ${isInvented ? "Invented by Innovative" : "Patented Grip"} | Innovative Gloves`} description={`${tech.name}: ${tech.tagline} ${tech.intro}`}>
   <!-- HERO -->
   <section class="th-hero">
     <div class="container th-hero-grid">
       <div class="th-copy">
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Grip Technologies", href: "/technologies" }, { label: tech.name }]} />
         <p class="eyebrow">{eyebrow}</p>
         <h1>{tech.name}</h1>
         <p class="th-tagline">{tech.tagline}</p>
