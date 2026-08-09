@@ -20,6 +20,7 @@ export const mainNav: NavGroup[] = [
   {
     label: "Industries", href: "/industries",
     children: [
+      { label: "All Industries", href: "/industries" },
       { label: "Automotive & Mechanical", href: "/industries/automotive" },
       { label: "Manufacturing & Engineering", href: "/industries/manufacturing" },
       { label: "Oil & Gas", href: "/industries/oil-gas" },
@@ -57,6 +58,7 @@ export const mainNav: NavGroup[] = [
   {
     label: "Resources", href: "/resources",
     children: [
+      { label: "Downloads & Declarations", href: "/resources" },
       { label: "Catalog", href: "/catalog.pdf" },
       { label: "Certificates", href: "/certifications" },
       { label: "Glove Guides", href: "/resources/guides" },
@@ -98,6 +100,7 @@ export const footerCols: { title: string; links: NavChild[] }[] = [
   {
     title: "Resources",
     links: [
+      { label: "Downloads & Declarations", href: "/resources" },
       { label: "Catalog", href: "/catalog.pdf" },
       { label: "Certifications", href: "/certifications" },
       { label: "Glove Guides", href: "/resources/guides" },
