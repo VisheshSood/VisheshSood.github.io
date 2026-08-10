@@ -1,13 +1,160 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import PageBanner from "../components/PageBanner.astro";
-import SectionStub from "../components/SectionStub.astro";
+import { MAILER_ENDPOINT, TURNSTILE_SITEKEY } from "../data/forms";
+
+// Quick guided quote request: contact details, a timeframe, and a few yes/no
+// qualifying questions. All answers are compiled into the email to sales.
+const timeframes = ["Urgent (within 1 month)", "1–3 months", "3–6 months", "Just exploring"];
+const questions = [
+  { name: "privateLabel", label: "Do you want your own brand (private label)?" },
+  { name: "biodegradable", label: "Do you need biodegradable (eco) gloves?" },
+  { name: "foodMedical", label: "Do you need food-contact or medical grade?" },
+  { name: "reseller", label: "Are you buying for resale / as a distributor?" },
+  { name: "samples", label: "Would you like free samples first?" },
+];
 ---
 
-<PageLayout title="Request a Quote | Innovative Gloves" description="Request a commercial quotation from Innovative Gloves, specify products, sizes, quantity, packaging, destination and private-label requirements.">
+<PageLayout title="Request a Quote | Innovative Gloves" description="Request a commercial quotation from Innovative Gloves. Answer a few quick questions and our team will prepare pricing for you.">
   <PageBanner eyebrow="Request a Quote" title={`Let's Talk<br>Numbers<span class="dot">.</span>`}
-    intro="Ready for pricing? Send us your requirements and we'll prepare a quotation." />
+    intro="A few quick questions and our team will prepare a quotation. It takes under a minute." />
 
-  <SectionStub tone="light" eyebrow="What to Include" title="Quotation Details" lead="The information we need to quote accurately." layout="checklist"
-    items={["Products", "Sizes", "Quantity", "Packaging", "Destination", "Private label", "Shipment timing"]} />
+  <section class="section">
+    <div class="container form-wrap">
+      <form class="form" id="quoteForm" data-endpoint={MAILER_ENDPOINT} aria-label="Request a quote">
+        <div class="row2">
+          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required /></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" required /></div>
+        </div>
+
+        <fieldset class="q">
+          <legend>How soon do you need this?</legend>
+          <div class="opts">
+            {timeframes.map((t, i) => (
+              <label class="pill"><input type="radio" name="timeframe" value={t} /><span>{t}</span></label>
+            ))}
+          </div>
+        </fieldset>
+
+        {questions.map((q) => (
+          <fieldset class="q">
+            <legend>{q.label}</legend>
+            <div class="opts">
+              <label class="pill"><input type="radio" name={q.name} value="Yes" /><span>Yes</span></label>
+              <label class="pill"><input type="radio" name={q.name} value="No" /><span>No</span></label>
+            </div>
+          </fieldset>
+        ))}
+
+        <div class="field"><label for="products">Which gloves &amp; roughly how many? <span class="opt">(optional)</span></label><textarea id="products" name="products" rows="3" placeholder="e.g. Micro Diamond nitrile, 8 mil, black — around 500 cartons to Germany"></textarea></div>
+
+        <div class="hp" aria-hidden="true"><label>Leave this field empty<input name="company_website" tabindex="-1" autocomplete="off" /></label></div>
+        <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY}></div>
+        <button type="submit" class="btn btn--primary">Send Quote Request <span class="arrow" aria-hidden="true">&rarr;</span></button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite" hidden></p>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    // Pre-fill products when arriving from the Glove Finder ("Request a Quote for These").
+    const items = new URLSearchParams(location.search).get("items");
+    if (items) {
+      const p = document.getElementById("products") as HTMLTextAreaElement | null;
+      if (p) p.value = items;
+    }
+  </script>
+
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script>
+    const form = document.getElementById("quoteForm") as HTMLFormElement | null;
+    const statusEl = document.getElementById("formStatus");
+    if (form && statusEl) {
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const val = (k: string) => String(fd.get(k) || "").trim();
+
+        // The mailer emails only name / email / details, so compile the answers
+        // into a single details message.
+        const details = [
+          ["How soon", val("timeframe")],
+          ["Private label (own brand)", val("privateLabel")],
+          ["Needs biodegradable", val("biodegradable")],
+          ["Needs food-contact / medical", val("foodMedical")],
+          ["Buying for resale / distribution", val("reseller")],
+          ["Wants samples first", val("samples")],
+          ["Products & quantity", val("products")],
+        ].filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join("\n");
+
+        const token = val("cf-turnstile-response");
+        if (!token) {
+          statusEl.hidden = false;
+          statusEl.className = "form-status is-err";
+          statusEl.textContent = "Please complete the anti-spam check.";
+          return;
+        }
+
+        const data = new URLSearchParams();
+        data.set("name", val("name"));
+        data.set("email", val("email"));
+        data.set("details", details || "Quote request (no extra detail provided).");
+        data.set("form", "Quote Request");
+        data.set("company_website", val("company_website")); // honeypot
+        data.set("cf-turnstile-response", token);
+
+        statusEl.hidden = false;
+        statusEl.className = "form-status";
+        statusEl.textContent = "Sending…";
+        if (btn) btn.disabled = true;
+        try {
+          const res = await fetch(form.dataset.endpoint || "", { method: "POST", body: data });
+          const j = await res.json().catch(() => ({}));
+          if (res.ok && j.ok) {
+            form.reset();
+            if ((window as any).turnstile) (window as any).turnstile.reset();
+            statusEl.className = "form-status is-ok";
+            statusEl.textContent = "Thanks, your quote request has been sent. Our team will prepare a quotation and be in touch shortly.";
+          } else {
+            statusEl.className = "form-status is-err";
+            statusEl.textContent = j.error || "Something went wrong. Please email sales@innovativeglove.com directly.";
+          }
+        } catch {
+          statusEl.className = "form-status is-err";
+          statusEl.textContent = "Could not reach the server. Please email sales@innovativeglove.com directly.";
+        } finally {
+          if (btn) btn.disabled = false;
+        }
+      });
+    }
+  </script>
 </PageLayout>
+
+<style>
+  .form-wrap { max-width: 760px; }
+  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+  .opt { text-transform: none; letter-spacing: 0; font-weight: 500; color: var(--text-dim); }
+  input, select, textarea { font: inherit; font-size: 0.95rem; padding: 12px 14px; border: 1px solid var(--border-strong); border-radius: var(--radius); background: #fff; color: var(--ink); width: 100%; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--green-dark); box-shadow: 0 0 0 3px rgba(140,198,63,0.18); }
+
+  /* Timeframe + yes/no pill questions */
+  fieldset.q { border: 0; padding: 0; margin: 0 0 18px; }
+  fieldset.q legend { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; padding: 0; }
+  .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .pill span { display: inline-block; padding: 9px 18px; border: 1px solid var(--border-strong); border-radius: 999px; font-size: 0.9rem; font-weight: 600; cursor: pointer; background: #fff; color: var(--ink); transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+  .pill span:hover { border-color: var(--green-dark); }
+  .pill input:checked + span { background: var(--green); border-color: var(--green); color: #14210a; }
+  .pill input:focus-visible + span { box-shadow: 0 0 0 3px rgba(140,198,63,0.3); }
+
+  .form .btn { margin-top: 6px; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .cf-turnstile { margin: 8px 0 4px; }
+  .form-status { margin-top: 14px; font-size: 0.9rem; font-weight: 600; }
+  .form-status.is-ok { color: var(--green-dark); }
+  .form-status.is-err { color: #c0392b; }
+  @media (max-width: 600px) { .row2 { grid-template-columns: 1fr; } }
+</style>
