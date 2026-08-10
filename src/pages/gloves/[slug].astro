@@ -69,7 +69,24 @@ const productSchema = {
 
   <section class="section p-hero">
     <div class="container p-grid">
-      <div class="p-visual"><GloveVisual glove={glove} ratio="1 / 1" /></div>
+      <div class="p-visual">
+        <GloveVisual glove={glove} ratio="1 / 1" />
+        <ul class="p-featlist">
+          {features.map((f) => (
+            <li class="p-feat">
+              <span class="p-feat-ic" aria-hidden="true">
+                {f.icon === "latex" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s5.5 6 5.5 10.5a5.5 5.5 0 0 1-11 0C6.5 9.5 12 3.5 12 3.5z"/></svg>)}
+                {f.icon === "nitrile" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s5.5 6 5.5 10.5a5.5 5.5 0 0 1-11 0C6.5 9.5 12 3.5 12 3.5z"/><path d="M4.7 4.7l14.6 14.6"/></svg>)}
+                {f.icon === "shield" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3.1 7.8-7 9-3.9-1.2-7-4.4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>)}
+                {f.icon === "swap" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7L4 11l4 4"/><path d="M16 7l4 4-4 4"/><path d="M4 11h16"/></svg>)}
+                {f.icon === "ring" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg>)}
+                {f.icon === "flex" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3 9c2.6-3.3 5.6-3.3 8 0s5.4 3.3 8 0"/><path d="M3 15c2.6-3.3 5.6-3.3 8 0s5.4 3.3 8 0"/></svg>)}
+              </span>
+              <span class="p-feat-txt"><strong>{f.title}.</strong> {f.desc}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div class="p-info">
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Gloves", href: "/gloves" }, { label: glove.name }]} />
         <p class="eyebrow">{eyebrowLabel}</p>
@@ -99,32 +116,6 @@ const productSchema = {
         {techSlug && <p class="p-tech">Grip technology: <a href={`/technologies/${techSlug}`}>{glove.texture} &rarr;</a></p>}
         {glove.patent && <p class="p-patent">&#9670; {glove.patent.replace(/[&\s]+$/, "")}</p>}
       </div>
-    </div>
-  </section>
-
-  <section class="section p-features">
-    <div class="container">
-      <header class="feat-head">
-        <p class="eyebrow">Built Into Every Pair</p>
-        <h2>Standard on Every Innovative Glove<span class="dot">.</span></h2>
-        <p class="muted">Whichever glove you choose, these come as standard.</p>
-      </header>
-      <ul class="feat-grid">
-        {features.map((f) => (
-          <li class="feat-card">
-            <span class="feat-icon" aria-hidden="true">
-              {f.icon === "latex" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s5.5 6 5.5 10.5a5.5 5.5 0 0 1-11 0C6.5 9.5 12 3.5 12 3.5z"/></svg>)}
-              {f.icon === "nitrile" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s5.5 6 5.5 10.5a5.5 5.5 0 0 1-11 0C6.5 9.5 12 3.5 12 3.5z"/><path d="M4.7 4.7l14.6 14.6"/></svg>)}
-              {f.icon === "shield" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3.1 7.8-7 9-3.9-1.2-7-4.4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>)}
-              {f.icon === "swap" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7L4 11l4 4"/><path d="M16 7l4 4-4 4"/><path d="M4 11h16"/></svg>)}
-              {f.icon === "ring" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg>)}
-              {f.icon === "flex" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 9c2.6-3.3 5.6-3.3 8 0s5.4 3.3 8 0"/><path d="M3 15c2.6-3.3 5.6-3.3 8 0s5.4 3.3 8 0"/></svg>)}
-            </span>
-            <h3>{f.title}</h3>
-            <p class="muted">{f.desc}</p>
-          </li>
-        ))}
-      </ul>
     </div>
   </section>
 
@@ -245,15 +236,13 @@ const productSchema = {
   .p-patent { font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; }
   .p-patent span { color: var(--green); }
 
-  .p-features { background: var(--bg); border-top: 1px solid var(--border); }
-  .feat-head { max-width: 640px; margin-bottom: clamp(22px, 3vw, 34px); }
-  .feat-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: 10px 0 10px; }
-  .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
-  .feat-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 24px; }
-  .feat-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: rgba(140,198,63,0.14); color: var(--green-dark); margin-bottom: 15px; }
-  .feat-icon svg { width: 23px; height: 23px; }
-  .feat-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
-  .feat-card p { font-size: 0.9rem; line-height: 1.55; }
+  /* Compact feature list under the glove image, icons as bullets */
+  .p-featlist { list-style: none; margin: 20px 0 0; padding: 18px 0 0; border-top: 1px solid var(--border); display: grid; gap: 13px; }
+  .p-feat { display: flex; gap: 11px; align-items: flex-start; }
+  .p-feat-ic { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: rgba(140,198,63,0.14); color: var(--green-dark); margin-top: 1px; }
+  .p-feat-ic svg { width: 16px; height: 16px; }
+  .p-feat-txt { font-size: 0.83rem; line-height: 1.5; color: var(--text-muted); }
+  .p-feat-txt strong { color: var(--ink); font-weight: 700; }
 
   .p-certs { background: var(--bg-2); border-top: 1px solid var(--border); }
   .certs-head { max-width: 640px; margin-bottom: clamp(24px, 3vw, 36px); }
