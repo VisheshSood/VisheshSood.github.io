@@ -161,6 +161,11 @@ import { mainNav as nav } from "../data/site";
       overflow-y: auto; padding: 8px 20px 48px; z-index: 99;
     }
     .mobile-menu[hidden] { display: none; }
+
+    /* While the menu is open: lock background scroll and pin the header at the
+       top as fixed so it stays put (sticky would collapse under overflow lock). */
+    :global(:root.nav-open) { overflow: hidden; }
+    :global(:root.nav-open) .site-header { position: fixed; top: 0; left: 0; right: 0; }
   }
 </style>
 
@@ -173,7 +178,10 @@ import { mainNav as nav } from "../data/site";
       burger.classList.toggle("is-open", open);
       burger.setAttribute("aria-expanded", String(open));
       burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-      document.documentElement.style.overflow = open ? "hidden" : "";
+      // Lock scroll via a class (not inline overflow on <html>): setting
+      // overflow:hidden on the scroll container breaks the sticky header once the
+      // page is scrolled, which made the header/burger collapse out of view.
+      document.documentElement.classList.toggle("nav-open", open);
     };
     burger.addEventListener("click", () => setOpen(menu.hasAttribute("hidden")));
     menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
