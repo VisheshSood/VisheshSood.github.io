@@ -3,16 +3,25 @@ interface Props {
   eyebrow?: string;
   title: string;
   intro?: string;
+  image?: string;
+  imageAlt?: string;
 }
-const { eyebrow, title, intro } = Astro.props;
+const { eyebrow, title, intro, image, imageAlt } = Astro.props;
 ---
 
-<section class="page-banner">
+<section class="page-banner" class:list={{ "has-media": image }}>
   <div class="container">
-    <div class="pb-inner">
-      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-      <h1 set:html={title} />
-      {intro && <p class="pb-intro">{intro}</p>}
+    <div class="pb-grid">
+      <div class="pb-inner">
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        <h1 set:html={title} />
+        {intro && <p class="pb-intro">{intro}</p>}
+      </div>
+      {image && (
+        <figure class="pb-media">
+          <img src={image} alt={imageAlt ?? ""} width="2000" height="1007" loading="lazy" decoding="async" />
+        </figure>
+      )}
     </div>
   </div>
 </section>
@@ -34,5 +43,20 @@ const { eyebrow, title, intro } = Astro.props;
     font-size: 1rem;
     margin-top: 12px;
     max-width: 62ch;
+  }
+
+  /* Two-column layout only when an image is supplied. */
+  .page-banner.has-media .pb-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    align-items: center;
+    gap: clamp(24px, 4vw, 56px);
+  }
+  .pb-media { margin: 0; }
+  .pb-media img { display: block; width: 100%; height: auto; opacity: 0.9; }
+
+  @media (max-width: 820px) {
+    .page-banner.has-media .pb-grid { grid-template-columns: 1fr; }
+    .pb-media { max-width: 480px; }
   }
 </style>

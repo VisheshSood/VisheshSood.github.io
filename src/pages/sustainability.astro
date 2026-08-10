@@ -22,19 +22,16 @@ const pillars = [
     body: [
       "Water is essential to glove quality, it strengthens the nitrile polymer and washes extractable proteins out of latex, but it is also a limited resource where we operate.",
       "So rather than lean on outside supply, we capture it ourselves. On-site reservoirs harvest and store rainwater through the year, cutting our draw on municipal and ground water while keeping a steady, high-quality supply for production.",
+      "What we do use, we use more than once. Advanced filtration and water-recycling systems clean and reuse water throughout the production process, so far less of it goes to waste.",
+      "The treated water runs clean enough that the ponds on our grounds support thriving populations of edible fish, some over 15 kilograms, which we share regularly with our team and the villages around us.",
     ],
     img: "/images/sus-rainwater.jpg",
     label: "On-site rainwater reservoir",
-  },
-  {
-    kicker: "Water",
-    title: "Recycled, Treated, Returned Clean",
-    body: [
-      "Advanced filtration and water-recycling systems clean and reuse water throughout the production process, so far less of it goes to waste.",
-      "The treated water runs clean enough that the ponds on our grounds support thriving populations of edible fish, some over 15 kilograms, which we share regularly with our team and the villages around us.",
+    gallery: [
+      { src: "/images/sus-rainwater.jpg", label: "On-site rainwater reservoir" },
+      { src: "/images/sus-water.jpg", label: "Water treatment & filtration" },
+      { src: "/images/sus-water-2.jpg", label: "Cooling towers and water systems on site" },
     ],
-    img: "/images/sus-water.jpg",
-    label: "Water treatment & filtration",
   },
   {
     kicker: "Clean Energy",
@@ -45,6 +42,12 @@ const pillars = [
     ],
     img: "/images/sus-solar.jpg",
     label: "Rooftop solar panels",
+    gallery: [
+      { src: "/images/sus-solar.jpg", label: "Rooftop solar panels across the factory" },
+      { src: "/images/sus-solar-1.jpg", label: "Solar array with maintenance walkway" },
+      { src: "/images/sus-solar-2.jpg", label: "Solar panels and roof ventilators" },
+      { src: "/images/sus-solar-3.jpg", label: "Rooftop solar with factory beyond" },
+    ],
   },
   {
     kicker: "People & Place",
@@ -89,7 +92,34 @@ const systems = ["High-efficiency boilers", "Water recycling", "Rainwater harves
           {p.body.map((para) => (<p class="muted">{para}</p>))}
         </div>
         <div class="sus-media">
-          {p.img
+          {p.gallery ? (
+            <div class="sus-carousel" data-carousel>
+              <div class="sus-carousel-stage">
+                {p.gallery.map((g, i) => (
+                  <div
+                    class:list={["sus-img", "sus-slide", { "is-active": i === 0 }]}
+                    style={`background-image:url('${g.src}')`}
+                    role="img"
+                    aria-label={g.label}
+                    data-slide={i}
+                  ></div>
+                ))}
+              </div>
+              <div class="sus-thumbs" role="tablist" aria-label="Solar power photos">
+                {p.gallery.map((g, i) => (
+                  <button
+                    type="button"
+                    class:list={["sus-thumb", { "is-active": i === 0 }]}
+                    style={`background-image:url('${g.src}')`}
+                    data-thumb={i}
+                    role="tab"
+                    aria-selected={i === 0 ? "true" : "false"}
+                    aria-label={g.label}
+                  ></button>
+                ))}
+              </div>
+            </div>
+          ) : p.img
             ? <div class="sus-img" style={`background-image:url('${p.img}')`} role="img" aria-label={p.label}></div>
             : <div class="sus-img sus-img--empty" data-label={p.label}><span>Photo coming soon</span></div>}
         </div>
@@ -158,6 +188,16 @@ const systems = ["High-efficiency boilers", "Water recycling", "Rainwater harves
   .sus-img--empty span { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-dim); }
   .sus-img--empty::after { content: attr(data-label); position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; font-size: 0.72rem; color: var(--text-muted); padding: 0 12px; }
 
+  /* Solar carousel: cross-fading hero + thumbnail strip */
+  .sus-carousel-stage { position: relative; aspect-ratio: 4 / 3; }
+  .sus-carousel-stage .sus-slide { position: absolute; inset: 0; aspect-ratio: auto; opacity: 0; transition: opacity 0.6s ease; }
+  .sus-carousel-stage .sus-slide.is-active { opacity: 1; }
+  .sus-thumbs { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px; margin-top: 12px; }
+  .sus-thumb { aspect-ratio: 4 / 3; border-radius: 10px; border: 1px solid var(--border); background-size: cover; background-position: center; cursor: pointer; padding: 0; opacity: 0.62; transition: opacity 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; outline: 2px solid transparent; outline-offset: 2px; }
+  .sus-thumb:hover { opacity: 0.85; }
+  .sus-thumb.is-active { opacity: 1; outline-color: var(--green); box-shadow: 0 6px 16px rgba(0,0,0,0.14); }
+  .sus-thumb:focus-visible { outline-color: var(--green-dark); }
+
   .sus-bio { background: radial-gradient(120% 120% at 0% 0%, rgba(140,198,63,0.14), rgba(140,198,63,0) 55%), var(--bg); border-top: 1px solid var(--border); }
   .sus-bio-inner { max-width: 720px; }
   .sus-bio h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 10px 0 14px; }
@@ -179,3 +219,48 @@ const systems = ["High-efficiency boilers", "Water recycling", "Rainwater harves
     .sus-media { order: -1 !important; }
   }
 </style>
+
+<script>
+  // Solar photo carousel: auto cross-fades the hero and syncs the thumbnails.
+  // Clicking a thumbnail jumps to that photo; hover/focus pauses the auto-cycle.
+  const INTERVAL = 5000;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll("[data-carousel]").forEach((root) => {
+    const slides = [...root.querySelectorAll("[data-slide]")];
+    const thumbs = [...root.querySelectorAll("[data-thumb]")];
+    if (slides.length < 2) return;
+
+    let index = 0;
+    let timer = null;
+
+    const show = (next) => {
+      index = (next + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle("is-active", i === index));
+      thumbs.forEach((t, i) => {
+        const on = i === index;
+        t.classList.toggle("is-active", on);
+        t.setAttribute("aria-selected", on ? "true" : "false");
+      });
+    };
+
+    const start = () => {
+      if (reduceMotion || timer) return;
+      timer = window.setInterval(() => show(index + 1), INTERVAL);
+    };
+    const stop = () => {
+      if (timer) { window.clearInterval(timer); timer = null; }
+    };
+
+    thumbs.forEach((t, i) =>
+      t.addEventListener("click", () => { show(i); stop(); start(); })
+    );
+
+    root.addEventListener("mouseenter", stop);
+    root.addEventListener("mouseleave", start);
+    root.addEventListener("focusin", stop);
+    root.addEventListener("focusout", start);
+
+    start();
+  });
+</script>
