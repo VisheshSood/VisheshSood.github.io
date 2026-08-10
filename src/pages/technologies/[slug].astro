@@ -12,6 +12,10 @@ const { tech } = Astro.props;
 
 const isBio = tech.slug === "biodegradable";
 const isInvented = tech.slug === "raised-diamond";
+// Animate the hero texture (zoom + light sweep) for grip-texture macros only.
+// Biodegradable (leaf) and any 'contain' product shot stay static.
+const animateTex = tech.icon !== "leaf" && tech.imgFit !== "contain";
+const darkTex = tech.icon === "diamond" || tech.icon === "raised"; // the two diamonds photograph darkest
 // Diamond was invented (not patented); biodegradable is a material innovation, not a grip patent.
 const eyebrow = isBio ? "Material Innovation" : isInvented ? "Invented by Innovative" : "Patented Grip Technology";
 
@@ -78,7 +82,15 @@ const glance: { k: string; v: string }[] = [
         <p class="th-patent"><span aria-hidden="true">◆</span> {tech.patentStatus}</p>
       </div>
       <div class:list={["th-media", tech.imgFit === "contain" && "th-media--contain"]}>
-        <div class="th-img" style={`background-image: url('${tech.img}')`}></div>
+        {animateTex ? (
+          <div class:list={["th-anim", darkTex && "th-anim--dark"]} aria-hidden="true">
+            <div class="th-tex" style={`background-image: url('${tech.img}')`}></div>
+            <div class="th-tex-shade"></div>
+            <div class="th-tex-sheen"></div>
+          </div>
+        ) : (
+          <div class="th-img" style={`background-image: url('${tech.img}')`}></div>
+        )}
       </div>
     </div>
   </section>
@@ -199,6 +211,17 @@ const glance: { k: string; v: string }[] = [
   .th-media { position: relative; }
   .th-img { aspect-ratio: 4 / 3; border-radius: var(--radius); background-size: cover; background-position: center; background-repeat: no-repeat; border: 1px solid var(--border); }
   .th-media--contain .th-img { background-size: contain; background-color: #fff; }
+
+  /* Animated texture hero: looks like a product loop video, but it IS the real
+     texture image (no AI). Slow zoom + a light sweep across the ridges. */
+  .th-anim { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: #060806; }
+  .th-anim .th-tex { position: absolute; inset: -8%; background-size: cover; background-position: center; background-repeat: no-repeat; filter: brightness(1.3) contrast(1.16); will-change: transform; animation: thkb 24s ease-in-out infinite; }
+  .th-anim--dark .th-tex { filter: brightness(1.55) contrast(1.3); }
+  .th-anim .th-tex-shade { position: absolute; inset: 0; background: radial-gradient(120% 100% at 50% 42%, transparent 45%, rgba(0,0,0,0.5) 100%); }
+  .th-anim .th-tex-sheen { position: absolute; top: -50%; bottom: -50%; left: -42%; width: 38%; background: linear-gradient(105deg, transparent, rgba(255,255,255,0.20), transparent); transform: skewX(-14deg); mix-blend-mode: screen; will-change: transform; animation: thsweep 7.5s ease-in-out 1.2s infinite; }
+  @keyframes thkb { 0% { transform: scale(1.06) translate(0,0); } 50% { transform: scale(1.18) translate(-2.2%, -2%); } 100% { transform: scale(1.06) translate(0,0); } }
+  @keyframes thsweep { 0% { transform: translateX(0) skewX(-14deg); } 55%, 100% { transform: translateX(440%) skewX(-14deg); } }
+  @media (prefers-reduced-motion: reduce) { .th-anim .th-tex, .th-anim .th-tex-sheen { animation: none; } }
 
   /* Story */
   .th-story { background: var(--ink); color: #fff; padding-block: clamp(44px, 6vw, 80px); }
