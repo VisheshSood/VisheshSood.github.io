@@ -31,6 +31,13 @@ const universalFeatures: { title: string; desc: string; icon: string }[] = [
   { title: "Second-Skin Comfort", icon: "flex", desc: "A soft, pliable formulation flexes with the hand for a snug fit that keeps dexterity high and hand fatigue low, even across a full shift." },
 ];
 
+// Material-specific lead feature: natural rubber for latex, latex-free for nitrile.
+const isLatex = glove.material === "Latex";
+const materialFeature = isLatex
+  ? { title: "Natural Rubber Latex", icon: "latex", desc: "Made from natural rubber for outstanding stretch and a light, barely-there feel, giving you the tactile sensitivity that precise, detailed work demands." }
+  : { title: "Latex-Free Nitrile", icon: "nitrile", desc: "Made from synthetic nitrile with no natural rubber proteins, so it is a safe choice for anyone with a latex sensitivity, and it stands up to oils, chemicals and punctures better than latex." };
+const features = [materialFeature, ...universalFeatures];
+
 // Certifications, every glove carries the quality & food-contact standards;
 // bio nitrile gloves additionally carry the biodegradability standards.
 const certGroups: { label: string; items: string[] }[] = [
@@ -103,9 +110,11 @@ const productSchema = {
         <p class="muted">Whichever glove you choose, these come as standard.</p>
       </header>
       <ul class="feat-grid">
-        {universalFeatures.map((f) => (
+        {features.map((f) => (
           <li class="feat-card">
             <span class="feat-icon" aria-hidden="true">
+              {f.icon === "latex" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s5.5 6 5.5 10.5a5.5 5.5 0 0 1-11 0C6.5 9.5 12 3.5 12 3.5z"/></svg>)}
+              {f.icon === "nitrile" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s5.5 6 5.5 10.5a5.5 5.5 0 0 1-11 0C6.5 9.5 12 3.5 12 3.5z"/><path d="M4.7 4.7l14.6 14.6"/></svg>)}
               {f.icon === "shield" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3.1 7.8-7 9-3.9-1.2-7-4.4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>)}
               {f.icon === "swap" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7L4 11l4 4"/><path d="M16 7l4 4-4 4"/><path d="M4 11h16"/></svg>)}
               {f.icon === "ring" && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg>)}
