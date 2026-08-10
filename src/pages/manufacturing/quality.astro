@@ -55,6 +55,16 @@ const standards = ["EN 455 (Parts 1–4)", "EN ISO 374-1 / -4 / -5", "ISO 9001",
     </div>
   </section>
 
+  <!-- LAB PHOTO -->
+  <section class="section qc-photo">
+    <div class="container">
+      <figure class="photo-band">
+        <div class="photo-band-img" style="background-image:url('/images/mfg-quality-lab.jpg')" role="img" aria-label="A quality technician performing chemical titration testing in the Innovative Gloves laboratory"></div>
+        <figcaption>Chemical and physical testing, carried out batch by batch in our on-site quality laboratory.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <!-- TESTS -->
   <section class="section qc-tests">
     <div class="container">
@@ -113,6 +123,10 @@ const standards = ["EN 455 (Parts 1–4)", "EN ISO 374-1 / -4 / -5", "ISO 9001",
 
 <style>
   .qc-feature { background: var(--bg); }
+  .qc-photo { background: var(--bg); padding-top: 0; }
+  .photo-band { position: relative; margin: 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+  .photo-band-img { aspect-ratio: 16 / 9; background-size: cover; background-position: center; }
+  .photo-band figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 44px 24px 18px; color: #fff; font-size: 0.9rem; background: linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0)); }
   .qc-feat-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
   .qc-feat-copy h2 { font-size: clamp(1.6rem, 3.2vw, 2.4rem); margin: 10px 0 14px; }
   .qc-feat-copy p { line-height: 1.65; margin-bottom: 12px; }

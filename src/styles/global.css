@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Innovative Gloves — Design System (LIGHT theme)
+   Innovative Gloves, Design System (LIGHT theme)
    Clean, bright, premium. Lime-green accent. Dark textured-glove photos
    used as tiles against light backgrounds. Condensed uppercase headings.
    Tweak the tokens below to retune the whole site.
@@ -83,7 +83,7 @@ h1, h2, h3, h4 {
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
-.section { padding-block: clamp(60px, 8vw, 110px); }
+.section { padding-block: clamp(44px, 5.5vw, 76px); }
 
 /* ---- Eyebrow (small green label above headings) ---- */
 .eyebrow {
@@ -158,7 +158,7 @@ h1, h2, h3, h4 {
   text-transform: uppercase;
   color: #9aa09a;
 }
-/* Dark variant — stands in for the dark textured-glove photos */
+/* Dark variant, stands in for the dark textured-glove photos */
 .img-slot--dark {
   background:
     radial-gradient(120% 120% at 30% 20%, #2a2f2b 0%, #16191700 60%),

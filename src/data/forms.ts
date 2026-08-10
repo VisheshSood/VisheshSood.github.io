@@ -7,6 +7,6 @@
 //   TURNSTILE_SITEKEY = the Cloudflare Turnstile "site key" (public half; NOT the secret key)
 export const MAILER_ENDPOINT = "/mailer/send.php";
 
-// Turnstile SITE key (public half — safe to commit). Its matching SECRET key must
+// Turnstile SITE key (public half, safe to commit). Its matching SECRET key must
 // go ONLY in php-mailer/config.php on the server, never in git.
 export const TURNSTILE_SITEKEY = "0x4AAAAAAEK4dxVBYSPTXHr2";

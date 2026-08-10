@@ -1,19 +1,95 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
-import PageBanner from "../../components/PageBanner.astro";
-import SectionStub from "../../components/SectionStub.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { articles, articlesByDate, formatArticleDate } from "../../data/news";
 
-// Sample article route. Real posts will come from a content collection later.
 export function getStaticPaths() {
-  return [{ params: { slug: "25-years" }, props: { title: "Celebrating 25 Years of Innovative Gloves" } }];
+  return articles.map((a) => ({ params: { slug: a.slug }, props: { article: a } }));
 }
-const { title } = Astro.props;
+const { article } = Astro.props;
+const related = articlesByDate.filter((a) => a.slug !== article.slug).slice(0, 3);
+
+// Article structured data for search / AI discoverability.
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  headline: article.title,
+  description: article.excerpt,
+  datePublished: article.date,
+  image: new URL(article.image, Astro.site).href,
+  author: { "@type": "Organization", name: "Innovative Gloves" },
+  publisher: { "@type": "Organization", name: "Innovative Gloves", logo: { "@type": "ImageObject", url: new URL("/images/innovative-gloves-logo-blue.png", Astro.site).href } },
+  mainEntityOfPage: new URL(`/news/${article.slug}`, Astro.site).href,
+};
 ---
 
-<PageLayout title={`${title} | Innovative Gloves`} description="A sample news article for the Innovative Gloves 25th anniversary." noindex={true}>
-  <PageBanner eyebrow="News" title={title} status="Sample article"
-    intro="An example news post. Real articles will be authored content with images, published under /news/article-name/." />
+<PageLayout title={`${article.title} | Innovative Gloves`} description={article.excerpt}>
+  <article class="section news-article">
+    <div class="container na-container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "News", href: "/news" }, { label: article.title }]} />
+      <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 
-  <SectionStub tone="light" eyebrow="Article" title="Article Body" lead="Full article content goes here." layout="media"
-    items={["Headline & date", "Rich body content", "Images", "Links to related products / technologies"]} />
+      <div class="na-meta">
+        <span class="na-tag">{article.tag}</span>
+        <time class="na-date" datetime={article.date}>{formatArticleDate(article.date)}</time>
+      </div>
+      <h1>{article.title}</h1>
+      <p class="na-lead">{article.excerpt}</p>
+      <div class:list={["na-hero", { "is-contain": article.imageFit === "contain" }]} style={`background-image:url('${article.image}')`} role="img" aria-label={article.title}></div>
+
+      <div class="na-body">
+        {article.body.map((para) => (<p>{para}</p>))}
+      </div>
+
+      <div class="na-cta">
+        <p class="muted">Built on 25 years of engineering better protection. See what that means for your work.</p>
+        <div class="na-cta-actions">
+          <a href="/technologies" class="btn btn--primary">Our Technologies <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="/gloves" class="btn btn--ghost">Browse All Gloves</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <section class="section na-related">
+    <div class="container">
+      <h2>More From Innovative<span class="dot">.</span></h2>
+      <div class="rel-grid">
+        {related.map((a) => (
+          <a class="rel-card" href={`/news/${a.slug}`}>
+            <div class:list={["rel-img", { "is-contain": a.imageFit === "contain" }]} style={`background-image:url('${a.image}')`} role="img" aria-label={a.title}></div>
+            <div class="rel-body">
+              <span class="na-tag">{a.tag}</span>
+              <h3>{a.title}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 </PageLayout>
+
+<style>
+  .na-container { max-width: 760px; }
+  .na-meta { display: flex; align-items: center; gap: 12px; margin: 18px 0 10px; }
+  .na-tag { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-dark); }
+  .na-date { font-size: 0.78rem; color: var(--text-muted); }
+  .news-article h1 { font-size: clamp(1.8rem, 4vw, 2.7rem); line-height: 1.1; margin-bottom: 14px; }
+  .na-lead { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; }
+  .na-hero { aspect-ratio: 16 / 9; border-radius: var(--radius); border: 1px solid var(--border); background-size: cover; background-position: center; box-shadow: 0 16px 40px rgba(0,0,0,0.10); margin-bottom: 30px; }
+  .na-hero.is-contain { background-size: contain; background-repeat: no-repeat; background-color: #fff; }
+  .na-body p { line-height: 1.75; margin-bottom: 18px; font-size: 1.02rem; }
+  .na-cta { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border); }
+  .na-cta p { margin-bottom: 16px; }
+  .na-cta-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  .na-related { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .na-related h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 24px; }
+  .rel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+  .rel-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; transition: transform 0.2s ease, border-color 0.2s ease; }
+  .rel-card:hover { transform: translateY(-4px); border-color: var(--green); }
+  .rel-img { aspect-ratio: 16 / 9; background-size: cover; background-position: center; }
+  .rel-img.is-contain { background-size: contain; background-repeat: no-repeat; background-color: #fff; }
+  .rel-body { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .rel-body h3 { font-size: 0.98rem; line-height: 1.3; }
+</style>

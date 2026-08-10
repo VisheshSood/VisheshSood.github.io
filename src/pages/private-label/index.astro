@@ -81,6 +81,16 @@ const steps = [
     </div>
   </section>
 
+  <!-- WAREHOUSE PHOTO -->
+  <section class="section pl-photo">
+    <div class="container">
+      <figure class="photo-band">
+        <div class="photo-band-img" style="background-image:url('/images/oem-warehouse.jpg')" role="img" aria-label="Palletised finished gloves racked in the Innovative Gloves export warehouse"></div>
+        <figcaption>The same lines, the same warehouse, the same export documentation behind our own brands, put to work for yours.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <!-- PROCESS -->
   <section class="section pl-process">
     <div class="container">
@@ -124,6 +134,11 @@ const steps = [
   .brand-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.1); }
   .brand-img { aspect-ratio: 4 / 3; background-color: #fff; background-size: contain; background-position: center; background-repeat: no-repeat; }
   .brand-name { display: block; padding: 12px 14px; font-family: var(--font-head); font-weight: 800; font-size: 0.9rem; color: var(--ink); border-top: 1px solid var(--border); }
+
+  .pl-photo { background: var(--bg); border-top: 1px solid var(--border); }
+  .photo-band { position: relative; margin: 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+  .photo-band-img { aspect-ratio: 16 / 9; background-size: cover; background-position: center; }
+  .photo-band figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 44px 24px 18px; color: #fff; font-size: 0.9rem; background: linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0)); }
 
   .pl-caps { background: var(--bg-2); border-top: 1px solid var(--border); }
   .caps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }

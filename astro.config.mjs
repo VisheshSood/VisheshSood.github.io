@@ -11,8 +11,6 @@ export default defineConfig({
   site: SITE,
   integrations: [
     sitemap({
-      // Keep placeholder /news sample pages out of the sitemap until real articles exist.
-      filter: (page) => !page.includes('/news'),
       // lastmod = build time. Every deploy rebuilds, so this honestly signals the
       // site was refreshed and prompts search engines to re-crawl.
       lastmod: new Date(),

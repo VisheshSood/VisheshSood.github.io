@@ -1,28 +1,27 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
 import PageBanner from "../../components/PageBanner.astro";
-
-const posts = [
-  { title: "Celebrating 25 Years of Innovative Gloves", slug: "25-years", tag: "Anniversary" },
-  { title: "New Micro Diamond glove launches", slug: "25-years", tag: "Product" },
-  { title: "Achieving our latest certification", slug: "25-years", tag: "Certification" },
-  { title: "Investing in sustainable manufacturing", slug: "25-years", tag: "Sustainability" },
-];
+import { articlesByDate, formatArticleDate } from "../../data/news";
 ---
 
-<PageLayout title="News & Insights | Innovative Gloves" description="Company updates, new products, trade shows, certifications, patents, manufacturing investments, sustainability projects and the 25th anniversary." noindex={true}>
+<PageLayout title="News & Insights | Innovative Gloves" description="Company updates, new products, patents, certifications, manufacturing investments, sustainability projects and the 25th anniversary of Innovative Gloves.">
   <PageBanner eyebrow="News & Insights" title={`Always<br>Developing<span class="dot">.</span>`}
     intro="Genuine company updates and technical insights, proof that Innovative is active and continually developing." />
 
   <section class="section news">
     <div class="container">
       <div class="news-grid">
-        {posts.map((p) => (
+        {articlesByDate.map((p) => (
           <a class="news-card" href={`/news/${p.slug}`}>
-            <div class="img-slot news-img" data-label="Article image"></div>
+            <div class:list={["news-img", { "is-contain": p.imageFit === "contain" }]} style={`background-image:url('${p.image}')`} role="img" aria-label={p.title}></div>
             <div class="news-body">
-              <span class="news-tag">{p.tag}</span>
+              <div class="news-meta">
+                <span class="news-tag">{p.tag}</span>
+                <time class="news-date" datetime={p.date}>{formatArticleDate(p.date)}</time>
+              </div>
               <h3>{p.title}</h3>
+              <p class="muted news-excerpt">{p.excerpt}</p>
+              <span class="news-read">Read more <span class="arrow" aria-hidden="true">&rarr;</span></span>
             </div>
           </a>
         ))}
@@ -32,11 +31,17 @@ const posts = [
 </PageLayout>
 
 <style>
-  .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-  .news-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; transition: transform 0.2s ease, border-color 0.2s ease; }
-  .news-card:hover { transform: translateY(-4px); border-color: var(--green); }
-  .news-img { aspect-ratio: 16 / 9; }
-  .news-body { padding: 18px; }
+  .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+  .news-card { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+  .news-card:hover { transform: translateY(-4px); border-color: var(--green); box-shadow: 0 16px 34px rgba(0,0,0,0.10); }
+  .news-img { aspect-ratio: 16 / 9; background-size: cover; background-position: center; }
+  .news-img.is-contain { background-size: contain; background-repeat: no-repeat; background-color: #fff; }
+  .news-body { padding: 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .news-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .news-tag { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-dark); }
-  .news-body h3 { font-size: 1.05rem; margin-top: 8px; }
+  .news-date { font-size: 0.72rem; color: var(--text-muted); }
+  .news-body h3 { font-size: 1.08rem; line-height: 1.3; }
+  .news-excerpt { font-size: 0.9rem; line-height: 1.55; }
+  .news-read { margin-top: auto; padding-top: 6px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-dark); display: inline-flex; align-items: center; gap: 6px; }
+  .news-card:hover .news-read .arrow { transform: translateX(4px); }
 </style>
