@@ -1,0 +1,79 @@
+---
+// Slim credibility strip directly under the hero: puts global-market
+// certifications in the first screen, where procurement buyers look first.
+// The full detail lives in the Certifications section further down the page.
+const certs = [
+  { name: "SMETA 4-Pillar", img: "/images/certs/cert-smeta.png" },
+  { name: "ISO 9001", img: "/images/certs/cert-iso9001.png" },
+  { name: "EN ISO 13485", img: "/images/certs/cert-iso13485.png" },
+  { name: "CE / PPE", img: "/images/certs/cert-ce.png" },
+  { name: "US FDA", img: "/images/certs/cert-fda.png" },
+  { name: "Australia TGA", img: "/images/certs/cert-tga.png" },
+  { name: "Health Canada", img: "/images/certs/cert-healthcanada.png" },
+];
+---
+
+<section class="trustbar" aria-label="Certifications">
+  <div class="container trustbar-inner">
+    <p class="trustbar-label">Certified for global markets</p>
+    <ul class="trustbar-logos">
+      {certs.map((c) => (
+        <li class="trustbar-logo">
+          <img src={c.img} alt={`${c.name} certification`} title={c.name} loading="lazy" />
+        </li>
+      ))}
+    </ul>
+    <a class="trustbar-link" href="/certifications">View all &rarr;</a>
+  </div>
+</section>
+
+<style>
+  .trustbar { background: var(--bg-2); border-bottom: 1px solid var(--border); }
+  .trustbar-inner {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 3vw, 36px);
+    padding-block: 16px;
+    flex-wrap: wrap;
+  }
+  .trustbar-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .trustbar-logos {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 3vw, 38px);
+    flex-wrap: wrap;
+    flex: 1;
+  }
+  .trustbar-logo img {
+    height: 34px;
+    width: auto;
+    display: block;
+    filter: grayscale(1);
+    opacity: 0.62;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+  }
+  .trustbar-logo img:hover { filter: grayscale(0); opacity: 1; }
+  .trustbar-link {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .trustbar-link:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .trustbar-logo img { height: 28px; }
+    .trustbar-link { display: none; }
+  }
+</style>
