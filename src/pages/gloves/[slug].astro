@@ -70,7 +70,14 @@ const productSchema = {
   <section class="section p-hero">
     <div class="container p-grid">
       <div class="p-visual">
-        <GloveVisual glove={glove} ratio="1 / 1" />
+        {glove.img ? (
+          <button type="button" class="p-zoom" data-zoom-src={glove.img} aria-label={`Enlarge image of ${glove.name} to see the texture`}>
+            <GloveVisual glove={glove} ratio="1 / 1" />
+            <span class="p-zoom-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8.5v5M8.5 11h5"/></svg></span>
+          </button>
+        ) : (
+          <GloveVisual glove={glove} ratio="1 / 1" />
+        )}
         <ul class="p-featlist">
           {features.map((f) => (
             <li class="p-feat">
@@ -207,11 +214,50 @@ const productSchema = {
       </div>
     </section>
   )}
+
+  {glove.img && (
+    <div class="lightbox" id="lightbox" hidden>
+      <button type="button" class="lb-close" aria-label="Close">&times;</button>
+      <img class="lb-img" id="lbImg" src="" alt={`${glove.name}, enlarged to show the texture`} />
+    </div>
+  )}
 </PageLayout>
+
+<script>
+  // Image lightbox: click the product image to view a larger version.
+  const lb = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lbImg");
+  if (lb && lbImg) {
+    const open = (src: string) => { lbImg.setAttribute("src", src); lb.removeAttribute("hidden"); document.body.style.overflow = "hidden"; };
+    const close = () => { lb.setAttribute("hidden", ""); lbImg.setAttribute("src", ""); document.body.style.overflow = ""; };
+    document.querySelectorAll<HTMLElement>(".p-zoom").forEach((btn) =>
+      btn.addEventListener("click", () => { const s = btn.dataset.zoomSrc; if (s) open(s); })
+    );
+    lb.addEventListener("click", (e) => {
+      const t = e.target as HTMLElement;
+      if (t === lb || t.classList.contains("lb-close")) close();
+    });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !lb.hasAttribute("hidden")) close(); });
+  }
+</script>
 
 <style>
   .p-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 5vw, 60px); align-items: start; }
   .p-visual :global(.gv) { border: 1px solid var(--border); }
+
+  /* Click-to-zoom product image */
+  .p-zoom { display: block; width: 100%; padding: 0; border: 0; background: none; position: relative; cursor: zoom-in; border-radius: var(--radius); }
+  .p-zoom-ic { position: absolute; right: 12px; bottom: 12px; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: rgba(20,24,15,0.72); color: #fff; opacity: 0.9; pointer-events: none; transition: opacity 0.15s ease, transform 0.15s ease; }
+  .p-zoom-ic svg { width: 19px; height: 19px; }
+  .p-zoom:hover .p-zoom-ic { opacity: 1; transform: scale(1.06); }
+  .p-zoom:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+  /* Lightbox overlay */
+  .lightbox { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 4vmin; background: rgba(8,10,7,0.92); cursor: zoom-out; }
+  .lightbox[hidden] { display: none; }
+  .lb-img { max-width: 96vw; max-height: 92vh; object-fit: contain; border-radius: 8px; background: #fff; box-shadow: 0 24px 70px rgba(0,0,0,0.55); cursor: default; }
+  .lb-close { position: absolute; top: 16px; right: 20px; width: 46px; height: 46px; border: 0; border-radius: 50%; background: rgba(255,255,255,0.14); color: #fff; font-size: 1.9rem; line-height: 1; cursor: pointer; transition: background 0.15s ease; }
+  .lb-close:hover { background: rgba(255,255,255,0.26); }
   .back-link { font-size: 0.8rem; font-weight: 600; color: var(--green-dark); }
   .p-info .eyebrow { margin-top: 14px; }
   .p-info h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin: 8px 0 8px; }
