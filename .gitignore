@@ -32,3 +32,10 @@ src/data/specs-txt/
 # PHP mailer secrets — created on the server only, NEVER committed
 php-mailer/config.php
 php-mailer/PHPMailer/
+
+# editor / IDE settings (kept local, not in the public repo)
+.vscode/
+
+# agent / AI instructions (kept local, not in the public repo)
+CLAUDE.md
+AGENTS.md
