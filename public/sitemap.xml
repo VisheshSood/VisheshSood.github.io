@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Compatibility alias. Google already knows the legacy /sitemap.xml URL from the
+  previous site. Astro (@astrojs/sitemap) generates sitemap-index.xml + sitemap-0.xml,
+  so this static file keeps /sitemap.xml valid by pointing at the generated sitemap.
+  Canonical discovery is still robots.txt -> sitemap-index.xml.
+-->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://www.innovativegloves.net/sitemap-0.xml</loc>
+  </sitemap>
+</sitemapindex>
