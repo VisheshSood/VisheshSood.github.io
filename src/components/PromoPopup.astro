@@ -1,0 +1,180 @@
+---
+// Welcome promo popup: captures an email and notifies the team that someone is
+// interested in the "50% Off Selected Gloves" promotion. Shown once per session.
+import { MAILER_ENDPOINT } from "../data/forms";
+---
+
+<div class="promo" id="promoPopup" role="dialog" aria-modal="true" aria-labelledby="promoTitle" hidden>
+  <div class="promo-backdrop" data-close></div>
+  <div class="promo-card">
+    <button type="button" class="promo-x" data-close aria-label="Close">&times;</button>
+
+    <div class="promo-visual" aria-hidden="true">
+      <span class="promo-badge"><b>50%</b><span>OFF</span></span>
+      <img class="promo-lineup" src="/images/promo/gloves-lineup.png" alt="Innovative Gloves range" />
+    </div>
+
+    <div class="promo-body" id="promoBody">
+      <p class="promo-eyebrow">Limited-Time Offer</p>
+      <h2 class="promo-title" id="promoTitle">50% Off<br />Selected Gloves<span class="dot">.</span></h2>
+      <p class="promo-sub">Enter your email and we will send you the deal on our high quality products on sale before they are gone.</p>
+
+      <form class="promo-form" id="promoForm" novalidate>
+        <input type="text" name="company_website" class="promo-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <label class="sr-only" for="promoEmail">Email address</label>
+        <input type="email" id="promoEmail" name="email" class="promo-input" placeholder="your@email.com" required autocomplete="email" />
+        <button type="submit" class="promo-submit">Get My 50% Off <span aria-hidden="true">&rarr;</span></button>
+        <p class="promo-status" id="promoStatus" role="status" aria-live="polite"></p>
+        <p class="promo-fine">No spam. We will only email you about this promotion.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ endpoint: MAILER_ENDPOINT }}>
+  (function () {
+    const SEEN = "ig_promo_seen", DONE = "ig_promo_done";
+    const el = document.getElementById("promoPopup");
+    if (!el) return;
+    let signedUp = false, seen = false;
+    try { signedUp = localStorage.getItem(DONE) === "1"; } catch (e) {}
+    try { seen = sessionStorage.getItem(SEEN) === "1"; } catch (e) {}
+    // Visiting /?promo (or #promo) always re-opens it, handy for previewing.
+    const force = /[?&]promo\b/.test(location.search) || location.hash === "#promo";
+    if (signedUp && !force) return; // already signed up, never nag again
+
+    const lock = (on) => { document.body.style.overflow = on ? "hidden" : ""; };
+    // Once per browsing SESSION: repeat visitors see it again on their next visit,
+    // but it won't re-trigger on every page/refresh within one visit.
+    const open = () => { el.hidden = false; lock(true); try { sessionStorage.setItem(SEEN, "1"); } catch (e) {} };
+    const close = () => { el.hidden = true; lock(false); };
+
+    if (force) { open(); }
+    else if (!seen) { setTimeout(open, 1200); }
+
+    el.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", close));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !el.hidden) close(); });
+
+    const form = document.getElementById("promoForm");
+    const status = document.getElementById("promoStatus");
+    const emailOk = (v) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+
+    const done = () => {
+      try { localStorage.setItem(DONE, "1"); } catch (e) {}
+      const body = document.getElementById("promoBody");
+      body.innerHTML =
+        '<div class="promo-thanks"><div class="promo-tick" aria-hidden="true">&#10003;</div>' +
+        "<h2>You are in.</h2><p>Thanks. We will email you the 50% off details shortly.</p>" +
+        '<button type="button" class="promo-submit" data-close>Done</button></div>';
+      body.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", close));
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = form.email.value.trim();
+      if (!emailOk(email)) { status.textContent = "Please enter a valid email address."; status.dataset.state = "err"; return; }
+      if (form.company_website.value) { done(); return; } // honeypot tripped
+
+      const btn = form.querySelector(".promo-submit");
+      btn.disabled = true;
+      status.dataset.state = "";
+      status.textContent = "Sending...";
+      try {
+        const fd = new FormData();
+        fd.append("form", "Promo");
+        fd.append("email", email);
+        fd.append("company_website", "");
+        const res = await fetch(endpoint, { method: "POST", body: fd });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) { done(); }
+        else { status.textContent = data.error || "Something went wrong. Please try again."; status.dataset.state = "err"; btn.disabled = false; }
+      } catch (err) {
+        status.textContent = "Network error. Please try again."; status.dataset.state = "err"; btn.disabled = false;
+      }
+    });
+  })();
+</script>
+
+<style>
+  .promo { position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .promo[hidden] { display: none; }
+  .promo-backdrop { position: absolute; inset: 0; background: rgba(8, 10, 7, 0.66); backdrop-filter: blur(3px); animation: promo-fade 0.25s ease; }
+  .promo-card {
+    position: relative; z-index: 1; width: min(460px, 100%); display: flex; flex-direction: column-reverse;
+    background: var(--surface, #fff); border-radius: 18px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4); animation: promo-pop 0.3s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+  @keyframes promo-fade { from { opacity: 0; } }
+  @keyframes promo-pop { from { opacity: 0; transform: translateY(14px) scale(0.98); } }
+
+  .promo-x {
+    position: absolute; top: 12px; right: 14px; z-index: 3; width: 36px; height: 36px; border: 0; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85); color: #14180f; font-size: 1.5rem; line-height: 1; cursor: pointer; transition: background 0.15s;
+  }
+  .promo-x:hover { background: #fff; }
+
+  /* Visual panel: a dark-green stage for the falling-glove rain */
+  .promo-visual {
+    position: relative; overflow: hidden; height: 200px;
+    background:
+      radial-gradient(60% 70% at 50% 92%, rgba(200, 240, 135, 0.5), transparent 64%),
+      radial-gradient(130% 150% at 50% 40%, #35491e 0%, #16240c 52%, #070d04 84%);
+  }
+  /* light rays bursting from behind the line-up */
+  .promo-visual::before {
+    content: ""; position: absolute; left: 50%; bottom: -30%; width: 150%; height: 150%; z-index: 0;
+    transform: translateX(-50%); pointer-events: none;
+    background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,0.13) 0deg 2deg, transparent 2deg 8.5deg);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0, transparent 56%);
+    mask-image: radial-gradient(circle at 50% 50%, #000 0, transparent 56%);
+  }
+  .promo-badge {
+    position: absolute; top: 10px; left: 10px; z-index: 5; width: 84px; height: 84px;
+    clip-path: polygon(50% 0%, 60% 14%, 75% 7%, 76% 24%, 93% 25%, 86% 40%, 100% 50%, 86% 60%, 93% 75%, 76% 76%, 75% 93%, 60% 86%, 50% 100%, 40% 86%, 25% 93%, 24% 76%, 7% 75%, 14% 60%, 0% 50%, 14% 40%, 7% 25%, 24% 24%, 25% 7%, 40% 14%);
+    background: radial-gradient(circle at 40% 34%, #ffe793, #f2b431 58%, #d78f12);
+    color: #3a2a06; display: grid; place-content: center; text-align: center; transform: rotate(-6deg);
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5));
+  }
+  .promo-badge b { font-family: var(--font-head, sans-serif); font-size: 1.4rem; font-weight: 900; line-height: 0.9; }
+  .promo-badge span { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em; color: #6b4e0a; }
+  /* Ready-made glove line-up spanning the full-width bottom band */
+  .promo-lineup { position: absolute; left: 50%; bottom: -7%; transform: translateX(-50%); width: 100%; max-width: none; z-index: 1; filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.45)); }
+
+  /* Body */
+  .promo-body { padding: clamp(20px, 3vw, 28px) clamp(20px, 3vw, 28px) 12px; display: flex; flex-direction: column; }
+  .promo-eyebrow { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-dark, #5a8f1e); }
+  .promo-title { font-family: var(--font-head, sans-serif); font-weight: 900; text-transform: uppercase; font-size: clamp(1.7rem, 4vw, 2.2rem); line-height: 0.98; margin: 6px 0 8px; color: var(--ink, #14180f); }
+  .promo-title .dot { color: var(--green, #8CC63F); }
+  .promo-sub { color: var(--text-muted, #55605a); font-size: 0.88rem; line-height: 1.45; margin-bottom: 14px; }
+
+  .promo-form { display: flex; flex-direction: column; gap: 8px; }
+  .promo-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .promo-input {
+    width: 100%; padding: 12px 14px; border: 1.5px solid var(--border-strong, #cfd6c8); border-radius: 10px;
+    font-size: 0.95rem; font-family: inherit; background: #fff; color: var(--ink, #14180f);
+  }
+  .promo-input:focus { outline: 0; border-color: var(--green, #8CC63F); box-shadow: 0 0 0 3px rgba(140, 198, 63, 0.25); }
+  .promo-submit {
+    width: 100%; padding: 12px 18px; border: 0; border-radius: 10px; cursor: pointer;
+    background: var(--green, #8CC63F); color: #14210a; font-weight: 800; font-size: 0.95rem; font-family: inherit;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .promo-submit:hover { background: var(--green-dark, #7ab52f); }
+  .promo-submit:disabled { opacity: 0.6; cursor: default; }
+  .promo-status { font-size: 0.82rem; margin: 0; min-height: 0; }
+  .promo-status:empty { display: none; }
+  .promo-status[data-state="err"] { color: #c0392b; margin-top: 6px; }
+  .promo-fine { font-size: 0.68rem; color: var(--text-muted, #7c857c); margin: 8px 0 0; }
+
+  .promo-thanks { text-align: center; padding: 10px 0; }
+  .promo-tick { width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%; background: rgba(140, 198, 63, 0.18); color: var(--green-dark, #5a8f1e); display: grid; place-items: center; font-size: 1.7rem; }
+  .promo-thanks h2 { font-family: var(--font-head, sans-serif); font-size: 1.6rem; margin-bottom: 8px; color: var(--ink, #14180f); }
+  .promo-thanks p { color: var(--text-muted, #55605a); margin-bottom: 20px; }
+
+  @media (max-width: 680px) {
+    .promo-card { max-width: 380px; }
+    .promo-visual { height: 165px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .promo-backdrop, .promo-card { animation: none; } }
+</style>

@@ -42,19 +42,31 @@ $formType = trim((string)($_POST['form'] ?? 'Website'));
 $token    = (string)($_POST['cf-turnstile-response'] ?? '');
 $honey    = trim((string)($_POST['company_website'] ?? ''));
 
+// Promo popup: an email-only signup that just notifies the team of interest.
+$isPromo  = strcasecmp($formType, 'Promo') === 0;
+
 // --- Honeypot: bots fill this hidden field. Silently drop. ---
 if ($honey !== '') { echo json_encode(['ok' => true]); exit; }
 
 // --- Validate (presence + sane length caps to blunt abuse) ---
-$bad = [];
-if ($name === '' || mb_strlen($name) > 100)          $bad[] = 'name';
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)
-    || mb_strlen($email) > 254)                       $bad[] = 'email';
-if ($message === '' || mb_strlen($message) > 5000)   $bad[] = 'message';
-if ($bad) {
-    http_response_code(422);
-    echo json_encode(['ok' => false, 'error' => 'Please complete all fields.', 'fields' => $bad]);
-    exit;
+if ($isPromo) {
+    // Only an email is required from the promo popup.
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($email) > 254) {
+        http_response_code(422);
+        echo json_encode(['ok' => false, 'error' => 'Please enter a valid email address.', 'fields' => ['email']]);
+        exit;
+    }
+} else {
+    $bad = [];
+    if ($name === '' || mb_strlen($name) > 100)          $bad[] = 'name';
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)
+        || mb_strlen($email) > 254)                       $bad[] = 'email';
+    if ($message === '' || mb_strlen($message) > 5000)   $bad[] = 'message';
+    if ($bad) {
+        http_response_code(422);
+        echo json_encode(['ok' => false, 'error' => 'Please complete all fields.', 'fields' => $bad]);
+        exit;
+    }
 }
 
 // --- Rate limit BEFORE the Turnstile call, per-IP and globally. -------------
@@ -69,42 +81,61 @@ if (!rate_ok('ip:' . $ip, 5, 3600) || !rate_ok('global', 100, 3600)) {
     exit;
 }
 
-// --- Verify Cloudflare Turnstile ---
-if ($token === '') {
-    http_response_code(400);
-    echo json_encode(['ok' => false, 'error' => 'Please complete the anti-spam check.']);
-    exit;
-}
-if (!verifyTurnstile($config['turnstile_secret'], $token, $_SERVER['REMOTE_ADDR'] ?? null)) {
-    http_response_code(403);
-    echo json_encode(['ok' => false, 'error' => 'Anti-spam check failed. Please try again.']);
-    exit;
+// --- Verify Cloudflare Turnstile. Skipped for the promo popup, which stays
+//     frictionless and leans on the honeypot + rate limiting above instead. ---
+if (!$isPromo) {
+    if ($token === '') {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'error' => 'Please complete the anti-spam check.']);
+        exit;
+    }
+    if (!verifyTurnstile($config['turnstile_secret'], $token, $_SERVER['REMOTE_ADDR'] ?? null)) {
+        http_response_code(403);
+        echo json_encode(['ok' => false, 'error' => 'Anti-spam check failed. Please try again.']);
+        exit;
+    }
 }
 
-// --- One email: team in To, customer in Cc + thanked ---
-$safeName = str_replace(["\r", "\n"], ' ', $name);
-$body =
-    "Hi {$safeName},\n\n" .
-    "Thank you for reaching out to Innovative Gloves. We've received your enquiry " .
-    "and a member of our team will get back to you shortly.\n\n" .
-    "For your reference, here is what you sent us:\n\n" .
-    "Enquiry type: {$formType}\n" .
-    "Name: {$name}\n" .
-    "Email: {$email}\n\n" .
-    "Message:\n{$message}\n\n" .
-    "Kind regards,\n" .
-    "Innovative Gloves\n" .
-    "sales@innovativeglove.com\n" .
-    "www.innovativegloves.net\n";
+if ($isPromo) {
+    // Promo popup: notify the team ONLY (no copy to the visitor).
+    $body =
+        "A visitor signed up through the website promo popup and is interested in " .
+        "the 50% Off Selected Gloves promotion.\n\n" .
+        "Interested email: {$email}\n" .
+        "Source: " . ($origin !== '' ? $origin : 'website') . "\n";
 
-$ok = ig_send_mail([
-    'to'            => $config['mail_to'],   // internal team
-    'cc'            => [$email],             // customer gets a copy
-    'reply_to'      => $email,
-    'reply_to_name' => $name,
-    'subject'       => 'Thank you for contacting Innovative Gloves',
-    'text'          => $body,
-]);
+    $ok = ig_send_mail([
+        'to'       => $config['mail_to'],   // internal team (Vishesh + RSood)
+        'reply_to' => $email,
+        'subject'  => 'Promo signup: interested in 50% Off Selected Gloves',
+        'text'     => $body,
+    ]);
+} else {
+    // --- One email: team in To, customer in Cc + thanked ---
+    $safeName = str_replace(["\r", "\n"], ' ', $name);
+    $body =
+        "Hi {$safeName},\n\n" .
+        "Thank you for reaching out to Innovative Gloves. We've received your enquiry " .
+        "and a member of our team will get back to you shortly.\n\n" .
+        "For your reference, here is what you sent us:\n\n" .
+        "Enquiry type: {$formType}\n" .
+        "Name: {$name}\n" .
+        "Email: {$email}\n\n" .
+        "Message:\n{$message}\n\n" .
+        "Kind regards,\n" .
+        "Innovative Gloves\n" .
+        "sales@innovativeglove.com\n" .
+        "www.innovativegloves.net\n";
+
+    $ok = ig_send_mail([
+        'to'            => $config['mail_to'],   // internal team
+        'cc'            => [$email],             // customer gets a copy
+        'reply_to'      => $email,
+        'reply_to_name' => $name,
+        'subject'       => 'Thank you for contacting Innovative Gloves',
+        'text'          => $body,
+    ]);
+}
 
 if ($ok) {
     echo json_encode(['ok' => true]);
