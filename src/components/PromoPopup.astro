@@ -15,18 +15,29 @@ import { MAILER_ENDPOINT } from "../data/forms";
     </div>
 
     <div class="promo-body" id="promoBody">
-      <p class="promo-eyebrow">Limited-Time Offer</p>
-      <h2 class="promo-title" id="promoTitle">50% Off<br />Selected Gloves<span class="dot">.</span></h2>
-      <p class="promo-sub">Enter your email and we will send you the deal on our high quality products on sale before they are gone.</p>
+      <div id="promoOffer">
+        <p class="promo-eyebrow">Limited-Time Offer</p>
+        <h2 class="promo-title" id="promoTitle">50% Off<br />Selected Gloves<span class="dot">.</span></h2>
+        <p class="promo-sub">Enter your email and we will send you the deal on our high quality products on sale before they are gone.</p>
 
-      <form class="promo-form" id="promoForm" novalidate>
-        <input type="text" name="company_website" class="promo-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
-        <label class="sr-only" for="promoEmail">Email address</label>
-        <input type="email" id="promoEmail" name="email" class="promo-input" placeholder="your@email.com" required autocomplete="email" />
-        <button type="submit" class="promo-submit">Get My 50% Off <span aria-hidden="true">&rarr;</span></button>
-        <p class="promo-status" id="promoStatus" role="status" aria-live="polite"></p>
-        <p class="promo-fine">No spam. We will only email you about this promotion.</p>
-      </form>
+        <form class="promo-form" id="promoForm" novalidate>
+          <input type="text" name="company_website" class="promo-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <label class="sr-only" for="promoEmail">Email address</label>
+          <input type="email" id="promoEmail" name="email" class="promo-input" placeholder="your@email.com" required autocomplete="email" />
+          <button type="submit" class="promo-submit">Get My 50% Off <span aria-hidden="true">&rarr;</span></button>
+          <p class="promo-status" id="promoStatus" role="status" aria-live="polite"></p>
+          <p class="promo-fine">No spam. We will only email you about this promotion.</p>
+        </form>
+      </div>
+
+      <div class="promo-thanks" id="promoThanks" hidden>
+        <div class="promo-tick" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6" /></svg>
+        </div>
+        <h2>You're In<span class="dot">.</span></h2>
+        <p>Thanks. Our team will email you the 50% off details shortly, keep an eye on your inbox.</p>
+        <button type="button" class="promo-submit promo-done" data-close>Done</button>
+      </div>
     </div>
   </div>
 </div>
@@ -39,8 +50,10 @@ import { MAILER_ENDPOINT } from "../data/forms";
     let signedUp = false, seen = false;
     try { signedUp = localStorage.getItem(DONE) === "1"; } catch (e) {}
     try { seen = sessionStorage.getItem(SEEN) === "1"; } catch (e) {}
-    // Visiting /?promo (or #promo) always re-opens it, handy for previewing.
-    const force = /[?&]promo\b/.test(location.search) || location.hash === "#promo";
+    // Visiting /?promo (or #promo) always re-opens it; /#thanks previews the
+    // success screen without submitting. Both are handy for previewing.
+    const previewThanks = location.hash === "#thanks";
+    const force = /[?&]promo\b/.test(location.search) || location.hash === "#promo" || previewThanks;
     if (signedUp && !force) return; // already signed up, never nag again
 
     const lock = (on) => { document.body.style.overflow = on ? "hidden" : ""; };
@@ -52,6 +65,14 @@ import { MAILER_ENDPOINT } from "../data/forms";
     if (force) { open(); }
     else if (!seen) { setTimeout(open, 1200); }
 
+    // Preview the success screen (no email sent, no flag stored) via /#thanks.
+    if (previewThanks) {
+      const offer = document.getElementById("promoOffer");
+      const thanks = document.getElementById("promoThanks");
+      if (offer) offer.hidden = true;
+      if (thanks) thanks.hidden = false;
+    }
+
     el.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", close));
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !el.hidden) close(); });
 
@@ -61,12 +82,10 @@ import { MAILER_ENDPOINT } from "../data/forms";
 
     const done = () => {
       try { localStorage.setItem(DONE, "1"); } catch (e) {}
-      const body = document.getElementById("promoBody");
-      body.innerHTML =
-        '<div class="promo-thanks"><div class="promo-tick" aria-hidden="true">&#10003;</div>' +
-        "<h2>You are in.</h2><p>Thanks. We will email you the 50% off details shortly.</p>" +
-        '<button type="button" class="promo-submit" data-close>Done</button></div>';
-      body.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", close));
+      const offer = document.getElementById("promoOffer");
+      const thanks = document.getElementById("promoThanks");
+      if (offer) offer.hidden = true;
+      if (thanks) thanks.hidden = false;
     };
 
     form.addEventListener("submit", async (e) => {
@@ -167,10 +186,14 @@ import { MAILER_ENDPOINT } from "../data/forms";
   .promo-status[data-state="err"] { color: #c0392b; margin-top: 6px; }
   .promo-fine { font-size: 0.68rem; color: var(--text-muted, #7c857c); margin: 8px 0 0; }
 
-  .promo-thanks { text-align: center; padding: 10px 0; }
-  .promo-tick { width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%; background: rgba(140, 198, 63, 0.18); color: var(--green-dark, #5a8f1e); display: grid; place-items: center; font-size: 1.7rem; }
-  .promo-thanks h2 { font-family: var(--font-head, sans-serif); font-size: 1.6rem; margin-bottom: 8px; color: var(--ink, #14180f); }
-  .promo-thanks p { color: var(--text-muted, #55605a); margin-bottom: 20px; }
+  .promo-thanks { text-align: center; padding: 8px 0 6px; }
+  .promo-tick { width: 60px; height: 60px; margin: 0 auto 16px; border-radius: 50%; background: var(--green, #8CC63F); color: #14210a; display: grid; place-items: center; box-shadow: 0 6px 18px rgba(140, 198, 63, 0.45); animation: promo-tick-pop 0.35s cubic-bezier(0.2, 0.8, 0.3, 1) both; }
+  .promo-tick svg { width: 30px; height: 30px; }
+  @keyframes promo-tick-pop { from { transform: scale(0); opacity: 0; } }
+  .promo-thanks h2 { font-family: var(--font-head, sans-serif); font-weight: 900; text-transform: uppercase; font-size: clamp(1.5rem, 4vw, 1.9rem); margin-bottom: 8px; color: var(--ink, #14180f); }
+  .promo-thanks .dot { color: var(--green, #8CC63F); }
+  .promo-thanks p { color: var(--text-muted, #55605a); font-size: 0.9rem; line-height: 1.5; max-width: 40ch; margin: 0 auto 18px; }
+  .promo-done { width: auto; display: inline-block; padding: 12px 34px; }
 
   @media (max-width: 680px) {
     .promo-card { max-width: 380px; }
