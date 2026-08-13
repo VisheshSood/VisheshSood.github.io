@@ -1,17 +1,18 @@
 ---
-import { colourHex, colourLight, texPattern, type Glove } from "../data/catalogue";
+import { colourHex, colourLight, texPattern, gloveGlow, type Glove } from "../data/catalogue";
 interface Props { glove: Glove; ratio?: string; box?: string; }
 const { glove, ratio = "4 / 3", box } = Astro.props;
 const primary = glove.colours?.[0] || "Blue";
 const hex = colourHex(primary);
 const light = colourLight(primary);
 const pat = texPattern[glove.texture] || "full";
+const glow = gloveGlow(glove);
 // Prefer an explicit box render (packaged shot), then the plain glove photo, then a generated card.
 const photo = box || glove.img;
 ---
 
 {photo ? (
-  <div class="gv gv--photo" style={`aspect-ratio:${ratio}; background-image:url('${photo}')`}></div>
+  <div class="gv gv--photo" style={`aspect-ratio:${ratio}; --photo:url('${photo}'); --glow:${glow}`}></div>
 ) : (
   <div class:list={["gv", "gv--gen", `pat-${pat}`, light && "is-light"]} style={`aspect-ratio:${ratio}; --bg:${hex}`}>
     <span class="gv-tex">{glove.texture}</span>
@@ -20,7 +21,18 @@ const photo = box || glove.img;
 
 <style>
   .gv { border-radius: var(--radius); overflow: hidden; position: relative; }
-  .gv--photo { background-color: #fff; background-size: contain; background-position: center; background-repeat: no-repeat; }
+  /* Transparent glove photo (top layer) over a soft texture-coloured glow (bottom layer). */
+  .gv--photo {
+    background-color: #fff;
+    background-image: var(--photo), radial-gradient(circle at 50% 47%, color-mix(in srgb, var(--glow, #9AA0A0) 42%, transparent), transparent 60%);
+    background-size: contain, 120% 120%;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+    transition: background-size 0.3s ease;
+  }
+  /* Bloom the glow on card hover. */
+  :global(.gcard:hover) .gv--photo,
+  :global(.flagship-card:hover) .gv--photo { background-size: contain, 145% 145%; }
 
   .gv--gen { background: var(--bg); --pat: rgba(255,255,255,0.18); }
   .gv--gen.is-light { --pat: rgba(0,0,0,0.16); }

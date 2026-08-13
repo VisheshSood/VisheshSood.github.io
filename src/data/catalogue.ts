@@ -84,7 +84,7 @@ const photoBySlug: Record<string, string> = {};
 const assign = (img: string, slugs: string[]) => { for (const s of slugs) photoBySlug[s] = GC + img; };
 
 // Diamond, black nitrile, short cuff
-assign("gc-diamond-black.jpg", ["diamond-6-nitrile", "diamond-8-nitrile", "diamond-8-nitrile-2", "diamond-8-nitrile-3", "diamond-8-nitrile-4"]);
+assign("gc-diamond-black.png", ["diamond-6-nitrile", "diamond-8-nitrile", "diamond-8-nitrile-2", "diamond-8-nitrile-3", "diamond-8-nitrile-4"]);
 // Diamond, blue nitrile, long cuff / household
 assign("gc-diamond-blue-long.jpg", ["diamond-6-nitrile-long", "diamond-8-nitrile-long", "diamond-9-nitrile-long", "diamond-8-5-nitrile-long", "diamond-5-nitrile-long"]);
 // Micro Diamond, black short cuff; royal blue long/short cuff
@@ -145,6 +145,21 @@ export function gloveBadges(g: Glove): { label: string; kind: string }[] {
   if (g.longCuff) out.push({ label: "Long Cuff", kind: "long" });
   if ((g.thickness ?? 0) >= 8) out.push({ label: "Heavy Duty", kind: "heavy" });
   return out;
+}
+
+// Signature glow colour rendered behind the (background-removed) glove photo on
+// catalogue cards. Keyed by texture, with bio gloves always green (eco signal).
+export function gloveGlow(g: Glove): string {
+  if (g.bio) return "#8CC63F";                 // green — biodegradable
+  switch (g.texture) {
+    case "Micro Diamond":  return "#E8B23A";   // gold — flagship patented grip
+    case "Diamond":        return "#8CC63F";   // brand green — the invented original
+    case "Zig":            return "#3B82F6";   // blue — patented dry grip
+    case "Tyre Tread":     return "#E8720C";   // orange — Gripper
+    case "Finger Textured":return "#7A4FBF";   // violet
+    case "Fully Textured": return "#6E8CA6";   // soft steel
+    default:               return "#9AA0A0";   // subtle grey — smooth
+  }
 }
 
 // Default catalogue ordering: lead with our flagship grip technologies (patented,
