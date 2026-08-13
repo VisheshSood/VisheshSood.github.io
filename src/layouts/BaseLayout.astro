@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import PromoPopup from "../components/PromoPopup.astro";
 
 interface Props {
   title?: string;
@@ -103,6 +104,7 @@ const websiteSchema = {
   </head>
   <body>
     <slot />
+    <PromoPopup />
 
     <!-- tawk.to live chat (loads on every page). Property/widget: Innovative Gloves. -->
     <script is:inline>
