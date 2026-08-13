@@ -86,7 +86,7 @@ const assign = (img: string, slugs: string[]) => { for (const s of slugs) photoB
 // Diamond, black nitrile, short cuff
 assign("gc-diamond-black.png", ["diamond-6-nitrile", "diamond-8-nitrile", "diamond-8-nitrile-2", "diamond-8-nitrile-3", "diamond-8-nitrile-4"]);
 // Diamond, blue nitrile, long cuff / household
-assign("gc-diamond-blue-long.jpg", ["diamond-6-nitrile-long", "diamond-8-nitrile-long", "diamond-9-nitrile-long", "diamond-8-5-nitrile-long", "diamond-5-nitrile-long"]);
+assign("gc-diamond-blue-long.png", ["diamond-6-nitrile-long", "diamond-8-nitrile-long", "diamond-9-nitrile-long", "diamond-8-5-nitrile-long", "diamond-5-nitrile-long"]);
 // Micro Diamond, black short cuff; royal blue long/short cuff
 assign("gc-microdiamond-black.png", ["micro-diamond-6-nitrile", "micro-diamond-8-nitrile"]);
 assign("gc-microdiamond-blue-long.png", ["micro-diamond-9-nitrile-long", "micro-diamond-6-nitrile-long"]);
@@ -102,10 +102,10 @@ assign("gc-zig-latex-blue.png", ["zig-14-latex-long"]);
 assign("gc-microdiamond-latex-blue.png", ["micro-diamond-14-latex-long"]);
 assign("gc-silverline-orange.png", ["diamond-17-latex-long"]);
 // Latex, black / white short cuff
-assign("gc-latex-black.jpg", ["smooth-8-latex", "smooth-8-latex-2", "smooth-8-latex-3", "textured-8-latex"]);
+assign("gc-latex-black.png", ["smooth-8-latex", "smooth-8-latex-2", "smooth-8-latex-3", "textured-8-latex"]);
 assign("gc-latex-white.png", ["smooth-latex", "smooth-latex-2", "smooth-latex-3", "textured-latex", "textured-latex-2", "textured-latex-3", "textured-latex-4", "textured-latex-5", "textured-latex-6", "textured-7-latex", "textured-8-latex-2", "textured-9-latex", "textured-latex-long", "textured-latex-long-2"]);
 // Latex, high-risk blue, long cuff
-assign("gc-latex-blue-long.jpg", ["textured-10-latex-long", "textured-14-latex-long", "textured-14-latex-long-2"]);
+assign("gc-latex-blue-long.png", ["textured-10-latex-long", "textured-14-latex-long", "textured-14-latex-long-2"]);
 // Finger textured, black (main family) / violet
 assign("gc-finger-black.jpg", ["finger-textured-3-nitrile"]);
 assign("gc-finger-violet.png", ["finger-textured-3-nitrile-2", "finger-textured-4-5-nitrile"]);
@@ -114,13 +114,13 @@ assign("gc-finger-blue-long.jpg", ["finger-textured-4-nitrile-long"]);
 // (short/long cuff, disposable/exam, bio, same glove, just cuff/grade differs).
 for (const g of raw as Glove[]) {
   if (/Nitrile/.test(g.material) && g.texture === "Fully Textured" && g.colours.includes("Blue")) {
-    photoBySlug[g.slug] = GC + "gc-fully-blue.jpg";
+    photoBySlug[g.slug] = GC + "gc-fully-blue.png";
   }
 }
 // The biodegradable 4 mil has its own dedicated photo (overrides the generic blue above).
 assign("gc-bio-blue.png", ["fully-textured-4-bio-nitrile"]);
 // The 6 mil fully-textured families (short + long) use a dedicated black photo.
-assign("gc-fully-black.jpg", ["fully-textured-6-nitrile", "fully-textured-6-nitrile-long"]);
+assign("gc-fully-black.png", ["fully-textured-6-nitrile", "fully-textured-6-nitrile-long"]);
 
 // Display name convention: [thickness] [texture] [material] [cuff].
 // e.g. "9 mil Micro Diamond Nitrile Long Cuff". Generated from fields so it stays
