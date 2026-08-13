@@ -101,6 +101,8 @@ assign("gc-zig-latex-blue.png", ["zig-14-latex-long"]);
 // Micro Diamond latex long cuff (blue); orange silverline household (diamond latex)
 assign("gc-microdiamond-latex-blue.png", ["micro-diamond-14-latex-long"]);
 assign("gc-silverline-orange.png", ["diamond-17-latex-long"]);
+// Diamond latex long, 14 mil green household (HHDT green)
+assign("gc-diamond-green-latex-long.png", ["diamond-14-latex-long"]);
 // Latex, black / white short cuff
 assign("gc-latex-black.png", ["smooth-8-latex", "smooth-8-latex-2", "smooth-8-latex-3", "textured-8-latex"]);
 assign("gc-latex-white.png", ["smooth-latex", "smooth-latex-2", "smooth-latex-3", "textured-latex", "textured-latex-2", "textured-latex-3", "textured-latex-4", "textured-latex-5", "textured-latex-6", "textured-7-latex", "textured-8-latex-2", "textured-9-latex", "textured-latex-long", "textured-latex-long-2"]);
@@ -199,7 +201,7 @@ const colourPhotos: Record<string, string> = {
   "Diamond|long|Latex|Orange": "colours/c-dia-l-l-orange.png",
   "Diamond|long|Nitrile|Dark Blue": "colours/c-dia-l-n-darkblue.png",
   "Diamond|long|Nitrile|Yellow": "colours/c-dia-l-n-yellow.png",
-  "Diamond|long|Nitrile|Green": "colours/c-dia-l-n-green.png",
+  "Diamond|long|Latex|Green": "colours/c-dia-l-l-green.png",
   "Smooth|short|Latex|Black": "colours/c-sm-s-l-black.png",
   "Smooth|long|Latex|Black": "colours/c-sm-l-l-black.png",
 };
@@ -211,6 +213,7 @@ const colourPhotosB: Record<string, string> = {
   "Zig|long|Latex|Blue and White": "colours/c-zig-l-l-blueandwhite-b.png",
   "Diamond|long|Latex|Blue": "colours/c-dia-l-l-blue-b.png",
   "Diamond|long|Latex|Orange": "colours/c-dia-l-l-orange-b.png",
+  "Diamond|long|Latex|Green": "colours/c-dia-l-l-green-b.png",
 };
 
 // The colour-specific photos available for a glove, in its listed colour order,

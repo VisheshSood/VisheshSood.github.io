@@ -9,6 +9,13 @@ const SITE = 'https://www.innovativegloves.net';
 
 export default defineConfig({
   site: SITE,
+  // Allow the local reverse-proxy hostnames (Caddy -> localhost:4321) through
+  // Vite's dev-server host check, so http://website/ and http://website.local/ work.
+  vite: {
+    server: {
+      allowedHosts: ['website', 'website.local'],
+    },
+  },
   integrations: [
     sitemap({
       // lastmod = build time. Every deploy rebuilds, so this honestly signals the
