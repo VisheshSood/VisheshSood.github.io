@@ -107,9 +107,9 @@ assign("gc-latex-white.png", ["smooth-latex", "smooth-latex-2", "smooth-latex-3"
 // Latex, high-risk blue, long cuff
 assign("gc-latex-blue-long.png", ["textured-10-latex-long", "textured-14-latex-long", "textured-14-latex-long-2"]);
 // Finger textured, black (main family) / violet
-assign("gc-finger-black.jpg", ["finger-textured-3-nitrile"]);
+assign("gc-finger-black.png", ["finger-textured-3-nitrile"]);
 assign("gc-finger-violet.png", ["finger-textured-3-nitrile-2", "finger-textured-4-5-nitrile"]);
-assign("gc-finger-blue-long.jpg", ["finger-textured-4-nitrile-long"]);
+assign("gc-finger-blue-long.png", ["finger-textured-4-nitrile-long"]);
 // Fully textured, blue photo covers EVERY blue fully-textured nitrile family
 // (short/long cuff, disposable/exam, bio, same glove, just cuff/grade differs).
 for (const g of raw as Glove[]) {
