@@ -162,6 +162,61 @@ export function gloveGlow(g: Glove): string {
   }
 }
 
+// Per-colour glove photos for the product-page colour carousel, keyed by
+// "texture|cuff|material|colour". Bio nitrile resolves against the Nitrile key.
+const colourPhotos: Record<string, string> = {
+  "Diamond|short|Nitrile|Black": "colours/c-dia-s-n-black.png",
+  "Diamond|short|Nitrile|Blue": "colours/c-dia-s-n-blue.png",
+  "Diamond|short|Nitrile|Green": "colours/c-dia-s-n-green.png",
+  "Diamond|short|Nitrile|Military Green": "colours/c-dia-s-n-militarygreen.png",
+  "Diamond|short|Nitrile|Orange": "colours/c-dia-s-n-orange.png",
+  "Diamond|short|Nitrile|Red": "colours/c-dia-s-n-red.png",
+  "Diamond|short|Nitrile|Yellow": "colours/c-dia-s-n-yellow.png",
+  "Micro Diamond|short|Nitrile|Black": "colours/c-mdia-s-n-black.png",
+  "Micro Diamond|short|Nitrile|Green": "colours/c-mdia-s-n-green.png",
+  "Micro Diamond|short|Nitrile|Red": "colours/c-mdia-s-n-red.png",
+  "Micro Diamond|long|Nitrile|Royal Blue": "colours/c-mdia-l-n-royalblue.png",
+  "Tyre Tread|short|Nitrile|Black": "colours/c-tyre-s-n-black.png",
+  "Tyre Tread|short|Nitrile|Blue": "colours/c-tyre-s-n-blue.png",
+  "Tyre Tread|short|Nitrile|Orange": "colours/c-tyre-s-n-orange.png",
+  "Tyre Tread|short|Nitrile|Red": "colours/c-tyre-s-n-red.png",
+  "Zig|short|Nitrile|Arctic Blue": "colours/c-zig-s-n-arcticblue.png",
+  "Zig|short|Nitrile|Black": "colours/c-zig-s-n-black.png",
+  "Zig|short|Nitrile|Dual Tone (Black and Green)": "colours/c-zig-s-n-dualtoneblackandgreen.png",
+  "Zig|short|Nitrile|Green": "colours/c-zig-s-n-green.png",
+  "Zig|long|Latex|Blue and White": "colours/c-zig-l-l-blueandwhite.png",
+  "Fully Textured|short|Nitrile|Black": "colours/c-ft-s-n-black.png",
+  "Fully Textured|short|Nitrile|Blue": "colours/c-ft-s-n-blue.png",
+  "Fully Textured|short|Nitrile|Light Blue": "colours/c-ft-s-n-lightblue.png",
+  "Fully Textured|short|Nitrile|Majestic Blue": "colours/c-ft-s-n-majesticblue.png",
+  "Fully Textured|long|Nitrile|Blue": "colours/c-ft-l-n-blue.png",
+  "Fully Textured|short|Latex|White": "colours/c-ft-s-l-white.png",
+  "Fully Textured|long|Latex|Blue": "colours/c-ft-l-l-blue.png",
+  "Fully Textured|long|Latex|White": "colours/c-ft-l-l-white.png",
+  "Finger Textured|short|Nitrile|Reflex Green": "colours/c-fing-s-n-reflexgreen.png",
+  "Finger Textured|short|Nitrile|Violet": "colours/c-fing-s-n-violet.png",
+  "Diamond|long|Latex|Blue": "colours/c-dia-l-l-blue.png",
+  "Diamond|long|Latex|Orange": "colours/c-dia-l-l-orange.png",
+  "Diamond|long|Nitrile|Dark Blue": "colours/c-dia-l-n-darkblue.png",
+  "Diamond|long|Nitrile|Yellow": "colours/c-dia-l-n-yellow.png",
+  "Diamond|long|Nitrile|Green": "colours/c-dia-l-n-green.png",
+  "Smooth|short|Latex|Black": "colours/c-sm-s-l-black.png",
+  "Smooth|long|Latex|Black": "colours/c-sm-l-l-black.png",
+};
+
+// The colour-specific photos available for a glove, in its listed colour order.
+// Used to build the product-page colour carousel; empty/one-item means no carousel.
+export function gloveColourPhotos(g: Glove): { colour: string; img: string }[] {
+  const cuff = g.longCuff ? "long" : "short";
+  const mat = /Latex/.test(g.material) ? "Latex" : "Nitrile";
+  const out: { colour: string; img: string }[] = [];
+  for (const c of g.colours) {
+    const file = colourPhotos[`${g.texture}|${cuff}|${mat}|${c}`];
+    if (file) out.push({ colour: c, img: GC + file });
+  }
+  return out;
+}
+
 // Default catalogue ordering: lead with our flagship grip technologies (patented,
 // then the invented Diamond), then textured, and everyday smooth gloves last, so the
 // range never opens on commodity thin gloves.

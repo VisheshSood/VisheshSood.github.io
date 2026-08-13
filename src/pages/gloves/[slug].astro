@@ -1,7 +1,7 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
 import GloveVisual from "../../components/GloveVisual.astro";
-import { catalogue, colourSwatch, texTechSlug } from "../../data/catalogue";
+import { catalogue, colourSwatch, texTechSlug, gloveGlow, gloveColourPhotos } from "../../data/catalogue";
 import { chemFor } from "../../data/chem-resistance";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
@@ -9,6 +9,10 @@ export function getStaticPaths() {
   return catalogue.map((g) => ({ params: { slug: g.slug }, props: { glove: g } }));
 }
 const { glove } = Astro.props;
+// Colour-specific photos → a carousel when the glove has more than one.
+const colourShots = gloveColourPhotos(glove);
+const hasCarousel = colourShots.length > 1;
+const glow = gloveGlow(glove);
 const related = catalogue.filter((g) => g.texture === glove.texture && g.slug !== glove.slug).slice(0, 4);
 const techSlug = texTechSlug[glove.texture];
 // Diamond was invented (not patented), we pioneered it. Others with a tech page are patented.
@@ -70,7 +74,30 @@ const productSchema = {
   <section class="section p-hero">
     <div class="container p-grid">
       <div class="p-visual">
-        {glove.img ? (
+        {hasCarousel ? (
+          <div class="p-carousel" data-carousel>
+            <div class="p-car-stage">
+              {colourShots.map((cp, i) => (
+                <button
+                  type="button"
+                  class:list={["p-car-slide", "p-zoom", { "is-active": i === 0 }]}
+                  style={`--photo:url('${cp.img}'); --glow:${glow}`}
+                  data-slide={i}
+                  data-zoom-src={cp.img}
+                  aria-label={`${glove.name} in ${cp.colour} — click to enlarge`}
+                  hidden={i !== 0 ? true : undefined}
+                ></button>
+              ))}
+              <span class="p-zoom-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8.5v5M8.5 11h5"/></svg></span>
+              <span class="p-car-name" data-car-name>{colourShots[0].colour}</span>
+            </div>
+            <div class="p-car-swatches" role="tablist" aria-label="Choose colour">
+              {colourShots.map((cp, i) => (
+                <button type="button" class:list={["p-car-swatch", { "is-active": i === 0 }]} data-go={i} style={`background:${colourSwatch(cp.colour)}`} title={cp.colour} aria-label={cp.colour} role="tab" aria-selected={i === 0 ? "true" : "false"}></button>
+              ))}
+            </div>
+          </div>
+        ) : glove.img ? (
           <button type="button" class="p-zoom" data-zoom-src={glove.img} aria-label={`Enlarge image of ${glove.name} to see the texture`}>
             <GloveVisual glove={glove} ratio="1 / 1" />
             <span class="p-zoom-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8.5v5M8.5 11h5"/></svg></span>
@@ -239,6 +266,19 @@ const productSchema = {
     });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !lb.hasAttribute("hidden")) close(); });
   }
+
+  // Colour carousel: clicking a swatch shows that colour's photo.
+  document.querySelectorAll("[data-carousel]").forEach((root) => {
+    const slides = [...root.querySelectorAll<HTMLElement>("[data-slide]")];
+    const swatches = [...root.querySelectorAll<HTMLElement>("[data-go]")];
+    const nameEl = root.querySelector("[data-car-name]");
+    const go = (i: number) => {
+      slides.forEach((s, k) => { const on = k === i; s.classList.toggle("is-active", on); s.toggleAttribute("hidden", !on); });
+      swatches.forEach((s, k) => { const on = k === i; s.classList.toggle("is-active", on); s.setAttribute("aria-selected", on ? "true" : "false"); });
+      if (nameEl) nameEl.textContent = swatches[i].getAttribute("title") || "";
+    };
+    swatches.forEach((s, i) => s.addEventListener("click", () => go(i)));
+  });
 </script>
 
 <style>
@@ -251,6 +291,24 @@ const productSchema = {
   .p-zoom-ic svg { width: 19px; height: 19px; }
   .p-zoom:hover .p-zoom-ic { opacity: 1; transform: scale(1.06); }
   .p-zoom:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+  /* Colour carousel on the product page */
+  .p-car-stage { position: relative; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .p-car-stage .p-car-slide {
+    display: block; width: 100%; aspect-ratio: 1 / 1; padding: 0; border: 0; cursor: zoom-in;
+    background-color: #fff;
+    background-image: var(--photo), radial-gradient(circle at 50% 47%, color-mix(in srgb, var(--glow, #9AA0A0) 42%, transparent), transparent 60%);
+    background-size: contain, 120% 120%;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+  }
+  .p-car-stage .p-car-slide[hidden] { display: none; }
+  .p-car-name { position: absolute; left: 12px; bottom: 12px; z-index: 2; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink); background: rgba(255,255,255,0.86); padding: 4px 11px; border-radius: 999px; pointer-events: none; }
+  .p-car-swatches { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
+  .p-car-swatch { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.18); cursor: pointer; padding: 0; outline: 2px solid transparent; outline-offset: 2px; transition: outline-color 0.15s ease, transform 0.15s ease; }
+  .p-car-swatch:hover { transform: scale(1.1); }
+  .p-car-swatch.is-active { outline-color: var(--green-dark); }
+  .p-car-swatch:focus-visible { outline-color: var(--green); }
 
   /* Lightbox overlay */
   .lightbox { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 4vmin; background: rgba(8,10,7,0.92); cursor: zoom-out; }
