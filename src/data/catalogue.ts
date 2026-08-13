@@ -204,15 +204,25 @@ const colourPhotos: Record<string, string> = {
   "Smooth|long|Latex|Black": "colours/c-sm-l-l-black.png",
 };
 
-// The colour-specific photos available for a glove, in its listed colour order.
-// Used to build the product-page colour carousel; empty/one-item means no carousel.
+// Second-angle (B) photos for gloves shot from two views; appended after the
+// primary so both angles appear in the product-page gallery.
+const colourPhotosB: Record<string, string> = {
+  "Zig|short|Nitrile|Dual Tone (Black and Green)": "colours/c-zig-s-n-dualtoneblackandgreen-b.png",
+  "Zig|long|Latex|Blue and White": "colours/c-zig-l-l-blueandwhite-b.png",
+  "Diamond|long|Latex|Blue": "colours/c-dia-l-l-blue-b.png",
+  "Diamond|long|Latex|Orange": "colours/c-dia-l-l-orange-b.png",
+};
+
+// The colour-specific photos available for a glove, in its listed colour order,
+// including a second angle where we have one. Builds the product-page gallery.
 export function gloveColourPhotos(g: Glove): { colour: string; img: string }[] {
   const cuff = g.longCuff ? "long" : "short";
   const mat = /Latex/.test(g.material) ? "Latex" : "Nitrile";
   const out: { colour: string; img: string }[] = [];
   for (const c of g.colours) {
-    const file = colourPhotos[`${g.texture}|${cuff}|${mat}|${c}`];
-    if (file) out.push({ colour: c, img: GC + file });
+    const key = `${g.texture}|${cuff}|${mat}|${c}`;
+    if (colourPhotos[key]) out.push({ colour: c, img: GC + colourPhotos[key] });
+    if (colourPhotosB[key]) out.push({ colour: c, img: GC + colourPhotosB[key] });
   }
   return out;
 }
