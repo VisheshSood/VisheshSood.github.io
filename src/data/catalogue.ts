@@ -100,7 +100,7 @@ assign("gc-zig-dualtone.png", ["zig-8-nitrile"]);
 assign("gc-zig-latex-blue.png", ["zig-14-latex-long"]);
 // Micro Diamond latex long cuff (blue); orange silverline household (diamond latex)
 assign("gc-microdiamond-latex-blue.png", ["micro-diamond-14-latex-long"]);
-assign("gc-silverline-orange.png", ["diamond-17-latex-long"]);
+assign("colours/c-dia-l-l-blue-b.png", ["diamond-17-latex-long"]);
 // Diamond latex long, 14 mil green household (HHDT green)
 assign("gc-diamond-green-latex-long.png", ["diamond-14-latex-long"]);
 // Latex, black / white short cuff
