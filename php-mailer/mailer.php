@@ -34,9 +34,15 @@ function ig_send_mail(array $opts): bool
     try {
         $mail->isSMTP();
         $mail->Host       = $config['smtp_host'];
-        $mail->SMTPAuth   = true;
-        $mail->Username   = $config['smtp_user'];
-        $mail->Password   = $config['smtp_pass'];
+        // No password set => IP-authenticated relay (e.g. Google Workspace SMTP
+        // relay with this server's IP allow-listed). Otherwise authenticate.
+        if (!empty($config['smtp_pass'])) {
+            $mail->SMTPAuth = true;
+            $mail->Username = $config['smtp_user'];
+            $mail->Password = $config['smtp_pass'];
+        } else {
+            $mail->SMTPAuth = false;
+        }
         $mail->SMTPSecure = $config['smtp_secure']; // 'tls' (587) or 'ssl' (465)
         $mail->Port       = (int)$config['smtp_port'];
         $mail->CharSet    = 'UTF-8';
