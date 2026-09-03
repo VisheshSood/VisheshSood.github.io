@@ -1,6 +1,6 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
-import { technologies, gripTest } from "../../data/site";
+import { technologies, gripTest, bioTest } from "../../data/site";
 import { catalogue } from "../../data/catalogue";
 import GloveVisual from "../../components/GloveVisual.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
@@ -72,6 +72,11 @@ const gripAll = technologies
   .sort((a, b) => b.wet - a.wet);
 const trackMax = Math.max(...gripAll.map((g) => g.wet)) + 25; // headroom past the top bar
 const pct = (v: number) => ((v / trackMax) * 100).toFixed(1);
+
+// Biodegradation comparison (biodegradable page only). Scaled to the treated
+// value with a little headroom so the standard-nitrile sliver stays honest.
+const bioMax = bioTest.bmpTreated + 2.5;
+const bioPct = (v: number) => ((v / bioMax) * 100).toFixed(1);
 ---
 
 <PageLayout title={isBio ? "Biodegradable Nitrile Gloves | Innovative Gloves" : `${tech.name} Nitrile Gloves | ${isInvented ? "Invented by Innovative" : "Patented Grip Technology"} | Innovative Gloves`} description={`${tech.name}: ${tech.tagline} ${tech.intro}`}>
@@ -197,6 +202,55 @@ const pct = (v: number) => ((v / trackMax) * 100).toFixed(1);
         <p class="gp-source">
           Source: {gripTest.lab}, {gripTest.standard}, {gripTest.date}. Improvement measured against a bare-hand
           control (dry {gripTest.controlDry} N·m, wet {gripTest.controlWet} N·m) on medium nitrile gloves.
+        </p>
+      </div>
+    </section>
+  )}
+
+  <!-- BIODEGRADATION (independent lab data — biodegradable line only) -->
+  {isBio && (
+    <section class="section th-grip">
+      <div class="container">
+        <div class="gp-head">
+          <p class="eyebrow">Proven to Break Down</p>
+          <h2>Measurably Faster<span class="dot">.</span></h2>
+          <p class="muted gp-lead">
+            Tested by <strong>{bioTest.lab}</strong> to {bioTest.standards} under high-solids anaerobic (landfill)
+            conditions. It biodegrades far faster than standard nitrile — a measured change in the material, not
+            a compostability claim.
+          </p>
+        </div>
+
+        <div class="gp-stats">
+          <div class="gp-stat gp-stat--wet">
+            <span class="gp-stat-num">{bioTest.bmpTreated}<span class="gp-stat-pct">%</span></span>
+            <span class="gp-stat-lbl">Biodegraded in {bioTest.bmpDays} days &mdash; vs {bioTest.bmpControl}% standard</span>
+          </div>
+          <div class="gp-stat gp-stat--wet">
+            <span class="gp-stat-num">{bioTest.d5511Treated}<span class="gp-stat-pct">%</span></span>
+            <span class="gp-stat-lbl">Biodegraded in {bioTest.d5511Days} days (ASTM D5511, pass)</span>
+          </div>
+        </div>
+
+        <div class="gp-chart" role="img" aria-label={`Biodegradation at ${bioTest.bmpDays} days: standard nitrile ${bioTest.bmpControl}%, biodegradable nitrile ${bioTest.bmpTreated}%.`}>
+          <p class="bio-cap">Biodegradation at {bioTest.bmpDays} days &mdash; same test, side by side</p>
+          <div class="gp-row">
+            <div class="gp-name">Standard nitrile</div>
+            <div class="gp-bars">
+              <div class="gp-track"><span class="gp-fill gp-fill--dry" style={`--w:${bioPct(bioTest.bmpControl)}%`}><span class="gp-val">{bioTest.bmpControl}%</span></span></div>
+            </div>
+          </div>
+          <div class="gp-row gp-row--current">
+            <div class="gp-name">Our biodegradable nitrile<span class="gp-here">Nitrihand · 4 mil</span></div>
+            <div class="gp-bars">
+              <div class="gp-track"><span class="gp-fill gp-fill--wet" style={`--w:${bioPct(bioTest.bmpTreated)}%`}><span class="gp-val">{bioTest.bmpTreated}%</span></span></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="gp-source">
+          Source: {bioTest.lab}, {bioTest.standards}, high-solids anaerobic digestion. Certified under the Intertek
+          {" "}{bioTest.greenLeaf}. Biodegradation figures apply to the biodegradable nitrile line, not the full range.
         </p>
       </div>
     </section>
@@ -377,6 +431,7 @@ const pct = (v: number) => ((v / trackMax) * 100).toFixed(1);
   .gp-chart.gp-anim.gp-in .gp-fill { width: var(--w); }
 
   .gp-source { margin-top: 16px; font-size: 0.78rem; color: var(--text-muted); max-width: 80ch; }
+  .bio-cap { margin: 0 0 16px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--text-muted); }
 
   /* Final CTA */
   .th-final { background: radial-gradient(120% 120% at 50% 0%, rgba(140,198,63,0.12), rgba(140,198,63,0) 60%), var(--bg); border-top: 1px solid var(--border); text-align: center; padding-block: clamp(56px, 8vw, 100px); }

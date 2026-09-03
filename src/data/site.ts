@@ -144,6 +144,24 @@ export const gripTest = {
   controlWet: 3.6,
 } as const;
 
+// Independent biodegradation data for the biodegradable nitrile line only
+// (Nitrihand / product 2713). Source: Intertek, ASTM D5511 & Bio-Methane
+// Potential (BMP) testing under high-solids anaerobic (landfill) conditions,
+// plus Intertek Green Leaf Mark certification (GLF-08-APAC-25-2018).
+// Figures are % of the material biodegraded — a measurable increase versus
+// standard nitrile, NOT full composting. Applies to the bio line, not the
+// whole range.
+export const bioTest = {
+  lab: "Intertek",
+  standards: "ASTM D5511 · EN ISO 15985",
+  greenLeaf: "Green Leaf Mark (GLF-08-APAC-25-2018)",
+  bmpDays: 81,
+  bmpControl: 0.8, // standard nitrile, 81-day BMP
+  bmpTreated: 12.2, // biodegradable nitrile, 81-day BMP
+  d5511Days: 377,
+  d5511Treated: 32.4, // biodegradable nitrile, 377-day ASTM D5511 (pass)
+} as const;
+
 export const technologies: Technology[] = [
   {
     slug: "micro-diamond",
