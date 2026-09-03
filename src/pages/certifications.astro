@@ -2,6 +2,18 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import PageBanner from "../components/PageBanner.astro";
 
+// Regulated markets we're approved to sell into — the specific mark/licence and
+// the governing regulation, from our certification records. Framed for buyers
+// asking "can I import this?".
+const markets = [
+  { flag: "\u{1F1FA}\u{1F1F8}", region: "United States", mark: "FDA 510(k) cleared", note: "Medical examination use, plus food-contact compliance (21 CFR 177.2600)." },
+  { flag: "\u{1F1EA}\u{1F1FA}", region: "European Union", mark: "CE marked · PPE Cat III & MDR Class I", note: "EU Type-Examination certificates (Notified Bodies 2777 & 0248); EN 455, EN ISO 374." },
+  { flag: "\u{1F1EC}\u{1F1E7}", region: "United Kingdom", mark: "UKCA marked", note: "UK Type-Examination (Approved Body 0321); EN ISO 374, EN ISO 21420." },
+  { flag: "\u{1F1E8}\u{1F1E6}", region: "Canada", mark: "Health Canada licensed", note: "Medical Device Licence under the Medical Devices Regulations, Section 43." },
+  { flag: "\u{1F1E6}\u{1F1FA}", region: "Australia & New Zealand", mark: "AS/NZS 4011:2014 tested", note: "Meets the single-use medical examination glove standard for the ANZ market." },
+  { flag: "\u{1F1F9}\u{1F1ED}", region: "Thailand", mark: "Thai FDA licensed", note: "Licensed for medical-device manufacture and export from our home market." },
+];
+
 // Accreditations & market approvals (logos we hold)
 const accreditations = [
   { name: "SMETA 4-Pillar", img: "/images/certs/cert-smeta.png", desc: "Sedex ethical audit, labour, health & safety, environment and business ethics." },
@@ -55,6 +67,29 @@ const standardGroups = [
 >
   <PageBanner eyebrow="Certifications & Compliance" title={`Certified for<br>Global Markets<span class="dot">.</span>`}
     intro="Everything distributors and procurement teams need to specify and import our gloves with confidence, the accreditations we hold and the standards every glove is tested against." />
+
+  <!-- MARKET COVERAGE -->
+  <section class="section markets">
+    <div class="container">
+      <header class="sec-head">
+        <p class="eyebrow">Global Market Coverage</p>
+        <h2>Cleared to Sell, Worldwide<span class="dot">.</span></h2>
+        <p class="muted">Our gloves carry the marks and licences to enter the world's major regulated markets. If you're importing, here's where we're already approved.</p>
+      </header>
+      <ul class="mk-grid">
+        {markets.map((m) => (
+          <li class="mk-card">
+            <span class="mk-flag" aria-hidden="true">{m.flag}</span>
+            <div class="mk-body">
+              <h3>{m.region}</h3>
+              <p class="mk-mark">{m.mark}</p>
+              <p class="mk-note">{m.note}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
   <!-- ACCREDITATIONS -->
   <section class="section acc">
@@ -138,6 +173,15 @@ const standardGroups = [
 <style>
   .sec-head { max-width: 680px; margin-bottom: clamp(26px, 4vw, 42px); }
   .sec-head h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin: 10px 0 12px; }
+
+  .markets { background: var(--bg-2); }
+  .mk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .mk-card { display: flex; gap: 16px; padding: 22px 22px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+  .mk-card:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(0,0,0,0.08); border-color: var(--border-strong); }
+  .mk-flag { flex: none; font-size: 2rem; line-height: 1.1; filter: saturate(1.05); }
+  .mk-body h3 { font-size: 1.05rem; margin-bottom: 6px; }
+  .mk-mark { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; color: var(--green-dark); margin-bottom: 8px; }
+  .mk-note { font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0; }
 
   .acc { background: var(--bg); }
   .acc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
