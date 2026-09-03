@@ -2,6 +2,7 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import GloveVisual from "../../components/GloveVisual.astro";
 import { catalogue, colourSwatch, texTechSlug, gloveGlow, gloveColourPhotos } from "../../data/catalogue";
+import { technologies, gripTest } from "../../data/site";
 import { chemFor } from "../../data/chem-resistance";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
@@ -52,6 +53,21 @@ if (glove.bio) certGroups.push({ label: "Biodegradability", items: ["ASTM D5511"
 
 const chem = chemFor(glove);
 const fmtDeg = (n: number | string) => (typeof n === "number" ? (n > 0 ? "+" : "") + n.toFixed(1) + "%" : n);
+
+// Measured grip for this glove's texture (independent ASTM F2961 data), if any.
+const gripTech = techSlug ? technologies.find((t) => t.slug === techSlug) : undefined;
+const grip = gripTech?.grip;
+
+// At-a-glance protection badges, derived honestly from this glove's own data:
+// viral barrier only when the glove actually passed EN ISO 374-5 for viruses,
+// food-safe for nitrile, medical-grade for examination gloves.
+const isNitrile = /nitrile/i.test(glove.material);
+const hasViral = !!chem?.micro?.some((m) => /virus/i.test(m.label) && m.result === "Pass");
+const badges = [
+  hasViral && { label: "Viral Barrier", sub: "EN ISO 374-5" },
+  isNitrile && { label: "Food Safe", sub: "EU 10/2011 · FDA" },
+  /examination/i.test(glove.grade) && { label: "Medical Grade", sub: "EN 455" },
+].filter(Boolean) as { label: string; sub: string }[];
 
 // Product structured data for rich results in Google search.
 const prodImage = new URL(glove.img || "/images/sus-aerial.jpg", Astro.site).href;
@@ -127,9 +143,34 @@ const productSchema = {
         <h1>{glove.name}</h1>
         <p class="p-full">{glove.fullName}</p>
 
+        {badges.length > 0 && (
+          <ul class="p-badges">
+            {badges.map((b) => (
+              <li class="p-badge">
+                <span class="p-badge-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6"/></svg></span>
+                <span class="p-badge-txt"><strong>{b.label}</strong><span class="p-badge-sub">{b.sub}</span></span>
+              </li>
+            ))}
+          </ul>
+        )}
+
         <dl class="spec-table">
           {specs.map(([k, v]) => (<div class="spec-row"><dt>{k}</dt><dd>{v}</dd></div>))}
         </dl>
+
+        {grip && (
+          <a class="p-grip" href={`/technologies/${techSlug}`}>
+            <span class="p-grip-head">
+              <span class="p-grip-eyebrow">Measured Grip</span>
+              <span class="p-grip-std">{gripTest.standard}</span>
+            </span>
+            <span class="p-grip-stats">
+              <span class="p-grip-stat"><b>+{grip.dry}%</b><span>dry grip</span></span>
+              <span class="p-grip-stat p-grip-stat--wet"><b>+{grip.wet}%</b><span>wet grip</span></span>
+            </span>
+            <span class="p-grip-foot">vs bare hand, independently tested <span class="p-grip-link">See full data &rarr;</span></span>
+          </a>
+        )}
 
         <div class="p-opt">
           <span class="p-opt-label">Colours ({glove.colours.length})</span>
@@ -147,7 +188,7 @@ const productSchema = {
           <a href="/request-quote" class="btn btn--ghost">Request a Quote</a>
         </div>
 
-        {techSlug && <p class="p-tech">Grip technology: <a href={`/technologies/${techSlug}`}>{glove.texture} &rarr;</a></p>}
+        {techSlug && !grip && <p class="p-tech">Grip technology: <a href={`/technologies/${techSlug}`}>{glove.texture} &rarr;</a></p>}
         {glove.patent && <p class="p-patent">&#9670; {glove.patent.replace(/[&\s]+$/, "")}</p>}
       </div>
     </div>
@@ -320,6 +361,29 @@ const productSchema = {
   .p-info .eyebrow { margin-top: 14px; }
   .p-info h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin: 8px 0 8px; }
   .p-full { color: var(--text-muted); font-size: 1rem; margin-bottom: 24px; }
+
+  /* At-a-glance protection badges */
+  .p-badges { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; padding: 0; }
+  .p-badge { display: inline-flex; align-items: center; gap: 9px; padding: 8px 14px 8px 10px; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--surface); }
+  .p-badge-ic { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: rgba(140,198,63,0.18); color: var(--green-dark); }
+  .p-badge-ic svg { width: 12px; height: 12px; }
+  .p-badge-txt { display: flex; flex-direction: column; line-height: 1.15; }
+  .p-badge-txt strong { font-size: 0.82rem; font-weight: 700; color: var(--ink); }
+  .p-badge-sub { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--text-muted); margin-top: 1px; }
+
+  /* Measured-grip highlight panel */
+  .p-grip { display: block; margin-bottom: 24px; padding: 18px 20px; border: 1px solid rgba(140,198,63,0.45); border-radius: var(--radius); background: linear-gradient(180deg, rgba(140,198,63,0.1), rgba(140,198,63,0.02)); transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+  .p-grip:hover { border-color: var(--green); box-shadow: 0 10px 24px rgba(140,198,63,0.16); }
+  .p-grip-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  .p-grip-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-dark); }
+  .p-grip-std { font-size: 0.68rem; font-weight: 600; color: var(--text-muted); }
+  .p-grip-stats { display: flex; gap: 28px; }
+  .p-grip-stat { display: flex; flex-direction: column; }
+  .p-grip-stat b { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.5rem, 4vw, 1.9rem); line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .p-grip-stat--wet b { color: var(--green-dark); }
+  .p-grip-stat span { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); margin-top: 5px; }
+  .p-grip-foot { display: block; margin-top: 14px; font-size: 0.76rem; color: var(--text-muted); }
+  .p-grip-link { font-weight: 700; color: var(--green-dark); white-space: nowrap; }
 
   .spec-table { border-top: 1px solid var(--border); margin-bottom: 24px; }
   .spec-row { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--border); }
