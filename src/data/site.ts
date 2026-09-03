@@ -129,7 +129,20 @@ export interface Technology {
   img: string; // hero image (macro texture or product render)
   imgFit?: "cover" | "contain"; // 'cover' for dark texture macros, 'contain' for product shots
   note?: string; // optional honest clarification (e.g. biodegradable)
+  grip?: { dry: number; wet: number }; // % grip improvement vs bare-hand control (ASTM F2961)
 }
+
+// Independent grip-performance test shared across the grip textures.
+// Source: Professional Testing Laboratory LLC, ASTM F2961, ref 0305163-305166,
+// 14 Feb 2024. Figures are % improvement in grip torque vs a bare-hand control
+// (dry control 9.7 N·m, wet control 3.6 N·m), tested on medium nitrile gloves.
+export const gripTest = {
+  standard: "ASTM F2961",
+  lab: "Professional Testing Laboratory LLC",
+  date: "February 2024",
+  controlDry: 9.7,
+  controlWet: 3.6,
+} as const;
 
 export const technologies: Technology[] = [
   {
@@ -153,6 +166,7 @@ export const technologies: Technology[] = [
     story:
       "After Tyre Tread came Micro Diamond. The inspiration struck on our own engineering floor, our bench vices gripped so powerfully thanks to the micro-diamond texture machined into their jaws. We recreated that texture on a nitrile glove and patented it as a superior successor to the raised diamond: shrinking the diamonds and packing many more into the same area increases surface area and contact points, which is what delivers noticeably better grip in oily conditions.",
     img: "/images/tex-micro-diamond.jpg",
+    grip: { dry: 141.7, wet: 262.9 },
   },
   {
     slug: "zig-grip",
@@ -175,6 +189,7 @@ export const technologies: Technology[] = [
     story:
       "Zig Grip is the evolution of our Gripper glove. After five years of selling Gripper, our R&D team learned exactly how to push the grip further, refining the texture and, crucially, improving the thumb texturing where control matters most. The result is a thicker, stronger glove that delivers our best dry grip yet, proven in lab tests.",
     img: "/images/tex-zig-grip.png",
+    grip: { dry: 148.5, wet: 215.1 },
   },
   {
     slug: "tyre-tread",
@@ -197,6 +212,7 @@ export const technologies: Technology[] = [
     story:
       "Tyre Tread was our first patented glove. Having pioneered the raised diamond back in 2011 and seen the whole industry follow our lead, we knew our next breakthrough deserved protection from day one. So when the idea struck, inspired by watching tyres grip wet roads in the rain, we patented it immediately. Available in 6 and 7 mil, in black, orange, red, green or custom shades.",
     img: "/images/tex-tyre-tread.jpg",
+    grip: { dry: 115.9, wet: 221.3 },
   },
   {
     slug: "raised-diamond",
@@ -219,6 +235,7 @@ export const technologies: Technology[] = [
     story:
       "We invented the raised diamond texture in 2011, the first of its kind. It has since been copied across the industry, but we remain the pioneers, and no one matches our quality. Buy raised diamond from Innovative and you're buying it from the company that created it.",
     img: "/images/tex-raised-diamond.webp",
+    grip: { dry: 75.0, wet: 181.9 },
   },
   {
     slug: "biodegradable",
