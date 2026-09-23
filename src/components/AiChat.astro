@@ -1,0 +1,159 @@
+---
+// AI chat assistant (answers from the public knowledge base only; see erp-bot/webchat on the server).
+// If the chat service is not reachable, this widget stays hidden and tawk.to shows as before.
+// "Talk to a person" hands over to tawk.to.
+---
+<div class="aic" id="aiChat" hidden>
+  <button type="button" class="aic-fab" id="aicOpen" aria-expanded="false" aria-controls="aicPanel">
+    <span class="aic-fab-dot" aria-hidden="true"></span> Ask us anything
+  </button>
+
+  <section class="aic-panel" id="aicPanel" role="dialog" aria-label="Chat with Innovative Gloves" hidden>
+    <header class="aic-head">
+      <div>
+        <p class="aic-eyebrow">Innovative Gloves</p>
+        <h2 class="aic-title">How can we help<span class="dot">?</span></h2>
+      </div>
+      <button type="button" class="aic-x" id="aicClose" aria-label="Close chat">&times;</button>
+    </header>
+
+    <div class="aic-log" id="aicLog" aria-live="polite">
+      <div class="aic-msg aic-bot">Hi! Ask me about our gloves, grip technologies, certifications, samples or private label. For prices, I'll pass your enquiry to our sales team.</div>
+    </div>
+
+    <form class="aic-form" id="aicForm" autocomplete="off">
+      <label class="sr-only" for="aicInput">Your message</label>
+      <textarea id="aicInput" rows="1" maxlength="800" placeholder="Type your question…" required></textarea>
+      <button type="submit" class="aic-send" aria-label="Send">&rarr;</button>
+    </form>
+    <div class="aic-foot">
+      <button type="button" class="aic-human" id="aicHuman">Talk to a person</button>
+      <span class="aic-note">Automated assistant · <a href="/privacy">Privacy</a></span>
+    </div>
+  </section>
+</div>
+
+<style>
+  .aic[hidden], .aic-panel[hidden], .aic-fab[hidden] { display: none !important; }
+  .aic { position: fixed; right: 20px; bottom: 20px; z-index: 900; font-family: var(--font-body); }
+  .aic-fab {
+    display: inline-flex; align-items: center; gap: 10px; padding: 14px 20px; border: 0; border-radius: 999px; cursor: pointer;
+    background: var(--ink); color: #fff; font: 600 15px/1 var(--font-body); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+  }
+  .aic-fab:hover { background: #000; }
+  .aic-fab-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(140,198,63,.25); }
+  .aic-panel {
+    position: absolute; right: 0; bottom: 0; width: min(380px, calc(100vw - 32px)); height: min(560px, calc(100vh - 40px));
+    display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; box-shadow: 0 24px 60px rgba(0,0,0,.25); overflow: hidden;
+  }
+  .aic-head { display: flex; justify-content: space-between; align-items: flex-start; padding: 18px 18px 14px; background: var(--ink); color: #fff; }
+  .aic-eyebrow { margin: 0 0 4px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 4px; }
+  .aic-title { font: 800 22px/1.1 var(--font-head); text-transform: uppercase; letter-spacing: .01em; color: #fff; margin: 0; text-align: left; }
+  .aic-title .dot { color: var(--green); }
+  .aic-x { background: none; border: 0; color: #fff; font-size: 28px; line-height: 1; cursor: pointer; padding: 0 4px; }
+  .aic-log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: var(--bg-2); }
+  .aic-msg { max-width: 86%; padding: 10px 13px; border-radius: 10px; font-size: 14.5px; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; }
+  .aic-bot { align-self: flex-start; background: var(--surface); border: 1px solid var(--light-border); color: var(--text); }
+  .aic-me { align-self: flex-end; background: var(--ink); color: #fff; }
+  .aic-msg a { color: var(--green-dark); text-decoration: underline; }
+  .aic-typing { color: var(--text-dim); font-style: italic; }
+  .aic-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--border); background: var(--surface); }
+  .aic-form textarea {
+    flex: 1; resize: none; max-height: 110px; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px;
+    font: 15px/1.4 var(--font-body); color: var(--text); background: var(--bg);
+  }
+  .aic-form textarea:focus { outline: 2px solid var(--green); outline-offset: 0; border-color: transparent; }
+  .aic-send { width: 44px; border: 0; border-radius: 8px; background: var(--green); color: var(--ink); font-size: 20px; font-weight: 700; cursor: pointer; }
+  .aic-send:disabled { opacity: .5; cursor: default; }
+  .aic-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 0 12px 12px; background: var(--surface); }
+  .aic-human { background: none; border: 1px solid var(--border-strong); border-radius: 999px; padding: 6px 12px; font: 600 13px var(--font-body); color: var(--text); cursor: pointer; }
+  .aic-human:hover { border-color: var(--green-dark); color: var(--green-dark); }
+  .aic-note { font-size: 12px; color: var(--text-dim); }
+  .aic-note a { color: inherit; }
+  @media (max-width: 480px) {
+    .aic { right: 12px; bottom: 12px; }
+    .aic-panel { position: fixed; inset: 0; width: auto; height: auto; border-radius: 0; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var API = "/api/chat";
+    var root = document.getElementById("aiChat");
+    if (!root) return;
+    var panel = document.getElementById("aicPanel"), openBtn = document.getElementById("aicOpen"), log = document.getElementById("aicLog");
+    var form = document.getElementById("aicForm"), input = document.getElementById("aicInput"), sendBtn = form.querySelector(".aic-send");
+
+    function store(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } }
+    var session = store("aic_session");
+    if (!session) {
+      session = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2);
+      store("aic_session", session);
+    }
+
+    // Only show the AI chat if its service answers; tawk.to stays as the fallback.
+    fetch(API + "/health").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function () {
+      window.__aiChatReady = true;
+      root.hidden = false;
+      hideTawk();
+      restore();
+    }).catch(function () { /* service down: leave tawk.to alone */ });
+
+    // tawk.to may load before or after this check: hide it now if it is up, and again whenever it finishes loading
+    function hideTawk() {
+      var T = window.Tawk_API = window.Tawk_API || {};
+      var prev = T.onLoad;
+      T.onLoad = function () { if (prev) { try { prev(); } catch (e) {} } if (window.__aiChatReady && !window.__aiHuman) { T.hideWidget(); } };
+      try { if (T.hideWidget) { T.hideWidget(); } } catch (e) {}
+    }
+
+    function addMsg(text, who) {
+      var d = document.createElement("div");
+      d.className = "aic-msg " + (who === "me" ? "aic-me" : "aic-bot");
+      // text only - URLs become links, nothing else is interpreted as HTML
+      text.split(/(https?:\/\/[^\s)]+)/g).forEach(function (part) {
+        if (/^https?:\/\//.test(part)) {
+          var a = document.createElement("a"); a.href = part; a.textContent = part.replace(/^https?:\/\/(www\.)?/, "");
+          a.target = part.indexOf(location.host) === -1 ? "_blank" : "_self"; a.rel = "noopener"; d.appendChild(a);
+        } else { d.appendChild(document.createTextNode(part)); }
+      });
+      log.appendChild(d); log.scrollTop = log.scrollHeight;
+      return d;
+    }
+    function remember(text, who) {
+      var h = []; try { h = JSON.parse(store("aic_history") || "[]"); } catch (e) {}
+      h.push([who, text]); store("aic_history", JSON.stringify(h.slice(-30)));
+    }
+    function restore() { try { JSON.parse(store("aic_history") || "[]").forEach(function (m) { addMsg(m[1], m[0]); }); } catch (e) {} }
+
+    function setOpen(open) {
+      panel.hidden = !open; openBtn.hidden = open; openBtn.setAttribute("aria-expanded", String(open));
+      if (open) { setTimeout(function () { input.focus(); }, 50); log.scrollTop = log.scrollHeight; }
+    }
+    openBtn.addEventListener("click", function () { setOpen(true); });
+    document.getElementById("aicClose").addEventListener("click", function () { setOpen(false); });
+    document.getElementById("aicHuman").addEventListener("click", function () {
+      setOpen(false); root.hidden = true; window.__aiHuman = true;
+      if (window.Tawk_API && Tawk_API.showWidget) { try { Tawk_API.showWidget(); Tawk_API.maximize(); } catch (e) {} }
+      else { location.href = "/contact"; }
+    });
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); } });
+    input.addEventListener("input", function () { input.style.height = "auto"; input.style.height = Math.min(input.scrollHeight, 110) + "px"; });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var text = input.value.trim();
+      if (!text) return;
+      input.value = ""; input.style.height = "auto"; sendBtn.disabled = true;
+      addMsg(text, "me"); remember(text, "me");
+      var wait = addMsg("Typing…", "bot"); wait.classList.add("aic-typing");
+      fetch(API, { method: "POST", headers: { "Content-Type": "application/json" },
+                   body: JSON.stringify({ session: session, message: text, page: location.pathname }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { wait.remove(); var t = d.reply || "Sorry, something went wrong. Please email sales@innovativeglove.com."; addMsg(t, "bot"); remember(t, "bot"); })
+        .catch(function () { wait.remove(); addMsg("Sorry, the chat is unavailable right now. Please email sales@innovativeglove.com or press Talk to a person.", "bot"); })
+        .finally(function () { sendBtn.disabled = false; input.focus(); });
+    });
+  })();
+</script>
