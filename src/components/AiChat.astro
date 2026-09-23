@@ -1,7 +1,7 @@
 ---
 // AI chat assistant (answers from the public knowledge base only; see erp-bot/webchat on the server).
-// If the chat service is not reachable, this widget stays hidden and tawk.to shows as before.
-// "Talk to a person" hands over to tawk.to.
+// If the chat service is not reachable, this widget stays hidden (the site's contact pages remain).
+// "Talk to a person" shows the team's email, phone numbers and contact form inside the chat (no AI call).
 ---
 <div class="aic" id="aiChat" hidden>
   <button type="button" class="aic-fab" id="aicOpen" aria-expanded="false" aria-controls="aicPanel">
@@ -95,11 +95,25 @@
   .aic-human:hover { border-color: var(--green-dark); color: var(--green-dark); }
   .aic-note { font-size: 12px; color: var(--text-dim); }
   .aic-note a { color: inherit; }
+  .aic-card { align-self: stretch; background: var(--surface); border: 1px solid var(--light-border); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .aic-card b { font: 700 14px/1.3 var(--font-body); }
+  .aic-card input, .aic-card textarea {
+    width: 100%; box-sizing: border-box; padding: 9px 10px; border: 1px solid var(--border-strong); border-radius: 8px;
+    font: 14.5px/1.35 var(--font-body); color: var(--text); background: var(--bg);
+  }
+  .aic-card textarea { resize: vertical; min-height: 58px; }
+  .aic-card input:focus, .aic-card textarea:focus { outline: 2px solid var(--green); outline-offset: -1px; border-color: transparent; }
+  .aic-card .aic-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .aic-card .aic-err { color: #b42318; font-size: 13px; min-height: 0; }
+  .aic-card .aic-err:empty { display: none; }
+  .aic-card button[type=submit] { align-self: flex-start; border: 0; border-radius: 8px; background: var(--green); color: var(--ink); font: 700 14px var(--font-body); padding: 10px 16px; cursor: pointer; }
+  .aic-card button[type=submit]:disabled { opacity: .5; cursor: default; }
+  .aic-card small { color: var(--text-dim); font-size: 12px; }
   @media (max-width: 480px) {
     .aic { right: 12px; bottom: 12px; }
     .aic-fab { padding: 12px 16px; font-size: 14px; }
     .aic-panel { position: fixed; inset: 0; width: auto; height: auto; border-radius: 0; border: 0; }
-    .aic-form textarea { font-size: 16px; } /* stops iOS zooming into the box */
+    .aic-form textarea, .aic-card input, .aic-card textarea { font-size: 16px; } /* stops iOS zooming into the box */
   }
   @media (prefers-reduced-motion: reduce) { .aic-panel, .aic-typing i, .aic-fab { animation: none; transition: none; } }
 </style>
@@ -122,20 +136,57 @@
       store("aic_session", session);
     }
 
-    // Only show the AI chat if its service answers; tawk.to stays as the fallback.
+    // Only show the AI chat if its service answers.
     fetch(API + "/health").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function () {
-      window.__aiChatReady = true;
       root.hidden = false;
-      hideTawk();
       restore();
-    }).catch(function () { /* service down: leave tawk.to alone */ });
+    }).catch(function () { /* service down: stay hidden */ });
 
-    // tawk.to may load before or after this check: hide it now if it is up, and again whenever it finishes loading
-    function hideTawk() {
-      var T = window.Tawk_API = window.Tawk_API || {};
-      var prev = T.onLoad;
-      T.onLoad = function () { if (prev) { try { prev(); } catch (e) {} } if (window.__aiChatReady && !window.__aiHuman) { T.hideWidget(); } };
-      try { if (T.hideWidget) { T.hideWidget(); } } catch (e) {}
+    var CONTACT = "Leave your details below and our team will get back to you. Or reach us directly:\n" +
+      "- Email: sales@innovativeglove.com\n" +
+      "- Bangkok head office: +66 2 258 6352\n" +
+      "- Hat Yai factory: +66 74 502 251";
+
+    // Contact form card inside the chat. Sent to /api/chat/contact, which emails the sales team.
+    function showForm() {
+      if (store("aic_contact_sent")) { addMsg("Thanks - we already have your details and our team will be in touch. You can also email sales@innovativeglove.com.", "bot"); return; }
+      var open = log.querySelector(".aic-card form");
+      if (open) { open.scrollIntoView({ block: "nearest" }); open.querySelector("input").focus(); return; }
+      var card = document.createElement("div"); card.className = "aic-card";
+      card.innerHTML =
+        '<b>Leave your details</b>' +
+        '<form novalidate>' +
+        '<div style="display:flex;flex-direction:column;gap:8px">' +
+        '<input name="name" autocomplete="name" maxlength="100" placeholder="Your name *" aria-label="Your name" required>' +
+        '<input name="email" type="email" autocomplete="email" maxlength="120" placeholder="Email" aria-label="Email">' +
+        '<input name="phone" type="tel" autocomplete="tel" maxlength="30" placeholder="Phone / WhatsApp (with country code)" aria-label="Phone">' +
+        '<textarea name="message" maxlength="1000" placeholder="What do you need? (optional)" aria-label="Message"></textarea>' +
+        '<input name="website" class="aic-hp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+        '<div class="aic-err" role="alert"></div>' +
+        '<button type="submit">Send to our team</button>' +
+        '<small>We only use this to reply to you. <a href="/privacy">Privacy</a></small>' +
+        '</div></form>';
+      log.appendChild(card); log.scrollTop = log.scrollHeight;
+      var f = card.querySelector("form"), err = card.querySelector(".aic-err"), btn = card.querySelector("button[type=submit]");
+      setTimeout(function () { f.elements.name.focus(); }, 50);
+      f.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var d = { session: session, page: location.pathname, name: f.elements.name.value.trim(), email: f.elements.email.value.trim(),
+                  phone: f.elements.phone.value.trim(), message: f.elements.message.value.trim(), website: f.elements.website.value };
+        if (!d.name) { err.textContent = "Please enter your name."; f.elements.name.focus(); return; }
+        if (!d.email && !d.phone) { err.textContent = "Please give an email or a phone number."; f.elements.email.focus(); return; }
+        err.textContent = ""; btn.disabled = true; btn.textContent = "Sending…";
+        fetch(API + "/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d) })
+          .then(function (r) { return r.json().then(function (j) { return { ok: r.ok && j.ok, j: j }; }); })
+          .then(function (res) {
+            if (!res.ok) { err.textContent = (res.j && res.j.error) || "Sorry, that didn't send. Please email sales@innovativeglove.com."; btn.disabled = false; btn.textContent = "Send to our team"; return; }
+            store("aic_contact_sent", "1");
+            var t = "Thanks " + d.name.split(" ")[0] + "! Your details are with our team and they will contact you soon" +
+                    (d.email ? " at " + d.email : "") + ".";
+            card.remove(); addMsg(t, "bot"); remember(t, "bot");
+          })
+          .catch(function () { err.textContent = "Sorry, that didn't send. Please email sales@innovativeglove.com."; btn.disabled = false; btn.textContent = "Send to our team"; });
+      });
     }
 
     function addMsg(text, who) {
@@ -177,9 +228,9 @@
     openBtn.addEventListener("click", function () { setOpen(true); });
     document.getElementById("aicClose").addEventListener("click", function () { setOpen(false); });
     document.getElementById("aicHuman").addEventListener("click", function () {
-      setOpen(false); root.hidden = true; window.__aiHuman = true;
-      if (window.Tawk_API && Tawk_API.showWidget) { try { Tawk_API.showWidget(); Tawk_API.maximize(); } catch (e) {} }
-      else { location.href = "/contact"; }
+      chips.hidden = true;
+      if (!store("aic_contact_sent")) { addMsg(CONTACT, "bot"); remember(CONTACT, "bot"); }
+      showForm();
     });
     input.addEventListener("keydown", function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); } });
     input.addEventListener("input", function () { input.style.height = "auto"; input.style.height = Math.min(input.scrollHeight, 110) + "px"; });
@@ -198,7 +249,7 @@
         fetch(API, { method: "POST", headers: { "Content-Type": "application/json" },
                      body: JSON.stringify({ session: session, message: text, page: location.pathname }) })
           .then(function (r) { return r.json(); })
-          .then(function (d) { wait.remove(); var t = d.reply || "Sorry, something went wrong. Please email sales@innovativeglove.com."; addMsg(t, "bot"); remember(t, "bot"); })
+          .then(function (d) { wait.remove(); var t = d.reply || "Sorry, something went wrong. Please email sales@innovativeglove.com."; addMsg(t, "bot"); remember(t, "bot"); if (d.form) { showForm(); } })
           .catch(function () { wait.remove(); addMsg("Sorry, the chat is unavailable right now. Please email sales@innovativeglove.com or press Talk to a person.", "bot"); })
           .finally(function () { busy = false; sendBtn.disabled = false; input.focus(); });
       }, delay);
