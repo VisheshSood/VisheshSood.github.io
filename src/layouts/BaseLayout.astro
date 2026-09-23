@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import AiChat from "../components/AiChat.astro";
 import PromoPopup from "../components/PromoPopup.astro";
 
 interface Props {
@@ -105,10 +106,13 @@ const websiteSchema = {
   <body>
     <slot />
     <PromoPopup />
+    <AiChat />
 
     <!-- tawk.to live chat (loads on every page). Property/widget: Innovative Gloves. -->
     <script is:inline>
       var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+      // When the AI chat is live, tawk.to waits behind its "Talk to a person" button.
+      Tawk_API.onLoad = function () { if (window.__aiChatReady) { Tawk_API.hideWidget(); } };
       (function () {
         var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
         s1.async = true;
