@@ -69,6 +69,7 @@
   .aic-bot { align-self: flex-start; background: var(--surface); border: 1px solid var(--light-border); color: var(--text); border-bottom-left-radius: 4px; }
   .aic-me { align-self: flex-end; background: var(--ink); color: #fff; border-bottom-right-radius: 4px; }
   .aic-bot a { color: var(--green-dark); text-decoration: underline; text-underline-offset: 2px; }
+  .aic-bot a.aic-formlink { font-weight: 700; }
   .aic-me a { color: var(--green); }
   .aic-typing { display: inline-flex; gap: 4px; padding: 13px 14px; }
   .aic-typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--text-dim); opacity: .4; animation: aic-dot 1.2s infinite; }
@@ -147,11 +148,15 @@
       "- Bangkok head office: +66 2 258 6352\n" +
       "- Hat Yai factory: +66 74 502 251";
 
+    // The AI said the sales team should take this: the website adds a fixed line whose "here" opens the form.
+    // "[[here]]" is a marker that addMsg turns into the link (kept in history, so it still works after a reload).
+    var OFFER = "\n\nFor that, please allow our sales rep to contact you. Please enter your details [[here]].";
+
     // Contact form card inside the chat. Sent to /api/chat/contact, which emails the sales team.
     function showForm() {
       if (store("aic_contact_sent")) { addMsg("Thanks - we already have your details and our team will be in touch. You can also email sales@innovativeglove.com.", "bot"); return; }
       var open = log.querySelector(".aic-card form");
-      if (open) { open.scrollIntoView({ block: "nearest" }); open.querySelector("input").focus(); return; }
+      if (open) { reveal(open.parentNode); open.querySelector("input").focus(); return; }
       var card = document.createElement("div"); card.className = "aic-card";
       card.innerHTML =
         '<b>Leave your details</b>' +
@@ -166,7 +171,7 @@
         '<button type="submit">Send to our team</button>' +
         '<small>We only use this to reply to you. <a href="/privacy">Privacy</a></small>' +
         '</div></form>';
-      log.appendChild(card); log.scrollTop = log.scrollHeight;
+      log.appendChild(card); reveal(card);
       var f = card.querySelector("form"), err = card.querySelector(".aic-err"), btn = card.querySelector("button[type=submit]");
       setTimeout(function () { f.elements.name.focus(); }, 50);
       f.addEventListener("submit", function (e) {
@@ -189,18 +194,26 @@
       });
     }
 
+    // Scroll so an element's FIRST line is in view (long answers are read from the top, not the bottom)
+    function reveal(el) {
+      log.scrollTop = Math.max(0, log.scrollTop + el.getBoundingClientRect().top - log.getBoundingClientRect().top - 12);
+    }
     function addMsg(text, who) {
       var d = document.createElement("div");
       d.className = "aic-msg " + (who === "me" ? "aic-me" : "aic-bot");
       if (who !== "me") { text = text.replace(/\*\*(.+?)\*\*/g, "$1").replace(/^#+\s*/gm, ""); }   // stray markdown
       // text only - URLs become links, nothing else is interpreted as HTML
-      text.split(/(https?:\/\/[^\s)]+)/g).forEach(function (part) {
-        if (/^https?:\/\//.test(part)) {
+      text.split(/(https?:\/\/[^\s)]+|\[\[here\]\])/g).forEach(function (part) {
+        if (part === "[[here]]" && who !== "me") {
+          var l = document.createElement("a"); l.href = "#"; l.textContent = "here"; l.className = "aic-formlink";
+          l.addEventListener("click", function (e) { e.preventDefault(); showForm(); }); d.appendChild(l);
+        } else if (/^https?:\/\//.test(part)) {
           var a = document.createElement("a"); a.href = part; a.textContent = part.replace(/^https?:\/\/(www\.)?/, "");
           a.target = part.indexOf(location.host) === -1 ? "_blank" : "_self"; a.rel = "noopener"; d.appendChild(a);
         } else { d.appendChild(document.createTextNode(part)); }
       });
-      log.appendChild(d); log.scrollTop = log.scrollHeight;
+      log.appendChild(d);
+      if (who === "me") { log.scrollTop = log.scrollHeight; } else { reveal(d); }
       return d;
     }
     function remember(text, who) {
@@ -249,7 +262,7 @@
         fetch(API, { method: "POST", headers: { "Content-Type": "application/json" },
                      body: JSON.stringify({ session: session, message: text, page: location.pathname }) })
           .then(function (r) { return r.json(); })
-          .then(function (d) { wait.remove(); var t = d.reply || "Sorry, something went wrong. Please email sales@innovativeglove.com."; addMsg(t, "bot"); remember(t, "bot"); if (d.form) { showForm(); } })
+          .then(function (d) { wait.remove(); var t = d.reply || "Sorry, something went wrong. Please email sales@innovativeglove.com."; if (d.form && !store("aic_contact_sent")) { t += OFFER; } addMsg(t, "bot"); remember(t, "bot"); })
           .catch(function () { wait.remove(); addMsg("Sorry, the chat is unavailable right now. Please email sales@innovativeglove.com or press Talk to a person.", "bot"); })
           .finally(function () { busy = false; sendBtn.disabled = false; input.focus(); });
       }, delay);
