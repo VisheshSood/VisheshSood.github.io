@@ -18,7 +18,13 @@
     </header>
 
     <div class="aic-log" id="aicLog" aria-live="polite">
-      <div class="aic-msg aic-bot">Hi! Ask me about our gloves, grip technologies, certifications, samples or private label. For prices, I'll pass your enquiry to our sales team.</div>
+      <div class="aic-msg aic-bot">Hi! I can answer questions about our gloves, grip textures, certifications, samples and private label. For prices, I'll pass your enquiry to our sales team.</div>
+      <div class="aic-chips" id="aicChips">
+        <button type="button">Which glove is best for oily work?</button>
+        <button type="button">Are your gloves food safe?</button>
+        <button type="button">Can you make our own brand?</button>
+        <button type="button">How do I get samples?</button>
+      </div>
     </div>
 
     <form class="aic-form" id="aicForm" autocomplete="off">
@@ -33,48 +39,69 @@
   </section>
 </div>
 
-<style>
+<style is:global>
+  /* Global on purpose: messages are created by the script, and Astro's scoped CSS would not reach them. All classes are aic- prefixed. */
   .aic[hidden], .aic-panel[hidden], .aic-fab[hidden] { display: none !important; }
   .aic { position: fixed; right: 20px; bottom: 20px; z-index: 900; font-family: var(--font-body); }
   .aic-fab {
     display: inline-flex; align-items: center; gap: 10px; padding: 14px 20px; border: 0; border-radius: 999px; cursor: pointer;
     background: var(--ink); color: #fff; font: 600 15px/1 var(--font-body); box-shadow: 0 10px 30px rgba(0,0,0,.22);
+    transition: transform .15s ease, background .15s ease;
   }
-  .aic-fab:hover { background: #000; }
+  .aic-fab:hover { background: #000; transform: translateY(-2px); }
   .aic-fab-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(140,198,63,.25); }
   .aic-panel {
-    position: absolute; right: 0; bottom: 0; width: min(380px, calc(100vw - 32px)); height: min(560px, calc(100vh - 40px));
+    position: absolute; right: 0; bottom: 0; width: min(390px, calc(100vw - 32px)); height: min(600px, calc(100vh - 40px));
+    height: min(600px, calc(100dvh - 40px));
     display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; box-shadow: 0 24px 60px rgba(0,0,0,.25); overflow: hidden;
+    border-radius: 14px; box-shadow: 0 24px 60px rgba(0,0,0,.25); overflow: hidden;
+    animation: aic-in .18s ease-out;
   }
-  .aic-head { display: flex; justify-content: space-between; align-items: flex-start; padding: 18px 18px 14px; background: var(--ink); color: #fff; }
-  .aic-eyebrow { margin: 0 0 4px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 4px; }
-  .aic-title { font: 800 22px/1.1 var(--font-head); text-transform: uppercase; letter-spacing: .01em; color: #fff; margin: 0; text-align: left; }
+  @keyframes aic-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  .aic-head { display: flex; justify-content: space-between; align-items: flex-start; padding: 16px 16px 14px 18px; background: var(--ink); color: #fff; flex: none; }
+  .aic-eyebrow { margin: 0 0 4px; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
+  .aic-title { margin: 0; font: 800 21px/1.1 var(--font-head); text-transform: uppercase; letter-spacing: .01em; color: #fff; text-align: left; }
   .aic-title .dot { color: var(--green); }
-  .aic-x { background: none; border: 0; color: #fff; font-size: 28px; line-height: 1; cursor: pointer; padding: 0 4px; }
-  .aic-log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: var(--bg-2); }
-  .aic-msg { max-width: 86%; padding: 10px 13px; border-radius: 10px; font-size: 14.5px; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; }
-  .aic-bot { align-self: flex-start; background: var(--surface); border: 1px solid var(--light-border); color: var(--text); }
-  .aic-me { align-self: flex-end; background: var(--ink); color: #fff; }
-  .aic-msg a { color: var(--green-dark); text-decoration: underline; }
-  .aic-typing { color: var(--text-dim); font-style: italic; }
-  .aic-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--border); background: var(--surface); }
-  .aic-form textarea {
-    flex: 1; resize: none; max-height: 110px; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px;
-    font: 15px/1.4 var(--font-body); color: var(--text); background: var(--bg);
+  .aic-x { background: none; border: 0; color: #fff; font-size: 28px; line-height: 1; cursor: pointer; padding: 0 4px; opacity: .85; }
+  .aic-x:hover { opacity: 1; }
+  .aic-log { flex: 1; min-height: 0; overflow-y: auto; padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; background: var(--bg-2); overscroll-behavior: contain; }
+  .aic-msg { max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 14.5px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .aic-bot { align-self: flex-start; background: var(--surface); border: 1px solid var(--light-border); color: var(--text); border-bottom-left-radius: 4px; }
+  .aic-me { align-self: flex-end; background: var(--ink); color: #fff; border-bottom-right-radius: 4px; }
+  .aic-bot a { color: var(--green-dark); text-decoration: underline; text-underline-offset: 2px; }
+  .aic-me a { color: var(--green); }
+  .aic-typing { display: inline-flex; gap: 4px; padding: 13px 14px; }
+  .aic-typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--text-dim); opacity: .4; animation: aic-dot 1.2s infinite; }
+  .aic-typing i:nth-child(2) { animation-delay: .15s; } .aic-typing i:nth-child(3) { animation-delay: .3s; }
+  @keyframes aic-dot { 0%, 60%, 100% { opacity: .35; transform: none; } 30% { opacity: 1; transform: translateY(-3px); } }
+  .aic-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+  .aic-chips[hidden] { display: none; }
+  .aic-chips button {
+    border: 1px solid var(--green-dark); background: var(--surface); color: var(--green-dark); border-radius: 999px;
+    padding: 6px 11px; font: 500 13px/1.2 var(--font-body); cursor: pointer; text-align: left;
   }
-  .aic-form textarea:focus { outline: 2px solid var(--green); outline-offset: 0; border-color: transparent; }
-  .aic-send { width: 44px; border: 0; border-radius: 8px; background: var(--green); color: var(--ink); font-size: 20px; font-weight: 700; cursor: pointer; }
-  .aic-send:disabled { opacity: .5; cursor: default; }
-  .aic-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 0 12px 12px; background: var(--surface); }
+  .aic-chips button:hover { background: var(--green); border-color: var(--green); color: var(--ink); }
+  .aic-form { display: flex; align-items: flex-end; gap: 8px; padding: 12px 12px 10px; border-top: 1px solid var(--border); background: var(--surface); flex: none; }
+  .aic-form textarea {
+    flex: 1; resize: none; min-height: 44px; max-height: 110px; padding: 11px 12px; border: 1px solid var(--border-strong); border-radius: 10px;
+    font: 15px/1.4 var(--font-body); color: var(--text); background: var(--bg); box-sizing: border-box;
+  }
+  .aic-form textarea:focus { outline: 2px solid var(--green); outline-offset: -1px; border-color: transparent; }
+  .aic-send { flex: none; width: 44px; height: 44px; border: 0; border-radius: 10px; background: var(--green); color: var(--ink); font-size: 20px; font-weight: 700; cursor: pointer; }
+  .aic-send:hover:not(:disabled) { background: var(--green-bright); }
+  .aic-send:disabled { opacity: .45; cursor: default; }
+  .aic-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 0 12px 12px; background: var(--surface); flex: none; }
   .aic-human { background: none; border: 1px solid var(--border-strong); border-radius: 999px; padding: 6px 12px; font: 600 13px var(--font-body); color: var(--text); cursor: pointer; }
   .aic-human:hover { border-color: var(--green-dark); color: var(--green-dark); }
   .aic-note { font-size: 12px; color: var(--text-dim); }
   .aic-note a { color: inherit; }
   @media (max-width: 480px) {
     .aic { right: 12px; bottom: 12px; }
-    .aic-panel { position: fixed; inset: 0; width: auto; height: auto; border-radius: 0; }
+    .aic-fab { padding: 12px 16px; font-size: 14px; }
+    .aic-panel { position: fixed; inset: 0; width: auto; height: auto; border-radius: 0; border: 0; }
+    .aic-form textarea { font-size: 16px; } /* stops iOS zooming into the box */
   }
+  @media (prefers-reduced-motion: reduce) { .aic-panel, .aic-typing i, .aic-fab { animation: none; transition: none; } }
 </style>
 
 <script is:inline>
@@ -84,6 +111,9 @@
     if (!root) return;
     var panel = document.getElementById("aicPanel"), openBtn = document.getElementById("aicOpen"), log = document.getElementById("aicLog");
     var form = document.getElementById("aicForm"), input = document.getElementById("aicInput"), sendBtn = form.querySelector(".aic-send");
+    var chips = document.getElementById("aicChips");
+    var GAP_MS = 10500;   // the server allows one question per 10 s; pace sends so real visitors never see "please wait"
+    var lastSent = 0, busy = false;
 
     function store(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } }
     var session = store("aic_session");
@@ -111,6 +141,7 @@
     function addMsg(text, who) {
       var d = document.createElement("div");
       d.className = "aic-msg " + (who === "me" ? "aic-me" : "aic-bot");
+      if (who !== "me") { text = text.replace(/\*\*(.+?)\*\*/g, "$1").replace(/^#+\s*/gm, ""); }   // stray markdown
       // text only - URLs become links, nothing else is interpreted as HTML
       text.split(/(https?:\/\/[^\s)]+)/g).forEach(function (part) {
         if (/^https?:\/\//.test(part)) {
@@ -125,7 +156,19 @@
       var h = []; try { h = JSON.parse(store("aic_history") || "[]"); } catch (e) {}
       h.push([who, text]); store("aic_history", JSON.stringify(h.slice(-30)));
     }
-    function restore() { try { JSON.parse(store("aic_history") || "[]").forEach(function (m) { addMsg(m[1], m[0]); }); } catch (e) {} }
+    function restore() {
+      var h = []; try { h = JSON.parse(store("aic_history") || "[]"); } catch (e) {}
+      h.forEach(function (m) { addMsg(m[1], m[0]); });
+      if (h.length) { chips.hidden = true; }
+    }
+    function typing() {
+      var d = document.createElement("div"); d.className = "aic-msg aic-bot aic-typing"; d.setAttribute("aria-label", "Typing");
+      d.innerHTML = "<i></i><i></i><i></i>"; log.appendChild(d); log.scrollTop = log.scrollHeight; return d;
+    }
+    chips.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b || busy) return;
+      input.value = b.textContent; form.requestSubmit();
+    });
 
     function setOpen(open) {
       panel.hidden = !open; openBtn.hidden = open; openBtn.setAttribute("aria-expanded", String(open));
@@ -144,16 +187,21 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var text = input.value.trim();
-      if (!text) return;
-      input.value = ""; input.style.height = "auto"; sendBtn.disabled = true;
+      if (!text || busy) return;
+      busy = true; sendBtn.disabled = true; chips.hidden = true;
+      input.value = ""; input.style.height = "auto";
       addMsg(text, "me"); remember(text, "me");
-      var wait = addMsg("Typing…", "bot"); wait.classList.add("aic-typing");
-      fetch(API, { method: "POST", headers: { "Content-Type": "application/json" },
-                   body: JSON.stringify({ session: session, message: text, page: location.pathname }) })
-        .then(function (r) { return r.json(); })
-        .then(function (d) { wait.remove(); var t = d.reply || "Sorry, something went wrong. Please email sales@innovativeglove.com."; addMsg(t, "bot"); remember(t, "bot"); })
-        .catch(function () { wait.remove(); addMsg("Sorry, the chat is unavailable right now. Please email sales@innovativeglove.com or press Talk to a person.", "bot"); })
-        .finally(function () { sendBtn.disabled = false; input.focus(); });
+      var wait = typing();
+      var delay = Math.max(0, lastSent + GAP_MS - Date.now());
+      setTimeout(function () {
+        lastSent = Date.now();
+        fetch(API, { method: "POST", headers: { "Content-Type": "application/json" },
+                     body: JSON.stringify({ session: session, message: text, page: location.pathname }) })
+          .then(function (r) { return r.json(); })
+          .then(function (d) { wait.remove(); var t = d.reply || "Sorry, something went wrong. Please email sales@innovativeglove.com."; addMsg(t, "bot"); remember(t, "bot"); })
+          .catch(function () { wait.remove(); addMsg("Sorry, the chat is unavailable right now. Please email sales@innovativeglove.com or press Talk to a person.", "bot"); })
+          .finally(function () { busy = false; sendBtn.disabled = false; input.focus(); });
+      }, delay);
     });
   })();
 </script>
