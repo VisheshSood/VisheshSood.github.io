@@ -1,0 +1,12 @@
+{
+  "projectId": "fba21eab-4677-4a1e-8d4c-35a848118cf6",
+  "shape": "package",
+  "pkg": "innovative-gloves-brand",
+  "globalName": "InnovativeGloves",
+  "cssEntry": ".design-sync/tokens-only.css",
+  "runtimeFontPrefixes": [
+    "Archivo",
+    "Inter"
+  ],
+  "readmeHeader": ".design-sync/conventions.md"
+}
