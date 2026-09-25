@@ -1,0 +1,2 @@
+/* Marker for the converter's tokens-only mode (cfg.cssEntry must be set when a
+   DS exports no components). The real stylesheet is imported by entry.mjs. */

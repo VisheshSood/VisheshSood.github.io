@@ -39,3 +39,10 @@ php-mailer/PHPMailer/
 # agent / AI instructions (kept local, not in the public repo)
 CLAUDE.md
 AGENTS.md
+
+# design-sync (claude.ai/design) build scratch
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
