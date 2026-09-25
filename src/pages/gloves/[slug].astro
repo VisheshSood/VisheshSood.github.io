@@ -56,7 +56,9 @@ const fmtDeg = (n: number | string) => (typeof n === "number" ? (n > 0 ? "+" : "
 
 // Measured grip for this glove's texture (independent ASTM F2961 data), if any.
 const gripTech = techSlug ? technologies.find((t) => t.slug === techSlug) : undefined;
-const grip = gripTech?.grip;
+// Grip figures come from an ASTM F2961 test on NITRILE gloves only, so latex
+// gloves never show them, even when they share a texture.
+const grip = glove.material === "Latex" ? undefined : gripTech?.grip;
 
 // At-a-glance protection badges, derived honestly from this glove's own data:
 // viral barrier only when the glove actually passed EN ISO 374-5 for viruses,

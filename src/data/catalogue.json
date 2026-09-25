@@ -163,7 +163,7 @@
   {
     "slug": "diamond-9-nitrile-long",
     "name": "Diamond 9 mil Nitrile Long Cuff",
-    "fullName": "Nitrile Powder Free House Hold Gloves",
+    "fullName": "Nitrile Powder Free Gloves",
     "material": "Nitrile",
     "bio": false,
     "texture": "Diamond",
@@ -188,7 +188,7 @@
   {
     "slug": "diamond-8-5-nitrile-long",
     "name": "Diamond 8.5 mil Nitrile Long Cuff",
-    "fullName": "Nitrile Powder Free House Hold Gloves",
+    "fullName": "Nitrile Powder Free Gloves",
     "material": "Nitrile",
     "bio": false,
     "texture": "Diamond",
@@ -1012,7 +1012,7 @@
   {
     "slug": "diamond-17-latex-long",
     "name": "Diamond 17 mil Latex Long Cuff",
-    "fullName": "Latex Powder Free Diamond Textured House Hold Gloves",
+    "fullName": "Latex Powder Free Diamond Textured Gloves",
     "material": "Latex",
     "bio": false,
     "texture": "Diamond",
@@ -1038,7 +1038,7 @@
   {
     "slug": "diamond-14-latex-long",
     "name": "Diamond 14 mil Latex Long Cuff",
-    "fullName": "Latex Powder Free Diamond Textured House Hold Gloves",
+    "fullName": "Latex Powder Free Diamond Textured Gloves",
     "material": "Latex",
     "bio": false,
     "texture": "Diamond",
@@ -1062,7 +1062,7 @@
   {
     "slug": "micro-diamond-14-latex-long",
     "name": "Micro Diamond 14 mil Latex Long Cuff",
-    "fullName": "Latex Powder Free Micro Diamond Textured House Hold Gloves",
+    "fullName": "Latex Powder Free Micro Diamond Textured Gloves",
     "material": "Latex",
     "bio": false,
     "texture": "Micro Diamond",
@@ -1188,7 +1188,7 @@
   {
     "slug": "zig-14-latex-long",
     "name": "Zig 14 mil Latex Long Cuff",
-    "fullName": "Latex Powder Free Zig Textured House Hold Gloves",
+    "fullName": "Latex Powder Free Zig Textured Gloves",
     "material": "Latex",
     "bio": false,
     "texture": "Zig",
