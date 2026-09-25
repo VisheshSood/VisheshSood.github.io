@@ -1,2 +1,9 @@
 /* Marker for the converter's tokens-only mode (cfg.cssEntry must be set when a
    DS exports no components). The real stylesheet is imported by entry.mjs. */
+
+/* This file is appended RAW to the bundle, after esbuild has stripped every
+   comment from global.css. So @kind annotations only survive if they live here.
+   Values must stay identical to src/styles/global.css (same value, no visual change). */
+:root {
+  --gutter: clamp(20px, 5vw, 48px); /* @kind spacing */
+}

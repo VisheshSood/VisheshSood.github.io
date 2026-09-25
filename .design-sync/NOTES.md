@@ -8,6 +8,8 @@
   `node .ds-sync/resync.mjs --config .design-sync/config.json --node-modules .ds-sync/node_modules --entry ./.design-sync/entry.mjs --out ./ds-bundle --no-render-check [--remote .design-sync/.cache/remote-sync.json]`
   `.ds-sync/node_modules` needs `esbuild ts-morph @types/react react react-dom`.
 
+- **@kind annotations must go in `tokens-only.css`, not `global.css`.** esbuild strips every comment from `global.css` when it builds `_ds_bundle.css`, but `cfg.cssEntry` (`tokens-only.css`) is appended raw. So a `/* @kind spacing */` on `--gutter` in `global.css` never reached Claude Design and the warning kept coming back. The override there repeats the exact `global.css` value, so nothing changes visually. Keep the two values in sync.
+
 ## Known render warns
 
 - `[FONT_REMOTE] "Arial Narrow"` is expected. It's the second fallback in `--font-head` (a system font), not a brand font, so it doesn't need to ship.
