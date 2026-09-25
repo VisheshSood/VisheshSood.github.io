@@ -41,7 +41,7 @@
 
   /* Layout */
   --maxw: 1200px;
-  --gutter: clamp(20px, 5vw, 48px);
+  --gutter: clamp(20px, 5vw, 48px); /* @kind spacing */
   --radius: 4px;
 }
 
