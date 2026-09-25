@@ -14,6 +14,7 @@
 
 - `[FONT_REMOTE] "Arial Narrow"` is expected. It's the second fallback in `--font-head` (a system font), not a brand font, so it doesn't need to ship.
 - `[RENDER_SKIPPED]` is expected. See the `--no-render-check` bullet above.
+- `[DTS_REACT]` (@types/react not found) and `[ZERO_MATCH]` are expected. There are no components, so no props get extracted.
 
 ## Re-sync risks
 
