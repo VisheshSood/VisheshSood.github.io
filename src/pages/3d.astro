@@ -82,7 +82,7 @@ const icons: Record<string, string> = {
                 ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" touch-action="pan-y"
               >
                 {p.hotspots.map((h) => (
-                  <button slot={`hotspot-${h.n}`} class="m3d-dot" data-n={h.n} aria-label={h.title}>{h.n}</button>
+                  <button slot={`hotspot-${h.n}`} class="m3d-dot" data-n={h.n} aria-label={h.title} data-position={`${h.at[0]} ${h.at[1]} ${h.at[2]}`} data-normal="0 0 1">{h.n}</button>
                 ))}
                 <button slot="ar-button" class="m3d-ar">View in your space</button>
                 <div class="m3d-progress" slot="progress-bar"><div class="m3d-progress-bar"></div></div>
@@ -151,9 +151,7 @@ const icons: Record<string, string> = {
     const place = () => {
       c = mv.getBoundingBoxCenter(); d = mv.getDimensions();
       fr.forEach((f, i) => {
-        const el = mv.querySelector(`[slot="hotspot-${i + 1}"]`);
-        if (el) el.dataset.position = `${c.x + f[0] * d.x} ${c.y + f[1] * d.y} ${c.z + f[2] * d.z}`;
-        if (el) el.dataset.normal = "0 0 1";
+        mv.updateHotspot({ name: `hotspot-${i + 1}`, position: `${c.x + f[0] * d.x}m ${c.y + f[1] * d.y}m ${c.z + f[2] * d.z}m`, normal: "0 0 1" });
       });
     };
     mv.addEventListener("load", place);
