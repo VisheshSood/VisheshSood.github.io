@@ -104,4 +104,27 @@ export const products: Product3D[] = [
     colours: [{ slug: "black", name: "Black" }, { slug: "parrot-green", name: "Parrot Green" }, { slug: "orange", name: "Orange" }],
     bestFor: "Mechanics and automotive, food processing, general industry", sizes: "S–3XL",
   },
+  {
+    slug: "diamond-8-mil", eyebrow: "Invented 2011", family: "Diamond", name: "8 mil Diamond",
+    intro: "The raised diamond texture we invented in 2011, on 8 mil nitrile.",
+    stats: [
+      { value: "+75.0%", label: "Dry grip vs bare hand", icon: "grip" },
+      { value: "+181.9%", label: "Wet grip vs bare hand", icon: "drop" },
+      { value: "8 mil", label: "Nitrile", icon: "layers" },
+      { value: "240 mm", label: "Beaded cuff · 290 mm long cuff available", icon: "ruler" },
+      { value: "Type B", label: "EN ISO 374-1 · 374-5 virus · food contact", icon: "shield" },
+    ],
+    hotspots: [
+      { n: 1, title: "Raised diamond texture", text: "Raised diamonds across palm and fingers.", at: [0, 0.05, 0.5] },
+      { n: 2, title: "Fingertip grip", text: "Texture runs to the fingertips.", at: [0.1, 0.42, 0.5] },
+      { n: 3, title: "Beaded cuff", text: "Polymer-coated inner, powder free, ambidextrous.", at: [0, -0.42, 0.5] },
+    ],
+    notes: [
+      "5 to 9 mil across the family, from 240 mm up to 300 mm long cuff",
+      "EN ISO 374-1 Type B chemical and EN ISO 374-5 virus protection; food-contact tested",
+      "Sizes S to 3XL",
+    ],
+    colours: [{ slug: "orange", name: "Orange" }, { slug: "black", name: "Black" }, { slug: "green", name: "Green" }, { slug: "yellow", name: "Yellow" }],
+    bestFor: "Construction, automotive, chemical handling (long cuff), general industry", sizes: "S–3XL",
+  },
 ];
