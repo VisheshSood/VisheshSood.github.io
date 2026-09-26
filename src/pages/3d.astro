@@ -11,14 +11,14 @@ const withFiles = products.map((p) => {
   const file = base || firstColour?.model || "";
   const defaultColour = base ? 0 : Math.max(0, colours.findIndex((c) => c.model));
   return { ...p, file, colours, defaultColour };
-});
+}).filter((p) => p.file); // tabs without a 3D model are hidden until one arrives
 
 const views = [
-  { id: "palm", label: "Palm", orbit: "0deg 78deg 120%", target: "0 0 0" },
-  { id: "left", label: "Left side", orbit: "90deg 78deg 120%", target: "0 0 0" },
-  { id: "back", label: "Back", orbit: "180deg 78deg 120%", target: "0 0 0" },
-  { id: "right", label: "Right side", orbit: "270deg 78deg 120%", target: "0 0 0" },
-  { id: "angle", label: "45° angle", orbit: "45deg 62deg 120%", target: "0 0 0" },
+  { id: "palm", label: "Palm", orbit: "0deg 78deg 100%", target: "0 0 0" },
+  { id: "left", label: "Left side", orbit: "90deg 78deg 100%", target: "0 0 0" },
+  { id: "back", label: "Back", orbit: "180deg 78deg 100%", target: "0 0 0" },
+  { id: "right", label: "Right side", orbit: "270deg 78deg 100%", target: "0 0 0" },
+  { id: "angle", label: "45° angle", orbit: "45deg 62deg 100%", target: "0 0 0" },
   { id: "fingers", label: "Fingers", orbit: "0deg 78deg 55%", target: "0 0.3 0" },
   { id: "palm-close", label: "Palm close-up", orbit: "0deg 78deg 45%", target: "0 0.05 0" },
   { id: "cuff", label: "Cuff", orbit: "0deg 95deg 60%", target: "0 -0.4 0" },
@@ -67,11 +67,11 @@ const icons: Record<string, string> = {
           <div class="m3d-centre">
             {p.file ? (
               <model-viewer
-                data-mv data-model={p.file} data-hotspots={JSON.stringify(p.hotspots.map((h) => h.at))}
+                data-mv data-model={p.file} data-hotspots={JSON.stringify(p.hotspots.map((h) => ({ at: h.at, view: h.view ?? null })))}
                 alt={p.name}
                 camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="16deg"
                 shadow-intensity="1" shadow-softness="0.8" exposure="1" environment-image="neutral" tone-mapping="neutral"
-                camera-orbit="30deg 78deg 120%" min-camera-orbit="auto 30deg 40%" max-camera-orbit="auto 130deg 220%"
+                field-of-view="30deg" camera-orbit="30deg 78deg auto"
                 interaction-prompt="none" reveal="auto"
                 ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" touch-action="pan-y"
               >
@@ -106,7 +106,7 @@ const icons: Record<string, string> = {
               <p class="eyebrow">Colour options</p>
               <div class="m3d-swatches">
                 {p.colours.map((c, ci) => (
-                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} title={c.name}>
+                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
                     <img src={c.swatch} alt="" loading="lazy" /><span>{c.name}</span>
                   </button>
                 ))}
@@ -149,12 +149,17 @@ const icons: Record<string, string> = {
   stages.forEach((stage) => {
     const mv = stage.querySelector<any>("[data-mv]");
     if (!mv) return;
-    const fr: number[][] = JSON.parse(mv.dataset.hotspots || "[]");
+    const hs: { at: number[]; view: { orbit: string; target?: number[] } | null }[] = JSON.parse(mv.dataset.hotspots || "[]");
+    const fr = hs.map((h) => h.at);
     let c = { x: 0, y: 0, z: 0 }, d = { x: 1, y: 1, z: 1 };
+    // R = distance that fits the whole model at 30° FOV; every view is a multiple of it.
+    let R = 1;
+    const orbit = (spec: string) => spec.replace(/([\d.]+)%/, (_, p) => `${(Number(p) / 100) * R}m`);
     const place = () => {
-      mv.updateFraming();
-      mv.cameraTarget = "auto auto auto"; mv.cameraOrbit = "30deg 78deg 120%"; mv.fieldOfView = "auto";
       c = mv.getBoundingBoxCenter(); d = mv.getDimensions();
+      R = 1.87 * Math.max(d.y, d.x * 1.05) * 1.15;
+      mv.minCameraOrbit = `auto 20deg ${0.35 * R}m`; mv.maxCameraOrbit = `auto 160deg ${2.5 * R}m`;
+      mv.cameraTarget = `${c.x}m ${c.y}m ${c.z}m`; mv.cameraOrbit = orbit("30deg 78deg 100%"); mv.jumpCameraToGoal();
       fr.forEach((f, i) => {
         mv.updateHotspot({ name: `hotspot-${i + 1}`, position: `${c.x + f[0] * d.x}m ${c.y + f[1] * d.y}m ${c.z + f[2] * d.z}m`, normal: "0 0 1" });
       });
@@ -175,7 +180,7 @@ const icons: Record<string, string> = {
         stopRotate();
         const [tx, ty, tz] = b.dataset.target!.split(" ").map(Number);
         mv.cameraTarget = `${c.x + tx * d.x}m ${c.y + ty * d.y}m ${c.z + tz * d.z}m`;
-        mv.cameraOrbit = b.dataset.orbit;
+        mv.cameraOrbit = orbit(b.dataset.orbit!);
         stage.querySelectorAll(".m3d-view").forEach((x) => x.classList.toggle("on", x === b));
       }));
 
@@ -186,7 +191,13 @@ const icons: Record<string, string> = {
     stage.querySelectorAll<HTMLElement>(".m3d-callouts li, .m3d-dot").forEach((el) => {
       el.addEventListener("mouseenter", () => sync(el.dataset.n, true));
       el.addEventListener("mouseleave", () => sync(el.dataset.n, false));
-      el.addEventListener("click", () => { stopRotate(); const f = fr[Number(el.dataset.n) - 1]; mv.cameraTarget = `${c.x + f[0] * d.x}m ${c.y + f[1] * d.y}m ${c.z + f[2] * d.z}m`; mv.cameraOrbit = "0deg 78deg 55%"; });
+      el.addEventListener("click", () => {
+        stopRotate();
+        const h = hs[Number(el.dataset.n) - 1]; const t = h.view?.target ?? h.at;
+        mv.cameraTarget = `${c.x + t[0] * d.x}m ${c.y + t[1] * d.y}m ${c.z + t[2] * d.z}m`;
+        mv.cameraOrbit = orbit(h.view?.orbit ?? "0deg 78deg 55%");
+        stage.querySelectorAll(".m3d-view").forEach((x) => x.classList.remove("on"));
+      });
     });
 
     // colour swatches: load a per-colour model when one exists
@@ -250,6 +261,7 @@ const icons: Record<string, string> = {
   .m3d-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; margin-bottom: 16px; }
   .m3d-swatch { border: 2px solid var(--light-border); background: var(--light-surface); border-radius: var(--radius); padding: 6px 4px 8px; cursor: pointer; display: grid; gap: 4px; justify-items: center; font: 500 11px/1.2 var(--font-body); color: var(--text-muted); }
   .m3d-swatch.on { border-color: var(--green); color: var(--text); }
+  .m3d-swatch:disabled { opacity: .4; cursor: default; }
   .m3d-swatch img { height: 64px; width: auto; }
   .m3d-toggle { display: flex; gap: 8px; align-items: center; font-size: 14px; }
   .m3d-toggle input { accent-color: var(--green); width: 18px; height: 18px; }

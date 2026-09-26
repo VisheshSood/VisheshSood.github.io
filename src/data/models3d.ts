@@ -1,6 +1,6 @@
 // Products shown on /3d, in tab order. Each looks for src/models3d/<slug>.glb and <slug>--<colour>.glb.
 // Copy mirrors the 2026 print catalogue. Grip figures are nitrile-only and never shown on latex.
-export type Hotspot = { n: number; title: string; text: string; at: [number, number, number] }; // fraction of bounding box, -0.5..0.5, front = +z
+export type Hotspot = { n: number; title: string; text: string; at: [number, number, number]; view?: { orbit: string; target?: [number, number, number] } }; // at/target = fraction of bounding box, -0.5..0.5, front = +z
 export type Stat = { value: string; label: string; icon: "layers" | "ruler" | "shield" | "refresh" | "leaf" | "grip" | "drop" };
 export type Colour = { slug: string; name: string };
 export type Product3D = {
@@ -29,8 +29,8 @@ export const products: Product3D[] = [
     stats: [{ value: "17 mil", label: "20 mil at palm", icon: "layers" }, ...latexStats.slice(1)],
     hotspots: [
       { n: 1, title: "Raised diamond texture", text: "The diamond texture we invented in 2011, on 17 mil natural latex, 20 mil at the palm.", at: [0, 0.05, 0.5] },
-      { n: 2, title: "Two-layer tear indicator", text: "Coloured outer over a white inner, so a crack shows white straight away.", at: [-0.2, 0.3, 0.5] },
-      { n: 3, title: "300 mm long cuff", text: "Beaded cuff stops liquid running down the arm.", at: [0, -0.42, 0.5] },
+      { n: 2, title: "Two-layer tear indicator", text: "Coloured outer over a white inner, so a crack shows white straight away.", at: [-0.2, 0.3, 0.5], view: { orbit: "0deg 150deg 65%", target: [0, -0.5, 0] } },
+      { n: 3, title: "300 mm long cuff", text: "Beaded cuff stops liquid running down the arm.", at: [0, -0.42, 0.5], view: { orbit: "20deg 85deg 70%", target: [0, -0.3, 0] } },
     ],
     notes: latexNotes,
     colours: [{ slug: "orange-silverlined", name: "Orange Silverlined" }, { slug: "blue-silverlined", name: "Blue Silverlined" }, { slug: "green-silverlined", name: "Green Silverlined" }],
@@ -38,14 +38,21 @@ export const products: Product3D[] = [
   },
   {
     slug: "zig-silverlined-latex", eyebrow: "Patented", family: "Zig Latex", name: "Zig Silverlined Latex",
-    intro: "17 mil Silverlined natural latex with a long cuff, on our patented Zig texture.",
-    stats: latexStats,
-    hotspots: [
-      { n: 1, title: "Patented Zig texture", text: "Raised zig ridges across palm and fingers.", at: [0, 0.05, 0.5] },
-      { n: 2, title: "Two-layer tear indicator", text: "Coloured outer over a white inner, so a crack shows white straight away.", at: [-0.2, 0.3, 0.5] },
-      { n: 3, title: "300 mm long cuff", text: "Beaded cuff stops liquid running down the arm.", at: [0, -0.42, 0.5] },
+    intro: "17 mil Silverlined natural latex with a long cuff, on our patented Zig texture, the best dry grip we make.",
+    stats: [
+      { value: "Zig", label: "Our best dry-grip texture", icon: "grip" },
+      { value: "17 mil", label: "Natural latex", icon: "layers" },
+      { value: "300 mm", label: "Long cuff", icon: "ruler" },
+      { value: "Silverlined", label: "White inner, tear indicator", icon: "shield" },
+      { value: "Reusable", label: "Lasts beyond a disposable", icon: "refresh" },
     ],
-    notes: latexNotes,
+    hotspots: [
+      { n: 1, title: "Zig dry grip", text: "Raised zig ridges across palm and fingers. Our best dry grip, and it holds in wet and oily conditions.", at: [0, 0.08, 0.5] },
+      { n: 2, title: "Thumb grip", text: "Extra zig grip on the index-facing side of the thumb, for tools and pinch grip.", at: [-0.36, 0.06, 0.4], view: { orbit: "-60deg 80deg 45%", target: [-0.3, 0.05, 0] } },
+      { n: 3, title: "Silverlined tear indicator", text: "Blue outer over a white inner, so a crack shows white straight away.", at: [0.18, -0.26, 0.5], view: { orbit: "0deg 150deg 65%", target: [0, -0.5, 0] } },
+      { n: 4, title: "300 mm long cuff", text: "Beaded cuff stops liquid running down the arm and covers the forearm.", at: [0, -0.44, 0.5], view: { orbit: "20deg 85deg 70%", target: [0, -0.3, 0] } },
+    ],
+    notes: [...latexNotes, "100% natural latex, powder-free"],
     colours: [{ slug: "blue-silverlined", name: "Blue Silverlined" }],
     bestFor: "Chemical handling, oil and gas, janitorial, heavy industry", sizes: "S–3XL",
   },
