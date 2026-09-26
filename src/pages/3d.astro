@@ -152,6 +152,8 @@ const icons: Record<string, string> = {
     const fr: number[][] = JSON.parse(mv.dataset.hotspots || "[]");
     let c = { x: 0, y: 0, z: 0 }, d = { x: 1, y: 1, z: 1 };
     const place = () => {
+      mv.updateFraming();
+      mv.cameraTarget = "auto auto auto"; mv.cameraOrbit = "30deg 78deg 120%"; mv.fieldOfView = "auto";
       c = mv.getBoundingBoxCenter(); d = mv.getDimensions();
       fr.forEach((f, i) => {
         mv.updateHotspot({ name: `hotspot-${i + 1}`, position: `${c.x + f[0] * d.x}m ${c.y + f[1] * d.y}m ${c.z + f[2] * d.z}m`, normal: "0 0 1" });
