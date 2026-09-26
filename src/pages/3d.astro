@@ -1,0 +1,255 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import { products } from "../data/models3d";
+import { existsSync, statSync } from "node:fs";
+import { join } from "node:path";
+
+const dir = join(process.cwd(), "public", "3d");
+const withFiles = products.map((p) => {
+  const colours = p.colours.map((c) => {
+    const f = join(dir, `${p.slug}--${c.slug}.glb`);
+    return { ...c, model: existsSync(f) ? `/3d/${p.slug}--${c.slug}.glb` : "", swatch: `/3d/colours/${p.slug}--${c.slug}.webp` };
+  });
+  // Default model: <slug>.glb, otherwise the first colour that has its own file.
+  const base = join(dir, `${p.slug}.glb`);
+  const firstColour = colours.find((c) => c.model);
+  const file = existsSync(base) ? `/3d/${p.slug}.glb` : firstColour?.model ?? "";
+  const mb = file ? (statSync(join(process.cwd(), "public", file)).size / 1048576).toFixed(1) : "";
+  const defaultColour = existsSync(base) ? 0 : Math.max(0, colours.findIndex((c) => c.model));
+  return { ...p, file, mb, colours, defaultColour };
+});
+
+const views = [
+  { id: "palm", label: "Palm", orbit: "0deg 78deg 120%", target: "0 0 0" },
+  { id: "left", label: "Left side", orbit: "90deg 78deg 120%", target: "0 0 0" },
+  { id: "back", label: "Back", orbit: "180deg 78deg 120%", target: "0 0 0" },
+  { id: "right", label: "Right side", orbit: "270deg 78deg 120%", target: "0 0 0" },
+  { id: "angle", label: "45° angle", orbit: "45deg 62deg 120%", target: "0 0 0" },
+  { id: "fingers", label: "Fingers", orbit: "0deg 78deg 55%", target: "0 0.3 0" },
+  { id: "palm-close", label: "Palm close-up", orbit: "0deg 78deg 45%", target: "0 0.05 0" },
+  { id: "cuff", label: "Cuff", orbit: "0deg 95deg 60%", target: "0 -0.4 0" },
+];
+
+const icons: Record<string, string> = {
+  layers: '<path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/>',
+  ruler: '<path d="M12 3v18"/><path d="M8 7h4M8 12h4M8 17h4"/>',
+  shield: '<path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z"/>',
+  refresh: '<path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/>',
+  leaf: '<path d="M5 19C5 9 11 5 20 5c0 9-4 15-14 15"/><path d="M5 19c3-4 6-7 9-9"/>',
+  grip: '<path d="M4 12h16"/><path d="m7 8 3 4-3 4M13 8l3 4-3 4"/>',
+  drop: '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/>',
+};
+---
+
+<PageLayout title="3D Models | Innovative Gloves" description="Internal 3D model review." noindex={true} noPromo={true}>
+  <section class="section m3d">
+    <div class="container">
+      <div class="m3d-tabs" role="tablist" aria-label="Products">
+        {withFiles.map((p, i) => (
+          <button role="tab" class:list={["m3d-tab", { on: i === 0 }]} data-tab={p.slug} aria-selected={i === 0 ? "true" : "false"}>{p.name}</button>
+        ))}
+      </div>
+
+      {withFiles.map((p, i) => (
+        <article class="m3d-stage" id={p.slug} data-stage hidden={i !== 0}>
+          <!-- LEFT: title + stats -->
+          <div class="m3d-left">
+            <p class="m3d-eyebrow"><span class="pill pill-lime">{p.eyebrow}</span><span class="pill pill-ink">{p.family}</span></p>
+            <h1 set:html={`${p.name}<span class="dot">.</span>`} />
+            <p class="m3d-intro">{p.intro}</p>
+            <ul class="m3d-stats">
+              {p.stats.map((s) => (
+                <li>
+                  <svg class="m3d-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icons[s.icon]} />
+                  <div><b>{s.value}</b><span>{s.label}</span></div>
+                </li>
+              ))}
+            </ul>
+            <p class="m3d-best"><span class="eyebrow">Best for</span>{p.bestFor}</p>
+            <p class="m3d-best"><span class="eyebrow">Sizes</span>{p.sizes}</p>
+          </div>
+
+          <!-- CENTRE: the model -->
+          <div class="m3d-centre">
+            {p.file ? (
+              <model-viewer
+                data-mv data-hotspots={JSON.stringify(p.hotspots.map((h) => h.at))}
+                src={p.file} alt={p.name}
+                camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="16deg"
+                shadow-intensity="1" shadow-softness="0.8" exposure="1" environment-image="neutral" tone-mapping="neutral"
+                camera-orbit="30deg 78deg 120%" min-camera-orbit="auto 30deg 40%" max-camera-orbit="auto 130deg 220%"
+                interaction-prompt="none" loading={i === 0 ? "eager" : "lazy"} reveal="auto"
+                ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" touch-action="pan-y"
+              >
+                {p.hotspots.map((h) => (
+                  <button slot={`hotspot-${h.n}`} class="m3d-dot" data-n={h.n} aria-label={h.title}>{h.n}</button>
+                ))}
+                <button slot="ar-button" class="m3d-ar">View in your space</button>
+                <div class="m3d-progress" slot="progress-bar"><div class="m3d-progress-bar"></div></div>
+              </model-viewer>
+            ) : (
+              <div class="m3d-placeholder">
+                <img src={p.colours[0].swatch} alt={p.name} loading="lazy" />
+                <span>3D model coming</span>
+              </div>
+            )}
+            <div class="m3d-views">
+              {views.map((v) => (
+                <button class="m3d-view" data-orbit={v.orbit} data-target={v.target} disabled={!p.file}>{v.label}</button>
+              ))}
+            </div>
+          </div>
+
+          <!-- RIGHT: callouts + colours -->
+          <aside class="m3d-right">
+            <ol class="m3d-callouts">
+              {p.hotspots.map((h) => (
+                <li data-n={h.n}><span class="m3d-num">{h.n}</span><div><b>{h.title}</b><p>{h.text}</p></div></li>
+              ))}
+            </ol>
+            <ul class="m3d-notes">{p.notes.map((n) => <li>{n}</li>)}</ul>
+            <div class="m3d-colours">
+              <p class="eyebrow">Colour options</p>
+              <div class="m3d-swatches">
+                {p.colours.map((c, ci) => (
+                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} title={c.name}>
+                    <img src={c.swatch} alt="" loading="lazy" /><span>{c.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <label class="m3d-toggle"><input type="checkbox" data-rotate checked={!!p.file} disabled={!p.file} /> Auto-rotate</label>
+            {p.file && <p class="m3d-file"><a href={p.file} download>{p.file.split("/").pop()}</a> · {p.mb} MB</p>}
+          </aside>
+        </article>
+      ))}
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  import "@google/model-viewer";
+
+  const tabs = document.querySelectorAll<HTMLButtonElement>(".m3d-tab");
+  const stages = document.querySelectorAll<HTMLElement>("[data-stage]");
+  function show(slug: string) {
+    tabs.forEach((t) => { const on = t.dataset.tab === slug; t.classList.toggle("on", on); t.setAttribute("aria-selected", String(on)); });
+    stages.forEach((s) => { s.hidden = s.id !== slug; });
+  }
+  tabs.forEach((t) => t.addEventListener("click", () => { show(t.dataset.tab!); history.replaceState(null, "", `#${t.dataset.tab}`); }));
+  const hash = location.hash.slice(1);
+  if (hash && document.getElementById(hash)?.hasAttribute("data-stage")) show(hash);
+
+  stages.forEach((stage) => {
+    const mv = stage.querySelector<any>("[data-mv]");
+    if (!mv) return;
+    const fr: number[][] = JSON.parse(mv.dataset.hotspots || "[]");
+    let c = { x: 0, y: 0, z: 0 }, d = { x: 1, y: 1, z: 1 };
+    const place = () => {
+      c = mv.getBoundingBoxCenter(); d = mv.getDimensions();
+      fr.forEach((f, i) => {
+        const el = mv.querySelector(`[slot="hotspot-${i + 1}"]`);
+        if (el) el.dataset.position = `${c.x + f[0] * d.x} ${c.y + f[1] * d.y} ${c.z + f[2] * d.z}`;
+        if (el) el.dataset.normal = "0 0 1";
+      });
+    };
+    mv.addEventListener("load", place);
+    mv.addEventListener("progress", (e: any) => {
+      const bar = mv.querySelector(".m3d-progress-bar") as HTMLElement;
+      bar.style.width = `${e.detail.totalProgress * 100}%`;
+      if (e.detail.totalProgress === 1) setTimeout(() => (bar.style.width = "0"), 400);
+    });
+
+    const rotate = stage.querySelector<HTMLInputElement>("[data-rotate]")!;
+    rotate.addEventListener("change", () => (mv.autoRotate = rotate.checked));
+    const stopRotate = () => { mv.autoRotate = false; rotate.checked = false; };
+
+    stage.querySelectorAll<HTMLButtonElement>(".m3d-view").forEach((b) =>
+      b.addEventListener("click", () => {
+        stopRotate();
+        const [tx, ty, tz] = b.dataset.target!.split(" ").map(Number);
+        mv.cameraTarget = `${c.x + tx * d.x}m ${c.y + ty * d.y}m ${c.z + tz * d.z}m`;
+        mv.cameraOrbit = b.dataset.orbit;
+        stage.querySelectorAll(".m3d-view").forEach((x) => x.classList.toggle("on", x === b));
+      }));
+
+    // callout <-> hotspot highlight
+    const sync = (n: string | undefined, on: boolean) => {
+      stage.querySelectorAll(`[data-n="${n}"]`).forEach((x) => x.classList.toggle("hi", on));
+    };
+    stage.querySelectorAll<HTMLElement>(".m3d-callouts li, .m3d-dot").forEach((el) => {
+      el.addEventListener("mouseenter", () => sync(el.dataset.n, true));
+      el.addEventListener("mouseleave", () => sync(el.dataset.n, false));
+      el.addEventListener("click", () => { stopRotate(); const f = fr[Number(el.dataset.n) - 1]; mv.cameraTarget = `${c.x + f[0] * d.x}m ${c.y + f[1] * d.y}m ${c.z + f[2] * d.z}m`; mv.cameraOrbit = "0deg 78deg 55%"; });
+    });
+
+    // colour swatches: load a per-colour model when one exists
+    stage.querySelectorAll<HTMLButtonElement>(".m3d-swatch").forEach((s) =>
+      s.addEventListener("click", () => {
+        stage.querySelectorAll(".m3d-swatch").forEach((x) => x.classList.toggle("on", x === s));
+        if (s.dataset.model) mv.src = s.dataset.model;
+      }));
+  });
+</script>
+
+<style>
+  .m3d { padding-block: 24px 48px; }
+  .m3d-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+  .m3d-tab { border: 1px solid var(--light-border); background: var(--light-surface); color: var(--text); padding: 10px 16px; border-radius: var(--radius); font: 600 14px var(--font-body); cursor: pointer; }
+  .m3d-tab.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .m3d-tab:focus-visible, .m3d-view:focus-visible, .m3d-swatch:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  .m3d-stage { display: grid; grid-template-columns: 280px minmax(0, 1fr) 300px; gap: 28px; align-items: start; }
+  .m3d-stage[hidden] { display: none; }
+  .m3d-stage > * { min-width: 0; }
+  .m3d-placeholder img { max-width: 100%; }
+  .m3d-notes, .m3d-best, .m3d-callouts p { overflow-wrap: anywhere; }
+
+  .pill { display: inline-block; font: 700 11px/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; padding: 6px 9px; }
+  .pill-lime { background: var(--green); color: var(--ink); } .pill-ink { background: var(--ink); color: #fff; }
+  .m3d-eyebrow { margin: 0 0 12px; display: flex; }
+  .m3d-left h1 { font: 700 clamp(30px, 3vw, 40px)/1.02 var(--font-head); letter-spacing: -.02em; margin: 0 0 12px; text-wrap: balance; }
+  .m3d-intro { color: var(--text-muted); margin: 0 0 20px; max-width: 34ch; }
+  .m3d-stats { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 12px; }
+  .m3d-stats li { display: flex; align-items: center; gap: 12px; }
+  .m3d-ico { width: 40px; height: 40px; flex: none; padding: 9px; border: 2px solid var(--green); border-radius: 50%; color: var(--green-dark); }
+  .m3d-stats b { display: block; font: 700 20px/1.1 var(--font-head); }
+  .m3d-stats span { font-size: 13px; color: var(--text-muted); }
+  .m3d-best { margin: 0 0 10px; font-size: 14px; color: var(--text-muted); }
+  .m3d-best .eyebrow { display: block; margin-bottom: 2px; }
+
+  .m3d-centre { display: grid; gap: 12px; }
+  model-viewer, .m3d-placeholder { width: 100%; aspect-ratio: 4 / 4.2; max-width: 100%; background: radial-gradient(ellipse at 50% 70%, #ffffff 0%, #eceee9 60%, #dfe2db 100%); border-radius: var(--radius); position: relative; --poster-color: transparent; }
+  .m3d-placeholder { display: grid; place-items: center; grid-template-rows: 1fr auto; padding: 24px; }
+  .m3d-placeholder img { max-height: 100%; object-fit: contain; }
+  .m3d-placeholder span { font: 600 12px var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim); }
+  .m3d-ar { position: absolute; top: 12px; right: 12px; background: var(--green); color: var(--ink); border: 0; border-radius: var(--radius); padding: 8px 12px; font: 600 13px var(--font-body); cursor: pointer; }
+  .m3d-progress { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .m3d-progress-bar { height: 100%; width: 0; background: var(--green); transition: width .2s; }
+  .m3d-dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; background: var(--green); color: var(--ink); font: 700 12px var(--font-body); box-shadow: 0 2px 8px rgba(0,0,0,.25); cursor: pointer; }
+  .m3d-dot.hi { transform: scale(1.25); background: var(--ink); color: #fff; }
+  .m3d-views { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+  .m3d-view { border: 1px solid var(--light-border); background: var(--light-surface); color: var(--text); padding: 8px 12px; border-radius: var(--radius); font: 500 13px var(--font-body); cursor: pointer; }
+  .m3d-view.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .m3d-view:disabled { opacity: .45; cursor: default; }
+
+  .m3d-callouts { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 10px; }
+  .m3d-callouts li { display: flex; gap: 12px; padding: 12px 14px; background: var(--light-bg); border-left: 3px solid var(--green); border-radius: var(--radius); cursor: pointer; }
+  .m3d-callouts li.hi { background: #eef6e3; }
+  .m3d-num { width: 24px; height: 24px; flex: none; border-radius: 50%; background: var(--green); color: var(--ink); font: 700 12px/24px var(--font-body); text-align: center; }
+  .m3d-callouts b { display: block; font: 700 14px/1.2 var(--font-body); margin-bottom: 3px; }
+  .m3d-callouts p { margin: 0; font-size: 13px; color: var(--text-muted); }
+  .m3d-notes { margin: 0 0 20px; padding-left: 18px; font-size: 13px; color: var(--text-muted); display: grid; gap: 4px; }
+  .m3d-colours .eyebrow { margin-bottom: 8px; }
+  .m3d-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; margin-bottom: 16px; }
+  .m3d-swatch { border: 2px solid var(--light-border); background: var(--light-surface); border-radius: var(--radius); padding: 6px 4px 8px; cursor: pointer; display: grid; gap: 4px; justify-items: center; font: 500 11px/1.2 var(--font-body); color: var(--text-muted); }
+  .m3d-swatch.on { border-color: var(--green); color: var(--text); }
+  .m3d-swatch img { height: 64px; width: auto; }
+  .m3d-toggle { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+  .m3d-toggle input { accent-color: var(--green); width: 18px; height: 18px; }
+  .m3d-file { margin: 12px 0 0; font-size: 12px; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+  .m3d-file a { color: var(--text-muted); }
+
+  @media (max-width: 1080px) { .m3d-stage { grid-template-columns: 1fr 1fr; } .m3d-centre { grid-column: 1 / -1; order: -1; } }
+  @media (max-width: 640px) { .m3d-stage { grid-template-columns: 1fr; gap: 20px; } model-viewer, .m3d-placeholder { aspect-ratio: 4 / 4.6; } }
+</style>
