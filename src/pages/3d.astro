@@ -1,22 +1,16 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import { products } from "../data/models3d";
-import { existsSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { modelByFile } from "../lib/models3d-files";
 
-const dir = join(process.cwd(), "public", "3d");
 const withFiles = products.map((p) => {
-  const colours = p.colours.map((c) => {
-    const f = join(dir, `${p.slug}--${c.slug}.glb`);
-    return { ...c, model: existsSync(f) ? `/3d/${p.slug}--${c.slug}.glb` : "", swatch: `/3d/colours/${p.slug}--${c.slug}.webp` };
-  });
+  const colours = p.colours.map((c) => ({ ...c, model: modelByFile(`${p.slug}--${c.slug}.glb`)?.url ?? "", swatch: `/3d/colours/${p.slug}--${c.slug}.webp` }));
   // Default model: <slug>.glb, otherwise the first colour that has its own file.
-  const base = join(dir, `${p.slug}.glb`);
+  const base = modelByFile(`${p.slug}.glb`)?.url ?? "";
   const firstColour = colours.find((c) => c.model);
-  const file = existsSync(base) ? `/3d/${p.slug}.glb` : firstColour?.model ?? "";
-  const mb = file ? (statSync(join(process.cwd(), "public", file)).size / 1048576).toFixed(1) : "";
-  const defaultColour = existsSync(base) ? 0 : Math.max(0, colours.findIndex((c) => c.model));
-  return { ...p, file, mb, colours, defaultColour };
+  const file = base || firstColour?.model || "";
+  const defaultColour = base ? 0 : Math.max(0, colours.findIndex((c) => c.model));
+  return { ...p, file, colours, defaultColour };
 });
 
 const views = [
@@ -73,12 +67,12 @@ const icons: Record<string, string> = {
           <div class="m3d-centre">
             {p.file ? (
               <model-viewer
-                data-mv data-hotspots={JSON.stringify(p.hotspots.map((h) => h.at))}
-                src={p.file} alt={p.name}
+                data-mv data-model={p.file} data-hotspots={JSON.stringify(p.hotspots.map((h) => h.at))}
+                alt={p.name}
                 camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="16deg"
                 shadow-intensity="1" shadow-softness="0.8" exposure="1" environment-image="neutral" tone-mapping="neutral"
                 camera-orbit="30deg 78deg 120%" min-camera-orbit="auto 30deg 40%" max-camera-orbit="auto 130deg 220%"
-                interaction-prompt="none" loading={i === 0 ? "eager" : "lazy"} reveal="auto"
+                interaction-prompt="none" reveal="auto"
                 ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" touch-action="pan-y"
               >
                 {p.hotspots.map((h) => (
@@ -119,7 +113,6 @@ const icons: Record<string, string> = {
               </div>
             </div>
             <label class="m3d-toggle"><input type="checkbox" data-rotate checked={!!p.file} disabled={!p.file} /> Auto-rotate</label>
-            {p.file && <p class="m3d-file"><a href={p.file} download>{p.file.split("/").pop()}</a> · {p.mb} MB</p>}
           </aside>
         </article>
       ))}
@@ -129,6 +122,16 @@ const icons: Record<string, string> = {
 
 <script>
   import "@google/model-viewer";
+  import { scramble } from "../lib/obf";
+
+  const loaded = new WeakMap<Element, string>();
+  async function loadModel(mv: any, url: string) {
+    if (!url || loaded.get(mv) === url) return;
+    loaded.set(mv, url);
+    const id = url.split("/").pop()!.replace(/\.bin$/, "");
+    const buf = new Uint8Array(await (await fetch(url)).arrayBuffer());
+    mv.src = URL.createObjectURL(new Blob([scramble(buf, id)], { type: "model/gltf-binary" }));
+  }
 
   const tabs = document.querySelectorAll<HTMLButtonElement>(".m3d-tab");
   const stages = document.querySelectorAll<HTMLElement>("[data-stage]");
@@ -136,12 +139,12 @@ const icons: Record<string, string> = {
     tabs.forEach((t) => { const on = t.dataset.tab === slug; t.classList.toggle("on", on); t.setAttribute("aria-selected", String(on)); });
     stages.forEach((s) => {
       s.hidden = s.dataset.stage !== slug;
-      if (!s.hidden) s.querySelector("[data-mv]")?.setAttribute("loading", "eager");
+      if (!s.hidden) { const v = s.querySelector<any>("[data-mv]"); if (v) loadModel(v, v.dataset.model); }
     });
   }
   tabs.forEach((t) => t.addEventListener("click", () => { show(t.dataset.tab!); history.replaceState(null, "", `#${t.dataset.tab}`); }));
   const hash = location.hash.slice(1);
-  if (hash && document.querySelector(`[data-stage="${hash}"]`)) show(hash);
+  show(hash && document.querySelector(`[data-stage="${hash}"]`) ? hash : (stages[0] as HTMLElement).dataset.stage!);
 
   stages.forEach((stage) => {
     const mv = stage.querySelector<any>("[data-mv]");
@@ -188,7 +191,7 @@ const icons: Record<string, string> = {
     stage.querySelectorAll<HTMLButtonElement>(".m3d-swatch").forEach((s) =>
       s.addEventListener("click", () => {
         stage.querySelectorAll(".m3d-swatch").forEach((x) => x.classList.toggle("on", x === s));
-        if (s.dataset.model) mv.src = s.dataset.model;
+        if (s.dataset.model) loadModel(mv, s.dataset.model);
       }));
   });
 </script>
@@ -248,8 +251,6 @@ const icons: Record<string, string> = {
   .m3d-swatch img { height: 64px; width: auto; }
   .m3d-toggle { display: flex; gap: 8px; align-items: center; font-size: 14px; }
   .m3d-toggle input { accent-color: var(--green); width: 18px; height: 18px; }
-  .m3d-file { margin: 12px 0 0; font-size: 12px; color: var(--text-dim); font-variant-numeric: tabular-nums; }
-  .m3d-file a { color: var(--text-muted); }
 
   @media (max-width: 1080px) { .m3d-stage { grid-template-columns: 1fr 1fr; } .m3d-centre { grid-column: 1 / -1; order: -1; } }
   @media (max-width: 640px) { .m3d-stage { grid-template-columns: 1fr; gap: 20px; } model-viewer, .m3d-placeholder { aspect-ratio: 4 / 4.6; } }
