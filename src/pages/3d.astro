@@ -81,6 +81,7 @@ const icons: Record<string, string> = {
                 <button slot="ar-button" class="m3d-ar">View in your space</button>
                 <div class="m3d-progress" slot="progress-bar"><div class="m3d-progress-bar"></div></div>
               </model-viewer>
+              <p class="m3d-turn"><span>360°</span> Drag to rotate</p>
             ) : (
               <div class="m3d-placeholder">
                 <img src={p.colours[0].swatch} alt={p.name} loading="lazy" />
@@ -89,7 +90,9 @@ const icons: Record<string, string> = {
             )}
             <div class="m3d-views">
               {views.map((v) => (
-                <button class="m3d-view" data-orbit={v.orbit} data-target={v.target} disabled={!p.file}>{v.label}</button>
+                <button class="m3d-view" data-orbit={v.orbit} data-target={v.target} disabled={!p.file}>
+                  <canvas width="160" height="160" aria-hidden="true"></canvas><span>{v.label}</span>
+                </button>
               ))}
             </div>
           </div>
@@ -98,7 +101,7 @@ const icons: Record<string, string> = {
           <aside class="m3d-right">
             <ol class="m3d-callouts">
               {p.hotspots.map((h) => (
-                <li data-n={h.n}><span class="m3d-num">{h.n}</span><div><b>{h.title}</b><p>{h.text}</p></div></li>
+                <li data-n={h.n}><canvas class="m3d-inset" width="220" height="220" aria-hidden="true"></canvas><div><span class="m3d-num">{h.n}</span><b>{h.title}</b><p>{h.text}</p></div></li>
               ))}
             </ol>
             <ul class="m3d-notes">{p.notes.map((n) => <li>{n}</li>)}</ul>
@@ -133,6 +136,35 @@ const icons: Record<string, string> = {
     mv.src = URL.createObjectURL(new Blob([scramble(buf, id)], { type: "model/gltf-binary" }));
   }
 
+  // One hidden model-viewer renders the insets and thumbnails so the main view is never disturbed.
+  const off: any = document.createElement("model-viewer");
+  off.setAttribute("style", "position:fixed;left:0;top:0;width:440px;height:440px;opacity:0;pointer-events:none;z-index:-1");
+  off.setAttribute("exposure", "1"); off.setAttribute("environment-image", "neutral"); off.setAttribute("tone-mapping", "neutral");
+  off.setAttribute("shadow-intensity", "0"); off.setAttribute("field-of-view", "30deg"); off.setAttribute("interaction-prompt", "none");
+  document.body.appendChild(off);
+  let offQueue: Promise<void> = Promise.resolve();
+  function renderViews(url: string, jobs: { canvas: HTMLCanvasElement; orbit: string; target: string; zoom?: number }[]) {
+    offQueue = offQueue.then(async () => {
+      if (off.src !== url) { off.src = url; await new Promise((r) => off.addEventListener("load", r, { once: true })); }
+      const c = off.getBoundingBoxCenter(), d = off.getDimensions();
+      const R = 1.87 * Math.max(d.y, d.x * 1.05) * 1.15;
+      for (const j of jobs) {
+        const [tx, ty, tz] = j.target.split(" ").map(Number);
+        off.cameraTarget = `${c.x + tx * d.x}m ${c.y + ty * d.y}m ${c.z + tz * d.z}m`;
+        off.cameraOrbit = j.orbit.replace(/([\d.]+)%/, (_: string, p: string) => `${(Number(p) / 100) * R * (j.zoom ?? 1)}m`);
+        off.jumpCameraToGoal();
+        await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+        const blob: Blob = await off.toBlob({ idealAspect: false, mimeType: "image/png" });
+        const img = new Image(); img.src = URL.createObjectURL(blob);
+        await img.decode();
+        const ctx = j.canvas.getContext("2d")!; const s = Math.min(img.width, img.height);
+        ctx.clearRect(0, 0, j.canvas.width, j.canvas.height);
+        ctx.drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, j.canvas.width, j.canvas.height);
+        URL.revokeObjectURL(img.src);
+      }
+    }).catch(() => {});
+  }
+
   const tabs = document.querySelectorAll<HTMLButtonElement>(".m3d-tab");
   const stages = document.querySelectorAll<HTMLElement>("[data-stage]");
   function show(slug: string) {
@@ -163,6 +195,14 @@ const icons: Record<string, string> = {
       fr.forEach((f, i) => {
         mv.updateHotspot({ name: `hotspot-${i + 1}`, position: `${c.x + f[0] * d.x}m ${c.y + f[1] * d.y}m ${c.z + f[2] * d.z}m`, normal: "0 0 1" });
       });
+      // insets: each callout shows its own close-up; thumbnails: each preset shows its view
+      const url = String(mv.src);
+      const insets = [...stage.querySelectorAll<HTMLCanvasElement>(".m3d-inset")].map((canvas, i) => {
+        const h = hs[i]; const t = h.view?.target ?? h.at;
+        return { canvas, orbit: h.view?.orbit ?? "0deg 78deg 40%", target: `${t[0]} ${t[1]} ${t[2]}`, zoom: h.view ? 0.7 : 1 };
+      });
+      const thumbs = [...stage.querySelectorAll<HTMLButtonElement>(".m3d-view")].map((b) => ({ canvas: b.querySelector("canvas")!, orbit: b.dataset.orbit!, target: b.dataset.target! }));
+      renderViews(url, [...insets, ...thumbs]);
     };
     mv.addEventListener("load", place);
     mv.addEventListener("progress", (e: any) => {
@@ -219,6 +259,7 @@ const icons: Record<string, string> = {
   .m3d-stage { display: grid; grid-template-columns: 280px minmax(0, 1fr) 300px; gap: 28px; align-items: start; }
   .m3d-stage[hidden] { display: none; }
   .m3d-stage > * { min-width: 0; }
+  .m3d-stage { position: relative; }
   .m3d-placeholder img { max-width: 100%; }
   .m3d-notes, .m3d-best, .m3d-callouts p { overflow-wrap: anywhere; }
 
@@ -235,8 +276,10 @@ const icons: Record<string, string> = {
   .m3d-best { margin: 0 0 10px; font-size: 14px; color: var(--text-muted); }
   .m3d-best .eyebrow { display: block; margin-bottom: 2px; }
 
-  .m3d-centre { display: grid; gap: 12px; }
-  model-viewer, .m3d-placeholder { width: 100%; height: auto; aspect-ratio: 4 / 4.2; max-width: 100%; background: radial-gradient(ellipse at 50% 70%, #ffffff 0%, #eceee9 60%, #dfe2db 100%); border-radius: var(--radius); position: relative; --poster-color: transparent; }
+  .m3d-centre { display: grid; gap: 12px; position: relative; }
+  .m3d-turn { position: absolute; left: 50%; transform: translateX(-50%); bottom: 96px; margin: 0; font: 500 12px var(--font-body); color: var(--text-muted); text-align: center; pointer-events: none; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.7); }
+  .m3d-turn span { display: block; font: 700 15px var(--font-head); color: var(--ink); }
+  model-viewer, .m3d-placeholder { width: 100%; height: auto; aspect-ratio: 4 / 4.2; max-width: 100%; background: radial-gradient(ellipse 46% 7% at 50% 88%, #d9dcd5 0%, #d9dcd5 60%, transparent 62%), radial-gradient(ellipse at 50% 70%, #ffffff 0%, #eceee9 60%, #dfe2db 100%); border-radius: var(--radius); position: relative; --poster-color: transparent; }
   .m3d-placeholder { display: grid; place-items: center; grid-template-rows: 1fr auto; padding: 24px; }
   .m3d-placeholder img { max-height: 100%; object-fit: contain; }
   .m3d-placeholder span { font: 600 12px var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim); }
@@ -245,16 +288,19 @@ const icons: Record<string, string> = {
   .m3d-progress-bar { height: 100%; width: 0; background: var(--green); transition: width .2s; }
   .m3d-dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; background: var(--green); color: var(--ink); font: 700 12px var(--font-body); box-shadow: 0 2px 8px rgba(0,0,0,.25); cursor: pointer; }
   .m3d-dot.hi { transform: scale(1.25); background: var(--ink); color: #fff; }
-  .m3d-views { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
-  .m3d-view { border: 1px solid var(--light-border); background: var(--light-surface); color: var(--text); padding: 8px 12px; border-radius: var(--radius); font: 500 13px var(--font-body); cursor: pointer; }
-  .m3d-view.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .m3d-views { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
+  .m3d-view { border: 1px solid var(--light-border); background: var(--light-surface); color: var(--text-muted); padding: 0 0 6px; border-radius: var(--radius); font: 500 11px/1.2 var(--font-body); cursor: pointer; display: grid; gap: 4px; overflow: hidden; }
+  .m3d-view canvas { width: 100%; height: auto; aspect-ratio: 1; display: block; background: #eef0eb; }
+  .m3d-view.on { border-color: var(--green); color: var(--text); box-shadow: inset 0 0 0 1px var(--green); }
   .m3d-view:disabled { opacity: .45; cursor: default; }
 
   .m3d-callouts { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 10px; }
-  .m3d-callouts li { display: flex; gap: 12px; padding: 12px 14px; background: var(--light-bg); border-left: 3px solid var(--green); border-radius: var(--radius); cursor: pointer; }
+  .m3d-callouts li { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: center; padding: 10px 12px 10px 10px; background: var(--light-bg); border-radius: var(--radius); cursor: pointer; }
   .m3d-callouts li.hi { background: #eef6e3; }
-  .m3d-num { width: 24px; height: 24px; flex: none; border-radius: 50%; background: var(--green); color: var(--ink); font: 700 12px/24px var(--font-body); text-align: center; }
-  .m3d-callouts b { display: block; font: 700 14px/1.2 var(--font-body); margin-bottom: 3px; }
+  .m3d-inset { width: 72px; height: 72px; border-radius: 50%; background: #e6e8e2; border: 2px solid var(--green); }
+  .m3d-num { display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: var(--green); color: var(--ink); font: 700 11px/20px var(--font-body); text-align: center; margin-right: 6px; vertical-align: 1px; }
+  .m3d-callouts b { display: inline; font: 700 14px/1.2 var(--font-body); }
+  .m3d-callouts p { margin: 4px 0 0; }
   .m3d-callouts p { margin: 0; font-size: 13px; color: var(--text-muted); }
   .m3d-notes { margin: 0 0 20px; padding-left: 18px; font-size: 13px; color: var(--text-muted); display: grid; gap: 4px; }
   .m3d-colours .eyebrow { margin-bottom: 8px; }
@@ -267,5 +313,5 @@ const icons: Record<string, string> = {
   .m3d-toggle input { accent-color: var(--green); width: 18px; height: 18px; }
 
   @media (max-width: 1080px) { .m3d-stage { grid-template-columns: 1fr 1fr; } .m3d-centre { grid-column: 1 / -1; order: -1; } }
-  @media (max-width: 640px) { .m3d-stage { grid-template-columns: 1fr; gap: 20px; } model-viewer, .m3d-placeholder { aspect-ratio: 4 / 4.6; } }
+  @media (max-width: 640px) { .m3d-stage { grid-template-columns: 1fr; gap: 20px; } model-viewer, .m3d-placeholder { aspect-ratio: 4 / 4.6; } .m3d-views { grid-template-columns: repeat(4, 1fr); } }
 </style>
