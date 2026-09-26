@@ -9,6 +9,7 @@ interface Props {
   image?: string;
   ogType?: string;
   noindex?: boolean;
+  noPromo?: boolean;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   image = "/images/sus-aerial.jpg",
   ogType = "website",
   noindex = false,
+  noPromo = false,
 } = Astro.props;
 
 // Absolute URLs for canonical / social tags (driven by `site` in astro.config.mjs).
@@ -105,7 +107,7 @@ const websiteSchema = {
   </head>
   <body>
     <slot />
-    <PromoPopup />
+    {!noPromo && <PromoPopup />}
     <AiChat />
 
   </body>
