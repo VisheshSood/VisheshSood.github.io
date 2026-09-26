@@ -101,7 +101,7 @@ const icons: Record<string, string> = {
           <aside class="m3d-right">
             <ol class="m3d-callouts">
               {p.hotspots.map((h) => (
-                <li data-n={h.n}><canvas class="m3d-inset" width="220" height="220" aria-hidden="true"></canvas><div><span class="m3d-num">{h.n}</span><b>{h.title}</b><p>{h.text}</p></div></li>
+                <li data-n={h.n}>{h.photo ? <img class="m3d-inset" src={h.photo} alt="" width="220" height="220" loading="lazy" /> : <canvas class="m3d-inset" width="220" height="220" aria-hidden="true"></canvas>}<div><span class="m3d-num">{h.n}</span><b>{h.title}</b><p>{h.text}</p></div></li>
               ))}
             </ol>
             <ul class="m3d-notes">{p.notes.map((n) => <li>{n}</li>)}</ul>
@@ -197,8 +197,8 @@ const icons: Record<string, string> = {
       });
       // insets: each callout shows its own close-up; thumbnails: each preset shows its view
       const url = String(mv.src);
-      const insets = [...stage.querySelectorAll<HTMLCanvasElement>(".m3d-inset")].map((canvas, i) => {
-        const h = hs[i]; const t = h.view?.target ?? h.at;
+      const insets = [...stage.querySelectorAll<HTMLElement>(".m3d-inset")].map((el, i) => ({ el, i })).filter(({ el }) => el instanceof HTMLCanvasElement).map(({ el, i }) => {
+        const canvas = el as HTMLCanvasElement; const h = hs[i]; const t = h.view?.target ?? h.at;
         return { canvas, orbit: h.view?.orbit ?? "0deg 78deg 40%", target: `${t[0]} ${t[1]} ${t[2]}`, zoom: h.view ? 0.7 : 1 };
       });
       const thumbs = [...stage.querySelectorAll<HTMLButtonElement>(".m3d-view")].map((b) => ({ canvas: b.querySelector("canvas")!, orbit: b.dataset.orbit!, target: b.dataset.target! }));
@@ -297,7 +297,7 @@ const icons: Record<string, string> = {
   .m3d-callouts { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 10px; }
   .m3d-callouts li { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: center; padding: 10px 12px 10px 10px; background: var(--light-bg); border-radius: var(--radius); cursor: pointer; }
   .m3d-callouts li.hi { background: #eef6e3; }
-  .m3d-inset { width: 72px; height: 72px; border-radius: 50%; background: #e6e8e2; border: 2px solid var(--green); }
+  .m3d-inset { width: 72px; height: 72px; border-radius: 50%; background: #e6e8e2; border: 2px solid var(--green); object-fit: cover; }
   .m3d-num { display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: var(--green); color: var(--ink); font: 700 11px/20px var(--font-body); text-align: center; margin-right: 6px; vertical-align: 1px; }
   .m3d-callouts b { display: inline; font: 700 14px/1.2 var(--font-body); }
   .m3d-callouts p { margin: 4px 0 0; }
