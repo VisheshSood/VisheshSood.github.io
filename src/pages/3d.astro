@@ -51,7 +51,7 @@ const icons: Record<string, string> = {
       </div>
 
       {withFiles.map((p, i) => (
-        <article class="m3d-stage" id={p.slug} data-stage hidden={i !== 0}>
+        <article class="m3d-stage" data-stage={p.slug} hidden={i !== 0}>
           <!-- LEFT: title + stats -->
           <div class="m3d-left">
             <p class="m3d-eyebrow"><span class="pill pill-lime">{p.eyebrow}</span><span class="pill pill-ink">{p.family}</span></p>
@@ -134,11 +134,14 @@ const icons: Record<string, string> = {
   const stages = document.querySelectorAll<HTMLElement>("[data-stage]");
   function show(slug: string) {
     tabs.forEach((t) => { const on = t.dataset.tab === slug; t.classList.toggle("on", on); t.setAttribute("aria-selected", String(on)); });
-    stages.forEach((s) => { s.hidden = s.id !== slug; });
+    stages.forEach((s) => {
+      s.hidden = s.dataset.stage !== slug;
+      if (!s.hidden) s.querySelector("[data-mv]")?.setAttribute("loading", "eager");
+    });
   }
   tabs.forEach((t) => t.addEventListener("click", () => { show(t.dataset.tab!); history.replaceState(null, "", `#${t.dataset.tab}`); }));
   const hash = location.hash.slice(1);
-  if (hash && document.getElementById(hash)?.hasAttribute("data-stage")) show(hash);
+  if (hash && document.querySelector(`[data-stage="${hash}"]`)) show(hash);
 
   stages.forEach((stage) => {
     const mv = stage.querySelector<any>("[data-mv]");
@@ -219,7 +222,7 @@ const icons: Record<string, string> = {
   .m3d-best .eyebrow { display: block; margin-bottom: 2px; }
 
   .m3d-centre { display: grid; gap: 12px; }
-  model-viewer, .m3d-placeholder { width: 100%; aspect-ratio: 4 / 4.2; max-width: 100%; background: radial-gradient(ellipse at 50% 70%, #ffffff 0%, #eceee9 60%, #dfe2db 100%); border-radius: var(--radius); position: relative; --poster-color: transparent; }
+  model-viewer, .m3d-placeholder { width: 100%; height: auto; aspect-ratio: 4 / 4.2; max-width: 100%; background: radial-gradient(ellipse at 50% 70%, #ffffff 0%, #eceee9 60%, #dfe2db 100%); border-radius: var(--radius); position: relative; --poster-color: transparent; }
   .m3d-placeholder { display: grid; place-items: center; grid-template-rows: 1fr auto; padding: 24px; }
   .m3d-placeholder img { max-height: 100%; object-fit: contain; }
   .m3d-placeholder span { font: 600 12px var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim); }
