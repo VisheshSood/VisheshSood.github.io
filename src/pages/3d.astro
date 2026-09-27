@@ -174,7 +174,7 @@ const icons: Record<string, string> = {
         await Promise.race([new Promise((r) => off.addEventListener("environment-change", r, { once: true })), new Promise((r) => setTimeout(r, 400))]);
       }
       if (off.src !== url) { off.src = url; await new Promise((r) => off.addEventListener("load", r, { once: true })); }
-      off.model?.materials.forEach((m: any) => { if (look.roughness) m.pbrMetallicRoughness.setRoughnessFactor(Number(look.roughness)); });
+      off.model?.materials.forEach((m: any) => { if (look.roughness && !/^IG\b/.test(m.name)) m.pbrMetallicRoughness.setRoughnessFactor(Number(look.roughness)); });
       const c = off.getBoundingBoxCenter(), d = off.getDimensions();
       const R = 1.87 * Math.max(d.y, d.x * 1.05) * 1.15;
       for (const j of jobs) try {
@@ -217,7 +217,8 @@ const icons: Record<string, string> = {
     let R = 1;
     const orbit = (spec: string) => spec.replace(/([\d.]+)%/, (_, p) => `${(Number(p) / 100) * R}m`);
     const place = () => {
-      if (mv.dataset.roughness) mv.model?.materials.forEach((m: any) => m.pbrMetallicRoughness.setRoughnessFactor(Number(mv.dataset.roughness)));
+      // Gloss override applies to the glove only; the moulded IG letters stay matte.
+      if (mv.dataset.roughness) mv.model?.materials.forEach((m: any) => { if (!/^IG\b/.test(m.name)) m.pbrMetallicRoughness.setRoughnessFactor(Number(mv.dataset.roughness)); });
       c = mv.getBoundingBoxCenter(); d = mv.getDimensions();
       R = 1.87 * Math.max(d.y, d.x * 1.05) * 1.15;
       mv.minCameraOrbit = `auto 20deg ${0.2 * R}m`; mv.maxCameraOrbit = `auto 160deg ${2.5 * R}m`;
