@@ -162,6 +162,7 @@ export const products: Product3D[] = [
       { slug: "black", name: "Black", look: studioLook, codes: "32406BK240 · 32408BK240 · 36408BK240 · 32408BK290 (8 mil, 290 mm long cuff)", note: blackNote },
       { slug: "yellow", name: "Yellow", codes: "32406YL240 · 32407YL240 · 32509YL300 (9 mil, 300 mm long cuff)", note: hiVis },
       { slug: "green", name: "Green", codes: "32406GR240 · 32407GR240", note: "Bright green is easy to spot; use it to colour-code tasks or areas" },
+      { slug: "blue", name: "Blue", codes: "32406BU240 · 32408BU240 · 32406BU290 · 32408BU290 (290 mm long cuff)", note: "Long cuff for forearm cover; blue stands out against meat, poultry and produce" },
     ],
     bestFor: "Construction, automotive, chemical handling (long cuff), general industry", sizes: "S–3XL",
   },
