@@ -1,6 +1,6 @@
 // Products shown on /3d, in tab order. Each looks for src/models3d/<slug>.glb and <slug>--<colour>.glb.
 // Copy mirrors the 2026 print catalogue. Grip figures are nitrile-only and never shown on latex.
-export type Hotspot = { n: number; title: string; text: string; at: [number, number, number]; view?: { orbit: string; target?: [number, number, number] }; photo?: string }; // photo may contain {colour}, replaced by the selected colour slug // at/target = fraction of bounding box, -0.5..0.5, front = +z
+export type Hotspot = { n: number; title: string; text: string; at: [number, number, number]; view?: { orbit: string; target?: [number, number, number] }}; // at/target = fraction of bounding box, -0.5..0.5, front = +z
 export type Stat = { value: string; label: string; icon: "layers" | "ruler" | "shield" | "refresh" | "leaf" | "grip" | "drop" };
 // look: per-colour lighting. Dark gloves hide their texture under even light; a studio environment and a slightly
 // glossier surface make the relief readable.
@@ -73,10 +73,10 @@ export const products: Product3D[] = [
       { value: "Reusable", label: "Lasts beyond a disposable", icon: "refresh" },
     ],
     hotspots: [
-      { n: 1, title: "Zig dry grip", text: "Raised zig ridges across palm and fingers. Our best dry grip, and it holds in wet and oily conditions.", at: [0, 0.08, 0.5], photo: "/3d/features/zig-silverlined-latex--1.webp" },
-      { n: 2, title: "Thumb grip", text: "Extra zig grip on the index-facing side of the thumb, for tools and pinch grip.", at: [-0.36, 0.06, 0.4], view: { orbit: "-60deg 80deg 45%", target: [-0.3, 0.05, 0] }, photo: "/3d/features/zig-silverlined-latex--2.webp" },
-      { n: 3, title: "Silverlined tear indicator", text: "Blue outer over a white inner, so a crack shows white straight away.", at: [0.18, -0.26, 0.5], view: { orbit: "0deg 150deg 65%", target: [0, -0.5, 0] }, photo: "/3d/features/zig-silverlined-latex--3.webp" },
-      { n: 4, title: "300 mm long cuff", text: "Beaded cuff stops liquid running down the arm and covers the forearm.", at: [0, -0.44, 0.5], view: { orbit: "20deg 85deg 70%", target: [0, -0.3, 0] }, photo: "/3d/features/zig-silverlined-latex--4.webp" },
+      { n: 1, title: "Zig dry grip", text: "Raised zig ridges across palm and fingers. Our best dry grip, and it holds in wet and oily conditions.", at: [0, 0.08, 0.5] },
+      { n: 2, title: "Thumb grip", text: "Extra zig grip on the index-facing side of the thumb, for tools and pinch grip.", at: [-0.36, 0.06, 0.4], view: { orbit: "-60deg 80deg 45%", target: [-0.3, 0.05, 0] } },
+      { n: 3, title: "Silverlined tear indicator", text: "Blue outer over a white inner, so a crack shows white straight away.", at: [0.18, -0.26, 0.5], view: { orbit: "0deg 150deg 65%", target: [0, -0.5, 0] } },
+      { n: 4, title: "300 mm long cuff", text: "Beaded cuff stops liquid running down the arm and covers the forearm.", at: [0, -0.44, 0.5], view: { orbit: "20deg 85deg 70%", target: [0, -0.3, 0] } },
     ],
     notes: [...latexNotes, "100% natural latex, powder-free"],
     colours: [{ slug: "blue-silverlined", name: "Blue Silverlined", codes: "14714SL290", note: "Blue is the food-industry colour: it stands out against meat, poultry and produce" }],
@@ -115,9 +115,9 @@ export const products: Product3D[] = [
       { value: "Type B", label: "EN ISO 374-1 · 374-5 virus · food contact", icon: "shield" },
     ],
     hotspots: [
-      { n: 1, title: "Micro diamond texture", text: "Small raised diamonds across palm and fingers.", at: [0, 0.05, 0.5], photo: "/3d/features/micro-diamond-8-mil--{colour}--1.webp" },
+      { n: 1, title: "Micro diamond texture", text: "Small raised diamonds across palm and fingers.", at: [0, 0.05, 0.5] },
       { n: 2, title: "Fingertip grip", text: "Texture runs to the fingertips.", at: [0.1, 0.42, 0.5] },
-      { n: 3, title: "Polymer-coated inner", text: "Powder-free and ambidextrous; slides on easily with no residue.", at: [0, -0.42, 0.5], photo: "/3d/features/micro-diamond-8-mil--{colour}--3.webp" },
+      { n: 3, title: "Polymer-coated inner", text: "Powder-free and ambidextrous; slides on easily with no residue.", at: [0, -0.42, 0.5] },
     ],
     notes: [
       "6 to 9 mil: 1.5 to over 2 times the thickness of a standard 4 mil glove",

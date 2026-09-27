@@ -2,15 +2,7 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import { products } from "../data/models3d";
 import { modelByFile } from "../lib/models3d-files";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 
-// Feature photo for hotspot h in colour c, or "" when that colour has none (the rendered close-up is used instead).
-const photoFor = (h: { photo?: string }, colour: string) => {
-  if (!h.photo) return "";
-  const url = h.photo.replace("{colour}", colour);
-  return existsSync(join(process.cwd(), "public", url)) ? url : "";
-};
 
 const withFiles = products.map((p) => {
   const colours = p.colours.map((c) => ({ ...c, model: modelByFile(`${p.slug}--${c.slug}.glb`)?.url ?? "", swatch: `/3d/colours/${p.slug}--${c.slug}.webp` }));
@@ -19,8 +11,7 @@ const withFiles = products.map((p) => {
   const firstColour = colours.find((c) => c.model);
   const file = base || firstColour?.model || "";
   const defaultColour = base ? 0 : Math.max(0, colours.findIndex((c) => c.model));
-  const photos = Object.fromEntries(p.colours.map((c) => [c.slug, p.hotspots.map((h) => photoFor(h, c.slug))]));
-  return { ...p, file, colours, defaultColour, photos };
+  return { ...p, file, colours, defaultColour };
 }).filter((p) => p.file); // tabs without a 3D model are hidden until one arrives
 
 const views = [
@@ -56,7 +47,7 @@ const icons: Record<string, string> = {
 
       {withFiles.map((p, i) => (
         <article class="m3d-stage" data-stage={p.slug} hidden={i !== 0}>
-          <!-- LEFT: title + stats -->
+          <!-- LEFT: name, stats, colour picker -->
           <div class="m3d-left">
             <p class="m3d-eyebrow"><span class="pill pill-lime">{p.eyebrow}</span><span class="pill pill-ink">{p.family}</span></p>
             <h1 set:html={`${p.name}<span class="dot">.</span>`} />
@@ -69,8 +60,22 @@ const icons: Record<string, string> = {
                 </li>
               ))}
             </ul>
-            <p class="m3d-best"><span class="eyebrow">Best for</span>{p.bestFor}</p>
-            <p class="m3d-best"><span class="eyebrow">Sizes</span>{p.sizes}</p>
+            <div class="m3d-colours">
+              <p class="eyebrow">Colour options</p>
+              <div class="m3d-swatches">
+                {p.colours.map((c, ci) => (
+                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} data-look={JSON.stringify(c.look ?? {})} data-colour={c.slug} data-name={c.name} data-note={c.note ?? ""} data-codes={c.codes ?? ""} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
+                    <img src={c.swatch} alt="" loading="lazy" /><span>{c.name}</span>
+                  </button>
+                ))}
+              </div>
+              {(() => { const c = p.colours[p.defaultColour]; return (
+                <div class="m3d-colour-info" data-colour-info>
+                  <p class="m3d-colour-note"><b data-ci-name>{c?.name}</b> <span data-ci-note>{c?.note}</span></p>
+                  <p class="m3d-colour-codes" data-ci-codes-wrap hidden={!c?.codes}>Codes <span data-ci-codes>{c?.codes}</span></p>
+                </div>
+              ); })()}
+            </div>
           </div>
 
           <!-- CENTRE: the model -->
@@ -90,8 +95,8 @@ const icons: Record<string, string> = {
                 ))}
                 <button slot="ar-button" class="m3d-ar">View in your space</button>
                 <div class="m3d-progress" slot="progress-bar"><div class="m3d-progress-bar"></div></div>
+                <p class="m3d-turn"><span>360°</span> Drag to rotate</p>
               </model-viewer>
-              <p class="m3d-turn"><span>360°</span> Drag to rotate</p>
             ) : (
               <div class="m3d-placeholder">
                 <img src={p.colours[0].swatch} alt={p.name} loading="lazy" />
@@ -105,34 +110,25 @@ const icons: Record<string, string> = {
                 </button>
               ))}
             </div>
+            <label class="m3d-toggle"><input type="checkbox" data-rotate checked={!!p.file} disabled={!p.file} /> Auto-rotate</label>
           </div>
 
-          <!-- RIGHT: callouts + colours -->
+          <!-- RIGHT: callouts, use, sizes -->
           <aside class="m3d-right">
             <ol class="m3d-callouts">
               {p.hotspots.map((h) => (
-                <li data-n={h.n}><span class="m3d-inset-wrap"><canvas class="m3d-inset" width="220" height="220" aria-hidden="true"></canvas>{(() => { const src = p.photos[p.colours[p.defaultColour]?.slug ?? ""]?.[h.n - 1] ?? ""; return <img class="m3d-inset m3d-inset-photo" src={src || undefined} hidden={!src} alt="" width="220" height="220" loading="lazy" />; })()}</span><div><span class="m3d-num">{h.n}</span><b>{h.title}</b><p>{h.text}</p></div></li>
+                <li data-n={h.n}><canvas class="m3d-inset" width="220" height="220" aria-hidden="true"></canvas><div><span class="m3d-num">{h.n}</span><b>{h.title}</b><p>{h.text}</p></div></li>
               ))}
             </ol>
-            <ul class="m3d-notes">{p.notes.map((n) => <li>{n}</li>)}</ul>
-            <div class="m3d-colours">
-              <p class="eyebrow">Colour options</p>
-              <div class="m3d-swatches">
-                {p.colours.map((c, ci) => (
-                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} data-look={JSON.stringify(c.look ?? {})} data-colour={c.slug} data-name={c.name} data-note={c.note ?? ""} data-codes={c.codes ?? ""} data-photos={JSON.stringify(p.photos[c.slug] ?? [])} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
-                    <img src={c.swatch} alt="" loading="lazy" /><span>{c.name}</span>
-                  </button>
-                ))}
-              </div>
-              {(() => { const c = p.colours[p.defaultColour]; return (
-                <div class="m3d-colour-info" data-colour-info>
-                  <p class="m3d-colour-note"><b data-ci-name>{c?.name}</b> <span data-ci-note>{c?.note}</span></p>
-                  <p class="m3d-colour-codes" data-ci-codes-wrap hidden={!c?.codes}>Codes <span data-ci-codes>{c?.codes}</span></p>
-                </div>
-              ); })()}
-            </div>
-            <label class="m3d-toggle"><input type="checkbox" data-rotate checked={!!p.file} disabled={!p.file} /> Auto-rotate</label>
+            <p class="m3d-best"><span class="eyebrow">Best for</span>{p.bestFor}</p>
+            <p class="m3d-best"><span class="eyebrow">Sizes</span>{p.sizes}</p>
           </aside>
+
+          <!-- BELOW: features, full width -->
+          <section class="m3d-features" aria-label="Features">
+            <p class="eyebrow">Features</p>
+            <ul class="m3d-notes">{p.notes.map((n) => <li>{n}</li>)}</ul>
+          </section>
         </article>
       ))}
     </div>
@@ -277,11 +273,6 @@ const icons: Record<string, string> = {
     stage.querySelectorAll<HTMLButtonElement>(".m3d-swatch").forEach((s) =>
       s.addEventListener("click", () => {
         stage.querySelectorAll(".m3d-swatch").forEach((x) => x.classList.toggle("on", x === s));
-        let photos: string[] = []; try { photos = JSON.parse(s.dataset.photos || "[]"); } catch {}
-        stage.querySelectorAll<HTMLImageElement>("img.m3d-inset-photo").forEach((img, i) => {
-          const src = photos[i] || "";
-          img.hidden = !src; if (src) img.src = src; else img.removeAttribute("src");
-        });
         const ci = stage.querySelector<HTMLElement>("[data-colour-info]");
         if (ci) {
           ci.querySelector("[data-ci-name]")!.textContent = s.dataset.name ?? "";
@@ -318,11 +309,11 @@ const icons: Record<string, string> = {
   .m3d-ico { width: 40px; height: 40px; flex: none; padding: 9px; border: 2px solid var(--green); border-radius: 50%; color: var(--green-dark); }
   .m3d-stats b { display: block; font: 700 20px/1.1 var(--font-head); }
   .m3d-stats span { font-size: 13px; color: var(--text-muted); }
-  .m3d-best { margin: 0 0 10px; font-size: 14px; color: var(--text-muted); }
+  .m3d-best { margin: 16px 0 0; font-size: 14px; color: var(--text-muted); }
   .m3d-best .eyebrow { display: block; margin-bottom: 2px; }
 
   .m3d-centre { display: grid; gap: 12px; position: relative; }
-  .m3d-turn { position: absolute; left: 50%; transform: translateX(-50%); bottom: 96px; margin: 0; font: 500 12px var(--font-body); color: var(--text-muted); text-align: center; pointer-events: none; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.7); }
+  .m3d-turn { position: absolute; left: 50%; transform: translateX(-50%); bottom: 14px; margin: 0; font: 500 12px var(--font-body); color: var(--text-muted); text-align: center; pointer-events: none; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.7); }
   .m3d-turn span { display: block; font: 700 15px var(--font-head); color: var(--ink); }
   model-viewer, .m3d-placeholder { width: 100%; height: auto; aspect-ratio: 4 / 4.2; max-width: 100%; background: radial-gradient(ellipse at 50% 70%, #ffffff 0%, #eceee9 60%, #dfe2db 100%); border-radius: var(--radius); position: relative; --poster-color: transparent; }
   .m3d-placeholder { display: grid; place-items: center; grid-template-rows: 1fr auto; padding: 24px; }
@@ -342,29 +333,31 @@ const icons: Record<string, string> = {
   .m3d-callouts { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 10px; }
   .m3d-callouts li { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: center; padding: 10px 12px 10px 10px; background: var(--light-bg); border-radius: var(--radius); cursor: pointer; }
   .m3d-callouts li.hi { background: #eef6e3; }
-  .m3d-inset-wrap { position: relative; width: 72px; height: 72px; }
   .m3d-inset { width: 72px; height: 72px; border-radius: 50%; background: #e6e8e2; border: 2px solid var(--green); object-fit: cover; display: block; }
-  .m3d-inset-photo { position: absolute; inset: 0; }
-  .m3d-inset-photo[hidden] { display: none; }
   .m3d-num { display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: var(--green); color: var(--ink); font: 700 11px/20px var(--font-body); text-align: center; margin-right: 6px; vertical-align: 1px; }
   .m3d-callouts b { display: inline; font: 700 14px/1.2 var(--font-body); }
   .m3d-callouts p { margin: 4px 0 0; }
   .m3d-callouts p { margin: 0; font-size: 13px; color: var(--text-muted); }
-  .m3d-notes { margin: 0 0 20px; padding-left: 18px; font-size: 13px; color: var(--text-muted); display: grid; gap: 4px; }
+  .m3d-features { grid-column: 1 / -1; border-top: 1px solid var(--light-border); padding-top: 20px; }
+  .m3d-features .eyebrow { margin-bottom: 12px; }
+  .m3d-notes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 28px; font-size: 14px; color: var(--text-muted); overflow-wrap: anywhere; }
+  .m3d-notes li { position: relative; padding-left: 16px; }
+  .m3d-notes li::before { content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; background: var(--green); }
   .m3d-colours .eyebrow { margin-bottom: 8px; }
-  .m3d-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; margin-bottom: 16px; }
+  .m3d-colours { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--light-border); }
+  .m3d-swatches { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-bottom: 12px; }
   .m3d-swatch { border: 2px solid var(--light-border); background: var(--light-surface); border-radius: var(--radius); padding: 6px 4px 8px; cursor: pointer; display: grid; gap: 4px; justify-items: center; font: 500 11px/1.2 var(--font-body); color: var(--text-muted); }
   .m3d-swatch.on { border-color: var(--green); color: var(--text); }
   .m3d-swatch:disabled { opacity: .4; cursor: default; }
-  .m3d-swatch img { height: 64px; width: auto; }
+  .m3d-swatch img { height: 46px; width: auto; }
   .m3d-colour-info { margin: -4px 0 16px; display: grid; gap: 4px; }
   .m3d-colour-note { margin: 0; font-size: 13px; color: var(--text-muted); }
   .m3d-colour-note b { color: var(--text); font-weight: 600; }
   .m3d-colour-codes { margin: 0; font-size: 12px; color: var(--text-dim); letter-spacing: .02em; }
   .m3d-colour-codes span { color: var(--text-muted); font-variant-numeric: tabular-nums; }
-  .m3d-toggle { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+  .m3d-toggle { display: flex; gap: 8px; align-items: center; justify-content: center; font-size: 13px; color: var(--text-muted); }
   .m3d-toggle input { accent-color: var(--green); width: 18px; height: 18px; }
 
-  @media (max-width: 1080px) { .m3d-stage { grid-template-columns: 1fr 1fr; } .m3d-centre { grid-column: 1 / -1; order: -1; } }
-  @media (max-width: 640px) { .m3d-stage { grid-template-columns: 1fr; gap: 20px; } model-viewer, .m3d-placeholder { aspect-ratio: 4 / 4.6; } .m3d-views { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 1080px) { .m3d-stage { grid-template-columns: 1fr 1fr; } .m3d-centre { grid-column: 1 / -1; order: -1; } .m3d-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .m3d-stage { grid-template-columns: 1fr; gap: 20px; } model-viewer, .m3d-placeholder { aspect-ratio: 4 / 4.6; } .m3d-views { grid-template-columns: repeat(4, 1fr); } .m3d-notes { grid-template-columns: 1fr; } }
 </style>
