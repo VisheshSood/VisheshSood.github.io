@@ -7,6 +7,8 @@ export type Stat = { value: string; label: string; icon: "layers" | "ruler" | "s
 export type Look = { exposure?: number; environment?: string; toneMapping?: string; roughness?: number };
 export const studioLook: Look = { exposure: 1.4, environment: "legacy", toneMapping: "aces", roughness: 0.4 };
 // Bright gloves: keep the neutral light, add contrast and a little gloss so the relief catches highlights.
+// Studio light without the extra gloss, for models whose own roughness map already reads well.
+export const studioMatteLook: Look = { exposure: 1.4, environment: "legacy", toneMapping: "aces" };
 export const glossLook: Look = { exposure: 1.05, environment: "neutral", toneMapping: "aces", roughness: 0.4 };
 export type Colour = { slug: string; name: string; look?: Look; note?: string; codes?: string };
 export type Product3D = {
@@ -88,7 +90,7 @@ export const products: Product3D[] = [
       { value: "2-layer", label: "Wear indicator", icon: "shield" },
     ],
     hotspots: [
-      { n: 1, title: "Patented Zig texture", text: "Raised zig ridges across palm and fingers, with extra grip at the thumb for tools.", at: [0, 0.05, 0.5] },
+      { n: 1, title: "Patented Zig texture", text: "Raised zig ridges across palm and fingers, with extra grip at the thumb for tools.", at: [0, 0.05, 0.5], view: { orbit: "0deg 82deg 26%", target: [0, 0.05, 0.5] } },
       { n: 2, title: "Two-layer wear indicator", text: "Black outside, green inside: when the black wears through, the green shows, so you know when to change gloves.", at: [-0.2, 0.3, 0.5], view: { orbit: "0deg 150deg 65%", target: [0, -0.5, 0] } },
       { n: 3, title: "Heavy-duty 8 mil", text: "Twice the thickness of a standard 4 mil glove, with a beaded cuff that resists tearing. Latex-free.", at: [0, -0.42, 0.5] },
     ],
@@ -98,7 +100,7 @@ export const products: Product3D[] = [
       "Ambidextrous: replace only the torn glove, not the pair",
       "EN ISO 374-1 Type B: level 6 against sodium hydroxide and formaldehyde; EN ISO 374-5 virus protection; food-contact tested",
     ],
-    colours: [{ slug: "dual-tone", name: "Dual Tone (Black and Green)", look: studioLook, codes: "32707TT240", note: "Black outside, green inside: when the black wears through, it is time to change" }],
+    colours: [{ slug: "dual-tone", name: "Dual Tone (Black and Green)", look: studioMatteLook, codes: "32707TT240", note: "Black outside, green inside: when the black wears through, it is time to change" }],
     bestFor: "Automotive and mechanics, maintenance, oil and gas, construction", sizes: "S–XXL",
   },
   {
