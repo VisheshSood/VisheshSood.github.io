@@ -220,7 +220,7 @@ const icons: Record<string, string> = {
       if (mv.dataset.roughness) mv.model?.materials.forEach((m: any) => m.pbrMetallicRoughness.setRoughnessFactor(Number(mv.dataset.roughness)));
       c = mv.getBoundingBoxCenter(); d = mv.getDimensions();
       R = 1.87 * Math.max(d.y, d.x * 1.05) * 1.15;
-      mv.minCameraOrbit = `auto 20deg ${0.35 * R}m`; mv.maxCameraOrbit = `auto 160deg ${2.5 * R}m`;
+      mv.minCameraOrbit = `auto 20deg ${0.2 * R}m`; mv.maxCameraOrbit = `auto 160deg ${2.5 * R}m`;
       mv.cameraTarget = `${c.x}m ${c.y}m ${c.z}m`; mv.cameraOrbit = orbit("30deg 78deg 100%"); mv.jumpCameraToGoal();
       fr.forEach((f, i) => {
         mv.updateHotspot({ name: `hotspot-${i + 1}`, position: `${c.x + f[0] * d.x}m ${c.y + f[1] * d.y}m ${c.z + f[2] * d.z}m`, normal: "0 0 1" });
@@ -239,7 +239,8 @@ const icons: Record<string, string> = {
 
     const rotate = stage.querySelector<HTMLInputElement>("[data-rotate]")!;
     rotate.addEventListener("change", () => (mv.autoRotate = rotate.checked));
-    const stopRotate = () => { mv.autoRotate = false; rotate.checked = false; };
+    // Auto-rotate spins the model itself, so reset that spin before aiming the camera at a feature.
+    const stopRotate = () => { mv.autoRotate = false; rotate.checked = false; mv.resetTurntableRotation(); };
 
     stage.querySelectorAll<HTMLButtonElement>(".m3d-view").forEach((b) =>
       b.addEventListener("click", () => {
@@ -261,7 +262,7 @@ const icons: Record<string, string> = {
         stopRotate();
         const h = hs[Number(el.dataset.n) - 1]; const t = h.view?.target ?? h.at;
         mv.cameraTarget = `${c.x + t[0] * d.x}m ${c.y + t[1] * d.y}m ${c.z + t[2] * d.z}m`;
-        mv.cameraOrbit = orbit(h.view?.orbit ?? "0deg 78deg 55%");
+        mv.cameraOrbit = orbit(h.view?.orbit ?? "0deg 82deg 30%");
         stage.querySelectorAll(".m3d-view").forEach((x) => x.classList.remove("on"));
       });
     });
