@@ -1,6 +1,6 @@
 // Products shown on /3d, in tab order. Each looks for src/models3d/<slug>.glb and <slug>--<colour>.glb.
 // Copy mirrors the 2026 print catalogue. Grip figures are nitrile-only and never shown on latex.
-export type Hotspot = { n: number; title: string; text: string; at: [number, number, number]; view?: { orbit: string; target?: [number, number, number] }; photo?: string }; // at/target = fraction of bounding box, -0.5..0.5, front = +z
+export type Hotspot = { n: number; title: string; text: string; at: [number, number, number]; view?: { orbit: string; target?: [number, number, number] }; photo?: string }; // photo may contain {colour}, replaced by the selected colour slug // at/target = fraction of bounding box, -0.5..0.5, front = +z
 export type Stat = { value: string; label: string; icon: "layers" | "ruler" | "shield" | "refresh" | "leaf" | "grip" | "drop" };
 export type Colour = { slug: string; name: string };
 export type Product3D = {
@@ -89,9 +89,9 @@ export const products: Product3D[] = [
       { value: "Type B", label: "EN ISO 374-1 · 374-5 virus · food contact", icon: "shield" },
     ],
     hotspots: [
-      { n: 1, title: "Micro diamond texture", text: "Small raised diamonds across palm and fingers.", at: [0, 0.05, 0.5] },
+      { n: 1, title: "Micro diamond texture", text: "Small raised diamonds across palm and fingers.", at: [0, 0.05, 0.5], photo: "/3d/features/micro-diamond-8-mil--{colour}--1.webp" },
       { n: 2, title: "Fingertip grip", text: "Texture runs to the fingertips.", at: [0.1, 0.42, 0.5] },
-      { n: 3, title: "Polymer-coated inner", text: "Powder free, ambidextrous.", at: [0, -0.42, 0.5] },
+      { n: 3, title: "Polymer-coated inner", text: "Powder free, ambidextrous.", at: [0, -0.42, 0.5], photo: "/3d/features/micro-diamond-8-mil--{colour}--3.webp" },
     ],
     notes: [
       "Sizes S to 3XL; 240, 280 and 290 mm lengths across the family",
