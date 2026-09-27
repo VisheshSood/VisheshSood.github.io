@@ -67,7 +67,7 @@ const icons: Record<string, string> = {
           <div class="m3d-centre">
             {p.file ? (
               <model-viewer
-                data-mv data-model={p.file} data-hotspots={JSON.stringify(p.hotspots.map((h) => ({ at: h.at, view: h.view ?? null })))}
+                data-mv data-model={p.file} data-look={JSON.stringify(p.colours[p.defaultColour]?.look ?? {})} data-hotspots={JSON.stringify(p.hotspots.map((h) => ({ at: h.at, view: h.view ?? null })))}
                 alt={p.name}
                 camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="16deg"
                 shadow-intensity="1" shadow-softness="0.8" exposure="1" environment-image="neutral" tone-mapping="neutral"
@@ -109,7 +109,7 @@ const icons: Record<string, string> = {
               <p class="eyebrow">Colour options</p>
               <div class="m3d-swatches">
                 {p.colours.map((c, ci) => (
-                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} data-colour={c.slug} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
+                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} data-look={JSON.stringify(c.look ?? {})} data-colour={c.slug} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
                     <img src={c.swatch} alt="" loading="lazy" /><span>{c.name}</span>
                   </button>
                 ))}
@@ -128,9 +128,18 @@ const icons: Record<string, string> = {
   import { scramble } from "../lib/obf";
 
   const loaded = new WeakMap<Element, string>();
-  async function loadModel(mv: any, url: string) {
+  const baseLook = { exposure: 1, environment: "neutral", toneMapping: "neutral" };
+  function applyLook(mv: any, lookJson: string | undefined) {
+    let look: any = {}; try { look = JSON.parse(lookJson || "{}"); } catch {}
+    mv.exposure = look.exposure ?? baseLook.exposure;
+    mv.environmentImage = look.environment ?? baseLook.environment;
+    mv.toneMapping = look.toneMapping ?? baseLook.toneMapping;
+    mv.dataset.roughness = look.roughness != null ? String(look.roughness) : "";
+  }
+  async function loadModel(mv: any, url: string, lookJson?: string) {
     if (!url || loaded.get(mv) === url) return;
     loaded.set(mv, url);
+    applyLook(mv, lookJson);
     const id = url.split("/").pop()!.replace(/\.bin$/, "");
     const buf = new Uint8Array(await (await fetch(url)).arrayBuffer());
     mv.src = URL.createObjectURL(new Blob([scramble(buf, id)], { type: "model/gltf-binary" }));
@@ -143,9 +152,12 @@ const icons: Record<string, string> = {
   off.setAttribute("shadow-intensity", "0"); off.setAttribute("field-of-view", "30deg"); off.setAttribute("interaction-prompt", "none");
   document.body.appendChild(off);
   let offQueue: Promise<void> = Promise.resolve();
-  function renderViews(url: string, jobs: { canvas: HTMLCanvasElement; orbit: string; target: string; zoom?: number }[]) {
+  function renderViews(url: string, look: { exposure: number; environment: string; toneMapping: string; roughness: string }, jobs: { canvas: HTMLCanvasElement; orbit: string; target: string; zoom?: number }[]) {
     offQueue = offQueue.then(async () => {
+      off.exposure = look.exposure; off.toneMapping = look.toneMapping;
+      if (off.environmentImage !== look.environment) { off.environmentImage = look.environment; await new Promise((r) => off.addEventListener("environment-change", r, { once: true })); }
       if (off.src !== url) { off.src = url; await new Promise((r) => off.addEventListener("load", r, { once: true })); }
+      off.model?.materials.forEach((m: any) => { if (look.roughness) m.pbrMetallicRoughness.setRoughnessFactor(Number(look.roughness)); });
       const c = off.getBoundingBoxCenter(), d = off.getDimensions();
       const R = 1.87 * Math.max(d.y, d.x * 1.05) * 1.15;
       for (const j of jobs) {
@@ -171,7 +183,7 @@ const icons: Record<string, string> = {
     tabs.forEach((t) => { const on = t.dataset.tab === slug; t.classList.toggle("on", on); t.setAttribute("aria-selected", String(on)); });
     stages.forEach((s) => {
       s.hidden = s.dataset.stage !== slug;
-      if (!s.hidden) { const v = s.querySelector<any>("[data-mv]"); if (v) loadModel(v, v.dataset.model); }
+      if (!s.hidden) { const v = s.querySelector<any>("[data-mv]"); if (v) loadModel(v, v.dataset.model, v.dataset.look); }
     });
   }
   tabs.forEach((t) => t.addEventListener("click", () => { show(t.dataset.tab!); history.replaceState(null, "", `#${t.dataset.tab}`); }));
@@ -188,6 +200,7 @@ const icons: Record<string, string> = {
     let R = 1;
     const orbit = (spec: string) => spec.replace(/([\d.]+)%/, (_, p) => `${(Number(p) / 100) * R}m`);
     const place = () => {
+      if (mv.dataset.roughness) mv.model?.materials.forEach((m: any) => m.pbrMetallicRoughness.setRoughnessFactor(Number(mv.dataset.roughness)));
       c = mv.getBoundingBoxCenter(); d = mv.getDimensions();
       R = 1.87 * Math.max(d.y, d.x * 1.05) * 1.15;
       mv.minCameraOrbit = `auto 20deg ${0.35 * R}m`; mv.maxCameraOrbit = `auto 160deg ${2.5 * R}m`;
@@ -202,7 +215,7 @@ const icons: Record<string, string> = {
         return { canvas, orbit: h.view?.orbit ?? "0deg 78deg 40%", target: `${t[0]} ${t[1]} ${t[2]}`, zoom: h.view ? 0.7 : 1 };
       });
       const thumbs = [...stage.querySelectorAll<HTMLButtonElement>(".m3d-view")].map((b) => ({ canvas: b.querySelector("canvas")!, orbit: b.dataset.orbit!, target: b.dataset.target! }));
-      renderViews(url, [...insets, ...thumbs]);
+      renderViews(url, { exposure: mv.exposure, environment: mv.environmentImage, toneMapping: mv.toneMapping, roughness: mv.dataset.roughness || "" }, [...insets, ...thumbs]);
     };
     mv.addEventListener("load", place);
     mv.addEventListener("progress", (e: any) => {
@@ -245,7 +258,7 @@ const icons: Record<string, string> = {
       s.addEventListener("click", () => {
         stage.querySelectorAll(".m3d-swatch").forEach((x) => x.classList.toggle("on", x === s));
         stage.querySelectorAll<HTMLImageElement>("img[data-photo]").forEach((img) => { img.src = img.dataset.photo!.replace("{colour}", s.dataset.colour ?? ""); });
-        if (s.dataset.model) loadModel(mv, s.dataset.model);
+        if (s.dataset.model) loadModel(mv, s.dataset.model, s.dataset.look);
       }));
   });
 </script>
