@@ -10,7 +10,8 @@ function liveColours(slug: string) {
   return p ? p.colours.filter((c) => modelByFile(`${slug}--${c.slug}.glb`) || modelByFile(`${slug}.glb`)) : [];
 }
 
-function tabFor(g: { material: string; texture: string; longCuff?: boolean }): string | null {
+function tabFor(g: { material: string; texture: string; longCuff?: boolean; colours?: string[] }): string | null {
+  if (g.material === "Nitrile" && g.texture === "Zig" && (g.colours ?? []).some((c) => /dual tone/i.test(c))) return "dual-tone-zig-8-mil";
   if (g.material === "Nitrile" && g.texture === "Diamond") return "diamond-8-mil";
   if (g.material === "Nitrile" && g.texture === "Micro Diamond") return "micro-diamond-8-mil";
   if (g.material === "Latex" && g.texture === "Diamond" && g.longCuff) return "diamond-silverlined-latex";
@@ -25,7 +26,7 @@ export function view3dForGlove(g: { material: string; texture: string; longCuff?
   const live = liveColours(tab);
   if (!live.length) return null;
   // Latex catalogue colours ("Orange", "Blue and White") map onto the Silverlined swatches.
-  const alias = (c: string) => (c === "blue-and-white" ? "blue-silverlined" : c);
+  const alias = (c: string) => (c === "blue-and-white" ? "blue-silverlined" : c.startsWith("dual-tone") ? "dual-tone" : c);
   const colour = (g.colours ?? []).map((c) => alias(slugify(c)))
     .map((c) => live.find((l) => l.slug === c || l.slug === `${c}-silverlined`)?.slug)
     .find(Boolean);
@@ -35,7 +36,7 @@ export function view3dForGlove(g: { material: string; texture: string; longCuff?
 const techTab: Record<string, string> = {
   "raised-diamond": "diamond-8-mil",
   "micro-diamond": "micro-diamond-8-mil",
-  "zig-grip": "zig-silverlined-latex",
+  "zig-grip": "dual-tone-zig-8-mil",
   "tyre-tread": "gripper-7-mil",
 };
 

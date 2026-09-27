@@ -89,12 +89,14 @@ export const products: Product3D[] = [
     ],
     hotspots: [
       { n: 1, title: "Patented Zig texture", text: "Raised zig ridges across palm and fingers, with extra grip at the thumb for tools.", at: [0, 0.05, 0.5] },
-      { n: 2, title: "Two-layer wear indicator", text: "When the black wears through, the green shows, so you know when to change gloves.", at: [-0.2, 0.3, 0.5] },
-      { n: 3, title: "Beaded cuff", text: "Latex-free, powder-free, ambidextrous.", at: [0, -0.42, 0.5] },
+      { n: 2, title: "Two-layer wear indicator", text: "Black outside, green inside: when the black wears through, the green shows, so you know when to change gloves.", at: [-0.2, 0.3, 0.5], view: { orbit: "0deg 150deg 65%", target: [0, -0.5, 0] } },
+      { n: 3, title: "Heavy-duty 8 mil", text: "Twice the thickness of a standard 4 mil glove, with a beaded cuff that resists tearing. Latex-free.", at: [0, -0.42, 0.5] },
     ],
     notes: [
-      "Heavy-duty 8 mil nitrile, widely used in automotive workshops",
-      "EN ISO 374-1 Type B chemical and EN ISO 374-5 virus protection; food-contact tested",
+      "Latex-free: safe for people with latex allergies",
+      "Holds up to oils, greases and fuels, with strong puncture resistance",
+      "Ambidextrous: replace only the torn glove, not the pair",
+      "EN ISO 374-1 Type B: level 6 against sodium hydroxide and formaldehyde; EN ISO 374-5 virus protection; food-contact tested",
     ],
     colours: [{ slug: "dual-tone", name: "Dual Tone (Black and Green)", look: studioLook, codes: "32707TT240", note: "Black outside, green inside: when the black wears through, it is time to change" }],
     bestFor: "Automotive and mechanics, maintenance, oil and gas, construction", sizes: "S–XXL",
