@@ -33,7 +33,7 @@ export const products: Product3D[] = [
       { n: 3, title: "300 mm long cuff", text: "Beaded cuff stops liquid running down the arm.", at: [0, -0.42, 0.5], view: { orbit: "20deg 85deg 70%", target: [0, -0.3, 0] } },
     ],
     notes: latexNotes,
-    colours: [{ slug: "orange-silverlined", name: "Orange Silverlined" }, { slug: "blue-silverlined", name: "Blue Silverlined" }, { slug: "green-silverlined", name: "Green Silverlined" }],
+    colours: [{ slug: "blue-silverlined", name: "Blue Silverlined" }, { slug: "orange-silverlined", name: "Orange Silverlined" }, { slug: "green-silverlined", name: "Green Silverlined" }],
     bestFor: "Meat and poultry processing, dishwashing, cleaning and janitorial, gardening, painting, automotive", sizes: "S–XXL (7–11)",
   },
   {
