@@ -110,9 +110,9 @@ export const products: Product3D[] = [
       { value: "Type B", label: "EN ISO 374-1 · 374-5 virus · food contact", icon: "shield" },
     ],
     hotspots: [
-      { n: 1, title: "Micro diamond texture", text: "Small raised diamonds across palm and fingers.", at: [0, 0.05, 0.5] },
-      { n: 2, title: "Fingertip grip", text: "Texture runs to the fingertips.", at: [0.1, 0.42, 0.5] },
-      { n: 3, title: "Polymer-coated inner", text: "Powder-free and ambidextrous; slides on easily with no residue.", at: [0, -0.42, 0.5] },
+      { n: 1, title: "Highest wet grip we make", text: "A dense grid of small raised diamonds keeps hold of wet and oily parts better than any of our other textures.", at: [0, 0.05, 0.5] },
+      { n: 2, title: "Control of small parts", text: "The micro diamonds cover the fingertips, so screws, clips and wet tools don't slip.", at: [0.1, 0.42, 0.5] },
+      { n: 3, title: "6 to 9 mil, up to 290 mm", text: "Heavy-duty weights for rough work, with a 290 mm long cuff in royal blue.", at: [0, -0.42, 0.5] },
     ],
     notes: diamondNitrileNotes,
     colours: [
@@ -152,9 +152,9 @@ export const products: Product3D[] = [
       { value: "Type B", label: "EN ISO 374-1 · 374-5 virus · food contact", icon: "shield" },
     ],
     hotspots: [
-      { n: 1, title: "Raised diamond texture", text: "Raised diamonds across palm and fingers; oil and water run off between them.", at: [0, 0.05, 0.5] },
-      { n: 2, title: "Fingertip grip", text: "Texture runs to the fingertips.", at: [0.1, 0.42, 0.5] },
-      { n: 3, title: "Beaded cuff", text: "Polymer-coated inner, powder free, ambidextrous.", at: [0, -0.42, 0.5] },
+      { n: 1, title: "The original raised diamond", text: "We invented it in 2011. Oil and water run off between the diamonds, so the grip holds when things get wet.", at: [0, 0.05, 0.5] },
+      { n: 2, title: "Grip to the fingertips", text: "Diamonds run right to the tips, for tools, fasteners and wet handles.", at: [0.1, 0.42, 0.5] },
+      { n: 3, title: "8 mil heavy duty", text: "Twice the thickness of a standard 4 mil glove, with a beaded cuff that resists tearing.", at: [0, -0.42, 0.5] },
     ],
     notes: diamondNitrileNotes,
     colours: [
