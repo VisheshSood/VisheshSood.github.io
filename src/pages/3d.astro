@@ -5,7 +5,7 @@ import { modelByFile } from "../lib/models3d-files";
 
 
 const withFiles = products.map((p) => {
-  const colours = p.colours.map((c) => ({ ...c, model: modelByFile(`${p.slug}--${c.slug}.glb`)?.url ?? "", swatch: `/3d/colours/${p.slug}--${c.slug}.webp` }));
+  const colours = p.colours.map((c) => ({ ...c, model: modelByFile(`${p.slug}--${c.slug}.glb`)?.url ?? "", reveal: modelByFile(`${p.slug}--${c.slug}--reveal.glb`)?.url ?? "", swatch: `/3d/colours/${p.slug}--${c.slug}.webp` }));
   // Default model: <slug>.glb, otherwise the first colour that has its own file.
   const base = modelByFile(`${p.slug}.glb`)?.url ?? "";
   const firstColour = colours.find((c) => c.model);
@@ -64,7 +64,7 @@ const icons: Record<string, string> = {
               <p class="eyebrow">Colour options</p>
               <div class="m3d-swatches">
                 {p.colours.map((c, ci) => (
-                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} data-look={JSON.stringify(c.look ?? {})} data-colour={c.slug} data-name={c.name} data-note={c.note ?? ""} data-codes={c.codes ?? ""} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
+                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} data-reveal={c.reveal} data-look={JSON.stringify(c.look ?? {})} data-colour={c.slug} data-name={c.name} data-note={c.note ?? ""} data-codes={c.codes ?? ""} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
                     <img src={c.swatch} alt="" loading="lazy" /><span>{c.name}</span>
                   </button>
                 ))}
@@ -82,7 +82,7 @@ const icons: Record<string, string> = {
           <div class="m3d-centre">
             {p.file ? (
               <model-viewer
-                data-mv data-model={p.file} data-look={JSON.stringify(p.colours[p.defaultColour]?.look ?? {})} data-hotspots={JSON.stringify(p.hotspots.map((h) => ({ at: h.at, view: h.view ?? null })))}
+                data-mv data-model={p.file} data-reveal={p.colours[p.defaultColour]?.reveal ?? ""} data-look={JSON.stringify(p.colours[p.defaultColour]?.look ?? {})} data-hotspots={JSON.stringify(p.hotspots.map((h) => ({ at: h.at, view: h.view ?? null, reveal: !!h.reveal })))}
                 alt={p.name}
                 camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="16deg"
                 shadow-intensity="1" shadow-softness="0.8" exposure="1" environment-image="neutral" tone-mapping="neutral"
@@ -94,6 +94,7 @@ const icons: Record<string, string> = {
                   <button slot={`hotspot-${h.n}`} class="m3d-dot" data-n={h.n} aria-label={h.title} data-position={`${h.at[0]} ${h.at[1]} ${h.at[2]}`} data-normal="0 0 1">{h.n}</button>
                 ))}
                 <button slot="ar-button" class="m3d-ar">View in your space</button>
+                <button type="button" class="m3d-reveal" data-reveal-btn hidden={!p.colours[p.defaultColour]?.reveal}><span aria-hidden="true">&#9654;</span> <span data-reveal-label>See the inner lining</span></button>
                 <div class="m3d-progress" slot="progress-bar"><div class="m3d-progress-bar"></div></div>
                 <p class="m3d-turn"><span>360°</span> Drag to rotate</p>
               </model-viewer>
@@ -210,7 +211,13 @@ const icons: Record<string, string> = {
   stages.forEach((stage) => {
     const mv = stage.querySelector<any>("[data-mv]");
     if (!mv) return;
-    const hs: { at: number[]; view: { orbit: string; target?: number[] } | null }[] = JSON.parse(mv.dataset.hotspots || "[]");
+    const hs: { at: number[]; view: { orbit: string; target?: number[] } | null; reveal: boolean }[] = JSON.parse(mv.dataset.hotspots || "[]");
+    // Cuff reveal: an animated copy of the current colour, downloaded only when asked for.
+    const revealBtn = stage.querySelector<HTMLButtonElement>("[data-reveal-btn]");
+    const revealLabel = revealBtn?.querySelector("[data-reveal-label]");
+    let revealUrl = mv.dataset.reveal || "";
+    let lookJson = mv.dataset.look || "{}";
+    let afterPlace: (() => void) | null = null;
     const fr = hs.map((h) => h.at);
     let c = { x: 0, y: 0, z: 0 }, d = { x: 1, y: 1, z: 1 };
     // R = distance that fits the whole model at 30° FOV; every view is a multiple of it.
@@ -222,7 +229,7 @@ const icons: Record<string, string> = {
       c = mv.getBoundingBoxCenter(); d = mv.getDimensions();
       R = 1.87 * Math.max(d.y, d.x * 1.05) * 1.15;
       mv.minCameraOrbit = `auto 20deg ${0.2 * R}m`; mv.maxCameraOrbit = `auto 160deg ${2.5 * R}m`;
-      mv.cameraTarget = `${c.x}m ${c.y}m ${c.z}m`; mv.cameraOrbit = orbit("30deg 78deg 100%"); mv.jumpCameraToGoal();
+      if (!afterPlace) { mv.cameraTarget = `${c.x}m ${c.y}m ${c.z}m`; mv.cameraOrbit = orbit("30deg 78deg 100%"); mv.jumpCameraToGoal(); }
       fr.forEach((f, i) => {
         mv.updateHotspot({ name: `hotspot-${i + 1}`, position: `${c.x + f[0] * d.x}m ${c.y + f[1] * d.y}m ${c.z + f[2] * d.z}m`, normal: "0 0 1" });
       });
@@ -230,6 +237,7 @@ const icons: Record<string, string> = {
       const url = String(mv.src);
       const thumbs = [...stage.querySelectorAll<HTMLButtonElement>(".m3d-view")].map((b) => ({ canvas: b.querySelector("canvas")!, orbit: b.dataset.orbit!, target: b.dataset.target! }));
       renderViews(url, { exposure: mv.exposure, environment: mv.environmentImage, toneMapping: mv.toneMapping, roughness: mv.dataset.roughness || "" }, thumbs);
+      if (afterPlace) { const run = afterPlace; afterPlace = null; run(); }
     };
     mv.addEventListener("load", place);
     mv.addEventListener("progress", (e: any) => {
@@ -242,6 +250,23 @@ const icons: Record<string, string> = {
     rotate.addEventListener("change", () => (mv.autoRotate = rotate.checked));
     // Auto-rotate spins the model itself, so reset that spin before aiming the camera at a feature.
     const stopRotate = () => { mv.autoRotate = false; rotate.checked = false; mv.resetTurntableRotation(); };
+    const aimCuff = () => {
+      mv.cameraTarget = `${c.x + 0.08 * d.x}m ${c.y - 0.34 * d.y}m ${c.z}m`;
+      mv.cameraOrbit = orbit("10deg 84deg 42%");
+    };
+    const playReveal = () => {
+      mv.animationName = "Cuff_Reveal"; mv.currentTime = 0; mv.play({ repetitions: 1 });
+      if (revealLabel) revealLabel.textContent = "See the inner lining";
+    };
+    const reveal = () => {
+      if (!revealUrl) return;
+      stopRotate(); aimCuff();
+      if (loaded.get(mv) === revealUrl) { playReveal(); return; }
+      if (revealLabel) revealLabel.textContent = "Loading…";
+      afterPlace = () => { aimCuff(); mv.jumpCameraToGoal(); playReveal(); };
+      loadModel(mv, revealUrl, lookJson);
+    };
+    revealBtn?.addEventListener("click", reveal);
 
     stage.querySelectorAll<HTMLButtonElement>(".m3d-view").forEach((b) =>
       b.addEventListener("click", () => {
@@ -260,8 +285,10 @@ const icons: Record<string, string> = {
       el.addEventListener("mouseenter", () => sync(el.dataset.n, true));
       el.addEventListener("mouseleave", () => sync(el.dataset.n, false));
       el.addEventListener("click", () => {
+        const h = hs[Number(el.dataset.n) - 1];
+        if (h.reveal && revealUrl) { reveal(); return; }
         stopRotate();
-        const h = hs[Number(el.dataset.n) - 1]; const t = h.view?.target ?? h.at;
+        const t = h.view?.target ?? h.at;
         mv.cameraTarget = `${c.x + t[0] * d.x}m ${c.y + t[1] * d.y}m ${c.z + t[2] * d.z}m`;
         mv.cameraOrbit = orbit(h.view?.orbit ?? "0deg 82deg 30%");
         stage.querySelectorAll(".m3d-view").forEach((x) => x.classList.remove("on"));
@@ -279,6 +306,8 @@ const icons: Record<string, string> = {
           ci.querySelector("[data-ci-codes]")!.textContent = s.dataset.codes ?? "";
           (ci.querySelector("[data-ci-codes-wrap]") as HTMLElement).hidden = !s.dataset.codes;
         }
+        revealUrl = s.dataset.reveal || ""; lookJson = s.dataset.look || "{}";
+        if (revealBtn) revealBtn.hidden = !revealUrl;
         if (s.dataset.model) loadModel(mv, s.dataset.model, s.dataset.look);
       }));
   });
@@ -327,6 +356,10 @@ const icons: Record<string, string> = {
   .m3d-placeholder img { max-height: 100%; object-fit: contain; }
   .m3d-placeholder span { font: 600 12px var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim); }
   .m3d-ar { position: absolute; top: 12px; right: 12px; background: var(--green); color: var(--ink); border: 0; border-radius: var(--radius); padding: 8px 12px; font: 600 13px var(--font-body); cursor: pointer; }
+  .m3d-reveal { position: absolute; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: 600 13px var(--font-body); cursor: pointer; }
+  .m3d-reveal[hidden] { display: none; }
+  .m3d-reveal span[aria-hidden] { color: var(--green); font-size: 10px; }
+  .m3d-reveal:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
   .m3d-progress { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
   .m3d-progress-bar { height: 100%; width: 0; background: var(--green); transition: width .2s; }
   .m3d-dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; background: var(--green); color: var(--ink); font: 700 12px var(--font-body); box-shadow: 0 2px 8px rgba(0,0,0,.25); cursor: pointer; }
