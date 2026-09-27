@@ -43,7 +43,7 @@ const latexStats: Stat[] = [
 
 export const products: Product3D[] = [
   {
-    slug: "diamond-silverlined-latex", eyebrow: "Flagship", family: "Diamond Latex", name: "Diamond Silverlined Latex",
+    slug: "diamond-silverlined-latex", eyebrow: "Flagship", family: "Diamond Latex", name: "Diamond Silverlined",
     intro: "17 mil Silverlined natural latex with a long cuff, on the raised diamond texture we invented in 2011.",
     stats: [{ value: "17 mil", label: "20 mil at palm", icon: "layers" }, ...latexStats.slice(1)],
     hotspots: [
@@ -60,7 +60,7 @@ export const products: Product3D[] = [
     bestFor: "Meat and poultry processing, dishwashing, cleaning and janitorial, gardening, painting, automotive", sizes: "S–XXL (7–11)", caution: "Contains natural rubber latex.",
   },
   {
-    slug: "zig-silverlined-latex", eyebrow: "Patented", family: "Zig Latex", name: "Zig Silverlined Latex",
+    slug: "zig-silverlined-latex", eyebrow: "Patented", family: "Zig Latex", name: "Zig Silverlined",
     intro: "17 mil Silverlined natural latex with a long cuff, on our patented Zig texture, the best dry grip we make.",
     stats: [
       { value: "Zig", label: "Our best dry-grip texture", icon: "grip" },
