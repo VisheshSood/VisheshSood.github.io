@@ -101,7 +101,7 @@ const icons: Record<string, string> = {
           <aside class="m3d-right">
             <ol class="m3d-callouts">
               {p.hotspots.map((h) => (
-                <li data-n={h.n}>{h.photo ? <img class="m3d-inset" src={h.photo} alt="" width="220" height="220" loading="lazy" /> : <canvas class="m3d-inset" width="220" height="220" aria-hidden="true"></canvas>}<div><span class="m3d-num">{h.n}</span><b>{h.title}</b><p>{h.text}</p></div></li>
+                <li data-n={h.n}>{h.photo ? <img class="m3d-inset" src={h.photo.replace("{colour}", p.colours[p.defaultColour]?.slug ?? "")} data-photo={h.photo} alt="" width="220" height="220" loading="lazy" /> : <canvas class="m3d-inset" width="220" height="220" aria-hidden="true"></canvas>}<div><span class="m3d-num">{h.n}</span><b>{h.title}</b><p>{h.text}</p></div></li>
               ))}
             </ol>
             <ul class="m3d-notes">{p.notes.map((n) => <li>{n}</li>)}</ul>
@@ -109,7 +109,7 @@ const icons: Record<string, string> = {
               <p class="eyebrow">Colour options</p>
               <div class="m3d-swatches">
                 {p.colours.map((c, ci) => (
-                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
+                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} data-colour={c.slug} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
                     <img src={c.swatch} alt="" loading="lazy" /><span>{c.name}</span>
                   </button>
                 ))}
@@ -244,6 +244,7 @@ const icons: Record<string, string> = {
     stage.querySelectorAll<HTMLButtonElement>(".m3d-swatch").forEach((s) =>
       s.addEventListener("click", () => {
         stage.querySelectorAll(".m3d-swatch").forEach((x) => x.classList.toggle("on", x === s));
+        stage.querySelectorAll<HTMLImageElement>("img[data-photo]").forEach((img) => { img.src = img.dataset.photo!.replace("{colour}", s.dataset.colour ?? ""); });
         if (s.dataset.model) loadModel(mv, s.dataset.model);
       }));
   });
