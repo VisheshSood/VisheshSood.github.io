@@ -111,7 +111,7 @@ export const products: Product3D[] = [
       { value: "+141.7%", label: "Dry grip vs bare hand", icon: "grip" },
       { value: "+262.9%", label: "Wet grip vs bare hand", icon: "drop" },
       { value: "6–9 mil", label: "Nitrile", icon: "layers" },
-      { value: "240 mm", label: "Beaded cuff", icon: "ruler" },
+      { value: "240–290 mm", label: "Beaded cuff · long cuff in royal blue", icon: "ruler" },
       { value: "Type B", label: "EN ISO 374-1 · 374-5 virus · food contact", icon: "shield" },
     ],
     hotspots: [
@@ -127,6 +127,7 @@ export const products: Product3D[] = [
     colours: [
       { slug: "black", name: "Black", look: studioLook, codes: "32806BK240 · 32808BK240", note: blackNote },
       { slug: "orange", name: "Orange", look: glossLook, codes: "32807OR240 · 32806OR240", note: hiVis },
+      { slug: "royal-blue", name: "Royal Blue", look: glossLook, codes: "32809RB290 (290 mm long cuff) · 32809RB240", note: "9 mil with a long cuff; blue stands out against meat, poultry and produce" },
     ],
     bestFor: "Mechanics and automotive, food processing, general industry", sizes: "S–3XL",
   },
