@@ -162,7 +162,7 @@ const icons: Record<string, string> = {
   const off: any = document.createElement("model-viewer");
   off.setAttribute("style", "position:fixed;left:0;top:0;width:440px;height:440px;opacity:0;pointer-events:none;z-index:-1");
   off.setAttribute("exposure", "1"); off.setAttribute("environment-image", "neutral"); off.setAttribute("tone-mapping", "neutral");
-  off.setAttribute("shadow-intensity", "0"); off.setAttribute("field-of-view", "30deg"); off.setAttribute("interaction-prompt", "none");
+  off.setAttribute("min-camera-orbit", "auto auto 0m"); off.setAttribute("min-field-of-view", "10deg"); off.setAttribute("shadow-intensity", "0"); off.setAttribute("field-of-view", "30deg"); off.setAttribute("interaction-prompt", "none");
   document.body.appendChild(off);
   let offQueue: Promise<void> = Promise.resolve();
   function renderViews(url: string, look: { exposure: number; environment: string; toneMapping: string; roughness: string }, jobs: { canvas: HTMLCanvasElement; orbit: string; target: string; zoom?: number }[]) {
