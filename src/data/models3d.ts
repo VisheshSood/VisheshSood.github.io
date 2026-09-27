@@ -2,7 +2,11 @@
 // Copy mirrors the 2026 print catalogue. Grip figures are nitrile-only and never shown on latex.
 export type Hotspot = { n: number; title: string; text: string; at: [number, number, number]; view?: { orbit: string; target?: [number, number, number] }; photo?: string }; // photo may contain {colour}, replaced by the selected colour slug // at/target = fraction of bounding box, -0.5..0.5, front = +z
 export type Stat = { value: string; label: string; icon: "layers" | "ruler" | "shield" | "refresh" | "leaf" | "grip" | "drop" };
-export type Colour = { slug: string; name: string };
+// look: per-colour lighting. Dark gloves hide their texture under even light; a studio environment and a slightly
+// glossier surface make the relief readable.
+export type Look = { exposure?: number; environment?: string; toneMapping?: string; roughness?: number };
+export const studioLook: Look = { exposure: 1.4, environment: "legacy", toneMapping: "aces", roughness: 0.4 };
+export type Colour = { slug: string; name: string; look?: Look };
 export type Product3D = {
   slug: string; eyebrow: string; family: string; name: string; intro: string;
   stats: Stat[]; hotspots: Hotspot[]; notes: string[]; colours: Colour[]; bestFor: string; sizes: string;
@@ -97,7 +101,7 @@ export const products: Product3D[] = [
       "Sizes S to 3XL; 240, 280 and 290 mm lengths across the family",
       "EN ISO 374-1 Type B chemical and EN ISO 374-5 virus protection; food-contact tested",
     ],
-    colours: [{ slug: "black", name: "Black" }, { slug: "orange", name: "Orange" }],
+    colours: [{ slug: "black", name: "Black", look: studioLook }, { slug: "orange", name: "Orange" }],
     bestFor: "Mechanics and automotive, food processing, general industry", sizes: "S–3XL",
   },
   {
@@ -139,7 +143,7 @@ export const products: Product3D[] = [
       "EN ISO 374-1 Type B chemical and EN ISO 374-5 virus protection; food-contact tested",
       "Sizes S to 3XL",
     ],
-    colours: [{ slug: "orange", name: "Orange" }, { slug: "black", name: "Black" }, { slug: "yellow", name: "Yellow" }, { slug: "green", name: "Green" }],
+    colours: [{ slug: "orange", name: "Orange" }, { slug: "black", name: "Black", look: studioLook }, { slug: "yellow", name: "Yellow" }, { slug: "green", name: "Green" }],
     bestFor: "Construction, automotive, chemical handling (long cuff), general industry", sizes: "S–3XL",
   },
 ];
