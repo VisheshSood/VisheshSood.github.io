@@ -82,7 +82,7 @@ const icons: Record<string, string> = {
           <div class="m3d-centre">
             {p.file ? (
               <model-viewer
-                data-mv data-model={p.file} data-reveal={p.colours[p.defaultColour]?.reveal ?? ""} data-look={JSON.stringify(p.colours[p.defaultColour]?.look ?? {})} data-hotspots={JSON.stringify(p.hotspots.map((h) => ({ at: h.at, view: h.view ?? null, reveal: !!h.reveal })))}
+                data-mv data-model={p.file} data-reveal={p.colours[p.defaultColour]?.reveal ?? ""} data-reveal-view={JSON.stringify(p.revealView ?? null)} data-look={JSON.stringify(p.colours[p.defaultColour]?.look ?? {})} data-hotspots={JSON.stringify(p.hotspots.map((h) => ({ at: h.at, view: h.view ?? null, reveal: !!h.reveal })))}
                 alt={p.name}
                 camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="16deg"
                 shadow-intensity="1" shadow-softness="0.8" exposure="1" environment-image="neutral" tone-mapping="neutral"
@@ -94,7 +94,7 @@ const icons: Record<string, string> = {
                   <button slot={`hotspot-${h.n}`} class="m3d-dot" data-n={h.n} aria-label={h.title} data-position={`${h.at[0]} ${h.at[1]} ${h.at[2]}`} data-normal="0 0 1">{h.n}</button>
                 ))}
                 <button slot="ar-button" class="m3d-ar">View in your space</button>
-                <button type="button" class="m3d-reveal" data-reveal-btn hidden={!p.colours[p.defaultColour]?.reveal}><span aria-hidden="true">&#9654;</span> <span data-reveal-label>See the inner lining</span></button>
+                <button type="button" class="m3d-reveal" data-reveal-btn hidden={!p.colours[p.defaultColour]?.reveal}><span aria-hidden="true">&#9654;</span> <span data-reveal-label data-text={p.revealLabel ?? "See the inner lining"}>{p.revealLabel ?? "See the inner lining"}</span></button>
                 <div class="m3d-progress" slot="progress-bar"><div class="m3d-progress-bar"></div></div>
                 <p class="m3d-turn"><span>360°</span> Drag to rotate</p>
               </model-viewer>
@@ -250,13 +250,17 @@ const icons: Record<string, string> = {
     rotate.addEventListener("change", () => (mv.autoRotate = rotate.checked));
     // Auto-rotate spins the model itself, so reset that spin before aiming the camera at a feature.
     const stopRotate = () => { mv.autoRotate = false; rotate.checked = false; mv.resetTurntableRotation(); };
+    const revealView: { orbit: string; target: number[] } | null = JSON.parse(mv.dataset.revealView || "null");
+    const revealText = revealLabel?.getAttribute("data-text") || "See the inner lining";
     const aimCuff = () => {
-      mv.cameraTarget = `${c.x + 0.08 * d.x}m ${c.y - 0.34 * d.y}m ${c.z}m`;
-      mv.cameraOrbit = orbit("10deg 84deg 42%");
+      const t = revealView?.target ?? [0.08, -0.34, 0];
+      mv.cameraTarget = `${c.x + t[0] * d.x}m ${c.y + t[1] * d.y}m ${c.z + t[2] * d.z}m`;
+      mv.cameraOrbit = orbit(revealView?.orbit ?? "10deg 84deg 42%");
     };
     const playReveal = () => {
-      mv.animationName = "Cuff_Reveal"; mv.currentTime = 0; mv.play({ repetitions: 1 });
-      if (revealLabel) revealLabel.textContent = "See the inner lining";
+      // Play whichever reveal the file carries (Cuff_Reveal, Tear_Reveal, …).
+      mv.animationName = mv.availableAnimations?.[0] ?? null; mv.currentTime = 0; mv.play({ repetitions: 1 });
+      if (revealLabel) revealLabel.textContent = revealText;
     };
     const reveal = () => {
       if (!revealUrl) return;

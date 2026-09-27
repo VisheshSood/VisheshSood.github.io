@@ -16,6 +16,8 @@ export type Colour = { slug: string; name: string; look?: Look; note?: string; c
 export type Product3D = {
   slug: string; eyebrow: string; family: string; name: string; intro: string;
   stats: Stat[]; hotspots: Hotspot[]; notes: string[]; colours: Colour[]; bestFor: string; sizes: string; caution?: string;
+  // Camera and button text for the reveal animation (default: frame the cuff, 'See the inner lining').
+  revealView?: { orbit: string; target: [number, number, number] }; revealLabel?: string;
 };
 
 // Chemical levels are EN ISO 374-1 permeation levels from the catalogue's chemical-resistance table (page 26).
@@ -83,6 +85,7 @@ export const products: Product3D[] = [
   },
   {
     slug: "dual-tone-zig-8-mil", eyebrow: "Flagship", family: "Patented Zig", name: "Dual Tone Zig",
+    revealView: { orbit: "0deg 85deg 38%", target: [0, 0.04, 0.5] }, revealLabel: "See the green layer",
     intro: "Two bonded layers, black outside and green inside, on our patented Zig texture. Our best dry grip.",
     stats: [
       { value: "+148.5%", label: "Dry grip vs bare hand", icon: "grip" },
