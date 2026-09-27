@@ -4,11 +4,13 @@ import { technologies, gripTest, bioTest } from "../../data/site";
 import { catalogue } from "../../data/catalogue";
 import GloveVisual from "../../components/GloveVisual.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { view3dForTech } from "../../lib/view3d";
 
 export function getStaticPaths() {
   return technologies.map((t) => ({ params: { slug: t.slug }, props: { tech: t } }));
 }
 const { tech } = Astro.props;
+const view3d = view3dForTech(tech.slug);
 
 const isBio = tech.slug === "biodegradable";
 const isInvented = tech.slug === "raised-diamond";
@@ -93,6 +95,7 @@ const bioPct = (v: number) => ((v / bioMax) * 100).toFixed(1);
           <a href="/request-samples" class="btn btn--primary">Request a Sample <span class="arrow" aria-hidden="true">&rarr;</span></a>
           <a href="#gloves" class="btn btn--ghost">See Gloves</a>
         </div>
+        {view3d && <p class="th-3d"><a href={view3d}><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3Z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></svg>See {tech.shortName} in 3D <span aria-hidden="true">&rarr;</span></a></p>}
         <p class="th-patent"><span aria-hidden="true">◆</span> {tech.patentStatus}</p>
       </div>
       <div class:list={["th-media", tech.imgFit === "contain" && "th-media--contain"]}>
@@ -455,6 +458,10 @@ const bioPct = (v: number) => ((v / bioMax) * 100).toFixed(1);
     .gp-fill { transition: none; }
     .gp-chart.gp-anim .gp-fill { width: var(--w); }
   }
+  .th-3d { margin: 14px 0 0; font-size: 14px; }
+  .th-3d a { display: inline-flex; align-items: center; gap: 8px; color: var(--green-dark); font-weight: 600; text-decoration: none; }
+  .th-3d a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .th-3d svg { flex: none; }
 </style>
 
 <script>

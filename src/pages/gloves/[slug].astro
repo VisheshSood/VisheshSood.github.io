@@ -5,11 +5,13 @@ import { catalogue, colourSwatch, texTechSlug, gloveGlow, gloveColourPhotos } fr
 import { technologies, gripTest } from "../../data/site";
 import { chemFor } from "../../data/chem-resistance";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { view3dForGlove } from "../../lib/view3d";
 
 export function getStaticPaths() {
   return catalogue.map((g) => ({ params: { slug: g.slug }, props: { glove: g } }));
 }
 const { glove } = Astro.props;
+const view3d = view3dForGlove(glove);
 // Colour-specific photos → a carousel when the glove has more than one.
 const colourShots = gloveColourPhotos(glove);
 const hasCarousel = colourShots.length > 1;
@@ -189,6 +191,7 @@ const productSchema = {
           <a href="/request-samples" class="btn btn--primary">Request a Sample <span class="arrow" aria-hidden="true">&rarr;</span></a>
           <a href="/request-quote" class="btn btn--ghost">Request a Quote</a>
         </div>
+        {view3d && <p class="p-3d"><a href={view3d}><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3Z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></svg>View this glove in 3D <span aria-hidden="true">&rarr;</span></a></p>}
 
         {techSlug && !grip && <p class="p-tech">Grip technology: <a href={`/technologies/${techSlug}`}>{glove.texture} &rarr;</a></p>}
         {glove.patent && <p class="p-patent">&#9670; Patented design</p>}
@@ -458,4 +461,8 @@ const productSchema = {
   .rel-meta { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; color: var(--green-dark); }
 
   @media (max-width: 760px) { .p-grid { grid-template-columns: 1fr; } }
+  .p-3d { margin: 14px 0 0; font-size: 14px; }
+  .p-3d a { display: inline-flex; align-items: center; gap: 8px; color: var(--green-dark); font-weight: 600; text-decoration: none; }
+  .p-3d a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .p-3d svg { flex: none; }
 </style>

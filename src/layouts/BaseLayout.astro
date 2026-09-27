@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import AiChat from "../components/AiChat.astro";
-import PromoPopup from "../components/PromoPopup.astro";
 
 interface Props {
   title?: string;
@@ -9,7 +8,6 @@ interface Props {
   image?: string;
   ogType?: string;
   noindex?: boolean;
-  noPromo?: boolean;
 }
 
 const {
@@ -18,7 +16,6 @@ const {
   image = "/images/sus-aerial.jpg",
   ogType = "website",
   noindex = false,
-  noPromo = false,
 } = Astro.props;
 
 // Absolute URLs for canonical / social tags (driven by `site` in astro.config.mjs).
@@ -107,7 +104,6 @@ const websiteSchema = {
   </head>
   <body>
     <slot />
-    {!noPromo && <PromoPopup />}
     <AiChat />
 
   </body>
