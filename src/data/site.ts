@@ -11,6 +11,7 @@ export const mainNav: NavGroup[] = [
       { label: "All Gloves", href: "/gloves" },
       { label: "Find Your Gloves", href: "/glove-finder" },
       { label: "Grip Technologies", href: "/technologies" },
+      { label: "3D Glove Viewer", href: "/3d" },
       { label: "Heavy Duty", href: "/gloves/heavy-duty" },
       { label: "Biodegradable", href: "/technologies/biodegradable" },
       { label: "Nitrile", href: "/gloves/nitrile" },

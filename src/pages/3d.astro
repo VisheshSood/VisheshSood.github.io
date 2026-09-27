@@ -36,7 +36,7 @@ const icons: Record<string, string> = {
 };
 ---
 
-<PageLayout title="3D Models | Innovative Gloves" description="Internal 3D model review." noindex={true} noPromo={true}>
+<PageLayout title="3D Glove Viewer | Innovative Gloves" description="Turn our gloves in 3D: Diamond Silverlined and Zig Silverlined latex, Micro Diamond and Diamond nitrile, in every colour we model. View them in your own space on a phone.">
   <section class="section m3d">
     <div class="container">
       <div class="m3d-tabs" role="tablist" aria-label="Products">
@@ -280,6 +280,13 @@ const icons: Record<string, string> = {
         if (s.dataset.model) loadModel(mv, s.dataset.model, s.dataset.look);
       }));
   });
+
+  // Runs last, after the swatch listeners exist. ?c=<colour> opens the linked colour (links from glove pages); ignored if that colour has no model
+  const wanted = new URLSearchParams(location.search).get("c");
+  if (wanted) {
+    const sw = document.querySelector<HTMLButtonElement>(`[data-stage]:not([hidden]) .m3d-swatch[data-colour="${CSS.escape(wanted)}"]`);
+    if (sw && !sw.disabled && !sw.classList.contains("on")) sw.click();
+  }
 </script>
 
 <style>
