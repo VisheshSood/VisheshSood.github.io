@@ -28,7 +28,6 @@ const latexNotes = [
 const diamondNitrileNotes = [
   "Latex-free nitrile: no natural rubber proteins, safe for latex-sensitive users",
   "Holds up to oils, greases and fuels, with strong puncture resistance",
-  "8 mil heavy duty: twice the thickness of a standard 4 mil glove",
   "Ambidextrous: replace only the torn glove, not the pair",
   "Powder-free, polymer-coated inner slides on easily and leaves no residue",
   "EN ISO 374-1 Type B: level 6 against 40% sodium hydroxide, level 5 against 37% formaldehyde",
@@ -107,11 +106,11 @@ export const products: Product3D[] = [
   },
   {
     slug: "micro-diamond-8-mil", eyebrow: "Patented", family: "Micro Diamond", name: "Micro Diamond",
-    intro: "A dense grid of small raised diamonds on 8 mil nitrile. The highest wet grip of all our textures.",
+    intro: "A dense grid of small raised diamonds on 6 to 9 mil nitrile. The highest wet grip of all our textures.",
     stats: [
       { value: "+141.7%", label: "Dry grip vs bare hand", icon: "grip" },
       { value: "+262.9%", label: "Wet grip vs bare hand", icon: "drop" },
-      { value: "8 mil", label: "Nitrile", icon: "layers" },
+      { value: "6–9 mil", label: "Nitrile", icon: "layers" },
       { value: "240 mm", label: "Beaded cuff", icon: "ruler" },
       { value: "Type B", label: "EN ISO 374-1 · 374-5 virus · food contact", icon: "shield" },
     ],
@@ -121,6 +120,7 @@ export const products: Product3D[] = [
       { n: 3, title: "Polymer-coated inner", text: "Powder-free and ambidextrous; slides on easily with no residue.", at: [0, -0.42, 0.5], photo: "/3d/features/micro-diamond-8-mil--{colour}--3.webp" },
     ],
     notes: [
+      "6 to 9 mil: 1.5 to over 2 times the thickness of a standard 4 mil glove",
       ...diamondNitrileNotes,
       "Sizes S to 3XL; 240, 280 and 290 mm lengths across the family",
     ],
@@ -165,6 +165,7 @@ export const products: Product3D[] = [
       { n: 3, title: "Beaded cuff", text: "Polymer-coated inner, powder free, ambidextrous.", at: [0, -0.42, 0.5] },
     ],
     notes: [
+      "8 mil heavy duty: twice the thickness of a standard 4 mil glove",
       ...diamondNitrileNotes,
       "5 to 9 mil across the family, from 240 mm up to 300 mm long cuff; sizes S to 3XL",
     ],

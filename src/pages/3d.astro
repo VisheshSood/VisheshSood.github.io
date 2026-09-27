@@ -161,12 +161,16 @@ const icons: Record<string, string> = {
   function renderViews(url: string, look: { exposure: number; environment: string; toneMapping: string; roughness: string }, jobs: { canvas: HTMLCanvasElement; orbit: string; target: string; zoom?: number }[]) {
     offQueue = offQueue.then(async () => {
       off.exposure = look.exposure; off.toneMapping = look.toneMapping;
-      if (off.environmentImage !== look.environment) { off.environmentImage = look.environment; await new Promise((r) => off.addEventListener("environment-change", r, { once: true })); }
+      // Built-in environments ("neutral", "legacy") never fire environment-change, so never wait on it alone.
+      if (off.environmentImage !== look.environment) {
+        off.environmentImage = look.environment;
+        await Promise.race([new Promise((r) => off.addEventListener("environment-change", r, { once: true })), new Promise((r) => setTimeout(r, 400))]);
+      }
       if (off.src !== url) { off.src = url; await new Promise((r) => off.addEventListener("load", r, { once: true })); }
       off.model?.materials.forEach((m: any) => { if (look.roughness) m.pbrMetallicRoughness.setRoughnessFactor(Number(look.roughness)); });
       const c = off.getBoundingBoxCenter(), d = off.getDimensions();
       const R = 1.87 * Math.max(d.y, d.x * 1.05) * 1.15;
-      for (const j of jobs) {
+      for (const j of jobs) try {
         const [tx, ty, tz] = j.target.split(" ").map(Number);
         off.cameraTarget = `${c.x + tx * d.x}m ${c.y + ty * d.y}m ${c.z + tz * d.z}m`;
         off.cameraOrbit = j.orbit.replace(/([\d.]+)%/, (_: string, p: string) => `${(Number(p) / 100) * R * (j.zoom ?? 1)}m`);
@@ -179,7 +183,7 @@ const icons: Record<string, string> = {
         ctx.clearRect(0, 0, j.canvas.width, j.canvas.height);
         ctx.drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, j.canvas.width, j.canvas.height);
         URL.revokeObjectURL(img.src);
-      }
+      } catch {}
     }).catch(() => {});
   }
 
