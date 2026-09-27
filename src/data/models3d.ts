@@ -7,6 +7,8 @@ export type Stat = { value: string; label: string; icon: "layers" | "ruler" | "s
 export type Look = { exposure?: number; environment?: string; toneMapping?: string; roughness?: number };
 export const studioLook: Look = { exposure: 1.4, environment: "legacy", toneMapping: "aces", roughness: 0.4 };
 // Bright gloves: keep the neutral light, add contrast and a little gloss so the relief catches highlights.
+// Satin: studio light with a half-gloss finish (user pick for Dual Tone, option C).
+export const satinLook: Look = { exposure: 1.5, environment: "legacy", toneMapping: "aces", roughness: 0.7 };
 // Studio light without the extra gloss, for models whose own roughness map already reads well.
 export const studioMatteLook: Look = { exposure: 1.4, environment: "legacy", toneMapping: "aces" };
 export const glossLook: Look = { exposure: 1.05, environment: "neutral", toneMapping: "aces", roughness: 0.4 };
@@ -20,7 +22,7 @@ export type Product3D = {
 const latexNotes = [
   "Natural rubber latex: soft, stretchy and close-fitting, with a natural feel for fine work",
   "Ambidextrous: replace only the torn glove, not the pair",
-  "Chlorinated: less tacky, easy to put on and take off",
+  "Smooth, non-tacky inside: easy to put on and take off",
   "Roomy fit goes over a cotton liner in cold rooms",
   "EN ISO 374-1 Type B: level 6 against formaldehyde, level 5 against hydrogen peroxide; EN ISO 374-5 virus protection",
 ];
@@ -100,7 +102,7 @@ export const products: Product3D[] = [
       "Ambidextrous: replace only the torn glove, not the pair",
       "EN ISO 374-1 Type B: level 6 against sodium hydroxide and formaldehyde; EN ISO 374-5 virus protection; food-contact tested",
     ],
-    colours: [{ slug: "dual-tone", name: "Dual Tone (Black and Green)", look: studioMatteLook, codes: "32707TT240", note: "Black outside, green inside: when the black wears through, it is time to change" }],
+    colours: [{ slug: "dual-tone", name: "Dual Tone (Black and Green)", look: satinLook, codes: "32707TT240", note: "Black outside, green inside: when the black wears through, it is time to change" }],
     bestFor: "Automotive and mechanics, maintenance, oil and gas, construction", sizes: "S–XXL",
   },
   {
