@@ -6,6 +6,8 @@ export type Stat = { value: string; label: string; icon: "layers" | "ruler" | "s
 // glossier surface make the relief readable.
 export type Look = { exposure?: number; environment?: string; toneMapping?: string; roughness?: number };
 export const studioLook: Look = { exposure: 1.4, environment: "legacy", toneMapping: "aces", roughness: 0.4 };
+// Bright gloves: keep the neutral light, add contrast and a little gloss so the relief catches highlights.
+export const glossLook: Look = { exposure: 1.05, environment: "neutral", toneMapping: "aces", roughness: 0.4 };
 export type Colour = { slug: string; name: string; look?: Look; note?: string; codes?: string };
 export type Product3D = {
   slug: string; eyebrow: string; family: string; name: string; intro: string;
@@ -124,7 +126,7 @@ export const products: Product3D[] = [
     ],
     colours: [
       { slug: "black", name: "Black", look: studioLook, codes: "32806BK240 · 32808BK240", note: blackNote },
-      { slug: "orange", name: "Orange", codes: "32807OR240 · 32806OR240", note: hiVis },
+      { slug: "orange", name: "Orange", look: glossLook, codes: "32807OR240 · 32806OR240", note: hiVis },
     ],
     bestFor: "Mechanics and automotive, food processing, general industry", sizes: "S–3XL",
   },
