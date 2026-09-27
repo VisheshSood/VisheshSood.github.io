@@ -123,8 +123,8 @@ export const products: Product3D[] = [
       "Sizes S to 3XL; 240, 280 and 290 mm lengths across the family",
     ],
     colours: [
-      { slug: "black", name: "Black", look: studioLook, codes: "32807BK240 · 32808BK240", note: blackNote },
-      { slug: "orange", name: "Orange", codes: "32807OR240", note: hiVis },
+      { slug: "black", name: "Black", look: studioLook, codes: "32806BK240 · 32808BK240", note: blackNote },
+      { slug: "orange", name: "Orange", codes: "32807OR240 · 32806OR240", note: hiVis },
     ],
     bestFor: "Mechanics and automotive, food processing, general industry", sizes: "S–3XL",
   },
