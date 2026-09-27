@@ -11,27 +11,22 @@ export const glossLook: Look = { exposure: 1.05, environment: "neutral", toneMap
 export type Colour = { slug: string; name: string; look?: Look; note?: string; codes?: string };
 export type Product3D = {
   slug: string; eyebrow: string; family: string; name: string; intro: string;
-  stats: Stat[]; hotspots: Hotspot[]; notes: string[]; colours: Colour[]; bestFor: string; sizes: string;
+  stats: Stat[]; hotspots: Hotspot[]; notes: string[]; colours: Colour[]; bestFor: string; sizes: string; caution?: string;
 };
 
 // Chemical levels are EN ISO 374-1 permeation levels from the catalogue's chemical-resistance table (page 26).
 const latexNotes = [
   "Natural rubber latex: soft, stretchy and close-fitting, with a natural feel for fine work",
-  "Stays flexible and comfortable through long shifts",
   "Ambidextrous: replace only the torn glove, not the pair",
-  "Chlorinated finish: less tacky, easy to put on and take off",
+  "Chlorinated: less tacky, easy to put on and take off",
   "Roomy fit goes over a cotton liner in cold rooms",
-  "EN ISO 374-1 Type B: level 6 against 37% formaldehyde, level 5 against 30% hydrogen peroxide",
-  "EN ISO 374-5 protection against bacteria, fungi and viruses",
-  "Contains natural rubber latex",
+  "EN ISO 374-1 Type B: level 6 against formaldehyde, level 5 against hydrogen peroxide; EN ISO 374-5 virus protection",
 ];
 const diamondNitrileNotes = [
-  "Latex-free nitrile: no natural rubber proteins, safe for latex-sensitive users",
+  "Latex-free: safe for people with latex allergies",
   "Holds up to oils, greases and fuels, with strong puncture resistance",
   "Ambidextrous: replace only the torn glove, not the pair",
-  "Powder-free, polymer-coated inner slides on easily and leaves no residue",
-  "EN ISO 374-1 Type B: level 6 against 40% sodium hydroxide, level 5 against 37% formaldehyde",
-  "EN ISO 374-5 protection against bacteria, fungi and viruses; food-contact tested",
+  "EN ISO 374-1 Type B: level 6 against sodium hydroxide, level 5 against formaldehyde; food-contact tested",
 ];
 // Colour notes: why the colour matters on the job.
 const hiVis = "High visibility: easy to see on the hand and easy to spot if a torn piece lands in product";
@@ -60,7 +55,7 @@ export const products: Product3D[] = [
       { slug: "orange-silverlined", name: "Orange Silverlined", codes: "14514SO290", note: hiVis },
       { slug: "green-silverlined", name: "Green Silverlined", codes: "14514SG290", note: "Bright green is easy to spot; use it to colour-code tasks or areas" },
     ],
-    bestFor: "Meat and poultry processing, dishwashing, cleaning and janitorial, gardening, painting, automotive", sizes: "S–XXL (7–11)",
+    bestFor: "Meat and poultry processing, dishwashing, cleaning and janitorial, gardening, painting, automotive", sizes: "S–XXL (7–11)", caution: "Contains natural rubber latex.",
   },
   {
     slug: "zig-silverlined-latex", eyebrow: "Patented", family: "Zig Latex", name: "Zig Silverlined Latex",
@@ -78,9 +73,9 @@ export const products: Product3D[] = [
       { n: 3, title: "Silverlined tear indicator", text: "Blue outer over a white inner, so a crack shows white straight away.", at: [0.18, -0.26, 0.5], view: { orbit: "0deg 150deg 65%", target: [0, -0.5, 0] } },
       { n: 4, title: "300 mm long cuff", text: "Beaded cuff stops liquid running down the arm and covers the forearm.", at: [0, -0.44, 0.5], view: { orbit: "20deg 85deg 70%", target: [0, -0.3, 0] } },
     ],
-    notes: [...latexNotes, "100% natural latex, powder-free"],
+    notes: latexNotes,
     colours: [{ slug: "blue-silverlined", name: "Blue Silverlined", codes: "14714SL290", note: "Blue is the food-industry colour: it stands out against meat, poultry and produce" }],
-    bestFor: "Chemical handling, oil and gas, janitorial, heavy industry", sizes: "S–3XL",
+    bestFor: "Chemical handling, oil and gas, janitorial, heavy industry", sizes: "S–3XL", caution: "Contains natural rubber latex.",
   },
   {
     slug: "dual-tone-zig-8-mil", eyebrow: "Flagship", family: "Patented Zig", name: "Dual Tone Zig",
@@ -119,11 +114,7 @@ export const products: Product3D[] = [
       { n: 2, title: "Fingertip grip", text: "Texture runs to the fingertips.", at: [0.1, 0.42, 0.5] },
       { n: 3, title: "Polymer-coated inner", text: "Powder-free and ambidextrous; slides on easily with no residue.", at: [0, -0.42, 0.5] },
     ],
-    notes: [
-      "6 to 9 mil: 1.5 to over 2 times the thickness of a standard 4 mil glove",
-      ...diamondNitrileNotes,
-      "Sizes S to 3XL; 240, 280 and 290 mm lengths across the family",
-    ],
+    notes: diamondNitrileNotes,
     colours: [
       { slug: "black", name: "Black", look: studioLook, codes: "32806BK240 · 32808BK240", note: blackNote },
       { slug: "orange", name: "Orange", look: glossLook, codes: "32807OR240 · 32806OR240", note: hiVis },
@@ -165,11 +156,7 @@ export const products: Product3D[] = [
       { n: 2, title: "Fingertip grip", text: "Texture runs to the fingertips.", at: [0.1, 0.42, 0.5] },
       { n: 3, title: "Beaded cuff", text: "Polymer-coated inner, powder free, ambidextrous.", at: [0, -0.42, 0.5] },
     ],
-    notes: [
-      "8 mil heavy duty: twice the thickness of a standard 4 mil glove",
-      ...diamondNitrileNotes,
-      "5 to 9 mil across the family, from 240 mm up to 300 mm long cuff; sizes S to 3XL",
-    ],
+    notes: diamondNitrileNotes,
     colours: [
       { slug: "orange", name: "Orange", codes: "32407OR240 · 32408OR240", note: hiVis },
       { slug: "black", name: "Black", look: studioLook, codes: "32408BK240 · 36408BK240 · 32408BK290 (290 mm long cuff)", note: blackNote },
