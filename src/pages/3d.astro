@@ -109,11 +109,17 @@ const icons: Record<string, string> = {
               <p class="eyebrow">Colour options</p>
               <div class="m3d-swatches">
                 {p.colours.map((c, ci) => (
-                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} data-look={JSON.stringify(c.look ?? {})} data-colour={c.slug} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
+                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} data-look={JSON.stringify(c.look ?? {})} data-colour={c.slug} data-name={c.name} data-note={c.note ?? ""} data-codes={c.codes ?? ""} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
                     <img src={c.swatch} alt="" loading="lazy" /><span>{c.name}</span>
                   </button>
                 ))}
               </div>
+              {(() => { const c = p.colours[p.defaultColour]; return (
+                <div class="m3d-colour-info" data-colour-info>
+                  <p class="m3d-colour-note"><b data-ci-name>{c?.name}</b> <span data-ci-note>{c?.note}</span></p>
+                  <p class="m3d-colour-codes" data-ci-codes-wrap hidden={!c?.codes}>Codes <span data-ci-codes>{c?.codes}</span></p>
+                </div>
+              ); })()}
             </div>
             <label class="m3d-toggle"><input type="checkbox" data-rotate checked={!!p.file} disabled={!p.file} /> Auto-rotate</label>
           </aside>
@@ -258,6 +264,13 @@ const icons: Record<string, string> = {
       s.addEventListener("click", () => {
         stage.querySelectorAll(".m3d-swatch").forEach((x) => x.classList.toggle("on", x === s));
         stage.querySelectorAll<HTMLImageElement>("img[data-photo]").forEach((img) => { img.src = img.dataset.photo!.replace("{colour}", s.dataset.colour ?? ""); });
+        const ci = stage.querySelector<HTMLElement>("[data-colour-info]");
+        if (ci) {
+          ci.querySelector("[data-ci-name]")!.textContent = s.dataset.name ?? "";
+          ci.querySelector("[data-ci-note]")!.textContent = s.dataset.note ?? "";
+          ci.querySelector("[data-ci-codes]")!.textContent = s.dataset.codes ?? "";
+          (ci.querySelector("[data-ci-codes-wrap]") as HTMLElement).hidden = !s.dataset.codes;
+        }
         if (s.dataset.model) loadModel(mv, s.dataset.model, s.dataset.look);
       }));
   });
@@ -323,6 +336,11 @@ const icons: Record<string, string> = {
   .m3d-swatch.on { border-color: var(--green); color: var(--text); }
   .m3d-swatch:disabled { opacity: .4; cursor: default; }
   .m3d-swatch img { height: 64px; width: auto; }
+  .m3d-colour-info { margin: -4px 0 16px; display: grid; gap: 4px; }
+  .m3d-colour-note { margin: 0; font-size: 13px; color: var(--text-muted); }
+  .m3d-colour-note b { color: var(--text); font-weight: 600; }
+  .m3d-colour-codes { margin: 0; font-size: 12px; color: var(--text-dim); letter-spacing: .02em; }
+  .m3d-colour-codes span { color: var(--text-muted); font-variant-numeric: tabular-nums; }
   .m3d-toggle { display: flex; gap: 8px; align-items: center; font-size: 14px; }
   .m3d-toggle input { accent-color: var(--green); width: 18px; height: 18px; }
 
