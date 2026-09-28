@@ -18,6 +18,8 @@ export type Product3D = {
   stats: Stat[]; hotspots: Hotspot[]; notes: string[]; colours: Colour[]; bestFor: string; sizes: string; caution?: string;
   // Camera and button text for the reveal animation (default: frame the cuff, 'See the inner lining').
   revealView?: { orbit: string; target: [number, number, number] }; revealLabel?: string;
+  // Only on the private share page (/3d/share-…), never on the public /3d or in site links.
+  shareOnly?: boolean;
 };
 
 // Chemical levels are EN ISO 374-1 permeation levels from the catalogue's chemical-resistance table (page 26).
@@ -47,7 +49,7 @@ const latexStats: Stat[] = [
 
 export const products: Product3D[] = [
   {
-    slug: "diamond-silverlined-latex", eyebrow: "Flagship", family: "Diamond Latex", name: "Diamond Silverlined",
+    slug: "diamond-silverlined-latex", shareOnly: true, eyebrow: "Flagship", family: "Diamond Latex", name: "Diamond Silverlined",
     intro: "17 mil Silverlined natural latex with a long cuff, on the raised diamond texture we invented in 2011.",
     stats: [{ value: "17 mil", label: "20 mil at palm", icon: "layers" }, ...latexStats.slice(1)],
     hotspots: [
@@ -64,7 +66,7 @@ export const products: Product3D[] = [
     bestFor: "Meat and poultry processing, dishwashing, cleaning and janitorial, gardening, painting, automotive", sizes: "S–XXL (7–11)", caution: "Contains natural rubber latex.",
   },
   {
-    slug: "zig-silverlined-latex", eyebrow: "Patented", family: "Zig Latex", name: "Zig Silverlined",
+    slug: "zig-silverlined-latex", shareOnly: true, eyebrow: "Patented", family: "Zig Latex", name: "Zig Silverlined",
     intro: "17 mil Silverlined natural latex with a long cuff, on our patented Zig texture, the best dry grip we make.",
     stats: [
       { value: "Zig", label: "Our best dry-grip texture", icon: "grip" },

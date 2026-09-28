@@ -6,7 +6,7 @@ import { modelByFile } from "./models3d-files";
 const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 function liveColours(slug: string) {
-  const p = products.find((x) => x.slug === slug);
+  const p = products.find((x) => x.slug === slug && !x.shareOnly); // share-only products never get public links
   return p ? p.colours.filter((c) => modelByFile(`${slug}--${c.slug}.glb`) || modelByFile(`${slug}.glb`)) : [];
 }
 
