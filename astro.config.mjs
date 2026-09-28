@@ -19,7 +19,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       // The private 3D share page stays out of the sitemap.
-      filter: (page) => !page.includes('/3d/share-'),
+      filter: (page) => !page.includes('/3d/silverlined'),
       // lastmod = build time. Every deploy rebuilds, so this honestly signals the
       // site was refreshed and prompts search engines to re-crawl.
       lastmod: new Date(),

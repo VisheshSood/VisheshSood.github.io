@@ -18,7 +18,7 @@ export type Product3D = {
   stats: Stat[]; hotspots: Hotspot[]; notes: string[]; colours: Colour[]; bestFor: string; sizes: string; caution?: string;
   // Camera and button text for the reveal animation (default: frame the cuff, 'See the inner lining').
   revealView?: { orbit: string; target: [number, number, number] }; revealLabel?: string;
-  // Only on the private share page (/3d/share-…), never on the public /3d or in site links.
+  // Only on the private share page (/3d/silverlined), never on the public /3d or in site links.
   shareOnly?: boolean;
 };
 
