@@ -14,6 +14,7 @@ function tabFor(g: { material: string; texture: string; longCuff?: boolean; colo
   if (g.material === "Nitrile" && g.texture === "Zig" && (g.colours ?? []).some((c) => /dual tone/i.test(c))) return "dual-tone-zig-8-mil";
   if (g.material === "Nitrile" && g.texture === "Diamond") return "diamond-8-mil";
   if (g.material === "Nitrile" && g.texture === "Micro Diamond") return "micro-diamond-8-mil";
+  if (g.material === "Nitrile" && g.texture === "Tyre Tread") return "gripper-7-mil";
   if (g.material === "Latex" && g.texture === "Diamond" && g.longCuff) return "diamond-silverlined-latex";
   if (g.material === "Latex" && g.texture === "Zig") return "zig-silverlined-latex";
   return null;
