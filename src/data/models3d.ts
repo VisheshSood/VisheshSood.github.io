@@ -145,12 +145,12 @@ export const products: Product3D[] = [
       { value: "Type B", label: "EN ISO 374-1 · 374-5 virus", icon: "shield" },
     ],
     hotspots: [
-      { n: 1, title: "Tyre-tread texture", text: "Directional tread across palm and fingers sheds oil and water.", at: [0, 0.05, 0.5] },
-      { n: 2, title: "Fingertip grip", text: "Tread continues to the fingertips for tools and fasteners.", at: [0.1, 0.42, 0.5] },
-      { n: 3, title: "Polymer-coated inner", text: "Powder free, ambidextrous, easy on and off.", at: [0, -0.42, 0.5] },
+      { n: 1, title: "Tyre-tread texture", text: "Directional tread across palm and fingers sheds oil and water.", at: [0, 0.05, 0.5], view: { orbit: "0deg 82deg 26%", target: [0, 0.05, 0.5] } },
+      { n: 2, title: "Fingertip grip", text: "Tread continues to the fingertips for tools and fasteners.", at: [0.1, 0.42, 0.5], view: { orbit: "10deg 78deg 28%", target: [0.05, 0.32, 0.4] } },
+      { n: 3, title: "Polymer-coated inner", text: "Powder free, ambidextrous, easy on and off.", at: [0.3, -0.36, 0.45] },
     ],
     notes: ["EN ISO 374-1 Type B chemical and EN ISO 374-5 virus protection"],
-    colours: [{ slug: "black", name: "Black", look: studioLook, codes: "32607BK240", note: blackNote }, { slug: "orange", name: "Orange", codes: "32607OR240", note: hiVis }],
+    colours: [{ slug: "black", name: "Black", look: studioLook, codes: "32607BK240", note: blackNote }, { slug: "orange", name: "Orange", look: glossLook, codes: "32607OR240", note: hiVis }],
     bestFor: "Oil and gas, automotive and mechanics, heavy industry", sizes: "S–XXL",
   },
   {
