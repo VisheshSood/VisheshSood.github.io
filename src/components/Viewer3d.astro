@@ -4,7 +4,7 @@ import { products } from "../data/models3d";
 import { modelByFile } from "../lib/models3d-files";
 
 // all = the private share page: also shows products marked shareOnly.
-const { all = false } = Astro.props as { all?: boolean };
+const { all = false, image = "/images/og-3d.jpg", title = "3D Glove Viewer | Innovative Gloves" } = Astro.props as { all?: boolean; image?: string; title?: string };
 
 
 const withFiles = products.map((p) => {
@@ -39,7 +39,7 @@ const icons: Record<string, string> = {
 };
 ---
 
-<PageLayout title="3D Glove Viewer | Innovative Gloves" description={`Turn our gloves in 3D: ${withFiles.map((p) => p.name).join(", ")}, in every colour we model. View them in your own space on a phone.`} noindex={all}>
+<PageLayout title={title} image={image} description={`Turn our gloves in 3D: ${withFiles.map((p) => p.name).join(", ")}, in every colour we model. View them in your own space on a phone.`} noindex={all}>
   <section class="section m3d">
     <div class="container">
       <div class="m3d-tabs" role="tablist" aria-label="Products">
