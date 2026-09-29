@@ -161,20 +161,20 @@ export const articles: Article[] = [
   },
   {
     slug: "3d-glove-viewer",
-    title: "See Our Gloves in 3D",
+    title: "Our Gloves Are Now in 3D",
     tag: "Launch",
     date: "2026-09-29",
     excerpt:
-      "Our new 3D Glove Viewer lets you turn, zoom and inspect our grip textures from any angle, and place a life-size glove on your own desk with your phone.",
+      "Four of our gloves are now online in 3D. Turn them around, zoom in on the grip, or put one on your desk with your phone.",
     image: "/images/og-3d.jpg",
     cta: { label: "Open the 3D Glove Viewer", href: "/3d" },
     body: [
-      "A photo shows one side of a glove. A grip texture is something you want to see up close, from every angle, the way you would if the glove were in your hand. That is why we built the Innovative Gloves 3D Glove Viewer.",
-      "It launches with four of our gloves: Dual Tone Zig, Micro Diamond, Gripper and Diamond. Each one is modelled to real size, and every colour has its own model, so the orange, black, yellow, green and blue Diamond gloves all look true to colour.",
-      "You can spin every glove a full 360 degrees and zoom right into the texture. Numbered callouts take you straight to the features that matter: the patented Zig pattern and thumb grip on Dual Tone Zig, the fine texture of Micro Diamond, the tyre tread of Gripper, and the raised diamond we first introduced in 2011.",
-      "Dual Tone Zig also shows its two-layer wear indicator in action. Press play and the black outer layer opens to reveal the green layer underneath, the colour that tells a wearer it is time to change gloves.",
-      "On a phone, tap View in your space to place a life-size glove on a desk or workbench through augmented reality. It is the quickest way to judge thickness, cuff length and texture before a sample ever ships.",
-      "The viewer is linked from each glove's page, and we will keep adding gloves and colours as new models are finished.",
+      "Grip textures are hard to show in a photo, so we made 3D models of our gloves instead.",
+      "Four are up so far: Dual Tone Zig, Micro Diamond, Gripper and Diamond, in the colours we make them in. They're built to real size.",
+      "Drag to turn a glove around, and zoom in until you can see the pattern properly. The numbered points next to each glove jump straight to the details, like the thumb grip on Dual Tone Zig.",
+      "On Dual Tone Zig, press play and the black layer splits open to show the green one underneath. That's the wear indicator. Once you see green, it's time for a new pair.",
+      "On a phone, tap \"View in your space\" and the glove shows up on your table at actual size. It's a quick way to check cuff length before you ask for samples.",
+      "More gloves are on the way.",
     ],
   },
 ];
