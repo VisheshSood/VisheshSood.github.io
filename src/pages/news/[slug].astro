@@ -41,6 +41,21 @@ const articleSchema = {
         {article.body.map((para) => (<p>{para}</p>))}
       </div>
 
+      {article.gallery && (
+        <section class="na-gallery" aria-label="Photos" data-gallery>
+          <div class="na-track" data-track>
+            {article.gallery.map((ph, i) => (
+              <figure class="na-slide"><img src={ph.src} alt={ph.alt} loading="eager" fetchpriority={i === 0 ? "auto" : "low"} decoding="async" width="1800" height="1200" /></figure>
+            ))}
+          </div>
+          <button type="button" class="na-nav na-prev" data-prev aria-label="Previous photo">&#8249;</button>
+          <button type="button" class="na-nav na-next" data-next aria-label="Next photo">&#8250;</button>
+          <div class="na-dots">
+            {article.gallery.map((_, i) => (<button type="button" class:list={["na-dot", { on: i === 0 }]} data-dot={i} aria-label={`Photo ${i + 1}`}></button>))}
+          </div>
+        </section>
+      )}
+
       <div class="na-cta">
         <p class="muted">Built on 25 years of engineering better protection. See what that means for your work.</p>
         <div class="na-cta-actions">
@@ -69,7 +84,35 @@ const articleSchema = {
   </section>
 </PageLayout>
 
+<script>
+  // Photo carousel: native scroll-snap (swipe on phones), arrows + dots for desktop.
+  document.querySelectorAll<HTMLElement>("[data-gallery]").forEach((g) => {
+    const track = g.querySelector<HTMLElement>("[data-track]")!;
+    const dots = [...g.querySelectorAll<HTMLButtonElement>("[data-dot]")];
+    const go = (i: number) => { const n = dots.length; i = (i + n) % n; track.scrollTo({ left: i * track.clientWidth }); };
+    const cur = () => Math.round(track.scrollLeft / track.clientWidth);
+    g.querySelector("[data-prev]")!.addEventListener("click", () => go(cur() - 1));
+    g.querySelector("[data-next]")!.addEventListener("click", () => go(cur() + 1));
+    dots.forEach((d, i) => d.addEventListener("click", () => go(i)));
+    track.addEventListener("scroll", () => { const c = cur(); dots.forEach((d, i) => d.classList.toggle("on", i === c)); }, { passive: true });
+  });
+</script>
+
 <style>
+  .na-gallery { position: relative; margin: 34px 0 8px; }
+  .na-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; border-radius: var(--radius); background: #111; box-shadow: 0 16px 40px rgba(0,0,0,0.10); }
+  .na-track::-webkit-scrollbar { display: none; }
+  .na-slide { flex: 0 0 100%; margin: 0; scroll-snap-align: center; aspect-ratio: 3 / 2; }
+  .na-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .na-nav { position: absolute; top: calc(50% - 18px); transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; border: 0; background: rgba(255,255,255,0.9); color: var(--ink); font-size: 28px; line-height: 1; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.2); display: grid; place-items: center; padding-bottom: 4px; }
+  .na-nav:hover { background: #fff; }
+  .na-prev { left: 12px; }
+  .na-next { right: 12px; }
+  .na-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+  .na-dot { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; background: rgba(20,22,20,0.2); cursor: pointer; }
+  .na-dot.on { background: var(--green); width: 22px; border-radius: 4px; }
+  @media (max-width: 560px) { .na-nav { display: none; } }
+
   .na-container { max-width: 760px; }
   .na-meta { display: flex; align-items: center; gap: 12px; margin: 18px 0 10px; }
   .na-tag { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-dark); }
