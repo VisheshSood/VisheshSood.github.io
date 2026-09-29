@@ -12,6 +12,7 @@ export interface Article {
   image: string;     // hero / card image (existing asset)
   imageFit?: "cover" | "contain"; // "contain" for product shots on white; default "cover"
   cta?: { label: string; href: string }; // optional main button under the article (default: Our Technologies)
+  gallery?: { src: string; alt: string }[]; // optional photo carousel under the article text
   body: string[];
 }
 
@@ -151,6 +152,16 @@ export const articles: Article[] = [
     excerpt:
       "This September marks 25 years since Innovative Gloves began, from a single family-owned factory in southern Thailand to a specialist manufacturer running 14 lines around the clock.",
     image: "/images/sus-aerial.jpg",
+    gallery: [
+      { src: "/images/news/25-years/01-team.webp", alt: "The Innovative Gloves team in front of the Silver Jubilee screen" },
+      { src: "/images/news/25-years/02-speech.webp", alt: "Opening speech: it began with a glove and a promise, 2001" },
+      { src: "/images/news/25-years/03-hall.webp", alt: "Guests filling the hall for the 25th anniversary dinner" },
+      { src: "/images/news/25-years/04-jubilee-screen.webp", alt: "The Silver Jubilee screen above the dinner tables" },
+      { src: "/images/news/25-years/05-band.webp", alt: "Live band on stage" },
+      { src: "/images/news/25-years/06-welcome.webp", alt: "A guest welcomed with applause" },
+      { src: "/images/news/25-years/07-balloons.webp", alt: "Gold and green 25 balloons" },
+      { src: "/images/news/25-years/08-gift-bag.webp", alt: "25th anniversary gift bag" },
+    ],
     body: [
       "This September, Innovative Gloves turns 25. What began in 2001 as a family-owned glove maker in southern Thailand has grown into a specialist international manufacturer, but the founding idea has never changed: build gloves that perform where ordinary disposables fall short.",
       "Today the factory runs 14 production lines, 24 hours a day, producing a range that spans roughly 4 to 14 mil across nitrile, latex, long-cuff, heavy-duty, chemical-protection and biodegradable gloves, supplied to industries worldwide.",
