@@ -44,7 +44,7 @@ const icons: Record<string, string> = {
     <div class="container">
       <div class="m3d-tabs" role="tablist" aria-label="Products">
         {withFiles.map((p, i) => (
-          <button role="tab" class:list={["m3d-tab", { on: i === 0 }]} data-tab={p.slug} aria-selected={i === 0 ? "true" : "false"}>{p.name}</button>
+          <button role="tab" class:list={["m3d-tab", { on: i === 0 }]} data-tab={p.slug} data-umami-event="3D tab" data-umami-event-glove={p.name} aria-selected={i === 0 ? "true" : "false"}>{p.name}</button>
         ))}
       </div>
 
@@ -67,7 +67,7 @@ const icons: Record<string, string> = {
               <p class="eyebrow">Colour options</p>
               <div class="m3d-swatches">
                 {p.colours.map((c, ci) => (
-                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} data-reveal={c.reveal} data-look={JSON.stringify(c.look ?? {})} data-colour={c.slug} data-name={c.name} data-note={c.note ?? ""} data-codes={c.codes ?? ""} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
+                  <button class:list={["m3d-swatch", { on: ci === p.defaultColour }]} data-model={c.model} data-reveal={c.reveal} data-look={JSON.stringify(c.look ?? {})} data-colour={c.slug} data-name={c.name} data-note={c.note ?? ""} data-codes={c.codes ?? ""} data-umami-event="3D colour" data-umami-event-glove={p.name} data-umami-event-colour={c.name} title={c.model ? c.name : `${c.name} (3D model coming)`} disabled={!c.model}>
                     <img src={c.swatch} alt="" loading="lazy" /><span>{c.name}</span>
                   </button>
                 ))}
@@ -94,10 +94,10 @@ const icons: Record<string, string> = {
                 ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" touch-action="pan-y"
               >
                 {p.hotspots.map((h) => (
-                  <button slot={`hotspot-${h.n}`} class="m3d-dot" data-n={h.n} aria-label={h.title} data-position={`${h.at[0]} ${h.at[1]} ${h.at[2]}`} data-normal="0 0 1">{h.n}</button>
+                  <button slot={`hotspot-${h.n}`} class="m3d-dot" data-n={h.n} data-umami-event="3D callout" data-umami-event-glove={p.name} data-umami-event-feature={h.title} aria-label={h.title} data-position={`${h.at[0]} ${h.at[1]} ${h.at[2]}`} data-normal="0 0 1">{h.n}</button>
                 ))}
-                <button slot="ar-button" class="m3d-ar">View in your space</button>
-                <button type="button" class="m3d-reveal" data-reveal-btn hidden={!p.colours[p.defaultColour]?.reveal}><span aria-hidden="true">&#9654;</span> <span data-reveal-label data-text={p.revealLabel ?? "See the inner lining"}>{p.revealLabel ?? "See the inner lining"}</span></button>
+                <button slot="ar-button" class="m3d-ar" data-umami-event="3D AR" data-umami-event-glove={p.name}>View in your space</button>
+                <button type="button" class="m3d-reveal" data-reveal-btn data-umami-event="3D reveal" data-umami-event-glove={p.name} hidden={!p.colours[p.defaultColour]?.reveal}><span aria-hidden="true">&#9654;</span> <span data-reveal-label data-text={p.revealLabel ?? "See the inner lining"}>{p.revealLabel ?? "See the inner lining"}</span></button>
                 <div class="m3d-progress" slot="progress-bar"><div class="m3d-progress-bar"></div></div>
                 <p class="m3d-turn"><span>360°</span> Drag to rotate</p>
               </model-viewer>
@@ -121,7 +121,7 @@ const icons: Record<string, string> = {
           <aside class="m3d-right">
             <ol class="m3d-callouts">
               {p.hotspots.map((h) => (
-                <li data-n={h.n}><span class="m3d-num">{h.n}</span><div><b>{h.title}</b><p>{h.text}</p></div></li>
+                <li data-n={h.n} data-umami-event="3D callout" data-umami-event-glove={p.name} data-umami-event-feature={h.title}><span class="m3d-num">{h.n}</span><div><b>{h.title}</b><p>{h.text}</p></div></li>
               ))}
             </ol>
             <p class="m3d-best"><span class="eyebrow">Best for</span>{p.bestFor}</p>

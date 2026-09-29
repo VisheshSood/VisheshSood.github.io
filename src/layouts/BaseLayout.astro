@@ -99,6 +99,9 @@ const websiteSchema = {
       rel="stylesheet"
     />
 
+    <!-- Umami analytics (cookieless). data-domains: only the live site counts, never localhost. -->
+    <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="11508fc8-b86b-4b77-aee9-d81bbe26bd2b" data-domains="www.innovativegloves.net,innovativegloves.net"></script>
+
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   </head>
