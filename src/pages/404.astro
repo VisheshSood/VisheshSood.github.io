@@ -1,0 +1,55 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+// Built to dist/404.html. Apache serves it for missing pages once the site's vhost has
+// `ErrorDocument 404 /404.html`. Umami then records the broken URL like any other page.
+---
+
+<PageLayout title="Page not found | Innovative Gloves" description="This page doesn't exist or the link is out of date." noindex>
+  <section class="nf">
+    <div class="nf-box">
+      <div class="nf-hero">
+        <img src="/images/404-logo.webp" alt="" width="132" height="132" />
+        <span class="nf-code">404<span class="dot">.</span></span>
+      </div>
+      <h1>Page not found</h1>
+      <p class="nf-text">This page doesn't exist or the link is out of date.</p>
+      <div class="nf-actions">
+        <a href="/" class="btn btn--ghost" data-back>Go back</a>
+        <a href="/" class="btn btn--primary">Home</a>
+      </div>
+      <nav class="nf-links" aria-label="Popular pages">
+        <a href="/gloves">Gloves</a>
+        <a href="/3d">3D Glove Viewer</a>
+        <a href="/technologies">Grip Technologies</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  // "Go back" returns to the previous page when there is one on this site, otherwise it stays a Home link.
+  const back = document.querySelector<HTMLAnchorElement>("[data-back]");
+  if (back && document.referrer && new URL(document.referrer).origin === location.origin) {
+    back.addEventListener("click", (e) => { e.preventDefault(); history.back(); });
+  }
+</script>
+
+<style>
+  .nf { background: #f5f6f2; min-height: 72vh; display: flex; align-items: center; justify-content: center; padding: 72px 16px; }
+  .nf-box { text-align: center; max-width: 560px; }
+  .nf-hero { display: inline-flex; align-items: center; gap: 18px; margin-bottom: 22px; }
+  .nf-hero img { width: 132px; height: 132px; }
+  .nf-code { font: 900 120px/0.9 var(--font-head); color: var(--ink); letter-spacing: -2px; }
+  .nf-code .dot { color: var(--green); }
+  .nf h1 { font: 700 26px/1.2 var(--font-body); text-transform: none; letter-spacing: 0; margin: 0 0 8px; }
+  .nf-text { color: var(--text-muted); margin: 0 0 28px; }
+  .nf-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .nf-links { display: flex; gap: 8px 22px; justify-content: center; flex-wrap: wrap; margin-top: 34px; padding-top: 22px; border-top: 1px solid rgba(20, 22, 20, 0.12); }
+  .nf-links a { color: var(--green-dark); font-weight: 600; font-size: 15px; text-decoration: none; }
+  .nf-links a:hover { text-decoration: underline; }
+  @media (max-width: 560px) {
+    .nf-hero img { width: 88px; height: 88px; }
+    .nf-code { font-size: 80px; }
+  }
+</style>
