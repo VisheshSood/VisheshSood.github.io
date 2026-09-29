@@ -11,6 +11,7 @@ export interface Article {
   excerpt: string;
   image: string;     // hero / card image (existing asset)
   imageFit?: "cover" | "contain"; // "contain" for product shots on white; default "cover"
+  cta?: { label: string; href: string }; // optional main button under the article (default: Our Technologies)
   body: string[];
 }
 
@@ -156,6 +157,24 @@ export const articles: Article[] = [
       "The last 25 years are written in the milestones along the way: inventing the raised diamond in 2011, our first patent in 2017, expanding to 14 lines in 2018, launching biodegradable nitrile in 2019, patenting Micro Diamond and then Zig Grip, and passing and renewing our SMETA ethical audits. Each one came from the same drive to keep improving.",
       "Being family-owned has shaped how we grew, investing in our own grip technologies, our own manufacturing, and our own people rather than competing on price alone. That's why a company of our size holds patents on multiple grip textures and keeps developing new ones.",
       "Twenty-five years is a milestone, not a finish line. The drive that produced the first raised diamond glove is still pushing new products, cleaner manufacturing and better protection for the people who wear our gloves every day. Here's to the next 25.",
+    ],
+  },
+  {
+    slug: "3d-glove-viewer",
+    title: "See Our Gloves in 3D",
+    tag: "Launch",
+    date: "2026-09-29",
+    excerpt:
+      "Our new 3D Glove Viewer lets you turn, zoom and inspect our grip textures from any angle, and place a life-size glove on your own desk with your phone.",
+    image: "/images/og-3d.jpg",
+    cta: { label: "Open the 3D Glove Viewer", href: "/3d" },
+    body: [
+      "A photo shows one side of a glove. A grip texture is something you want to see up close, from every angle, the way you would if the glove were in your hand. That is why we built the Innovative Gloves 3D Glove Viewer.",
+      "It launches with four of our gloves: Dual Tone Zig, Micro Diamond, Gripper and Diamond. Each one is modelled to real size, and every colour has its own model, so the orange, black, yellow, green and blue Diamond gloves all look true to colour.",
+      "You can spin every glove a full 360 degrees and zoom right into the texture. Numbered callouts take you straight to the features that matter: the patented Zig pattern and thumb grip on Dual Tone Zig, the fine texture of Micro Diamond, the tyre tread of Gripper, and the raised diamond we first introduced in 2011.",
+      "Dual Tone Zig also shows its two-layer wear indicator in action. Press play and the black outer layer opens to reveal the green layer underneath, the colour that tells a wearer it is time to change gloves.",
+      "On a phone, tap View in your space to place a life-size glove on a desk or workbench through augmented reality. It is the quickest way to judge thickness, cuff length and texture before a sample ever ships.",
+      "The viewer is linked from each glove's page, and we will keep adding gloves and colours as new models are finished.",
     ],
   },
 ];
