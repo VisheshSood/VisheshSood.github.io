@@ -44,7 +44,7 @@ const articleSchema = {
       <div class="na-cta">
         <p class="muted">Built on 25 years of engineering better protection. See what that means for your work.</p>
         <div class="na-cta-actions">
-          <a href="/technologies" class="btn btn--primary">Our Technologies <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a href={article.cta?.href ?? "/technologies"} class="btn btn--primary">{article.cta?.label ?? "Our Technologies"} <span class="arrow" aria-hidden="true">&rarr;</span></a>
           <a href="/gloves" class="btn btn--ghost">Browse All Gloves</a>
         </div>
       </div>
