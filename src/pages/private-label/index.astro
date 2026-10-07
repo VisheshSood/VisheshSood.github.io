@@ -1,6 +1,7 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
 import PageBanner from "../../components/PageBanner.astro";
+import { catalogue } from "../../data/catalogue";
 
 // Our own trademarked brands, real proof that we already do private label.
 const brands = [
@@ -27,6 +28,19 @@ const capabilities = [
   { t: "Certified for Export", d: "CAT III and EN ISO 374 certified, with the documentation to import into regulated markets worldwide." },
 ];
 
+// Range facts for the "Materials & styles" block, computed so they stay true as the range changes.
+const nitrileMils = catalogue.filter((g) => g.material.includes("Nitrile") && g.thickness != null).map((g) => g.thickness as number);
+const cuffs = [...new Set(catalogue.map((g) => g.length))].sort((a, b) => a - b);
+const colourCount = new Set(catalogue.flatMap((g) => g.colours)).size;
+// Buyer information. MOQ and lead-time NUMBERS are deliberately absent until confirmed by the business.
+const ordering = [
+  { t: "Minimum order", d: "Minimums depend on the glove, the packaging and how much is customised. Tell us what you are planning and we will give you clear minimum-order guidance." },
+  { t: "Packaging", d: "Custom box artwork, dispenser boxes, cartons and inners, designed and printed to your specification." },
+  { t: "Artwork", d: "We finalise the specification, colours, packaging and artwork with you before production starts." },
+  { t: "Samples", d: "We send samples of the base glove first, so you can check fit, feel and grip before committing. <a href=\"/request-samples/\">Request samples</a>." },
+  { t: "Lead time", d: "Share your destination and volumes and we will confirm lead times and shipping terms. We export worldwide and can work to the Incoterms that suit you." },
+  { t: "Materials & styles", d: `Nitrile from ${Math.min(...nitrileMils)} to ${Math.max(...nitrileMils)} mil, bio nitrile, and natural rubber latex. Cuffs of ${cuffs.join(", ")} mm. ${colourCount} colours across the range. Smooth, textured and our own grip textures. <a href=\"/gloves/\">See every glove</a>.` },
+];
 const steps = [
   { n: "01", t: "Enquiry", d: "Tell us the glove, the market and roughly the volumes you're planning." },
   { n: "02", t: "Samples", d: "We send samples of the base gloves so you can feel the difference before committing." },
@@ -37,10 +51,10 @@ const steps = [
 ---
 
 <PageLayout
-  title="OEM & Private Label | Innovative Gloves"
+  title="OEM & Private Label Glove Manufacturer | Nitrile & Latex | Innovative Gloves"
   description="Our manufacturing, your brand. Put your name on patented Micro Diamond, Zig, Tyre Tread and everyday gloves, with custom colours, thickness, artwork and packaging, certified for export worldwide."
 >
-  <PageBanner eyebrow="OEM / Private Label" title={`Our Manufacturing.<br>Your Brand<span class="dot">.</span>`}
+  <PageBanner h1="OEM & Private Label Glove Manufacturing" title={`Our Manufacturing.<br>Your Brand<span class="dot">.</span>`}
     intro="From your branding on a standard glove to a co-developed specialist product, we're a product-development partner, not just a supplier." />
 
   <!-- BRAND PROOF -->
@@ -110,6 +124,28 @@ const steps = [
     </div>
   </section>
 
+  <!-- BUYER INFORMATION -->
+  <section class="section pl-order">
+    <div class="container">
+      <header class="pl-head">
+        <p class="eyebrow">Ordering Private Label</p>
+        <h2>What to Expect<span class="dot">.</span></h2>
+      </header>
+      <div class="order-grid">
+        {ordering.map((o) => (
+          <div class="order-item">
+            <h3>{o.t}</h3>
+            <p set:html={o.d} />
+          </div>
+        ))}
+      </div>
+      <div class="pl-dev" id="product-development">
+        <h3>Need a glove that doesn't exist yet?</h3>
+        <p>Our R&amp;D team can develop it with you: a new colour, texture, thickness, cuff or packaging, taken from prototype samples through to production on our own lines. <a href="/innovation/">How we develop new gloves</a>.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="section pl-cta">
     <div class="container pl-cta-inner">
@@ -155,6 +191,14 @@ const steps = [
   .pl-step h3 { font-size: 1rem; margin: 6px 0 8px; }
   .pl-step p { font-size: 0.84rem; line-height: 1.5; }
 
+  .pl-order { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .order-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 32px; }
+  .order-item h3, .pl-dev h3 { font-size: 1.02rem; margin-bottom: 8px; }
+  .order-item p, .pl-dev p { font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); }
+  .order-item :global(a), .pl-dev a { color: var(--green-dark); font-weight: 600; }
+  .pl-dev { margin-top: 30px; padding: 22px 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  @media (max-width: 900px) { .order-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .order-grid { grid-template-columns: 1fr; } }
   .pl-cta { background: radial-gradient(120% 120% at 50% 0%, rgba(140,198,63,0.12), rgba(140,198,63,0) 60%), var(--bg-2); border-top: 1px solid var(--border); text-align: center; }
   .pl-cta-inner { max-width: 620px; margin-inline: auto; }
   .pl-cta-inner h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 12px; }

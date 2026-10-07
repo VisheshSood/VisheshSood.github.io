@@ -5,16 +5,27 @@ interface Props {
   intro?: string;
   image?: string;
   imageAlt?: string;
+  /** Optional: a descriptive H1 shown in the eyebrow position; `title` then keeps its look as a styled brand line. */
+  h1?: string;
 }
-const { eyebrow, title, intro, image, imageAlt } = Astro.props;
+const { eyebrow, title, intro, image, imageAlt, h1 } = Astro.props;
 ---
 
 <section class="page-banner" class:list={{ "has-media": image }}>
   <div class="container">
     <div class="pb-grid">
       <div class="pb-inner">
-        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-        <h1 set:html={title} />
+        {h1 ? (
+          <>
+            <h1 class="eyebrow pb-h1">{h1}</h1>
+            <p class="pb-title" set:html={title} />
+          </>
+        ) : (
+          <>
+            {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+            <h1 set:html={title} />
+          </>
+        )}
         {intro && <p class="pb-intro">{intro}</p>}
       </div>
       {image && (
@@ -33,7 +44,9 @@ const { eyebrow, title, intro, image, imageAlt } = Astro.props;
     padding-block: clamp(26px, 3.5vw, 48px);
   }
   .pb-inner { max-width: 760px; }
-  .page-banner h1 {
+  .pb-h1 { margin: 0; line-height: 1.5; }
+  .pb-title { font-family: var(--font-head); font-weight: 800; text-transform: uppercase; color: var(--ink); letter-spacing: -0.005em; }
+  .page-banner h1:not(.pb-h1), .pb-title {
     font-size: clamp(1.7rem, 3.4vw, 2.6rem);
     margin: 8px 0 0;
     line-height: 1.1;
