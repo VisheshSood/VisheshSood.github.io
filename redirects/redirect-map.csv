@@ -1,0 +1,116 @@
+kind,old,status,behaviour,new,redirect,confidence,evidence,gsc_impressions_3m
+Host,http://innovativegloves.net/*,no response (port 80 blocked by AWS security group),times out,https://www.innovativegloves.net/*,301 one hop to https://www.innovativegloves.net + same path,certain,,
+Host,http://www.innovativegloves.net/*,no response (port 80 blocked by AWS security group),"times out; Google still lists this homepage (2,821 impressions, 94 clicks, 3 months)",https://www.innovativegloves.net/*,301 one hop to https://www.innovativegloves.net + same path,certain,,
+Host,https://innovativegloves.net/*,200,serves a full duplicate of every page (canonical tag points to www),https://www.innovativegloves.net/*,301 one hop to https://www.innovativegloves.net + same path,certain,,
+Old PDF,https://www.innovativegloves.net/Catalog.pdf,404,404 Not Found,https://www.innovativegloves.net/catalog.pdf,301 to /catalog.pdf,certain,,
+Legacy page,https://www.innovativegloves.net/Ncertification.htm,404,404 Not Found,https://www.innovativegloves.net/certifications/,301 to /certifications/,certain,,
+Legacy page,https://www.innovativegloves.net/Nfeatures.htm,404,404 Not Found,https://www.innovativegloves.net/gloves/nitrile/,301 to /gloves/nitrile/,certain,,
+Legacy page,https://www.innovativegloves.net/Npackaging.htm,404,404 Not Found,https://www.innovativegloves.net/gloves/nitrile/,301 to /gloves/nitrile/,certain,,
+Legacy page,https://www.innovativegloves.net/Nprocess.htm,404,404 Not Found,https://www.innovativegloves.net/manufacturing/,301 to /manufacturing/,certain,,
+Legacy page,https://www.innovativegloves.net/Nspecifications.htm,404,404 Not Found,https://www.innovativegloves.net/gloves/fully-textured-4-nitrile/,301 to /gloves/fully-textured-4-nitrile/,medium,"Archived page: blue nitrile, textured palms and fingers, 9 and 12 inch lengths; thickness not stated",
+Legacy page,https://www.innovativegloves.net/Nuse.htm,404,404 Not Found,https://www.innovativegloves.net/gloves/nitrile/,301 to /gloves/nitrile/,certain,,
+Legacy page,https://www.innovativegloves.net/about.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/about/,301 to /about/,certain,,508
+Legacy page,https://www.innovativegloves.net/advantages.html,404,404 Not Found,https://www.innovativegloves.net/why-innovative/,301 to /why-innovative/,certain,,
+Legacy page,https://www.innovativegloves.net/automotive.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/industries/automotive/,301 to /industries/automotive/,certain,,38
+Legacy page,https://www.innovativegloves.net/biodegradable.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/technologies/biodegradable/,301 to /technologies/biodegradable/,certain,,407
+Legacy page,https://www.innovativegloves.net/brands.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/private-label/,301 to /private-label/,certain,,723
+Legacy page,https://www.innovativegloves.net/certification.htm,404,404 Not Found,https://www.innovativegloves.net/certifications/,301 to /certifications/,certain,,
+Legacy page,https://www.innovativegloves.net/coal.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/sustainability/,301 to /sustainability/,certain,,37
+Legacy page,https://www.innovativegloves.net/construction.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/industries/construction/,301 to /industries/construction/,certain,,39
+Legacy page,https://www.innovativegloves.net/contact.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/contact/,301 to /contact/,certain,,394
+Legacy page,https://www.innovativegloves.net/contactus.htm,404,404 Not Found,https://www.innovativegloves.net/contact/,301 to /contact/,certain,,
+Legacy page,https://www.innovativegloves.net/downloads.htm,404,404 Not Found,https://www.innovativegloves.net/resources/,301 to /resources/,certain,,
+Legacy page,https://www.innovativegloves.net/features.htm,404,404 Not Found,https://www.innovativegloves.net/gloves/smooth-latex-2/,301 to /gloves/smooth-latex-2/,high,"Archived: smooth, natural feel, white latex (powdered series)",
+Legacy page,https://www.innovativegloves.net/food.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/industries/food-processing/,301 to /industries/food-processing/,certain,,112
+Legacy page,https://www.innovativegloves.net/general.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/industries/general-purpose/,301 to /industries/general-purpose/,certain,,93
+Legacy page,https://www.innovativegloves.net/header.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/header_news.html,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,1
+Legacy page,https://www.innovativegloves.net/homecontent.htm,404,404 Not Found,https://www.innovativegloves.net/,301 to /,certain,,
+Legacy page,https://www.innovativegloves.net/household.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/industries/cleaning/,301 to /industries/cleaning/,certain,,87
+Legacy page,https://www.innovativegloves.net/igpres.htm,404,404 Not Found,https://www.innovativegloves.net/about/history/,301 to /about/history/,medium,Archived: 2001 company PowerPoint presentation,
+Legacy page,https://www.innovativegloves.net/igpres_files/error.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/frame.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/fullscreen.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/master03.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/outline.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0001.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0002.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0003.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0004.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0005.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0006.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0007.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0008.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0009.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0010.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0011.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0012.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0013.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/igpres_files/slide0014.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/index.htm,404,404 Not Found,https://www.innovativegloves.net/,301 to /,certain,,
+Legacy page,https://www.innovativegloves.net/index.html,200,200 full duplicate of the homepage,https://www.innovativegloves.net/,301 to /,certain,,38
+Legacy page,https://www.innovativegloves.net/index.php,404,404 Not Found,https://www.innovativegloves.net/,301 to /,certain,,
+Legacy page,https://www.innovativegloves.net/industries.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/industries/,301 to /industries/,certain,,39
+Old PDF,https://www.innovativegloves.net/innovative-gloves-info.pdf,404,404 Not Found,https://www.innovativegloves.net/catalog.pdf,301 to /catalog.pdf,certain,,
+Legacy page,https://www.innovativegloves.net/main_index.htm,404,404 Not Found,https://www.innovativegloves.net/,301 to /,certain,,
+Legacy page,https://www.innovativegloves.net/manufac.htm,404,404 Not Found,https://www.innovativegloves.net/manufacturing/,301 to /manufacturing/,certain,,
+Legacy page,https://www.innovativegloves.net/medical.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/industries/medical/,301 to /industries/medical/,certain,,81
+Legacy page,https://www.innovativegloves.net/menu.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/microdiamond.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/technologies/micro-diamond/,301 to /technologies/micro-diamond/,certain,,480
+Legacy page,https://www.innovativegloves.net/modal/contact.php,404,404 Not Found,https://www.innovativegloves.net/contact/,301 to /contact/,certain,,
+Legacy page,https://www.innovativegloves.net/news.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/news/,301 to /news/,certain,,70
+Legacy page,https://www.innovativegloves.net/news/SEDEX.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/certifications/,301 to /certifications/,high,Your preference; /certifications/ has a SMETA (Sedex Members Ethical Trade Audit) section,734
+Legacy page,https://www.innovativegloves.net/news/covid-19-update.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/news/,301 to /news/,certain,,19
+Legacy page,https://www.innovativegloves.net/our-gloves.html,404,404 Not Found,https://www.innovativegloves.net/gloves/,301 to /gloves/,certain,,
+Legacy page,https://www.innovativegloves.net/packaging.htm,404,404 Not Found,https://www.innovativegloves.net/gloves/smooth-latex-2/,301 to /gloves/smooth-latex-2/,medium,Same unlabelled (powdered latex) series,
+Old PDF,https://www.innovativegloves.net/pdfs/DOC%20-%20Latex%20gloves.pdf,404,404 Not Found,https://www.innovativegloves.net/declaration-of-conformity-latex.pdf,301 to /declaration-of-conformity-latex.pdf,certain,,
+Old PDF,https://www.innovativegloves.net/pdfs/DOC%20-%20Nitrile%20Gloves.pdf,404,404 Not Found,https://www.innovativegloves.net/declaration-of-conformity-nitrile.pdf,301 to /declaration-of-conformity-nitrile.pdf,certain,,
+Old PDF,https://www.innovativegloves.net/pdfs/DOC-latex_gloves.pdf,404,404 Not Found,https://www.innovativegloves.net/declaration-of-conformity-latex.pdf,301 to /declaration-of-conformity-latex.pdf,certain,,117
+Old PDF,https://www.innovativegloves.net/pdfs/DOC-nitrile_gloves.pdf,404,404 Not Found,https://www.innovativegloves.net/declaration-of-conformity-nitrile.pdf,301 to /declaration-of-conformity-nitrile.pdf,certain,,228
+Legacy page,https://www.innovativegloves.net/pfree_certification.htm,404,404 Not Found,https://www.innovativegloves.net/certifications/,301 to /certifications/,certain,,
+Legacy page,https://www.innovativegloves.net/pfree_features.htm,404,404 Not Found,https://www.innovativegloves.net/gloves/textured-latex-2/,301 to /gloves/textured-latex-2/,high,Archived 'pfree' series = powder-free latex,
+Legacy page,https://www.innovativegloves.net/pfree_packaging.htm,404,404 Not Found,https://www.innovativegloves.net/gloves/textured-latex-2/,301 to /gloves/textured-latex-2/,high,Archived 'pfree' series = powder-free latex,
+Legacy page,https://www.innovativegloves.net/pfree_process.htm,404,404 Not Found,https://www.innovativegloves.net/manufacturing/,301 to /manufacturing/,certain,,
+Legacy page,https://www.innovativegloves.net/pfree_specifications.htm,404,404 Not Found,https://www.innovativegloves.net/gloves/textured-latex-2/,301 to /gloves/textured-latex-2/,high,Archived 'pfree' series = powder-free latex,
+Legacy page,https://www.innovativegloves.net/pfree_use.htm,404,404 Not Found,https://www.innovativegloves.net/gloves/textured-latex-2/,301 to /gloves/textured-latex-2/,high,Archived 'pfree' series = powder-free latex,
+Legacy page,https://www.innovativegloves.net/process.htm,404,404 Not Found,https://www.innovativegloves.net/manufacturing/,301 to /manufacturing/,certain,,
+Legacy page,https://www.innovativegloves.net/productmenu1.htm,404,404 Not Found,(none),410 Gone: old frame/menu fragment or PowerPoint slide with no equivalent,n/a,,
+Legacy page,https://www.innovativegloves.net/products.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/gloves/,301 to /gloves/,certain,,248
+Legacy page,https://www.innovativegloves.net/quote.html,404,404 Not Found,https://www.innovativegloves.net/request-quote/,301 to /request-quote/,certain,,
+Legacy page,https://www.innovativegloves.net/rawmaterials.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/manufacturing/,301 to /manufacturing/,certain,,16
+Legacy page,https://www.innovativegloves.net/recognition.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/recognition/,301 to /recognition/,certain,,20
+Legacy page,https://www.innovativegloves.net/service-single.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/manufacturing/,301 to /manufacturing/,low,Existing stub target; not re-checked,13
+Legacy page,https://www.innovativegloves.net/service.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/manufacturing/,301 to /manufacturing/,low,Existing stub target; page not re-checked (archive rate-limited); 2008 'services' page was about private label,5
+Legacy page,https://www.innovativegloves.net/services.html,404,404 Not Found,https://www.innovativegloves.net/private-label/,301 to /private-label/,high,"Archived page: custom colours, flavours, private labelling, artwork and dispenser design",
+Legacy page,https://www.innovativegloves.net/sitemap.htm,404,404 Not Found,https://www.innovativegloves.net/,301 to /,certain,,
+Legacy page,https://www.innovativegloves.net/specifications.htm,404,404 Not Found,https://www.innovativegloves.net/gloves/smooth-latex-2/,301 to /gloves/smooth-latex-2/,high,"Archived: natural white latex, powdered, 240 mm",
+Old PDF,https://www.innovativegloves.net/specs/3milnitrile.pdf,404,404 Not Found,https://www.innovativegloves.net/gloves/finger-textured-3-nitrile/,301 to /gloves/finger-textured-3-nitrile/,medium,PDF not archived; the only current 3 mil nitrile glove,6
+Old PDF,https://www.innovativegloves.net/specs/4milbio.pdf,404,404 Not Found,https://www.innovativegloves.net/gloves/fully-textured-4-bio-nitrile/,301 to /gloves/fully-textured-4-bio-nitrile/,certain,,5
+Old PDF,https://www.innovativegloves.net/specs/4milnitrile.pdf,404,404 Not Found,https://www.innovativegloves.net/gloves/fully-textured-4-nitrile/,301 to /gloves/fully-textured-4-nitrile/,medium,PDF not archived; old plain spec files were the standard textured line,22
+Old PDF,https://www.innovativegloves.net/specs/5milnitrile.pdf,404,404 Not Found,https://www.innovativegloves.net/gloves/fully-textured-5-nitrile/,301 to /gloves/fully-textured-5-nitrile/,medium,PDF not archived; same reasoning,3
+Old PDF,https://www.innovativegloves.net/specs/6mil.pdf,404,404 Not Found,https://www.innovativegloves.net/gloves/fully-textured-6-nitrile/,301 to /gloves/fully-textured-6-nitrile/,medium,"PDF not archived; texture-specific files carry dt/ft/mdt in the name, plain ones were the standard textured line; 6 mil also exists as Diamond, Micro Diamond, Zig, Tyre Tread",29
+Old PDF,https://www.innovativegloves.net/specs/6millatex.pdf,404,404 Not Found,https://www.innovativegloves.net/gloves/textured-latex-2/,301 to /gloves/textured-latex-2/,low,PDF not archived; no current latex glove is listed at 6 mil; closest everyday powder-free latex,12
+Old PDF,https://www.innovativegloves.net/specs/8mildt.pdf,404,404 Not Found,https://www.innovativegloves.net/gloves/diamond-8-nitrile/,301 to /gloves/diamond-8-nitrile/,certain,,5
+Old PDF,https://www.innovativegloves.net/specs/8milft.pdf,404,404 Not Found,https://www.innovativegloves.net/gloves/fully-textured-8-nitrile/,301 to /gloves/fully-textured-8-nitrile/,certain,,1
+Old PDF,https://www.innovativegloves.net/specs/8milmdt.pdf,404,404 Not Found,https://www.innovativegloves.net/gloves/micro-diamond-8-nitrile/,301 to /gloves/micro-diamond-8-nitrile/,certain,,4
+Old PDF,https://www.innovativegloves.net/specs/9mdtblue.pdf,404,404 Not Found,https://www.innovativegloves.net/gloves/micro-diamond-9-nitrile/,301 to /gloves/micro-diamond-9-nitrile/,certain,,4
+Old PDF,https://www.innovativegloves.net/specs/9mildt.pdf,404,404 Not Found,https://www.innovativegloves.net/gloves/diamond-9-nitrile-long/,301 to /gloves/diamond-9-nitrile-long/,certain,,17
+Legacy page,https://www.innovativegloves.net/technology.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/technologies/,301 to /technologies/,certain,,129
+Legacy page,https://www.innovativegloves.net/tyretread.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/technologies/tyre-tread/,301 to /technologies/tyre-tread/,certain,,120
+Legacy page,https://www.innovativegloves.net/use.htm,404,404 Not Found,https://www.innovativegloves.net/gloves/smooth-latex-2/,301 to /gloves/smooth-latex-2/,medium,Same unlabelled (powdered latex) series as features/specifications,
+Legacy page,https://www.innovativegloves.net/water.html,200,200 HTML page with meta-refresh + JavaScript redirect (not a real redirect),https://www.innovativegloves.net/sustainability/,301 to /sustainability/,certain,,15
+Legacy page,https://www.innovativegloves.net/web/aboutus.php,404,404 Not Found,https://www.innovativegloves.net/about/,301 to /about/,certain,,
+Legacy page,https://www.innovativegloves.net/web/advantage.php,404,404 Not Found,https://www.innovativegloves.net/why-innovative/,301 to /why-innovative/,certain,,
+Legacy page,https://www.innovativegloves.net/web/contactus.php,404,404 Not Found,https://www.innovativegloves.net/contact/,301 to /contact/,certain,,
+Legacy page,https://www.innovativegloves.net/web/diamond_textured.php,404,404 Not Found,https://www.innovativegloves.net/technologies/raised-diamond/,301 to /technologies/raised-diamond/,certain,,
+Legacy page,https://www.innovativegloves.net/web/index.php,404,404 Not Found,https://www.innovativegloves.net/,301 to /,certain,,
+Legacy page,https://www.innovativegloves.net/web/manufacturing.php,404,404 Not Found,https://www.innovativegloves.net/manufacturing/,301 to /manufacturing/,certain,,
+Legacy page,https://www.innovativegloves.net/web/product.php,404,404 Not Found,https://www.innovativegloves.net/gloves/,301 to /gloves/,certain,,
+Legacy page,https://www.innovativegloves.net/web/product_AVI_nitri_skin_pro.php,404,404 Not Found,https://www.innovativegloves.net/gloves/finger-textured-3-nitrile/,301 to /gloves/finger-textured-3-nitrile/,high,"Archived page: 'Nitrile 3.0m Pro', soft stretchy 3 mil nitrile with textured fingers",
+Legacy page,https://www.innovativegloves.net/web/product_high_risk_10m.php,404,404 Not Found,https://www.innovativegloves.net/gloves/textured-10-latex-long/,301 to /gloves/textured-10-latex-long/,certain,,
+Legacy page,https://www.innovativegloves.net/web/product_high_risk_14m.php,404,404 Not Found,https://www.innovativegloves.net/gloves/textured-14-latex-long/,301 to /gloves/textured-14-latex-long/,certain,,
+Legacy page,https://www.innovativegloves.net/web/product_nitrile.php,404,404 Not Found,https://www.innovativegloves.net/gloves/fully-textured-4-nitrile/,301 to /gloves/fully-textured-4-nitrile/,medium,"Archived page: powder-free blue nitrile, mildly textured all over; thickness not stated",
+Legacy page,https://www.innovativegloves.net/web/product_powder_free.php,404,404 Not Found,https://www.innovativegloves.net/gloves/textured-latex-2/,301 to /gloves/textured-latex-2/,high,"Archived page: powder-free latex, textured finish, low protein",
+Legacy page,https://www.innovativegloves.net/web/product_powdered.php,404,404 Not Found,https://www.innovativegloves.net/gloves/textured-latex/,301 to /gloves/textured-latex/,high,Archived page: powdered latex with textured engraving,
+Legacy page,https://www.innovativegloves.net/web/product_unbrake_black_nitrile.php,404,404 Not Found,https://www.innovativegloves.net/gloves/fully-textured-4-nitrile/,301 to /gloves/fully-textured-4-nitrile/,low,"Archived page holds only a chemical-resistance chart, no specs; black powder-free nitrile; current Fully Textured 4 mil comes in black",
+Legacy page,https://www.innovativegloves.net/web/sitemap.php,404,404 Not Found,https://www.innovativegloves.net/,301 to /,certain,,
