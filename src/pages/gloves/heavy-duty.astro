@@ -10,9 +10,9 @@ const heavyLatex = catalogue.filter((g) => g.material === "Latex" && isHeavy(g.t
 const total = heavyNitrile.length + heavyLatex.length;
 ---
 
-<PageLayout title="Heavy Duty Gloves | Innovative Gloves" description={`Our thickest, toughest gloves, ${total} heavy-duty nitrile and latex families from 8 to 14 mil, with aggressive grip and long-cuff options for the most demanding work.`}>
-  <PageBanner eyebrow="Heavy Duty" title={`Built for the<br>Toughest Jobs<span class="dot">.</span>`}
-    intro="When ordinary disposables tear, our heavy-duty range takes over, thicker gauges (8–14 mil), aggressive patented grip and extended cuffs, in both nitrile and latex. This is where our specialist expertise really shows." />
+<PageLayout title="Heavy Duty Nitrile & Latex Gloves | Innovative Gloves" description={`${total} heavy duty nitrile and latex gloves made in Thailand: thicker films, grip textures for oily and wet work, and long-cuff options. OEM and private label available.`}>
+  <PageBanner eyebrow="Built for the Toughest Jobs" title={`Heavy Duty Nitrile &amp; Latex Gloves<span class="dot">.</span>`}
+    intro="A glove suits heavy work when it lasts through abrasion, oil, water and rough handling. That comes from several things together: a thicker film, a grip texture that holds wet or oily parts, a beaded cuff that resists tearing as you pull the glove on, and a long cuff where liquids are involved. The gloves below are the thickest in our nitrile and latex range, many with our raised diamond, Micro Diamond, Zig or Tyre Tread textures and long-cuff versions. Each glove's page lists its tested properties." />
 
   <section class="section hd-section">
     <div class="container">
@@ -46,6 +46,19 @@ const total = heavyNitrile.length + heavyLatex.length;
     </div>
   </section>
 
+  <section class="section hd-guide">
+    <div class="container">
+      <p class="eyebrow">Choosing a Heavy Duty Glove</p>
+      <h2>Match the Glove to the Job<span class="dot">.</span></h2>
+      <div class="hd-grid">
+        <div><h3>Thickness</h3><p>A thicker film lasts longer against abrasion and punctures but gives up some fingertip feel. Pick the thinnest glove that survives the task. <a href="/resources/guides/how-to-choose-glove-thickness/">How to choose a thickness</a>.</p></div>
+        <div><h3>Texture</h3><p>Grip matters as much as thickness when parts are oily or wet. <a href="/technologies/micro-diamond/">Micro Diamond</a> and <a href="/technologies/tyre-tread/">Tyre Tread</a> are made for oil, <a href="/technologies/zig-grip/">Zig Grip</a> for dry grip, and the <a href="/technologies/raised-diamond/">raised diamond</a> for general heavy work.</p></div>
+        <div><h3>Cuff</h3><p>Long-cuff versions cover more of the forearm, which keeps splashes and cleaning solutions out of the glove.</p></div>
+        <div><h3>Application</h3><p>See the gloves we recommend for <a href="/industries/automotive/">automotive work</a>, <a href="/industries/oil-gas/">oil and gas</a>, <a href="/industries/construction/">construction</a> and <a href="/industries/chemical/">chemical handling</a>. For chemicals, check each glove's tested EN ISO 374 results against the chemical you use.</p></div>
+      </div>
+    </div>
+  </section>
+
   <section class="section hd-cta-band">
     <div class="container hd-cta-inner">
       <h2>Need Something Even Tougher<span class="dot">.</span></h2>
@@ -60,6 +73,13 @@ const total = heavyNitrile.length + heavyLatex.length;
 
 <style>
   .hd-alt { background: var(--bg-2); }
+  .hd-guide { border-top: 1px solid var(--border); }
+  .hd-guide h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 10px 0 26px; }
+  .hd-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 36px; }
+  .hd-grid h3 { font-size: 1.05rem; margin-bottom: 8px; }
+  .hd-grid p { line-height: 1.65; }
+  .hd-grid a { color: var(--green-dark); font-weight: 600; }
+  @media (max-width: 820px) { .hd-grid { grid-template-columns: 1fr; } }
   .range-head { margin-bottom: clamp(24px, 3vw, 40px); }
   .range-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-top: 10px; }
   .range-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; }
