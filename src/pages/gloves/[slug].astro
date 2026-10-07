@@ -43,7 +43,10 @@ const isLatex = glove.material === "Latex";
 const materialFeature = isLatex
   ? { title: "Natural Rubber Latex", icon: "latex", desc: "Made from natural rubber for outstanding stretch and a light, barely-there feel, giving you the tactile sensitivity that precise, detailed work demands." }
   : { title: "Latex-Free Nitrile", icon: "nitrile", desc: "Made from synthetic nitrile with no natural rubber proteins, so it is a safe choice for anyone with a latex sensitivity, and it stands up to oils, chemicals and punctures better than latex." };
-const features = [materialFeature, ...universalFeatures];
+// Powdered gloves must not show the "Powder-Free" card: swap it for an accurate powdered one.
+const isPowdered = /corn starch/i.test(glove.treatment || "");
+const powderFeature = { title: "Powdered", icon: "shield", desc: "Lightly coated inside with USP-grade corn starch, which makes the glove quick and easy to pull on." };
+const features = [materialFeature, ...universalFeatures.map((f) => (isPowdered && f.title === "Powder-Free" ? powderFeature : f))];
 
 // Certifications, every glove carries the quality & food-contact standards;
 // bio nitrile gloves additionally carry the biodegradability standards.
