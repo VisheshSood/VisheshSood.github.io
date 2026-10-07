@@ -55,7 +55,7 @@ export const industryContent: Record<string, IndustryContent> = {
       "Aggressive Tyre Tread and Diamond grip hold fast on slick, oily surfaces",
       "Nitrile resists oils and many chemicals, with per-product EN ISO 374 data",
       "Long-cuff 290–300 mm options protect beyond the wrist",
-      "Heavy 8–14 mil gauges take abuse without giving up",
+      "Heavy 7–9 mil nitrile gauges take abuse without giving up",
     ],
     recommended: ["micro-diamond-9-nitrile-long", "tyre-tread-7-nitrile-long", "diamond-9-nitrile-long", "zig-8-nitrile"], // oil-gas
   },
