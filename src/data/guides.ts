@@ -5,6 +5,9 @@ export interface Guide {
   tag: string;
   excerpt: string;
   body: string[];
+  /** Optional search-result title/description (approved per guide); defaults to `title | Glove Knowledge Centre` and the excerpt. */
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 export const guides: Guide[] = [
@@ -28,8 +31,11 @@ export const guides: Guide[] = [
     slug: "nitrile-vs-latex",
     title: "Nitrile vs Latex",
     tag: "Materials",
+    seoTitle: "Is Nitrile Latex? Nitrile vs Latex Gloves Compared | Innovative Gloves",
+    seoDescription: "No. Nitrile is a synthetic rubber with no natural latex proteins, so nitrile gloves are latex-free. How the two compare on fit, strength and chemicals.",
     excerpt: "Both fit and protect well, but they behave differently. How to choose between synthetic nitrile and natural rubber latex.",
     body: [
+      "Is nitrile the same as latex? No. Nitrile is a synthetic rubber; latex is natural rubber from the rubber tree. Nitrile gloves contain no natural latex proteins, which makes them the usual choice where latex allergy is a concern.",
       "Nitrile and natural rubber latex are two of the most widely used materials for disposable gloves. Both can provide excellent fit, flexibility, and protection, but their performance characteristics are different. Choosing between them depends on the working environment, the substances being handled, user preference, and any allergy considerations.",
       "Nitrile gloves are made from a synthetic rubber material. One of their main advantages is their strong resistance to oils, greases, fuels, and many commonly encountered chemicals. Nitrile is also valued for its puncture and tear resistance, which makes it popular in automotive, industrial, laboratory, cleaning, maintenance, and medical applications. Because nitrile does not contain natural rubber latex proteins, it is also commonly selected where latex allergy is a concern.",
       "Modern nitrile formulations can provide excellent flexibility and comfort. Higher-quality nitrile gloves are designed to stretch with the hand and reduce fatigue during prolonged use. They are also available in a wide range of thicknesses, cuff lengths, colors, and grip textures, allowing users to select a glove for anything from light inspection work to demanding industrial applications.",
@@ -61,6 +67,8 @@ export const guides: Guide[] = [
     slug: "how-chemical-permeation-works",
     title: "How Chemical Permeation Works",
     tag: "Chemical Safety",
+    seoTitle: "Glove Permeation vs Penetration vs Degradation | Innovative Gloves",
+    seoDescription: "Why a chemical can pass through a glove that looks intact: permeation, penetration and degradation explained, plus breakthrough time.",
     excerpt: "A glove can look intact and still let a chemical through at a molecular level. Understanding permeation, breakthrough time and degradation.",
     body: [
       "When selecting protective gloves for chemical handling, one of the most important concepts to understand is chemical permeation. A glove may look completely intact and still allow a chemical to pass through its material at a molecular level. This is why visual inspection and glove thickness alone are not enough to determine whether a glove is suitable for a particular chemical.",

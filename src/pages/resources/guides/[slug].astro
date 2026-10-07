@@ -22,7 +22,7 @@ const articleSchema = {
 };
 ---
 
-<PageLayout title={`${guide.title} | Glove Knowledge Centre`} description={guide.excerpt}>
+<PageLayout title={guide.seoTitle ?? `${guide.title} | Glove Knowledge Centre`} description={guide.seoDescription ?? guide.excerpt}>
   <article class="section guide-article">
     <div class="container">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Knowledge Centre", href: "/resources/guides" }, { label: guide.title }]} />

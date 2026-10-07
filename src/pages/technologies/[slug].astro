@@ -16,6 +16,13 @@ const isBio = tech.slug === "biodegradable";
 const isInvented = tech.slug === "raised-diamond";
 // SEO H1s (approved 2026-10-07). Titles are unchanged: they carry invention/patent wording that needs sign-off first.
 // Approved titles (2026-10-07). Others keep their existing title; no patent wording added or strengthened.
+// Approved meta descriptions (2026-10-07): under ~150 chars, no added invention/patent claims.
+const descBySlug: Record<string, string> = {
+  "raised-diamond": "Diamond textured nitrile gloves with the original raised diamond grip. 5 to 17 mil, standard and long cuff, made in our factory in Thailand.",
+  "micro-diamond": "Micro Diamond nitrile gloves: a dense micro-texture for strong grip with oils. 6 to 14 mil, standard and long cuff, made in Thailand.",
+  "zig-grip": "Zig Grip nitrile gloves: our best dry grip, with a zig-zag texture and improved thumb grip. 6 to 14 mil, including Dual Tone with a wear indicator.",
+  "tyre-tread": "Gripper (Tyre Tread) nitrile gloves: a deep tread that channels away oil and water. 6 to 7 mil, standard and long cuff, made in Thailand.",
+};
 const titleBySlug: Record<string, string> = {
   "raised-diamond": "Diamond Textured Nitrile Gloves | Raised Diamond Grip | Innovative Gloves",
   "tyre-tread": "Gripper (Tyre Tread) Nitrile Gloves | Innovative Gloves",
@@ -93,7 +100,7 @@ const bioMax = bioTest.bmpTreated + 2.5;
 const bioPct = (v: number) => ((v / bioMax) * 100).toFixed(1);
 ---
 
-<PageLayout title={titleBySlug[tech.slug] ?? (isBio ? "Biodegradable Nitrile Gloves | Innovative Gloves" : `${tech.name} Nitrile Gloves | ${isInvented ? "Invented by Innovative" : "Patented Grip Technology"} | Innovative Gloves`)} description={`${tech.name}: ${tech.tagline} ${tech.intro}`}>
+<PageLayout title={titleBySlug[tech.slug] ?? (isBio ? "Biodegradable Nitrile Gloves | Innovative Gloves" : `${tech.name} Nitrile Gloves | ${isInvented ? "Invented by Innovative" : "Patented Grip Technology"} | Innovative Gloves`)} description={descBySlug[tech.slug] ?? `${tech.name}: ${tech.tagline} ${tech.intro}`}>
   <!-- HERO -->
   <section class="th-hero">
     <div class="container th-hero-grid">
