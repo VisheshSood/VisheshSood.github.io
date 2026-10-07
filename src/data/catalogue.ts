@@ -16,6 +16,8 @@ export interface Glove {
   sizes: string[];
   patent: string;
   img?: string; // real box render, where we have one
+  /** Shown with the Heavy Duty badge and on /gloves/heavy-duty/. Set per product in catalogue.json. */
+  heavyDuty?: boolean;
 }
 
 // Colour name -> swatch. `light: true` means it needs dark text/pattern on top.
@@ -144,7 +146,7 @@ export function gloveBadges(g: Glove): { label: string; kind: string }[] {
   else if (["Micro Diamond", "Zig", "Tyre Tread"].includes(g.texture)) out.push({ label: "Patented", kind: "patented" });
   if (g.bio) out.push({ label: "Bio", kind: "bio" });
   if (g.longCuff) out.push({ label: "Long Cuff", kind: "long" });
-  if ((g.thickness ?? 0) >= 8) out.push({ label: "Heavy Duty", kind: "heavy" });
+  if (g.heavyDuty) out.push({ label: "Heavy Duty", kind: "heavy" }); // explicit per-product flag in catalogue.json
   return out;
 }
 

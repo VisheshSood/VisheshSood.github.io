@@ -105,7 +105,7 @@ const count = gloves.length;
                 data-colours={g.colours.join("|")}
                 data-bio={g.bio ? "1" : "0"}
                 data-longcuff={g.longCuff ? "1" : "0"}
-                data-heavy={(g.thickness ?? 0) >= 8 ? "1" : "0"}
+                data-heavy={g.heavyDuty ? "1" : "0"}
               >
                 <div class="gcard-visual">
                   <GloveVisual glove={g} />

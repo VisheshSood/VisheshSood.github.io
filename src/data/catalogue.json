@@ -25,7 +25,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "diamond-5-nitrile-long",
@@ -49,7 +50,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "diamond-6-nitrile",
@@ -79,7 +81,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "diamond-6-nitrile-long",
@@ -104,7 +107,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "diamond-8-nitrile",
@@ -133,7 +137,8 @@
       "2X-Large",
       "3X-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "diamond-8-nitrile-long",
@@ -158,7 +163,8 @@
       "2X-Large",
       "3X-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "diamond-9-nitrile-long",
@@ -183,7 +189,8 @@
       "X-Large(10)",
       "2X-Large(11)"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "diamond-8-5-nitrile-long",
@@ -207,7 +214,8 @@
       "X-Large(10)",
       "2X-Large(11)"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "tyre-tread-6-nitrile",
@@ -234,7 +242,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": "US Design Patent Number D779, 130 S Feb 14th 2017 &"
+    "patent": "US Design Patent Number D779, 130 S Feb 14th 2017 &",
+    "heavyDuty": false
   },
   {
     "slug": "tyre-tread-7-nitrile",
@@ -260,7 +269,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": "US Design Patent Number D779, 130 S Feb 14th 2017 &"
+    "patent": "US Design Patent Number D779, 130 S Feb 14th 2017 &",
+    "heavyDuty": false
   },
   {
     "slug": "tyre-tread-7-nitrile-long",
@@ -284,7 +294,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": "US Design Patent Number D779, 130 S Feb 14th 2017 &"
+    "patent": "US Design Patent Number D779, 130 S Feb 14th 2017 &",
+    "heavyDuty": false
   },
   {
     "slug": "micro-diamond-6-nitrile",
@@ -311,7 +322,8 @@
       "2X-Large",
       "3X-Large"
     ],
-    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )"
+    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )",
+    "heavyDuty": false
   },
   {
     "slug": "micro-diamond-6-nitrile-long",
@@ -339,7 +351,8 @@
       "2X-Large",
       "3X-Large"
     ],
-    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )"
+    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )",
+    "heavyDuty": false
   },
   {
     "slug": "micro-diamond-8-nitrile",
@@ -366,7 +379,8 @@
       "2X-Large",
       "3X-Large"
     ],
-    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )"
+    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )",
+    "heavyDuty": true
   },
   {
     "slug": "finger-textured-4-nitrile-long",
@@ -392,7 +406,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "micro-diamond-9-nitrile-long",
@@ -417,7 +432,8 @@
       "2X-Large",
       "3X-Large"
     ],
-    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )"
+    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )",
+    "heavyDuty": true
   },
   {
     "slug": "micro-diamond-9-nitrile",
@@ -442,7 +458,8 @@
       "2X-Large",
       "3X-Large"
     ],
-    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )"
+    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )",
+    "heavyDuty": true
   },
   {
     "slug": "fully-textured-4-nitrile",
@@ -471,7 +488,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "fully-textured-4-nitrile-long",
@@ -497,7 +515,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "finger-textured-3-nitrile-2",
@@ -523,7 +542,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "textured-4-nitrile",
@@ -548,7 +568,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "textured-5-nitrile",
@@ -574,7 +595,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "textured-6-nitrile",
@@ -599,7 +621,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "textured-8-nitrile",
@@ -626,7 +649,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "fully-textured-4-bio-nitrile",
@@ -651,7 +675,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "finger-textured-4-5-nitrile",
@@ -676,7 +701,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "fully-textured-5-nitrile",
@@ -705,7 +731,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "fully-textured-5-nitrile-long",
@@ -730,7 +757,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "fully-textured-6-nitrile",
@@ -760,7 +788,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "fully-textured-6-nitrile-long",
@@ -787,7 +816,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "fully-textured-8-nitrile",
@@ -815,7 +845,8 @@
       "2X-Large. 3X-Large",
       "2XL-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "fully-textured-8-nitrile-long",
@@ -842,7 +873,8 @@
       "2X-Large",
       "3X-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "zig-6-nitrile",
@@ -871,7 +903,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": "US Design Patent Number D1, 068,207 S Apr. 1st 2025 &"
+    "patent": "US Design Patent Number D1, 068,207 S Apr. 1st 2025 &",
+    "heavyDuty": false
   },
   {
     "slug": "zig-8-nitrile",
@@ -900,7 +933,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": "US Design Patent Number D1, 068,207 S Apr. 1st 2025 &"
+    "patent": "US Design Patent Number D1, 068,207 S Apr. 1st 2025 &",
+    "heavyDuty": true
   },
   {
     "slug": "zig-6-bio-nitrile",
@@ -930,7 +964,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": "US Design Patent Number D1, 068,207 S Apr. 1st 2025 &"
+    "patent": "US Design Patent Number D1, 068,207 S Apr. 1st 2025 &",
+    "heavyDuty": false
   },
   {
     "slug": "smooth-latex",
@@ -957,7 +992,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "textured-10-latex-long",
@@ -982,7 +1018,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "textured-14-latex-long",
@@ -1007,7 +1044,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "diamond-17-latex-long",
@@ -1034,7 +1072,8 @@
       "X-Large (10)",
       "XX-Large (11)"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "micro-diamond-14-latex-long",
@@ -1059,7 +1098,8 @@
       "2X-Large",
       "3X-Large"
     ],
-    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )"
+    "patent": "US Design Patent No. D870, 976 S Dec 24th 2019 ,  EU Community Design Registration No. 004675619 and Australian Design Registration No. 201810657 )",
+    "heavyDuty": true
   },
   {
     "slug": "smooth-latex-2",
@@ -1085,7 +1125,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "textured-latex",
@@ -1110,7 +1151,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "textured-latex-long",
@@ -1135,7 +1177,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "textured-8-latex",
@@ -1160,7 +1203,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "zig-14-latex-long",
@@ -1185,7 +1229,8 @@
       "2X-Large",
       "3X-Large"
     ],
-    "patent": "US Design Patent Number D1, 068,207 S Apr. 1st 2025 &"
+    "patent": "US Design Patent Number D1, 068,207 S Apr. 1st 2025 &",
+    "heavyDuty": true
   },
   {
     "slug": "textured-latex-2",
@@ -1211,7 +1256,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "textured-latex-long-2",
@@ -1236,7 +1282,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "textured-7-latex",
@@ -1261,7 +1308,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": false
   },
   {
     "slug": "textured-8-latex-2",
@@ -1286,7 +1334,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "smooth-8-latex",
@@ -1311,7 +1360,8 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   },
   {
     "slug": "textured-9-latex",
@@ -1336,6 +1386,7 @@
       "X-Large",
       "XX-Large"
     ],
-    "patent": ""
+    "patent": "",
+    "heavyDuty": true
   }
 ]

@@ -4,9 +4,8 @@ import PageBanner from "../../components/PageBanner.astro";
 import GloveCard from "../../components/GloveCard.astro";
 import { catalogue } from "../../data/catalogue";
 
-const isHeavy = (t: number | null) => !!t && t >= 8;
-const heavyNitrile = catalogue.filter((g) => g.material.includes("Nitrile") && isHeavy(g.thickness)).sort((a, b) => (b.thickness || 0) - (a.thickness || 0));
-const heavyLatex = catalogue.filter((g) => g.material === "Latex" && isHeavy(g.thickness)).sort((a, b) => (b.thickness || 0) - (a.thickness || 0));
+const heavyNitrile = catalogue.filter((g) => g.material.includes("Nitrile") && g.heavyDuty).sort((a, b) => (b.thickness || 0) - (a.thickness || 0));
+const heavyLatex = catalogue.filter((g) => g.material === "Latex" && g.heavyDuty).sort((a, b) => (b.thickness || 0) - (a.thickness || 0));
 const total = heavyNitrile.length + heavyLatex.length;
 ---
 
