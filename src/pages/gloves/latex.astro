@@ -10,7 +10,6 @@ const latex = catalogue
 
 const cuffs = [...new Set(latex.map((g) => g.length))].sort((a, b) => a - b);
 const powderedCount = latex.filter((g) => /corn starch/i.test(g.treatment || "")).length;
-// Thickness figures are deliberately NOT computed here: the "14 mil" vs 17 mil question is open (see SEO audit).
 const textures = [
   { name: "Smooth", href: "/resources/guides/glove-textures-explained/", text: "Smooth surface with the natural feel of latex." },
   { name: "Fully textured", href: "/resources/guides/glove-textures-explained/", text: "Light texture over the whole glove for a surer hold." },
@@ -26,7 +25,7 @@ const uses = [
 ];
 ---
 
-<PageLayout title="Disposable & Heavy-Duty Latex Gloves, Made in Thailand | Innovative Gloves" description={`Our latex glove range, ${latex.length} families including high-risk, heavy-duty and long-cuff options up to 14 mil. Natural rubber comfort and elasticity, made in Thailand.`}>
+<PageLayout title="Disposable & Heavy-Duty Latex Gloves, Made in Thailand | Innovative Gloves" description={`Our latex glove range, ${latex.length} families including high-risk, heavy-duty and long-cuff options up to 17 mil. Natural rubber comfort and elasticity, made in Thailand.`}>
   <PageBanner eyebrow="Latex" title={`Disposable &amp; Heavy-Duty Latex Gloves<span class="dot">.</span>`}
     intro={`We make disposable latex gloves from natural rubber in our own factory in Hat Yai, Thailand. The range runs from everyday smooth and fully textured gloves with a ${cuffs[0]} mm cuff to heavy long-cuff gloves at ${cuffs.slice(1).join(" and ")} mm for cleaning and wet work. Heavy latex gloves are also made with our raised diamond, Micro Diamond and Zig textures. Latex gives natural stretch, a close fit and a light feel. Most latex gloves are powder-free, and any glove below can be made under your own brand.`} />
 
@@ -108,7 +107,7 @@ const uses = [
         <p class="muted">Latex flexes and fits like a second skin, giving exceptional tactile sensitivity and a secure, comfortable grip over long shifts. For heavy-duty and high-risk handling, our thicker latex gloves offer serious protection at a competitive price, produced in-house with strict quality control.</p>
         <ul class="lat-points">
           <li><span class="c" aria-hidden="true">&#10003;</span> Superb elasticity, fit and comfort</li>
-          <li><span class="c" aria-hidden="true">&#10003;</span> High-risk &amp; heavy-duty options up to 14 mil</li>
+          <li><span class="c" aria-hidden="true">&#10003;</span> High-risk &amp; heavy-duty options up to 17 mil</li>
           <li><span class="c" aria-hidden="true">&#10003;</span> Long-cuff (300 mm) protection</li>
           <li><span class="c" aria-hidden="true">&#10003;</span> Powder-free options available</li>
         </ul>

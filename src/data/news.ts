@@ -163,7 +163,7 @@ export const articles: Article[] = [
     ],
     body: [
       "This September, Innovative Gloves turns 25. What began in 2001 as a family-owned glove maker in southern Thailand has grown into a specialist international manufacturer, but the founding idea has never changed: build gloves that perform where ordinary disposables fall short.",
-      "Today the factory runs 14 production lines, 24 hours a day, producing a range that spans roughly 4 to 14 mil across nitrile, latex, long-cuff, heavy-duty, chemical-protection and biodegradable gloves, supplied to industries worldwide.",
+      "Today the factory runs 14 production lines, 24 hours a day, producing a range that spans roughly 3 to 17 mil across nitrile, latex, long-cuff, heavy-duty, chemical-protection and biodegradable gloves, supplied to industries worldwide.",
       "The last 25 years are written in the milestones along the way: inventing the raised diamond in 2011, our first patent in 2017, expanding to 14 lines in 2018, launching biodegradable nitrile in 2019, patenting Micro Diamond and then Zig Grip, and passing and renewing our SMETA ethical audits. Each one came from the same drive to keep improving.",
       "Being family-owned has shaped how we grew, investing in our own grip technologies, our own manufacturing, and our own people rather than competing on price alone. That's why a company of our size holds patents on multiple grip textures and keeps developing new ones.",
       "Twenty-five years is a milestone, not a finish line. The drive that produced the first raised diamond glove is still pushing new products, cleaner manufacturing and better protection for the people who wear our gloves every day. Here's to the next 25.",
