@@ -102,7 +102,6 @@ assign("gc-zig-latex-blue.png", ["zig-14-latex-long"]);
 assign("gc-microdiamond-latex-blue.png", ["micro-diamond-14-latex-long"]);
 assign("colours/c-dia-l-l-blue-b.png", ["diamond-17-latex-long"]);
 // Diamond latex long, 14 mil green household (HHDT green)
-assign("gc-diamond-green-latex-long.png", ["diamond-14-latex-long"]);
 // Latex, black / white short cuff
 assign("gc-latex-black.png", ["smooth-8-latex", "smooth-8-latex-2", "smooth-8-latex-3", "textured-8-latex"]);
 assign("gc-latex-white.png", ["smooth-latex", "smooth-latex-2", "smooth-latex-3", "textured-latex", "textured-latex-2", "textured-latex-3", "textured-latex-4", "textured-latex-5", "textured-latex-6", "textured-7-latex", "textured-8-latex-2", "textured-9-latex", "textured-latex-long", "textured-latex-long-2"]);

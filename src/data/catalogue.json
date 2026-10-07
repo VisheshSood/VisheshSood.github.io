@@ -1024,30 +1024,7 @@
     "colours": [
       "Blue",
       "Blue and White",
-      "Orange"
-    ],
-    "sizes": [
-      "Small (7)",
-      "Medium (8)",
-      "Large (9)",
-      "X-Large (10)",
-      "XX-Large (11)"
-    ],
-    "patent": ""
-  },
-  {
-    "slug": "diamond-14-latex-long",
-    "name": "Diamond 14 mil Latex Long Cuff",
-    "fullName": "Latex Powder Free Diamond Textured Gloves",
-    "material": "Latex",
-    "bio": false,
-    "texture": "Diamond",
-    "treatment": "Extensive washing for a clean, easy-donning finish",
-    "thickness": 14,
-    "length": 300,
-    "longCuff": true,
-    "grade": "Disposable & Examination",
-    "colours": [
+      "Orange",
       "Green"
     ],
     "sizes": [
