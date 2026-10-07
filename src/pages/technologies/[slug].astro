@@ -14,6 +14,13 @@ const view3d = view3dForTech(tech.slug);
 
 const isBio = tech.slug === "biodegradable";
 const isInvented = tech.slug === "raised-diamond";
+// SEO H1s (approved 2026-10-07). Titles are unchanged: they carry invention/patent wording that needs sign-off first.
+const h1BySlug: Record<string, string> = {
+  "raised-diamond": "Raised Diamond Textured Nitrile Gloves",
+  "micro-diamond": "Micro Diamond Nitrile Gloves",
+  "zig-grip": "Zig Grip Nitrile Gloves",
+  "tyre-tread": "Gripper (Tyre Tread) Nitrile Gloves",
+};
 // Animate the hero texture (zoom + light sweep) for grip-texture macros only.
 // Biodegradable (leaf) and any 'contain' product shot stay static.
 const animateTex = tech.icon !== "leaf" && tech.imgFit !== "contain";
@@ -88,7 +95,7 @@ const bioPct = (v: number) => ((v / bioMax) * 100).toFixed(1);
       <div class="th-copy">
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Grip Technologies", href: "/technologies" }, { label: tech.name }]} />
         <p class="eyebrow">{eyebrow}</p>
-        <h1>{tech.name}</h1>
+        <h1>{h1BySlug[tech.slug] ?? tech.name}</h1>
         <p class="th-tagline">{tech.tagline}</p>
         <p class="th-intro">{tech.intro}</p>
         <div class="th-cta">
