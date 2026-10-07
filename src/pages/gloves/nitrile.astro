@@ -7,28 +7,38 @@ import { catalogue } from "../../data/catalogue";
 const nitrile = catalogue
   .filter((g) => g.material.includes("Nitrile"))
   .sort((a, b) => (a.thickness || 0) - (b.thickness || 0));
+
+// Facts below are computed from the catalogue so they stay true when the range changes.
+const mils = [...new Set(nitrile.map((g) => g.thickness).filter((t): t is number => t != null))].sort((a, b) => a - b);
+const minMil = mils[0];
+const maxMil = mils[mils.length - 1];
+const cuffs = [...new Set(nitrile.map((g) => g.length))].sort((a, b) => a - b);
+const colourCount = new Set(nitrile.flatMap((g) => g.colours)).size;
+const milsFor = (texture: string) => {
+  const t = [...new Set(nitrile.filter((g) => g.texture === texture).map((g) => g.thickness))].sort((a, b) => (a || 0) - (b || 0));
+  return t.length > 1 ? `${t[0]}–${t[t.length - 1]} mil` : `${t[0]} mil`;
+};
+const textures = [
+  { name: "Raised Diamond", texture: "Diamond", href: "/technologies/raised-diamond/", text: "Raised diamonds across palm and fingers. The original diamond texture, for general and industrial work." },
+  { name: "Micro Diamond", texture: "Micro Diamond", href: "/technologies/micro-diamond/", text: "A dense, fine texture that holds well in oil while keeping fingertip feel." },
+  { name: "Zig Grip", texture: "Zig", href: "/technologies/zig-grip/", text: "Our strongest dry grip, also made as Dual Tone with a green wear layer." },
+  { name: "Tyre Tread (Gripper)", texture: "Tyre Tread", href: "/technologies/tyre-tread/", text: "A deep tread pattern for heavy handling and slippery conditions." },
+  { name: "Fully textured", texture: "Fully Textured", href: "/resources/guides/glove-textures-explained/", text: "Light texture over the whole glove. The everyday all-rounder." },
+  { name: "Finger textured", texture: "Finger Textured", href: "/resources/guides/glove-textures-explained/", text: "Smooth palm with textured fingertips, for light and detailed work." },
+];
+const uses = [
+  { label: "Automotive & mechanical", href: "/industries/automotive/" },
+  { label: "Oil, gas & petrochemical", href: "/industries/oil-gas/" },
+  { label: "Food processing", href: "/industries/food-processing/" },
+  { label: "Chemical handling", href: "/industries/chemical/" },
+  { label: "Cleaning & janitorial", href: "/industries/cleaning/" },
+  { label: "Laboratory", href: "/industries/laboratory/" },
+];
 ---
 
-<PageLayout title="Nitrile Gloves | Innovative Gloves" description={`Our full nitrile glove range, ${nitrile.length} families across textures, thicknesses and colours. Powder-free, polymer-coated, patented grip options and biodegradable nitrile.`}>
-  <PageBanner eyebrow="Nitrile" title={`Nitrile Gloves<span class="dot">.</span>`}
-    intro="Strong, chemical-resistant and latex-free, nitrile is the backbone of our range. From everyday disposables to patented heavy-duty grip, all made in our own facility in Thailand." />
-
-  <section class="section nit-about">
-    <div class="container nit-grid">
-      <div class="nit-copy">
-        <p class="eyebrow">Why Nitrile</p>
-        <h2>Engineered for Performance<span class="dot">.</span></h2>
-        <p class="muted">Nitrile offers excellent puncture, abrasion and chemical resistance with no latex-protein allergy risk, which is why it's the material of choice across automotive, industrial, food and medical work. We control the full process, from compound to finished glove, so quality and consistency stay in our hands.</p>
-        <ul class="nit-points">
-          <li><span class="c" aria-hidden="true">&#10003;</span> Powder-free &amp; polymer-coated options</li>
-          <li><span class="c" aria-hidden="true">&#10003;</span> Patented grip textures (Micro Diamond, Zig, Gripper)</li>
-          <li><span class="c" aria-hidden="true">&#10003;</span> 3–9 mil, 240–300 mm, 20+ colours</li>
-          <li><span class="c" aria-hidden="true">&#10003;</span> Biodegradable nitrile available</li>
-        </ul>
-      </div>
-      <div class="nit-img" style="background-image:url('/images/glovecatalog/gc-diamond-black.png')"></div>
-    </div>
-  </section>
+<PageLayout title="Disposable & Industrial Nitrile Gloves, Made in Thailand | Innovative Gloves" description={`Disposable and industrial nitrile gloves made in our own factory in Thailand: ${nitrile.length} gloves from ${minMil} to ${maxMil} mil, ${cuffs.join(", ")} mm cuffs, grip textures and OEM.`}>
+  <PageBanner eyebrow="Nitrile" title={`Disposable &amp; Industrial Nitrile Gloves<span class="dot">.</span>`}
+    intro={`We make disposable nitrile gloves in our own factory in Hat Yai, Thailand. The range runs from ${minMil} mil finger-textured gloves for light work to ${maxMil} mil heavy-duty gloves with a ${cuffs[cuffs.length - 1]} mm cuff. Surfaces go from fully textured to our own grip textures: raised diamond, Micro Diamond, Zig and Tyre Tread. Every nitrile glove is latex-free and ambidextrous, most are powder-free, and any glove below can be made under your own brand. Pick a glove to see its full specifications, colours and test results.`} />
 
   <section class="section nit-range">
     <div class="container">
@@ -44,11 +54,84 @@ const nitrile = catalogue
       </div>
     </div>
   </section>
+
+  <section class="section nit-guide">
+    <div class="container">
+      <p class="eyebrow">Choosing a Nitrile Glove</p>
+      <h2>What to Look At<span class="dot">.</span></h2>
+
+      <div class="guide-grid">
+        <div class="guide-block">
+          <h3>Thickness</h3>
+          <p>Our nitrile gloves run from {minMil} to {maxMil} mil. Thinner gloves give more fingertip feel and suit short, light tasks. Thicker gloves last longer against abrasion and punctures, at some cost to dexterity. <a href="/resources/guides/how-to-choose-glove-thickness/">How to choose a thickness</a> and <a href="/resources/guides/what-does-mil-mean/">what a mil is</a>.</p>
+        </div>
+        <div class="guide-block">
+          <h3>Cuff length</h3>
+          <p>Standard gloves are {cuffs[0]} mm. Long-cuff versions at {cuffs.slice(1).join(" and ")} mm cover more of the forearm, which helps with splashes and wet work. Long-cuff options are listed with each glove family above.</p>
+        </div>
+        <div class="guide-block">
+          <h3>Colour</h3>
+          <p>The range comes in {colourCount} colours. Black hides grease and dirt. Orange and yellow are easy to see. Blue stands out against food. Colours also let a site separate tasks or areas.</p>
+        </div>
+        <div class="guide-block">
+          <h3>Standards and documents</h3>
+          <p>Each product page shows that glove's EN ISO 374 classification and test results. Chemical resistance depends on the specific glove and chemical, so check the tested data for your use. Certificates and declarations are on our <a href="/certifications/">certifications page</a>.</p>
+        </div>
+      </div>
+
+      <h3 class="tex-h">Textures</h3>
+      <div class="tex-grid">
+        {textures.map((t) => (
+          <a class="tex-card" href={t.href}>
+            <b>{t.name}</b>
+            <span class="tex-mil">{milsFor(t.texture)}</span>
+            <span>{t.text}</span>
+          </a>
+        ))}
+      </div>
+
+      <div class="guide-grid two">
+        <div class="guide-block">
+          <h3>Where they are used</h3>
+          <ul class="use-list">
+            {uses.map((u) => (<li><a href={u.href}>{u.label}</a></li>))}
+          </ul>
+          <p class="muted small">Not sure which glove fits the job? Use the <a href="/glove-finder/">glove finder</a> or see our <a href="/gloves/heavy-duty/">heavy-duty gloves</a>.</p>
+        </div>
+        <div class="guide-block">
+          <h3>Your brand, our factory</h3>
+          <p>Any nitrile glove on this page can be produced under your own brand, with your choice of colour, thickness and packaging. <a href="/private-label/">OEM and private-label manufacturing</a>.</p>
+          <div class="cta-row">
+            <a href="/request-quote/" class="btn btn--primary">Request a Quote <span class="arrow" aria-hidden="true">&rarr;</span></a>
+            <a href="/request-samples/" class="btn btn--ghost">Request Samples</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section nit-about">
+    <div class="container nit-grid">
+      <div class="nit-copy">
+        <p class="eyebrow">Why Nitrile</p>
+        <h2>Engineered for Performance<span class="dot">.</span></h2>
+        <p class="muted">Nitrile offers excellent puncture, abrasion and chemical resistance with no latex-protein allergy risk, which is why it's the material of choice across automotive, industrial, food and medical work. We control the full process, from compound to finished glove, so quality and consistency stay in our hands. <a href="/resources/guides/nitrile-vs-latex/">Nitrile vs latex</a>.</p>
+        <ul class="nit-points">
+          <li><span class="c" aria-hidden="true">&#10003;</span> Powder-free &amp; polymer-coated options</li>
+          <li><span class="c" aria-hidden="true">&#10003;</span> Patented grip textures (Micro Diamond, Zig, Gripper)</li>
+          <li><span class="c" aria-hidden="true">&#10003;</span> {minMil}–{maxMil} mil, {cuffs[0]}–{cuffs[cuffs.length - 1]} mm, {colourCount} colours</li>
+          <li><span class="c" aria-hidden="true">&#10003;</span> Biodegradable nitrile available</li>
+        </ul>
+      </div>
+      <div class="nit-img" style="background-image:url('/images/glovecatalog/gc-diamond-black.png')"></div>
+    </div>
+  </section>
 </PageLayout>
 
 <style>
   .nit-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
   .nit-copy h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin: 10px 0 16px; }
+  .nit-copy p a, .guide-block p a { color: var(--green-dark); font-weight: 600; }
   .nit-points { margin-top: 20px; display: grid; gap: 10px; }
   .nit-points li { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 0.95rem; }
   .nit-points .c { color: var(--green-dark); font-weight: 900; }
@@ -57,5 +140,23 @@ const nitrile = catalogue
   .range-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(24px, 3vw, 40px); }
   .range-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-top: 10px; }
   .range-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; }
-  @media (max-width: 820px) { .nit-grid { grid-template-columns: 1fr; } .nit-img { order: -1; } }
+
+  .nit-guide { background: var(--bg-2); border-top: 1px solid var(--border); }
+  .nit-guide > .container > h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 10px 0 28px; }
+  .guide-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 36px; }
+  .guide-grid.two { margin-top: 34px; }
+  .guide-block h3, .tex-h { font-size: 1.05rem; margin-bottom: 8px; }
+  .guide-block p { line-height: 1.65; }
+  .tex-h { margin-top: 34px; }
+  .tex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin-top: 12px; }
+  .tex-card { display: grid; align-content: start; gap: 4px; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); transition: border-color .2s ease, transform .2s ease; }
+  .tex-card:hover { border-color: var(--green); transform: translateY(-2px); }
+  .tex-card b { font-size: 0.98rem; }
+  .tex-mil { font-size: 0.78rem; font-weight: 700; color: var(--green-dark); letter-spacing: .04em; }
+  .tex-card span:last-child { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+  .use-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 18px; margin-bottom: 12px; }
+  .use-list a { color: var(--green-dark); font-weight: 600; }
+  .small { font-size: 0.9rem; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+  @media (max-width: 820px) { .nit-grid, .guide-grid { grid-template-columns: 1fr; } .nit-img { order: -1; } }
 </style>
