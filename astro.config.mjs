@@ -1,6 +1,34 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// After the build, add the trailing slash to internal links that point at a page
+// (/gloves -> /gloves/), so a click never costs a 301 hop. Only rewrites a link when
+// <dist>/<path>/index.html exists; files, anchors and external links are untouched.
+const trailingSlashLinks = {
+  name: 'ig-trailing-slash-links',
+  hooks: {
+    'astro:build:done': async ({ dir }) => {
+      const root = fileURLToPath(dir);
+      const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : e.name.endsWith('.html') ? [path.join(d, e.name)] : []));
+      let changed = 0;
+      for (const file of walk(root)) {
+        const src = fs.readFileSync(file, 'utf8');
+        const out = src.replace(/(href=")(\/[^"?#]*[^"/?#])([?#][^"]*)?"/g, (m, a, p, rest = '') => {
+          if (path.extname(p)) return m;
+          if (!fs.existsSync(path.join(root, p, 'index.html'))) return m;
+          changed++;
+          return `${a}${p}/${rest}"`;
+        });
+        if (out !== src) fs.writeFileSync(file, out);
+      }
+      console.log(`[ig-trailing-slash-links] ${changed} internal links normalised`);
+    },
+  },
+};
 
 // IMPORTANT: `site` is the canonical production URL. It drives canonical links,
 // Open Graph URLs and the generated sitemap. Change this ONE line if the final
@@ -17,6 +45,7 @@ export default defineConfig({
     },
   },
   integrations: [
+    trailingSlashLinks,
     sitemap({
       // The private 3D share page stays out of the sitemap.
       filter: (page) => !page.includes('/3d/silverlined'),

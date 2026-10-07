@@ -70,7 +70,7 @@ const websiteSchema = {
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {!Astro.url.pathname.startsWith("/404") && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta name="theme-color" content="#8cc63f" />
 
