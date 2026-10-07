@@ -5,12 +5,13 @@
 <section class="hero">
   <div class="hero-grid">
     <div class="hero-copy">
-      <p class="hero-years">EST 2001</p>
-      <h1>
+      <!-- SEO: the page's H1 is the descriptive line; the brand headline below keeps its look as a styled <p>. -->
+      <h1 class="hero-years">Nitrile &amp; Latex Glove Manufacturer in Thailand</h1>
+      <p class="hero-title">
         25 Years of<br />
         Engineering<br />
         Better Protection<span class="dot">.</span>
-      </h1>
+      </p>
       <p class="hero-lede">
         From patented grip technologies to specialist heavy-duty gloves, we
         develop solutions designed to perform where ordinary disposable gloves
@@ -64,6 +65,8 @@
     z-index: 2;
   }
   .hero-years {
+    font-family: var(--font-body);
+    line-height: 1.5;
     color: var(--green-dark);
     font-weight: 700;
     letter-spacing: 0.28em;
@@ -71,7 +74,11 @@
     font-size: 0.82rem;
     margin-bottom: 18px;
   }
-  .hero h1 {
+  @media (max-width: 600px) { .hero-years { letter-spacing: 0.14em; font-size: 0.74rem; } }
+  .hero .hero-title {
+    font-family: var(--font-head);
+    text-transform: uppercase;
+    color: var(--ink);
     font-size: clamp(2.6rem, 5.6vw, 5rem);
     font-weight: 900;
     letter-spacing: -0.015em;
