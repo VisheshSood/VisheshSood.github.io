@@ -4,7 +4,7 @@ import GloveVisual from "../../components/GloveVisual.astro";
 import { catalogue, colourSwatch, texTechSlug, gloveGlow, gloveColourPhotos } from "../../data/catalogue";
 import { technologies, gripTest } from "../../data/site";
 import { chemFor } from "../../data/chem-resistance";
-import { ratingsFor, icons as ratingIcons } from "../../data/compliance";
+import { ratingsFor, icons as ratingIcons, iconSvg, CE_MARK_SRC } from "../../data/compliance";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { view3dForGlove } from "../../lib/view3d";
 
@@ -70,7 +70,7 @@ const hasViral = !!chem?.micro?.some((m) => /virus/i.test(m.label) && m.result =
 const badges = [
   hasViral && { label: "Viral Barrier", sub: "EN ISO 374-5", icon: "bio" },
   isNitrile && { label: "Food Safe", sub: "EU 10/2011 · FDA", icon: "food" },
-  /examination/i.test(glove.grade) && { label: "Medical Grade", sub: "EN 455", icon: "medical" },
+  /examination/i.test(glove.grade) && { label: "Medical Grade", sub: "EN 455", icon: "check" },
 ].filter(Boolean) as { label: string; sub: string; icon: keyof typeof ratingIcons }[];
 
 // Product structured data for rich results in Google search.
@@ -125,12 +125,17 @@ const productSchema = {
         ) : (
           <GloveVisual glove={glove} ratio="1 / 1" />
         )}
-        <a class="p-rate-strip" href="#ratings" aria-label="See all performance ratings">
-          {ratings.map((r) => (
-            <span class="p-rate-ic" title={r.sub ? `${r.label}: ${r.sub}` : r.label}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ratingIcons[r.icon]} /></span>
+        <ul class="p-chips" aria-label="Compliance">
+          {ratings.map((r, ri) => (
+            <li class="p-chip" class:list={{ "p-chip--sym": r.icon !== "check" }}>
+              {r.icon === "ce"
+                ? <img src={CE_MARK_SRC} alt="" class="p-chip-ce" width="20" height="14" />
+                : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={iconSvg(r.icon, `c${ri}`)} />}
+              <span>{r.short}</span>
+            </li>
           ))}
-        </a>
-        <a class="p-rate-more" href="#ratings">See all performance ratings &darr;</a>
+        </ul>
+        <a class="p-rate-more" href="#ratings">See full performance ratings &darr;</a>
         <ul class="p-featlist">
           {features.map((f) => (
             <li class="p-feat">
@@ -155,9 +160,9 @@ const productSchema = {
 
         {badges.length > 0 && (
           <ul class="p-badges">
-            {badges.map((b) => (
+            {badges.map((b, bi) => (
               <li class="p-badge">
-                <span class="p-badge-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={ratingIcons[b.icon]} /></span>
+                <span class="p-badge-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={iconSvg(b.icon, `p${bi}`)} /></span>
                 <span class="p-badge-txt"><strong>{b.label}</strong><span class="p-badge-sub">{b.sub}</span></span>
               </li>
             ))}
@@ -212,9 +217,9 @@ const productSchema = {
         <h2>Performance Ratings<span class="dot">.</span></h2>
       </header>
       <ul class="ratings">
-        {ratings.map((r) => (
-          <li class="rating">
-            <span class="rating-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={ratingIcons[r.icon]} /></span>
+        {ratings.map((r, gi) => (
+          <li class="rating" class:list={{ "rating--text": r.icon === "check" }}>
+            <span class="rating-ic" aria-hidden="true">{r.icon === "ce" ? <img src={CE_MARK_SRC} alt="" class="rating-ce" width="40" height="29" /> : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={iconSvg(r.icon, `g${gi}`)} />}</span>
             <span class="rating-txt"><strong>{r.label}</strong>{r.sub && <span>{r.sub}</span>}</span>
           </li>
         ))}
@@ -370,10 +375,11 @@ const productSchema = {
   .p-badge { display: inline-flex; align-items: center; gap: 9px; padding: 8px 14px 8px 10px; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--surface); }
   .p-badge-ic { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); }
   .p-badge-ic svg { width: 20px; height: 20px; }
-  .p-rate-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(31px, 1fr)); justify-items: center; align-items: center; gap: 6px 2px; margin: 16px 0 6px; text-decoration: none; }
-  .p-rate-ic { display: grid; place-items: center; width: 30px; height: 30px; color: #6a6f71; transition: color .15s ease; }
-  .p-rate-ic svg { width: 27px; height: 27px; }
-  .p-rate-strip:hover .p-rate-ic { color: var(--ink); }
+  .p-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 8px; padding: 0; }
+  .p-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px 5px 7px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); font-size: 0.74rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+  .p-chip svg { width: 16px; height: 16px; flex: none; color: var(--green-dark); }
+  .p-chip--sym svg { width: 20px; height: 20px; color: #3f4446; }
+  .p-chip-ce { width: 19px; height: auto; opacity: 0.8; }
   .p-rate-more { display: inline-block; margin-bottom: 6px; font-size: 0.8rem; font-weight: 600; color: var(--green-dark); }
   .p-certs { scroll-margin-top: 80px; }
   .p-badge-txt { display: flex; flex-direction: column; line-height: 1.15; }
@@ -428,6 +434,8 @@ const productSchema = {
   .rating { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
   .rating-ic { flex: none; display: grid; place-items: center; width: 50px; height: 50px; color: #55595b; }
   .rating-ic svg { width: 48px; height: 48px; }
+  .rating--text .rating-ic svg { width: 30px; height: 30px; color: var(--green-dark); }
+  .rating-ce { width: 40px; height: auto; opacity: 0.78; }
   .rating-txt { display: grid; gap: 2px; min-width: 0; }
   .rating-txt strong { font-size: 0.95rem; color: var(--ink); }
   .rating-txt span { font-size: 0.82rem; color: var(--text-muted); }

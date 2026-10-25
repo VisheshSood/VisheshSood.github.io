@@ -12,6 +12,8 @@ export interface Rating {
   icon: keyof typeof icons;
   label: string;
   sub?: string;
+  /** compact label for the chips under the product photo */
+  short: string;
 }
 
 interface GloveLike {
@@ -22,51 +24,52 @@ interface GloveLike {
 
 export function ratingsFor(glove: GloveLike, chem: ChemResistance | undefined): Rating[] {
   const isNitrile = /nitrile/i.test(glove.material);
-  const out: Rating[] = [{ icon: "ce", label: "PPE Category", sub: "CAT III" }];
+  const out: Rating[] = [{ icon: "ce", label: "PPE Category", sub: "CAT III", short: "CE · CAT III" }];
 
   if (chem) {
     // Letters on the EN ISO 374-1 pictogram = chemicals tested at performance level 2 or higher.
     // Type C gloves carry no letters.
     const letters = chem.type === "Type C" ? "" : chem.chemicals.filter((c) => c.level >= 2).map((c) => c.code).join("");
-    out.push({ icon: "flask", label: `EN ISO 374-1 (${chem.type})`, sub: letters || undefined });
+    out.push({ icon: "flask", label: `EN ISO 374-1 (${chem.type})`, sub: letters || undefined, short: `EN ISO 374-1 · ${chem.type}${letters ? " · " + letters : ""}` });
     const passed = (re: RegExp) => !!chem.micro?.some((m) => re.test(m.label) && m.result === "Pass");
     if (passed(/bacteria|fungi/i)) {
-      out.push({ icon: "bio", label: "EN ISO 374-5", sub: passed(/virus/i) ? "Bacteria, Fungi, Virus" : "Bacteria & Fungi" });
+      out.push({ icon: "bio", label: "EN ISO 374-5", sub: passed(/virus/i) ? "Bacteria, Fungi, Virus" : "Bacteria & Fungi", short: passed(/virus/i) ? "EN ISO 374-5 · Virus" : "EN ISO 374-5" });
     }
   }
 
-  out.push({ icon: "food", label: "Food Contact", sub: "EU 10/2011 · FDA 21 CFR 177.2600" });
-  if (/examination/i.test(glove.grade)) out.push({ icon: "medical", label: "EN 455", sub: "Medical gloves" });
-  if (isNitrile) out.push({ icon: "astm", label: "ASTM D6319" });
+  out.push({ icon: "food", label: "Food Contact", sub: "EU 10/2011 · FDA 21 CFR 177.2600", short: "Food contact" });
+  if (/examination/i.test(glove.grade)) out.push({ icon: "check", label: "EN 455", sub: "Medical gloves", short: "EN 455" });
+  if (isNitrile) out.push({ icon: "check", label: "ASTM D6319", short: "ASTM D6319" });
   out.push(
-    { icon: "silicone", label: "Silicone Free" },
-    { icon: "reach", label: "REACH", sub: "Compliant" },
-    { icon: "svhc", label: "SVHC", sub: "Compliant" },
-    { icon: "pfas", label: "POPs / PFAS / PFOS", sub: "Compliant" },
-    { icon: "prop65", label: "Prop 65", sub: "Compliant" },
-    { icon: "rohs", label: "RoHS", sub: "Compliant" },
-    { icon: "iso", label: "Quality Systems", sub: "ISO 9001 · EN ISO 13485" },
+    { icon: "check", label: "Silicone Free", short: "Silicone free" },
+    { icon: "check", label: "REACH", sub: "Compliant", short: "REACH" },
+    { icon: "check", label: "SVHC", sub: "Compliant", short: "SVHC" },
+    { icon: "check", label: "POPs / PFAS / PFOS", sub: "Compliant", short: "PFAS / PFOS / POPs" },
+    { icon: "check", label: "Prop 65", sub: "Compliant", short: "Prop 65" },
+    { icon: "check", label: "RoHS", sub: "Compliant", short: "RoHS" },
+    { icon: "check", label: "Quality Systems", sub: "ISO 9001 · EN ISO 13485", short: "ISO 9001 · ISO 13485" },
   );
-  if (glove.bio) out.push({ icon: "leaf", label: "Biodegradability", sub: "ASTM D5511 · ISO 15985" });
+  if (glove.bio) out.push({ icon: "check", label: "Biodegradability", sub: "ASTM D5511 · ISO 15985", short: "ASTM D5511 · ISO 15985" });
   return out;
 }
 
-// Monochrome line icons, drawn for the site (24×24, stroke = currentColor).
-const ring = (txt: string, size = 6.2) =>
-  `<circle cx="12" cy="12" r="10.2"/><text x="12" y="${12 + size * 0.36}" text-anchor="middle" font-size="${size}" font-weight="700" fill="currentColor" stroke="none" font-family="Inter, system-ui, sans-serif">${txt}</text>`;
+// Icons. Official symbols only where one exists: the CE mark (artwork file, rendered as an <img>),
+// the EN ISO 374-1 / 374-5 pictograms (ISO 7000 flask / biohazard in a shield; redrawn until the
+// official files from our box/IFU artwork are supplied) and the EU food-contact glass-and-fork.
+// Everything without an official symbol (REACH, RoHS, SVHC, PFAS, Prop 65, ASTM, ISO, EN 455…)
+// gets a neutral check: no invented "logos".
+export const CE_MARK_SRC = "/images/certs/cert-ce.png";
+const SHIELD = "M12 1.8 3.6 4.9v6.6c0 5 3.6 9 8.4 10.7 4.8-1.7 8.4-5.7 8.4-10.7V4.9L12 1.8Z";
+const at = (d: number, a: number) => { const r = (a * Math.PI) / 180; return [(d * Math.sin(r)).toFixed(2), (-d * Math.cos(r)).toFixed(2)]; };
+// Biohazard trefoil (standard proportions); __ID__ must be replaced with a unique id per use (SVG mask).
+const BIOHAZARD = `<g transform="translate(12 12.3) scale(0.215)"><defs><mask id="__ID__" maskUnits="userSpaceOnUse" x="-30" y="-30" width="60" height="60" stroke="none"><rect x="-30" y="-30" width="60" height="60" fill="#fff"/>${[0, 120, 240].map((a) => { const [x, y] = at(18, a); return `<circle cx="${x}" cy="${y}" r="10.5" fill="#000"/>`; }).join("")}<circle r="3" fill="#000"/></mask></defs><g mask="url(#__ID__)" fill="currentColor" stroke="none">${[0, 120, 240].map((a) => { const [x, y] = at(11, a); return `<circle cx="${x}" cy="${y}" r="15"/>`; }).join("")}<circle r="12.4" fill="none" stroke="currentColor" stroke-width="2.6"/></g></g>`;
 export const icons = {
-  ce: `<path d="M10.6 6.2a5.8 5.8 0 1 0 0 11.6"/><path d="M19.2 6.2a5.8 5.8 0 1 0 0 11.6M13.4 12h4.6"/>`,
-  flask: `<path d="M12 2.5 4 5.5v6.2c0 4.6 3.4 8.3 8 9.8 4.6-1.5 8-5.2 8-9.8V5.5l-8-3Z"/><path d="M10.4 7.5h3.2M11 7.5v3l-2.6 4.6c-.4.8.1 1.6 1 1.6h5.2c.9 0 1.4-.8 1-1.6L13 10.5v-3"/>`,
-  bio: `<path d="M12 2.5 4 5.5v6.2c0 4.6 3.4 8.3 8 9.8 4.6-1.5 8-5.2 8-9.8V5.5l-8-3Z"/><circle cx="12" cy="12.2" r="1.6"/><circle cx="12" cy="8.6" r="2"/><circle cx="8.9" cy="14" r="2"/><circle cx="15.1" cy="14" r="2"/>`,
-  food: `<path d="M6 3h7l-.6 5.2A2.9 2.9 0 0 1 9.5 11 2.9 2.9 0 0 1 6.6 8.2L6 3Z"/><path d="M9.5 11v7.5M7 21h5"/><path d="M17 3v18M15.2 3v4.5c0 1 .8 1.8 1.8 1.8s1.8-.8 1.8-1.8V3"/>`,
-  medical: `<rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M12 7.5v9M7.5 12h9"/>`,
-  astm: `<rect x="2.5" y="4" width="19" height="16" rx="1.5"/><path d="M2.5 9.5h19"/><text x="12" y="8.1" text-anchor="middle" font-size="3.8" font-weight="700" fill="currentColor" stroke="none" font-family="Inter, system-ui, sans-serif">ASTM</text><text x="12" y="16.9" text-anchor="middle" font-size="4.9" font-weight="700" fill="currentColor" stroke="none" font-family="Inter, system-ui, sans-serif" textLength="15" lengthAdjust="spacingAndGlyphs">D6319</text>`,
-  silicone: `<circle cx="12" cy="10" r="7.5"/><path d="M8.5 21 12 17.5 15.5 21"/><path d="M9 10.5c0-2.3 1.7-3.8 4.6-3.8-.2 2.6-1.6 4.4-4 4.4M9 13l2.8-2.6"/>`,
-  reach: ring("REACH", 5.2),
-  svhc: ring("SVHC", 5.8),
-  pfas: ring("PFAS", 6),
-  prop65: ring("P65", 6.6),
-  rohs: ring("RoHS", 6),
-  iso: ring("ISO", 7),
-  leaf: `<path d="M5 19c0-9 5.5-13 14-14 .2 8.8-4.5 14-12.5 14"/><path d="M5 19c2.6-3.6 5.4-6.3 8.6-8.4"/>`,
+  ce: "", // rendered from CE_MARK_SRC
+  flask: `<path d="${SHIELD}" stroke-width="1.4"/><path d="M10.2 6.9h3.6M10.9 6.9v3.6l-3.3 5.8c-.5.9.1 1.9 1.1 1.9h6.6c1 0 1.6-1 1.1-1.9l-3.3-5.8V6.9" stroke-width="1.4"/><path d="M8.7 15h6.6" stroke-width="1.1"/>`,
+  bio: `<path d="${SHIELD}" stroke-width="1.4"/>${BIOHAZARD}`,
+  food: `<path d="M5.6 3.2h7l-.5 4.9a3 3 0 0 1-6 0l-.5-4.9Z" stroke-width="1.5"/><path d="M9.1 11v7.6M6.4 20.8h5.4" stroke-width="1.5"/><path d="M17.4 3.2v17.6M15.4 3.2v4.7c0 1.1.9 2 2 2s2-.9 2-2V3.2" stroke-width="1.5"/>`,
+  check: `<circle cx="12" cy="12" r="9.5" stroke-width="1.5"/><path d="M7.8 12.3l2.8 2.8 5.6-5.8" stroke-width="1.8"/>`,
 } as const;
+
+/** SVG inner markup for an icon, with a unique id for any mask it uses. */
+export const iconSvg = (icon: keyof typeof icons, uid: string) => icons[icon].replaceAll("__ID__", `bh-${uid}`);
