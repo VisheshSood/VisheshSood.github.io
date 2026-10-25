@@ -68,10 +68,10 @@ const grip = glove.material === "Latex" ? undefined : gripTech?.grip;
 const isNitrile = /nitrile/i.test(glove.material);
 const hasViral = !!chem?.micro?.some((m) => /virus/i.test(m.label) && m.result === "Pass");
 const badges = [
-  hasViral && { label: "Viral Barrier", sub: "EN ISO 374-5" },
-  isNitrile && { label: "Food Safe", sub: "EU 10/2011 · FDA" },
-  /examination/i.test(glove.grade) && { label: "Medical Grade", sub: "EN 455" },
-].filter(Boolean) as { label: string; sub: string }[];
+  hasViral && { label: "Viral Barrier", sub: "EN ISO 374-5", icon: "bio" },
+  isNitrile && { label: "Food Safe", sub: "EU 10/2011 · FDA", icon: "food" },
+  /examination/i.test(glove.grade) && { label: "Medical Grade", sub: "EN 455", icon: "medical" },
+].filter(Boolean) as { label: string; sub: string; icon: keyof typeof ratingIcons }[];
 
 // Product structured data for rich results in Google search.
 const prodImage = new URL(glove.img || "/images/sus-aerial.jpg", Astro.site).href;
@@ -125,6 +125,12 @@ const productSchema = {
         ) : (
           <GloveVisual glove={glove} ratio="1 / 1" />
         )}
+        <a class="p-rate-strip" href="#ratings" aria-label="See all performance ratings">
+          {ratings.map((r) => (
+            <span class="p-rate-ic" title={r.sub ? `${r.label}: ${r.sub}` : r.label}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ratingIcons[r.icon]} /></span>
+          ))}
+        </a>
+        <a class="p-rate-more" href="#ratings">See all performance ratings &darr;</a>
         <ul class="p-featlist">
           {features.map((f) => (
             <li class="p-feat">
@@ -151,7 +157,7 @@ const productSchema = {
           <ul class="p-badges">
             {badges.map((b) => (
               <li class="p-badge">
-                <span class="p-badge-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6"/></svg></span>
+                <span class="p-badge-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={ratingIcons[b.icon]} /></span>
                 <span class="p-badge-txt"><strong>{b.label}</strong><span class="p-badge-sub">{b.sub}</span></span>
               </li>
             ))}
@@ -199,7 +205,7 @@ const productSchema = {
     </div>
   </section>
 
-  <section class="section p-certs">
+  <section class="section p-certs" id="ratings">
     <div class="container">
       <header class="certs-head">
         <p class="eyebrow">Certified &amp; Compliant</p>
@@ -362,8 +368,14 @@ const productSchema = {
   /* At-a-glance protection badges */
   .p-badges { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; padding: 0; }
   .p-badge { display: inline-flex; align-items: center; gap: 9px; padding: 8px 14px 8px 10px; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--surface); }
-  .p-badge-ic { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: rgba(140,198,63,0.18); color: var(--green-dark); }
-  .p-badge-ic svg { width: 12px; height: 12px; }
+  .p-badge-ic { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); }
+  .p-badge-ic svg { width: 20px; height: 20px; }
+  .p-rate-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(31px, 1fr)); justify-items: center; align-items: center; gap: 6px 2px; margin: 16px 0 6px; text-decoration: none; }
+  .p-rate-ic { display: grid; place-items: center; width: 30px; height: 30px; color: #6a6f71; transition: color .15s ease; }
+  .p-rate-ic svg { width: 27px; height: 27px; }
+  .p-rate-strip:hover .p-rate-ic { color: var(--ink); }
+  .p-rate-more { display: inline-block; margin-bottom: 6px; font-size: 0.8rem; font-weight: 600; color: var(--green-dark); }
+  .p-certs { scroll-margin-top: 80px; }
   .p-badge-txt { display: flex; flex-direction: column; line-height: 1.15; }
   .p-badge-txt strong { font-size: 0.82rem; font-weight: 700; color: var(--ink); }
   .p-badge-sub { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--text-muted); margin-top: 1px; }
