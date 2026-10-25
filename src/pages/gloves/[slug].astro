@@ -4,6 +4,7 @@ import GloveVisual from "../../components/GloveVisual.astro";
 import { catalogue, colourSwatch, texTechSlug, gloveGlow, gloveColourPhotos } from "../../data/catalogue";
 import { technologies, gripTest } from "../../data/site";
 import { chemFor } from "../../data/chem-resistance";
+import { ratingsFor, icons as ratingIcons } from "../../data/compliance";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { view3dForGlove } from "../../lib/view3d";
 
@@ -48,15 +49,11 @@ const isPowdered = /corn starch/i.test(glove.treatment || "");
 const powderFeature = { title: "Powdered", icon: "shield", desc: "Lightly coated inside with USP-grade corn starch, which makes the glove quick and easy to pull on." };
 const features = [materialFeature, ...universalFeatures.map((f) => (isPowdered && f.title === "Powder-Free" ? powderFeature : f))];
 
-// Certifications, every glove carries the quality & food-contact standards;
-// bio nitrile gloves additionally carry the biodegradability standards.
-const certGroups: { label: string; items: string[] }[] = [
-  { label: "Quality & Medical", items: ["ISO 9001", "EN ISO 13485", "EN 455", "EU MDR"] },
-  { label: "Food Contact", items: ["US FDA 21 CFR 177.2600", "Overall Migration, EU Regulation 10/2011"] },
-];
-if (glove.bio) certGroups.push({ label: "Biodegradability", items: ["ASTM D5511", "ISO 15985"] });
+
 
 const chem = chemFor(glove);
+// Compliance grid: rules + sources in src/data/compliance.ts.
+const ratings = ratingsFor(glove, chem);
 const fmtDeg = (n: number | string) => (typeof n === "number" ? (n > 0 ? "+" : "") + n.toFixed(1) + "%" : n);
 
 // Measured grip for this glove's texture (independent ASTM F2961 data), if any.
@@ -206,24 +203,16 @@ const productSchema = {
     <div class="container">
       <header class="certs-head">
         <p class="eyebrow">Certified &amp; Compliant</p>
-        <h2>Tested to International Standards<span class="dot">.</span></h2>
-        <p class="muted">This product is manufactured under Innovative Gloves' certified quality systems. The certifications and standards that apply to it are listed below{glove.bio ? ", including independently verified biodegradability" : ""}.</p>
+        <h2>Performance Ratings<span class="dot">.</span></h2>
       </header>
-      <div class="certs-groups">
-        {certGroups.map((grp) => (
-          <div class="cert-group">
-            <p class="cert-group-label">{grp.label}</p>
-            <ul class="cert-list">
-              {grp.items.map((it) => (
-                <li class="cert-badge">
-                  <span class="cert-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6"/></svg></span>
-                  <span>{it}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <ul class="ratings">
+        {ratings.map((r) => (
+          <li class="rating">
+            <span class="rating-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={ratingIcons[r.icon]} /></span>
+            <span class="rating-txt"><strong>{r.label}</strong>{r.sub && <span>{r.sub}</span>}</span>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   </section>
 
@@ -423,13 +412,13 @@ const productSchema = {
   .p-certs { background: var(--bg-2); border-top: 1px solid var(--border); }
   .certs-head { max-width: 640px; margin-bottom: clamp(24px, 3vw, 36px); }
   .certs-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: 10px 0 12px; }
-  .certs-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
-  .cert-group { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 22px; }
-  .cert-group-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 14px; }
-  .cert-list { display: grid; gap: 10px; }
-  .cert-badge { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.9rem; color: var(--ink); }
-  .cert-check { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(140,198,63,0.16); color: var(--green-dark); }
-  .cert-check svg { width: 13px; height: 13px; }
+  .ratings { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .rating { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .rating-ic { flex: none; display: grid; place-items: center; width: 50px; height: 50px; color: #55595b; }
+  .rating-ic svg { width: 48px; height: 48px; }
+  .rating-txt { display: grid; gap: 2px; min-width: 0; }
+  .rating-txt strong { font-size: 0.95rem; color: var(--ink); }
+  .rating-txt span { font-size: 0.82rem; color: var(--text-muted); }
 
   .p-chem { background: var(--bg); border-top: 1px solid var(--border); }
   .chem-head { max-width: 680px; margin-bottom: clamp(22px, 3vw, 32px); }
