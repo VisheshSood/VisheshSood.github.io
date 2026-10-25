@@ -33,6 +33,12 @@ const articleSchema = {
       <div class="ga-body">
         {guide.body.map((para) => (<p>{para}</p>))}
       </div>
+      {guide.related && (
+        <nav class="ga-links" aria-label="Related pages">
+          <p class="ga-links-h">Related</p>
+          <ul>{guide.related.map((l) => (<li><a href={l.href}>{l.label} <span aria-hidden="true">&rarr;</span></a></li>))}</ul>
+        </nav>
+      )}
 
       <div class="ga-cta">
         <p class="muted">Want help matching this to a product? Our range is built for exactly these decisions.</p>
@@ -69,6 +75,10 @@ const articleSchema = {
   .ga-body { max-width: 68ch; }
   .ga-body p { font-size: 1.02rem; line-height: 1.75; margin-bottom: 20px; color: var(--text); }
 
+  .ga-links { max-width: 68ch; margin-top: 8px; }
+  .ga-links-h { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 8px; }
+  .ga-links ul { list-style: none; padding: 0; display: grid; gap: 6px; }
+  .ga-links a { color: var(--green-dark); font-weight: 600; }
   .ga-cta { max-width: 68ch; margin-top: 32px; padding: 26px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-2); }
   .ga-cta p { margin-bottom: 16px; }
   .ga-cta-actions { display: flex; flex-wrap: wrap; gap: 14px; }

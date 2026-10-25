@@ -8,6 +8,8 @@ export interface Guide {
   /** Optional search-result title/description (approved per guide); defaults to `title | Glove Knowledge Centre` and the excerpt. */
   seoTitle?: string;
   seoDescription?: string;
+  /** Optional links to product / reference pages, shown under the article. */
+  related?: { label: string; href: string }[];
 }
 
 export const guides: Guide[] = [
@@ -61,6 +63,34 @@ export const guides: Guide[] = [
       "Other proprietary textures may use zig-zag, tyre-tread, scale, or channelled patterns. These designs aim to create mechanical interaction between the glove surface and the object being held. Different patterns may perform better depending on whether the user is handling smooth metal, tools, wet surfaces, oily components, or irregular objects.",
       "Texture should not be considered in isolation. Glove formulation, thickness, elasticity, and fit all affect real-world grip. An aggressive texture on a poorly fitting glove may still provide less control than a well-fitted glove with a more carefully engineered pattern.",
       "The best approach is to match the texture to the environment. Light texture is generally sufficient for dry precision work. Full texture provides broader handling control, while raised or engineered grip patterns are more suitable for wet, greasy, oily, and heavy-duty applications. Choosing the correct texture can improve safety, reduce hand fatigue, and help users maintain a more secure grip throughout the task.",
+    ],
+  },
+  {
+    slug: "en-iso-374-explained",
+    title: "EN ISO 374 Explained",
+    tag: "Chemical Safety",
+    seoTitle: "EN ISO 374 Explained: Type A, B and C Chemical Gloves | Innovative Gloves",
+    seoDescription: "What EN ISO 374 Type A, B and C mean, what the letters and levels on the box show, and why a rating never means a glove resists every chemical.",
+    excerpt: "What the flask and biohazard symbols on a glove box actually tell you, what Type A, B and C mean, and what they don't.",
+    body: [
+      "EN ISO 374 is the European standard for gloves that protect against chemicals and micro-organisms. If a glove box shows a flask or a biohazard symbol, this is the standard behind it. It is useful, but it is easy to read more into it than it says.",
+      "The most important point first: an EN ISO 374 rating does not mean a glove resists every chemical. The rating comes from tests against a short list of chemicals. It tells you how that glove performed against those chemicals in a laboratory, and nothing more. Before using a glove with any chemical, check the test result for that exact glove and that exact chemical.",
+      "Part 1 of the standard, EN ISO 374-1, covers chemicals. The glove is tested for permeation, which is how long a chemical takes to pass through the material at a molecular level. That time is the breakthrough time, and it is graded into six performance levels: level 1 is more than 10 minutes, level 2 more than 30, level 3 more than 60, level 4 more than 120, level 5 more than 240 and level 6 more than 480 minutes.",
+      "Each test chemical has a letter: A methanol, B acetone, C acetonitrile, D dichloromethane, E carbon disulphide, F toluene, G diethylamine, H tetrahydrofuran, I ethyl acetate, J n-heptane, K 40% sodium hydroxide, L 96% sulphuric acid, M 65% nitric acid, N 99% acetic acid, O 25% ammonia, P 30% hydrogen peroxide, S 40% hydrofluoric acid and T 37% formaldehyde.",
+      "The type depends on how many of those chemicals the glove holds out against. Type A means at least level 2 against six or more of them. Type B means at least level 2 against three or more. Type C means at least level 1 against at least one.",
+      "On the box, Type A and Type B gloves show the flask with letters underneath: the chemicals that reached level 2 or higher. A Type B glove marked KPT, for example, lasted at least 30 minutes against sodium hydroxide, hydrogen peroxide and formaldehyde. Type C gloves show the flask with no letters.",
+      "Part 4, EN ISO 374-4, adds degradation: how much the glove's puncture resistance changes after contact with each test chemical. A large change means the chemical is attacking the material, even when the breakthrough time looks fine. The result is given as a percentage, and a negative figure usually means the glove swelled.",
+      "The standard also requires the glove to pass leak tests, so liquid cannot get through pinholes or weak spots. That is penetration, which is different from permeation: penetration goes through holes, permeation goes through the material itself.",
+      "Part 5, EN ISO 374-5, covers micro-organisms. A glove that passes the leak tests is rated against bacteria and fungi and carries the biohazard symbol. If it also passes a separate virus test, the word VIRUS is printed under the symbol.",
+      "All of these results come from controlled laboratory tests at room temperature, with one pure chemical at a time. In real work, heat, mixtures, stretching, abrasion and longer contact can all shorten protection. Use the levels to compare gloves, not as a guaranteed safe time, and change gloves after a splash.",
+      "Every glove on our website lists its own EN ISO 374 type, the chemicals it was tested against, the performance level for each and the degradation result. Our nitrile gloves under 5 mil are Type C. Our textured nitrile gloves from 5 mil, our Diamond, Micro Diamond, Zig and Tyre Tread gloves, and our latex gloves are Type B. If you need a result for a chemical that is not listed, ask us before using the glove with it.",
+    ],
+    related: [
+      { label: "How chemical permeation works", href: "/resources/guides/how-chemical-permeation-works/" },
+      { label: "Nitrile gloves and their EN ISO 374 results", href: "/gloves/nitrile/" },
+      { label: "Latex gloves", href: "/gloves/latex/" },
+      { label: "Gloves for chemical handling", href: "/industries/chemical/" },
+      { label: "Our certifications", href: "/certifications/" },
     ],
   },
   {
